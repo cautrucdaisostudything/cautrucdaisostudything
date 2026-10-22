@@ -1,0 +1,437 @@
+<!-- ======================================================== -->
+<div class="chapter-content" id="tab-c8">
+  <h2 class="section-title">Chương 8. Đồng Cấu Vành và Đặc Số</h2>
+  
+  <p class="welcome-copy">
+    Đồng cấu vành là các ánh xạ bảo toàn đồng thời cả phép cộng và phép nhân. 
+    Sự tương đồng sâu sắc giữa lý thuyết nhóm và lý thuyết vành đạt mức hoàn thiện cao nhất ở chương này: 
+    hạt nhân của đồng cấu vành chính là iđêan, và bộ bốn định lý đẳng cấu vành cung cấp công cụ tối thượng 
+    để nhận diện cấu trúc của mọi vành thương mà không cần thực hiện phép chia lớp trực tiếp. 
+    Phần cuối chương khảo sát <b>Đặc số</b> – một đại lượng đo lường cấu trúc cộng của vành và kiểm soát tính nguyên tố của trường.
+  </p>
+
+  <!-- 8.1 ĐỘNG CƠ SƯ PHẠM: BẢO TOÀN ĐỒNG THỜI HAI PHÉP TOÁN -->
+  <h3 class="subsection-title">8.1. Khởi Nguồn Sư Phạm: Ánh Xạ Giữ Hai Phép Toán và Sự Kế Thừa Cấu Trúc</h3>
+  <p>
+    Trong lý thuyết nhóm, đồng cấu chỉ cần bảo toàn một phép toán duy nhất. Nhưng với một vành, ánh xạ phải tôn trọng <b>đồng thời cả phép cộng và phép nhân</b>:
+  </p>
+  <ul class="bullet-list">
+    <li>Bảo toàn phép cộng nghĩa là ánh xạ là một đồng cấu nhóm cộng từ $(R, +)$ sang $(S, +)$.</li>
+    <li>Bảo toàn phép nhân nghĩa là ánh xạ là một đồng cấu nửa nhóm nhân từ $(R, \cdot)$ sang $(S, \cdot)$.</li>
+  </ul>
+  <p>
+    Sự kết hợp này bảo đảm rằng mọi tính toán đại số thực hiện ở vành nguồn $R$ đều được chuyển dịch trung thực sang vành đích $S$.
+  </p>
+
+  <!-- 8.2 ĐỊNH NGHĨA ĐỒNG CẤU VÀNH & VẤN ĐỀ ĐƠN VỊ -->
+  <h3 class="subsection-title">8.2. Định Nghĩa Đồng Cấu Vành và Ranh Giới Bảo Toàn Đơn Vị</h3>
+  
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 8.1</span>
+      <span class="tag">Đồng Cấu Vành (Ring Homomorphism)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $R$ và $S$ là hai vành. Một ánh xạ $f : R \to S$ được gọi là một <b>đồng cấu vành</b> nếu thỏa mãn đồng thời hai điều kiện:</p>
+      <ul class="bullet-list">
+        <li><b>1. Bảo toàn phép cộng:</b>
+          $$f(a + b) = f(a) + f(b) \quad \forall a, b \in R$$
+        </li>
+        <li><b>2. Bảo toàn phép nhân:</b>
+          $$f(ab) = f(a)f(b) \quad \forall a, b \in R$$
+        </li>
+      </ul>
+      <div class="corollary-box">
+        <b>💡 Các hệ quả tức thời:</b>
+        <br>• Bảo toàn phần tử không: $f(0_R) = 0_S$ (do tính chất của đồng cấu nhóm cộng).
+        <br>• Bảo toàn phần tử đối: $f(-a) = -f(a)$ và $f(a - b) = f(a) - f(b)$ với mọi $a, b \in R$.
+        <br>• Bảo toàn bội nguyên: $f(na) = n f(a)$ với mọi $n \in \mathbb{Z}, a \in R$.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Xét phép chiếu $\pi_6:\mathbb{Z}\to\mathbb{Z}/6\mathbb{Z}$, $a\mapsto[a]_6$. Kiểm tra đây là đồng cấu vành bảo toàn đơn vị.</p>
+          <p><b>2. Hộp công cụ.</b> Đồng cấu vành phải bảo toàn đồng thời phép cộng và phép nhân; bảo toàn đơn vị là điều kiện bổ sung khi yêu cầu đồng cấu unital.</p>
+          <p><b>3. Lời giải.</b> Với $a,b\in\mathbb{Z}$, $\pi_6(a+b)=[a+b]_6=[a]_6+[b]_6$ và $\pi_6(ab)=[ab]_6=[a]_6[b]_6$. Ngoài ra $\pi_6(1)=[1]_6$, đơn vị của $\mathbb{Z}/6\mathbb{Z}$. Vậy $\pi_6$ là đồng cấu vành bảo toàn đơn vị (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Bảo toàn hai phép toán không tự động chứng minh toàn ánh hay đơn ánh; riêng phép chiếu này toàn ánh nhưng không đơn ánh vì $\pi_6(6)=[0]_6=\pi_6(0)$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 8.2</span>
+      <span class="tag">Phân Loại Các Dạng Đồng Cấu Vành</span>
+    </div>
+    <div class="card-body">
+      <p>Một đồng cấu vành $f: R \to S$ được phân loại dựa theo các tính chất ánh xạ:</p>
+      <ul class="bullet-list">
+        <li><b>Đơn cấu vành (Monomorphism):</b> Là một đồng cấu vành có tính <i>đơn ánh</i>.</li>
+        <li><b>Toàn cấu vành (Epimorphism):</b> Là một đồng cấu vành có tính <i>toàn ánh</i>.</li>
+        <li><b>Đẳng cấu vành (Isomorphism):</b> Là một đồng cấu vành vừa đơn ánh vừa toàn ánh (<i>song ánh</i>). Khi đó ta viết $R \cong S$.</li>
+        <li><b>Tự đẳng cấu vành (Automorphism):</b> Là một đẳng cấu từ một vành lên chính nó.</li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Xét $\varphi:\mathbb{Z}\to\mathbb{Z}\times\mathbb{Z}$, $a\mapsto(a,0)$, với phép toán theo từng tọa độ. Phân loại ánh xạ và kiểm tra bảo toàn đơn vị.</p>
+          <p><b>2. Hộp công cụ.</b> Một đồng cấu vành có thể đồng thời đơn ánh/toàn ánh hoặc không; theo quy ước ở chương này, đồng cấu vành không nhất thiết gửi đơn vị nguồn đến đơn vị đích.</p>
+          <p><b>3. Lời giải.</b> Ta có $\varphi(a+b)=(a+b,0)=(a,0)+(b,0)$ và $\varphi(ab)=(ab,0)=(a,0)(b,0)$, nên đây là đồng cấu. Nếu $\varphi(a)=\varphi(b)$ thì $a=b$, vậy đơn ánh; nhưng không toàn ánh vì $(0,1)$ không thuộc ảnh. Đơn vị đích là $(1,1)$, trong khi $\varphi(1)=(1,0)\ne(1,1)$. Do đó $\varphi$ là đơn cấu không bảo toàn đơn vị (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Đừng ngầm thêm điều kiện $f(1_R)=1_S$ vào định nghĩa đồng cấu vành đang dùng; cũng không suy đơn cấu là toàn cấu.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="ex-card counter" data-type="ex" open style="margin-bottom: 1.5rem;">
+    <summary>⚠️ Cảnh báo sư phạm: Đồng cấu vành KHÔNG MẶC ĐỊNH bảo toàn phần tử đơn vị!</summary>
+    <div class="ex-content">
+      <p>
+        Theo giáo trình của TS. Huỳnh Việt Khánh, một vành không bắt buộc có đơn vị, do đó <b>định nghĩa đồng cấu vành không yêu cầu $f(1_R) = 1_S$</b>.
+        <br>Nếu cả $R$ và $S$ đều có đơn vị, một đồng cấu thỏa mãn $f(1_R) = 1_S$ được gọi riêng là <i>đồng cấu vành bảo toàn đơn vị</i> (unital ring homomorphism).
+      </p>
+      <p><b>Phản ví dụ kinh điển (Bài tập 8.4):</b></p>
+      <p>
+        Xét ánh xạ $\delta : \mathbb{Z} \to M_2(\mathbb{Z})$ định bởi $\delta(k) = \begin{pmatrix} k & 0 \\ 0 & 0 \end{pmatrix} = k E_{11}$.
+        <br>• $\delta(a + b) = \delta(a) + \delta(b)$ (bảo toàn cộng).
+        <br>• $\delta(ab) = (ab)E_{11} = (a E_{11})(b E_{11}) = \delta(a)\delta(b)$ (vì $E_{11}^2 = E_{11}$, bảo toàn nhân).
+        <br>Do đó $\delta$ là một đồng cấu vành (thậm chí là đơn cấu).
+        <br>Tuy nhiên: Phần tử đơn vị của $\mathbb{Z}$ là $1$, nhưng ảnh của nó là:
+        $$\delta(1) = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} \neq \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = I_2$$
+        Ánh xạ này <b>hoàn toàn không bảo toàn phần tử đơn vị</b> đối với vành mẹ $M_2(\mathbb{Z})$!
+      </p>
+    </div>
+  </details>
+
+  <!-- 8.3 HẠT NHÂN VÀ TẬP ẢNH -->
+  <h3 class="subsection-title">8.3. Hạt Nhân, Tập Ảnh và Tiêu Chuẩn Đơn Cấu Vành</h3>
+  
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 8.3</span>
+      <span class="tag">Hạt Nhân (Kernel) và Tập Ảnh (Image)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $f : R \to S$ là một đồng cấu vành. Ta xác định:</p>
+      <ul class="bullet-list">
+        <li><b>1. Hạt nhân của đồng cấu:</b> Là tập hợp các phần tử của $R$ bị gửi về phần tử không $0_S$ của $S$:
+          $$\ker f = \{r \in R \mid f(r) = 0_S\}$$
+        </li>
+        <li><b>2. Tập ảnh của đồng cấu:</b> Là tập hợp tất cả các giá trị thực sự đạt tới trong $S$:
+          $$\operatorname{im} f = f(R) = \{f(r) \mid r \in R\}$$
+        </li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Xét $\operatorname{ev}_0:\mathbb{R}[x]\to\mathbb{R}$, $P(x)\mapsto P(0)$. Tìm ảnh và hạt nhân.</p>
+          <p><b>2. Hộp công cụ.</b> Ảnh gồm các giá trị đạt được; hạt nhân gồm các đa thức được gửi về $0$. Đa thức có giá trị $0$ tại $0$ khi và chỉ khi chia hết cho $x$.</p>
+          <p><b>3. Lời giải.</b> Mọi $c\in\mathbb{R}$ là ảnh của đa thức hằng $P(x)=c$, nên $\operatorname{im}(\operatorname{ev}_0)=\mathbb{R}$. Nếu $P(x)=a_0+a_1x+\cdots+a_nx^n$, thì $P(0)=a_0$; do đó $P(0)=0$ khi và chỉ khi $P(x)=xQ(x)$ với $Q\in\mathbb{R}[x]$. Vậy $\ker(\operatorname{ev}_0)=(x)=x\mathbb{R}[x]$, một iđêan hai phía vì $\mathbb{R}[x]$ giao hoán (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Tập ảnh bằng toàn bộ đối miền ở ví dụ này vì mọi hằng số đạt được; không nên mặc định điều đó cho mọi đồng cấu.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 8.4</span>
+      <span class="tag">Bản Chất Cấu Trúc Của Hạt Nhân và Tiêu Chuẩn Đơn Ánh</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $f : R \to S$ là một đồng cấu vành. Khi đó:</p>
+      <ul class="bullet-list">
+        <li><b>1. Tập ảnh là vành con:</b> $\operatorname{im} f$ luôn là một <b>vành con</b> của vành đích $S$.</li>
+        <li><b>2. Hạt nhân luôn là Iđêan hai phía:</b> $\ker f$ <b>luôn là một iđêan hai phía</b> của vành nguồn $R$ ($\ker f \trianglelefteq R$).</li>
+        <li><b>3. Tiêu chuẩn đơn ánh cốt lõi:</b> Ánh xạ $f$ là một đơn ánh (đơn cấu) khi và chỉ khi hạt nhân của nó là tầm thường:
+          $$f \text{ là đơn ánh} \iff \ker f = \{0_R\}$$
+        </li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Với $f=\operatorname{ev}_0:\mathbb{R}[x]\to\mathbb{R}$, xác định ảnh, hạt nhân và tính đơn ánh.</p>
+          <p><b>2. Hộp công cụ.</b> Ảnh của đồng cấu vành là vành con; hạt nhân là iđêan hai phía; $f$ đơn ánh khi và chỉ khi $\ker f=\{0\}$.</p>
+          <p><b>3. Lời giải.</b> Mọi hằng số $c$ là $f(c)$ nên $\operatorname{im}f=\mathbb{R}$. Một đa thức có giá trị $0$ tại $0$ khi và chỉ khi chia hết cho $x$, vậy $\ker f=(x)$. Hạt nhân này không tầm thường vì $x\ne0$ nhưng $f(x)=0$; do đó $f$ không đơn ánh. Chẳng hạn $f(x)=f(0)=0$ trong khi $x\ne0$. Kết luận phù hợp tiêu chuẩn (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Toàn ánh không kéo theo đơn ánh; hãy xét kernel thay vì suy luận chỉ từ tập ảnh.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="proof-block">
+    <summary>🔍 Xem chứng minh tính iđêan hai phía của $\ker f$</summary>
+    <div class="proof-content">
+      <p>
+        • Vì $f$ là đồng cấu nhóm cộng, $(\ker f, +)$ là một nhóm con của $(R, +)$.
+        <br>• Lấy $x \in \ker f$ và $r \in R$ tùy ý. Ta kiểm tra tính hấp thụ hai phía:
+        $$f(rx) = f(r)f(x) = f(r) \cdot 0_S = 0_S \implies rx \in \ker f$$
+        $$f(xr) = f(x)f(r) = 0_S \cdot f(r) = 0_S \implies xr \in \ker f$$
+        Do đó $\ker f$ hấp thụ mọi phép nhân từ cả hai phía. Vậy $\ker f \trianglelefteq R$. <span class="qed">∎</span>
+      </p>
+    </div>
+  </details>
+
+  <!-- 8.4 BỐN ĐỊNH LÝ ĐẲNG CẤU VÀNH -->
+  <h3 class="subsection-title">8.4. Bộ Bốn Định Lý Đẳng Cấu Vành và Phương Pháp 3 Bước Thực Chiến</h3>
+  <p>
+    Vì hạt nhân $\ker f$ luôn là một iđêan hai phía của $R$, ta luôn tạo được vành thương $\dfrac{R}{\ker f}$. 
+    Định lý đẳng cấu thứ nhất khẳng định vành thương này phản chiếu hoàn hảo cấu trúc của tập ảnh:
+  </p>
+
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 8.5</span>
+      <span class="tag">Định Lý Đẳng Cấu Thứ Nhất Cho Vành (First Isomorphism Theorem)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $f : R \to S$ là một đồng cấu vành. Ánh xạ cảm sinh:</p>
+      <div class="math-display">
+        $$\Phi : \dfrac{R}{\ker f} \stackrel{\cong}{\longrightarrow} \operatorname{im} f, \quad \Phi(r + \ker f) = f(r)$$
+      </div>
+      <p>là một <b>đẳng cấu vành</b>. Đặc biệt, nếu $f$ là một toàn cấu ($\operatorname{im} f = S$), ta có đẳng cấu trọn vẹn:</p>
+      <div class="math-display">
+        $$\dfrac{R}{\ker f} \;\cong\; S$$
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Chứng minh $\mathbb{R}[x]/(x^2+1)\cong\mathbb{C}$ bằng ánh xạ $\Phi(P)=P(i)$.</p>
+          <p><b>2. Hộp công cụ.</b> Dùng Định lý Đẳng cấu Thứ nhất: xây dựng đồng cấu, chứng minh toàn ánh, tìm kernel, rồi suy ra thương đẳng cấu với ảnh.</p>
+          <p><b>3. Lời giải.</b> (1) Với $P,Q\in\mathbb{R}[x]$, $\Phi(P+Q)=P(i)+Q(i)$ và $\Phi(PQ)=P(i)Q(i)$, nên $\Phi$ là đồng cấu vành. (2) Với mọi $a+bi\in\mathbb{C}$, $\Phi(a+bx)=a+bi$, nên $\Phi$ toàn ánh. (3) Chia $P$ cho $x^2+1$, viết $P=(x^2+1)Q+(ax+b)$. Khi đó $P(i)=ai+b$; bằng $0$ khi và chỉ khi $a=b=0$. Vậy $\ker\Phi=(x^2+1)$. Theo định lý, $\mathbb{R}[x]/(x^2+1)\cong\mathbb{C}$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Kernel không phải chỉ là tập các nghiệm của $x^2+1$ mà là toàn bộ đa thức bị gửi về $0$, tức iđêan sinh bởi đa thức ấy. Cần chứng minh toàn ánh lên $\mathbb{C}$, không chỉ lên một tập con.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- HỘP PHƯƠNG PHÁP 3 BƯỚC NHẬN DIỆN VÀNH THƯƠNG -->
+  <div style="background: var(--eq-bg, #f8fafc); border: 1.5px solid #bfdbfe; border-radius: 12px; padding: 20px; margin: 1.5rem 0;">
+    <div style="font-weight: 700; color: #1d4ed8; font-size: 1.05rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+      <span>💡</span> Tuyệt Chiêu: Phương Pháp 3 Bước Nhận Diện Vành Thương $\dfrac{R}{I} \cong S$
+    </div>
+    <p style="margin: 0 0 10px; font-size: 0.95rem; color: #334155;">
+      Muốn chứng minh một vành thương $\dfrac{R}{I}$ đẳng cấu với một vành quen thuộc $S$, 
+      <b>tuyệt đối không chia lớp kề thủ công</b>. Hãy thực hiện quy trình 3 bước chuẩn mực:
+    </p>
+    <ul class="bullet-list" style="margin-bottom: 0;">
+      <li><b>Bước 1 (Xây dựng đồng cấu):</b> Thiết lập một ánh xạ tự nhiên $f : R \to S$ và kiểm tra bảo toàn hai phép toán: $f(a + b) = f(a) + f(b)$ và $f(ab) = f(a)f(b)$.</li>
+      <li><b>Bước 2 (Chứng minh toàn ánh):</b> Chứng minh với mọi $s \in S$, luôn tìm được phần tử $r \in R$ sao cho $f(r) = s$ (tức $\operatorname{im} f = S$).</li>
+      <li><b>Bước 3 (Xác định hạt nhân):</b> Giải phương trình $f(r) = 0_S$ để tìm $\ker f$, và chứng minh $\ker f = I$.</li>
+    </ul>
+    <div style="margin-top: 10px; padding: 8px 12px; background: #ffffff; border-radius: 6px; font-size: 0.92rem; color: #1e40af; border-left: 3px solid #2563eb;">
+      <b>Kết luận:</b> Áp dụng Định lý Đẳng cấu Thứ nhất cho vành, ta kết luận ngay: $\dfrac{R}{I} = \dfrac{R}{\ker f} \cong \operatorname{im} f = S$.
+    </div>
+  </div>
+
+  <!-- BỘ BA ĐỊNH LÝ CẤU TRÚC VÀNH -->
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 8.6</span>
+      <span class="tag">Bộ Ba Định Lý Cấu Trúc Mở Rộng Cho Vành</span>
+    </div>
+    <div class="card-body">
+      <ul class="bullet-list">
+        <li><b>Định lý đẳng cấu thứ hai (Hình thoi):</b> Cho $S$ là vành con của $R$ và $I \trianglelefteq R$. Khi đó $S + I$ là vành con của $R$, $S \cap I \trianglelefteq S$, và ta có:
+          $$\dfrac{S + I}{I} \;\cong\; \dfrac{S}{S \cap I}$$
+        </li>
+        <li><b>Định lý đẳng cấu thứ ba:</b> Cho $I, J \trianglelefteq R$ với $I \subseteq J$. Khi đó $J/I \trianglelefteq R/I$ và:
+          $$\dfrac{R/I}{J/I} \;\cong\; \dfrac{R}{J}$$
+        </li>
+        <li><b>Định lý tương ứng cho vành (Correspondence Theorem):</b> Cho $I \trianglelefteq R$. Phép chiếu chính tắc $\pi_I : R \to R/I$ thiết lập một song ánh bảo toàn quan hệ bao hàm giữa các iđêan của $R$ chứa $I$ và các iđêan của $R/I$:
+          $$\{J \trianglelefteq R \mid I \subseteq J\} \;\longleftrightarrow\; \{K \trianglelefteq R/I\}, \quad J \longmapsto J/I$$
+          <i>Đặc biệt (trong vành giao hoán có đơn vị):</i> Song ánh này <b>bảo toàn tính nguyên tố và tính cực đại</b>!
+          $$J \text{ nguyên tố} \iff J/I \text{ nguyên tố}; \qquad J \text{ cực đại} \iff J/I \text{ cực đại} \text{}$$
+        </li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Dùng $R=\mathbb{Z}$ minh họa định lý hình thoi với $S=2\mathbb{Z}, I=3\mathbb{Z}$; định lý thương của thương với $N=12\mathbb{Z}\subset H=4\mathbb{Z}$; và định lý tương ứng modulo $12$.</p>
+          <p><b>2. Hộp công cụ.</b> Các công thức là $(S+I)/I\cong S/(S\cap I)$, $(R/N)/(H/N)\cong R/H$, và song ánh $J\mapsto J/N$ giữa iđêan chứa $N$ và iđêan của $R/N$.</p>
+          <p><b>3. Lời giải.</b> Hình thoi: $2\mathbb{Z}+3\mathbb{Z}=\mathbb{Z}$ vì $1=3-2$, còn $2\mathbb{Z}\cap3\mathbb{Z}=6\mathbb{Z}$. Ánh xạ $2k+6\mathbb{Z}\mapsto k+3\mathbb{Z}$ cho $2\mathbb{Z}/6\mathbb{Z}\cong\mathbb{Z}/3\mathbb{Z}$. Thương của thương: $H/N=\{[0]_{12},[4]_{12},[8]_{12}\}$; ánh xạ $([k]_{12}+H/N)\mapsto[k]_4$ cho $(\mathbb{Z}/12\mathbb{Z})/(4\mathbb{Z}/12\mathbb{Z})\cong\mathbb{Z}/4\mathbb{Z}$. Tương ứng: các iđêan $d\mathbb{Z}$ chứa $12\mathbb{Z}$ có $d\mid12$, tức $d=1,2,3,4,6,12$; chúng cho các iđêan $d\mathbb{Z}/12\mathbb{Z}=\langle[d]_{12}\rangle$ của $\mathbb{Z}/12\mathbb{Z}$. Ánh xạ bảo toàn bao hàm, đồng thời trong vành giao hoán có đơn vị cũng bảo toàn tính nguyên tố và cực đại (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Với thương của thương phải có $N\subseteq H$. Định lý tương ứng chỉ đưa xuống thương những iđêan của $R$ chứa $N$; không ghép mọi iđêan của $R$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 8.5 ĐẶC SỐ CỦA VÀNH -->
+  <h3 class="subsection-title">8.5. Đặc Số Của Vành $\operatorname{char}(R)$ và Phẩm Chất Đại Số</h3>
+  <p>
+    Đặc số là một đại lượng hoàn toàn thuộc về nhóm cộng của vành, đo lường số lần cộng phần tử đơn vị lại với chính nó để triệt tiêu về $0$:
+  </p>
+
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 8.7</span>
+      <span class="tag">Đặc Số Của Vành (Characteristic)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $R$ là một vành bất kỳ. Xét tập hợp các số nguyên triệt tiêu đồng thời mọi phần tử của vành:</p>
+      <div class="math-display">
+        $$A_R = \{n \in \mathbb{Z} \mid n \cdot r = 0_R, \forall r \in R\}$$
+      </div>
+      <p>Tập $A_R$ luôn là một iđêan của vành số nguyên $\mathbb{Z}$. Vì $\mathbb{Z}$ là PID, tồn tại duy nhất số nguyên không âm $m \ge 0$ sao cho $A_R = m\mathbb{Z}$.</p>
+      <ul class="bullet-list">
+        <li>Số nguyên $m$ được gọi là <b>đặc số</b> của vành $R$, ký hiệu là $\operatorname{char}(R)$.</li>
+        <li><b>Nếu $m = 0$:</b> Không có số nguyên dương nào làm triệt tiêu vành. Ta nói vành có <i>đặc số bằng 0</i>: $\operatorname{char}(R) = 0$.</li>
+        <li><b>Nếu $m > 0$:</b> Là <b>số nguyên dương nhỏ nhất</b> thỏa mãn $m \cdot r = 0_R$ với mọi $r \in R$.</li>
+        <li><b>Trường hợp $R$ có đơn vị $1_R \neq 0_R$:</b> $\operatorname{char}(R)$ chính là <b>cấp của phần tử đơn vị $1_R$</b> trong nhóm cộng $(R, +)$!</li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Tính đặc số của $\mathbb{Z}$, $\mathbb{Z}/n\mathbb{Z}$ và vành tích $T=\mathbb{Z}/4\mathbb{Z}\times\mathbb{Z}/6\mathbb{Z}$.</p>
+          <p><b>2. Hộp công cụ.</b> Với vành có đơn vị khác $0$, đặc số là cấp cộng của đơn vị. Trong vành tích, bội $m(1_R,1_S)$ bằng $(m1_R,m1_S)$, nên cấp của đơn vị là BCNN cấp các tọa độ.</p>
+          <p><b>3. Lời giải.</b> Trong $\mathbb{Z}$, không có $m>0$ sao cho $m\cdot1=0$, nên $\operatorname{char}(\mathbb{Z})=0$. Trong $\mathbb{Z}/n\mathbb{Z}$, $m[1]=[0]$ khi và chỉ khi $n\mid m$, do đó $\operatorname{char}=n$. Với $T$, đơn vị là $([1]_4,[1]_6)$; bội nhỏ nhất triệt tiêu cả hai tọa độ phải chia hết đồng thời cho $4$ và $6$. Vì $\operatorname{lcm}(4,6)=12$, $\operatorname{char}(T)=12$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Đặc số của vành tích không nhất thiết là tích hai đặc số; ở đây nó là BCNN. Phải kiểm tra bội triệt tiêu mọi tọa độ, không chỉ một tọa độ.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem; border-left: 4px solid #10b981;">
+    <div class="card-header" style="color: #047857;">
+      <span class="label">🏛️ ĐỊNH LÝ 8.8</span>
+      <span class="tag" style="background: rgba(16, 185, 129, 0.15); color: #047857;">Đặc Số Của Miền Nguyên và Trường (Bài tập 8.24)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $R$ là một miền nguyên (hoặc một trường). Khi đó:</p>
+      <div class="math-display">
+        $$\operatorname{char}(R) = 0 \quad \text{hoặc} \quad \operatorname{char}(R) = p \text{ (với } p \text{ là một số nguyên tố)}$$
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Giả sử miền nguyên $R$ có đơn vị và đặc số dương $n$. Chứng minh $n$ phải là số nguyên tố.</p>
+          <p><b>2. Hộp công cụ.</b> $n=\operatorname{char}(R)$ là số nguyên dương nhỏ nhất sao cho $n1_R=0_R$. Miền nguyên không có ước của không: tích bằng $0$ thì một thừa số bằng $0$.</p>
+          <p><b>3. Lời giải.</b> Giả sử phản chứng $n$ hợp số, viết $n=ab$ với $1<a,b<n$. Khi đó $(a1_R)(b1_R)=(ab)1_R=n1_R=0_R$. Vì $R$ là miền nguyên, $a1_R=0_R$ hoặc $b1_R=0_R$. Nhưng $a,b$ là số nguyên dương nhỏ hơn $n$, trái với tính nhỏ nhất của đặc số $n$. Vậy $n$ không thể hợp số; do $n>1$, nó phải là số nguyên tố $p$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Lập luận cần miền nguyên để loại trừ ước của không và cần đơn vị khác $0$ để đặc số dương được hiểu theo cấp cộng của $1_R$. Vành tổng quát có thể có đặc số hợp số, như $\mathbb{Z}/6\mathbb{Z}$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="proof-block">
+    <summary>🔍 Xem chứng minh đặc số của miền nguyên không thể là hợp số</summary>
+    <div class="proof-content">
+      <p>
+        Giả sử $R$ là một miền nguyên có đặc số $n > 0$. Ta cần chứng minh $n$ là số nguyên tố.
+        <br>Giả sử phản chứng $n$ là một hợp số: $n = ab$ với $1 &lt; a, b &lt; n$.
+        <br>Vì $\operatorname{char}(R) = n$, ta có $n \cdot 1_R = 0_R$. Mặt khác, theo luật phân phối của vành:
+        $$(a \cdot 1_R)(b \cdot 1_R) = (ab) \cdot (1_R \cdot 1_R) = n \cdot 1_R = 0_R \text{}$$
+        Vì $R$ là một miền nguyên nên $R$ <b>hoàn toàn không có ước của không</b>. Do đó buộc phải có:
+        $$a \cdot 1_R = 0_R \quad \text{hoặc} \quad b \cdot 1_R = 0_R \text{}$$
+        Điều này mâu thuẫn trực tiếp với tính nhỏ nhất của $n$ (vì cả $a$ và $b$ đều là các số nguyên dương nghiêm ngặt nhỏ hơn $n$)!
+        Vậy $n$ bắt buộc phải là một số nguyên tố $p$. <span class="qed">∎</span>
+      </p>
+    </div>
+  </details>
+
+  <!-- 8.6 VÍ DỤ KINH ĐIỂN: PHÉP THẾ ĐA THỨC -->
+  <h3 class="subsection-title">8.6. Bài Toán Mẫu Mực: Phép Thế Đa Thức Nhận Diện $F[x]/(x - a) \cong F$</h3>
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.5rem;">
+    <div class="card-header">
+      <span class="label">🏛️ BÀI TẬP 8.10 GIÁO TRÌNH</span>
+      <span class="tag">Ứng Dụng 3 Bước Nhận Diện Vành Thương</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $F$ là một trường và $a \in F$. Chứng minh đẳng cấu vành: $\dfrac{F[x]}{(x - a)} \;\cong\; F$.</p>
+      <ul class="bullet-list">
+        <li><b>Bước 1 (Xây dựng đồng cấu):</b> Xét ánh xạ tính giá trị đa thức $\operatorname{ev}_a : F[x] \to F$ định bởi $\operatorname{ev}_a(f) = f(a)$. 
+          Hiển nhiên $\operatorname{ev}_a(f + g) = f(a) + g(a)$ và $\operatorname{ev}_a(fg) = f(a)g(a)$. Đồng thời $\operatorname{ev}_a(1) = 1$. 
+          Vậy $\operatorname{ev}_a$ là một đồng cấu vành bảo toàn đơn vị.
+        </li>
+        <li><b>Bước 2 (Chứng minh toàn ánh):</b> Với mọi hằng số $c \in F$, xét đa thức hằng $f(x) = c \in F[x]$, ta có $\operatorname{ev}_a(f) = c$. Do đó $\operatorname{im}(\operatorname{ev}_a) = F$.</li>
+        <li><b>Bước 3 (Xác định hạt nhân):</b> Theo định lý Bézout cho đa thức, $f(a) = 0 \iff f(x)$ chia hết cho $x - a$. 
+          Do đó $\ker(\operatorname{ev}_a) = \{f \in F[x] \mid f(a) = 0\} = (x - a)$ (iđêan chính sinh bởi $x - a$).
+        </li>
+      </ul>
+      <p style="margin-top: 8px;">
+        Áp dụng Định lý Đẳng cấu Thứ nhất cho vành, ta kết luận: $\dfrac{F[x]}{(x - a)} \;\cong\; F$. <span class="qed">∎</span>
+      </p>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Xét $\Phi:\mathbb{R}[x]\to\mathbb{C}$, $P(x)\mapsto P(i)$. Chứng minh $\mathbb{R}[x]/(x^2+1)\cong\mathbb{C}$ bằng ba bước.</p>
+          <p><b>2. Hộp công cụ.</b> Định lý Đẳng cấu Thứ nhất cho vành: nếu $\Phi$ là toàn cấu và $\ker\Phi=I$, thì $\mathbb{R}[x]/I\cong\mathbb{C}$.</p>
+          <p><b>3. Lời giải.</b> Bước 1: $\Phi(P+Q)=P(i)+Q(i)$ và $\Phi(PQ)=P(i)Q(i)$, nên $\Phi$ là đồng cấu. Bước 2: mọi $a+bi\in\mathbb{C}$ là ảnh của đa thức $a+bx$, do đó $\Phi$ toàn ánh. Bước 3: chia đa thức $P$ cho $x^2+1$, viết $P=(x^2+1)Q+(ax+b)$. Khi đó $P(i)=ai+b=0$ khi và chỉ khi $a=b=0$, vậy $\ker\Phi=(x^2+1)$. Theo định lý, $\mathbb{R}[x]/(x^2+1)\cong\mathbb{C}$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Hạt nhân gồm mọi đa thức chia hết cho $x^2+1$, không chỉ đa thức $x^2+1$ đơn lẻ. Tính toàn ánh được thấy trực tiếp qua các phần tử $a+bi$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 8.7 BẢNG ĐỐI CHIẾU SONG HÀNH TOÀN DIỆN -->
+  <h3 class="subsection-title">8.7. Bảng Đối Chiếu Song Hành Toàn Diện: Lý Thuyết Nhóm vs. Lý Thuyết Vành</h3>
+  <p style="font-size:0.95rem; color:var(--text-muted);">
+    Mọi cấu trúc cốt lõi trong Lý thuyết Vành đều là sự phát triển song song hoàn hảo từ Lý thuyết Nhóm:
+  </p>
+
+  <div class="table-wrapper">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th style="width: 25%;">Tiêu Chí Khảo Sát</th>
+          <th style="width: 37%;">Lý Thuyết Nhóm (Một phép toán)</th>
+          <th style="width: 38%;">Lý Thuyết Vành (Hai phép toán)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Cấu trúc nền tảng</b></td>
+          <td>Nhóm $(G, \cdot)$</td>
+          <td>Vành $(R, +, \cdot)$</td>
+        </tr>
+        <tr>
+          <td><b>Cấu trúc con nội tại</b></td>
+          <td>Nhóm con: $H \le G$ ($xy^{-1} \in H$)</td>
+          <td>Vành con: $S \subseteq R$ ($x - y \in S, xy \in S$)</td>
+        </tr>
+        <tr>
+          <td><b>Cấu trúc tạo thương hợp lệ</b></td>
+          <td><b>Nhóm con chuẩn tắc:</b> $N \trianglelefteq G$ ($gNg^{-1} \subseteq N$)</td>
+          <td><b>Iđêan hai phía:</b> $I \trianglelefteq R$ ($RI \subseteq I, IR \subseteq I$)</td>
+        </tr>
+        <tr>
+          <td><b>Phép chiếu chính tắc</b></td>
+          <td>$\pi_N : G \twoheadrightarrow G/N, \quad g \mapsto gN$</td>
+          <td>$\pi_I : R \twoheadrightarrow R/I, \quad r \mapsto r + I$</td>
+        </tr>
+        <tr>
+          <td><b>Hạt nhân của đồng cấu</b></td>
+          <td>$\ker \varphi = \{g \in G \mid \varphi(g) = e_K\} \trianglelefteq G$</td>
+          <td>$\ker f = \{r \in R \mid f(r) = 0_S\} \trianglelefteq R$</td>
+        </tr>
+        <tr>
+          <td><b>Định lý đẳng cấu 1</b></td>
+          <td>$\dfrac{G}{\ker\varphi} \;\cong\; \operatorname{im}\varphi$</td>
+          <td>$\dfrac{R}{\ker f} \;\cong\; \operatorname{im} f$</td>
+        </tr>
+        <tr>
+          <td><b>Định lý đẳng cấu 2 (Hình thoi)</b></td>
+          <td>$\dfrac{H}{H \cap N} \;\cong\; \dfrac{HN}{N}$</td>
+          <td>$\dfrac{S}{S \cap I} \;\cong\; \dfrac{S + I}{I}$</td>
+        </tr>
+        <tr>
+          <td><b>Định lý đẳng cấu 3</b></td>
+          <td>$\dfrac{G/N}{H/N} \;\cong\; \dfrac{G}{H}$</td>
+          <td>$\dfrac{R/I}{J/I} \;\cong\; \dfrac{R}{J}$</td>
+        </tr>
+        <tr>
+          <td><b>Phân loại chất lượng thương</b></td>
+          <td>$[G : N] = p \implies G/N$ cyclic</td>
+          <td>$R/I$ là miền nguyên $\iff I$ nguyên tố<br>$R/I$ là trường $\iff I$ cực đại</td>
+        </tr>
+        <tr>
+          <td><b>Đại lượng cấp / Chu kỳ</b></td>
+          <td>Cấp của nhóm $|G|$ và cấp phần tử $\operatorname{ord}(a)$</td>
+          <td>Đặc số của vành $\operatorname{char}(R)$</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- ==================== HẾT CHƯƠNG 8 HOÀN CHỈNH ==================== -->

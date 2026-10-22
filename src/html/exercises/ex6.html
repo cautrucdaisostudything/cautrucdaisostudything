@@ -1,0 +1,234 @@
+<!-- ==================== BÀI TẬP CHƯƠNG 6: HOÀN CHỈNH ==================== -->
+<div class="chapter-content" id="tab-ex6">
+  <h2 class="section-title">Hệ thống Bài tập & Lời giải: Chương 6. Vành, Miền nguyên & Trường</h2>
+  <p>
+    Rèn luyện kĩ năng kiểm tra tiên đề vành, phân loại miền nguyên – vành chia – trường, phân biệt phần tử khả nghịch với ước của không, và xử lý các vành con có đơn vị riêng khác đơn vị vành mẹ.
+  </p>
+
+  <!-- BÀI TẬP 6.1 -->
+  <div class="ex-study-card" id="ex-6-1">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-a">Nhóm A · Nhận diện</span>
+        <span class="ex-level-badge">🟢 Cơ bản</span>
+        <span class="ex-title-label">BÀI TẬP 6.1: Phân loại Tiêu chí Cấu trúc Vành</span>
+      </div>
+      <button class="ex-status-btn" data-id="6-1" data-status="todo" onclick="toggleExStatus(this, '6-1')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Với mỗi vành $\mathbb{Z}, 2\mathbb{Z}, \mathbb{Z}/6\mathbb{Z}, M_2(\mathbb{R})$, hãy xác định tính giao hoán, sự tồn tại của phần tử đơn vị và sự tồn tại của ước của không.</p>
+      <p>Sau đó xác định cấu trúc đó có phải là miền nguyên, vành chia hoặc trường hay không. Mỗi câu trả lời phủ định phải kèm một lý do hoặc một phản ví dụ cụ thể.</p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • <b>Miền nguyên:</b> Vành khác không, giao hoán, có đơn vị $1_R$ và không có ước của không.<br>
+        • <b>Vành chia:</b> Vành khác không, có đơn vị $1_R$, mọi phần tử khác $0$ đều khả nghịch.<br>
+        • <b>Trường:</b> Vành chia giao hoán (hoặc miền nguyên có mọi phần tử khác $0$ khả nghịch).
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>1. Vành $\mathbb{Z}$:</b><br>
+        • Phép nhân giao hoán, có phần tử đơn vị là $1$, không có ước của không ($ab = 0 \implies a = 0$ hoặc $b = 0$).<br>
+        • $\implies$ $\mathbb{Z}$ là một <b>miền nguyên</b>.<br>
+        • $\mathbb{Z}$ không là trường và không là vành chia vì phần tử $2 \neq 0$ không khả nghịch trong $\mathbb{Z}$.
+      </p>
+      <p><b>2. Vành $2\mathbb{Z}$:</b><br>
+        • Phép nhân giao hoán, không có ước của không.<br>
+        • Tuy nhiên $2\mathbb{Z}$ <b>không có phần tử đơn vị</b> (nếu có $e$ thì $2e = 2 \implies e = 1 \notin 2\mathbb{Z}$).<br>
+        • $\implies$ $2\mathbb{Z}$ không là miền nguyên, không là vành chia, không là trường.
+      </p>
+      <p><b>3. Vành $\mathbb{Z}/6\mathbb{Z}$:</b><br>
+        • Phép nhân giao hoán, có phần tử đơn vị là $[1]_6$.<br>
+        • Có ước của không: $[2]_6 \neq [0]_6$ và $[3]_6 \neq [0]_6$ nhưng $[2]_6[3]_6 = [6]_6 = [0]_6$.<br>
+        • $\implies$ Không là miền nguyên, không là vành chia, không là trường.
+      </p>
+      <p><b>4. Vành ma trận $M_2(\mathbb{R})$:</b><br>
+        • Có phần tử đơn vị là ma trận đơn vị $I_2$.<br>
+        • <b>Không giao hoán:</b> Xét $E_{12} = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}, E_{21} = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}$, ta có $E_{12}E_{21} = E_{11} \neq E_{22} = E_{21}E_{12}$.<br>
+        • Có ước của không: $E_{12} \neq 0$ nhưng $E_{12}^2 = 0$.<br>
+        • $\implies$ Không là miền nguyên, không là vành chia, không là trường. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Quy ước quan trọng:</b> Theo giáo trình TS. Huỳnh Việt Khánh, miền nguyên bắt buộc phải có đơn vị $1_R$. Do đó vành $2\mathbb{Z}$ dù giao hoán và không có ước của không vẫn <i>không được coi là miền nguyên</i>.
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 6.3 -->
+  <div class="ex-study-card" id="ex-6-3">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-a">Nhóm A · Tính toán</span>
+        <span class="ex-level-badge">🟢 Cơ bản</span>
+        <span class="ex-title-label">BÀI TẬP 6.3: Phần tử Khả nghịch & Ước của Không trong Z/12Z</span>
+      </div>
+      <button class="ex-status-btn" data-id="6-3" data-status="todo" onclick="toggleExStatus(this, '6-3')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Trong vành $\mathbb{Z}/12\mathbb{Z}$:</p>
+      <p>
+        (a) Liệt kê tất cả các phần tử khả nghịch cùng phần tử nghịch đảo tương ứng của chúng.<br>
+        (b) Liệt kê tất cả các ước của không.<br>
+        (c) Có phần tử khác không nào vừa khả nghịch vừa là ước của không không? Rút ra kết luận tổng quát.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Trong $\mathbb{Z}/n\mathbb{Z}$, lớp $[a]_n$ khả nghịch $\iff \gcd(a, n) = 1$.<br>
+        • Lớp $[a]_n \neq [0]_n$ là ước của không $\iff \gcd(a, n) > 1$.<br>
+        • Hai tập hợp này phân hoạch tập các phần tử khác không của $\mathbb{Z}/n\mathbb{Z}$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Các phần tử khả nghịch trong $\mathbb{Z}/12\mathbb{Z}$:</b><br>
+        Đó là các lớp $[a]_{12}$ với $\gcd(a, 12) = 1$: $\{[1], [5], [7], [11]\}$. Nghịch đảo tương ứng:<br>
+        • $[1]^{-1} = [1]$ (vì $1 \times 1 = 1$)<br>
+        • $[5]^{-1} = [5]$ (vì $5 \times 5 = 25 \equiv 1 \pmod{12}$)<br>
+        • $[7]^{-1} = [7]$ (vì $7 \times 7 = 49 \equiv 1 \pmod{12}$)<br>
+        • $[11]^{-1} = [11]$ (vì $[-1] \times [-1] = [1]$)<br>
+        Mỗi phần tử khả nghịch trong $\mathbb{Z}/12\mathbb{Z}$ đều tự là nghịch đảo của chính nó.
+      </p>
+      <p><b>(b) Các ước của không trong $\mathbb{Z}/12\mathbb{Z}$:</b><br>
+        Đó là các lớp $[a]_{12} \neq [0]$ có $\gcd(a, 12) > 1$: $\{[2], [3], [4], [6], [8], [9], [10]\}$. Minh họa tích bằng $0$:<br>
+        • $[2][6] = [12] = [0]$<br>
+        • $[3][4] = [12] = [0]$<br>
+        • $[8][3] = [24] = [0]$<br>
+        • $[9][4] = [36] = [0]$<br>
+        • $[10][6] = [60] = [0]$
+      </p>
+      <p><b>(c) So sánh và kết luận:</b><br>
+        Không có phần tử nào vừa khả nghịch vừa là ước của không.<br>
+        <i>Chứng minh tổng quát:</i> Nếu $u$ khả nghịch và là ước của không, tồn tại $b \neq 0$ sao cho $ub = 0$. Nhân $u^{-1}$ vào bên trái: $u^{-1}(ub) = u^{-1}0 \implies (u^{-1}u)b = 0 \implies 1b = 0 \implies b = 0$, mâu thuẫn! Do đó, <b>một phần tử khả nghịch không bao giờ là ước của không</b>. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Lưu ý định nghĩa:</b> Phần tử $0$ theo định nghĩa chuẩn <i>không được gọi là ước của không</i> (ước của không phải là phần tử khác không thỏa mãn tích với một phần tử khác không bằng 0).
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 6.8 -->
+  <div class="ex-study-card" id="ex-6-8">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-b">Nhóm B · Vận dụng</span>
+        <span class="ex-level-badge">🟡 Vận dụng</span>
+        <span class="ex-title-label">BÀI TẬP 6.8: Tiêu chuẩn Vành con & Đơn vị Riêng</span>
+      </div>
+      <button class="ex-status-btn" data-id="6-8" data-status="todo" onclick="toggleExStatus(this, '6-8')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Trong vành ma trận $M_2(\mathbb{R})$, xét tập con:</p>
+      <p>$$S = \left\{ \begin{pmatrix} a & 0 \\ 0 & 0 \end{pmatrix} \;\Bigg|\; a \in \mathbb{R} \right\} = \mathbb{R}E_{11}$$</p>
+      <p>
+        (a) Dùng tiêu chuẩn vành con chứng minh $S$ là một vành con của $M_2(\mathbb{R})$.<br>
+        (b) Vành con $S$ có phần tử đơn vị không? Nếu có, phần tử đơn vị đó có trùng với đơn vị $I_2$ của vành mẹ $M_2(\mathbb{R})$ không?
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Tiêu chuẩn vành con: $S \neq \emptyset$, đóng với phép trừ ($A - B \in S$) và đóng với phép nhân ($AB \in S$).<br>
+        • Phần tử đơn vị của vành con $1_S$ phải thỏa mãn $A \cdot 1_S = 1_S \cdot A = A$ với mọi $A \in S$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Chứng minh $S$ là vành con của $M_2(\mathbb{R})$:</b><br>
+        • Lấy $a = 0$, ta có ma trận không $\begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} \in S \implies S \neq \emptyset$.<br>
+        • Lấy $A = \begin{pmatrix} a & 0 \\ 0 & 0 \end{pmatrix}, B = \begin{pmatrix} b & 0 \\ 0 & 0 \end{pmatrix} \in S$ ($a, b \in \mathbb{R}$):<br>
+        - Xét hiệu: $A - B = \begin{pmatrix} a - b & 0 \\ 0 & 0 \end{pmatrix} \in S$ (do $a - b \in \mathbb{R}$).<br>
+        - Xét tích: $AB = \begin{pmatrix} a & 0 \\ 0 & 0 \end{pmatrix}\begin{pmatrix} b & 0 \\ 0 & 0 \end{pmatrix} = \begin{pmatrix} ab & 0 \\ 0 & 0 \end{pmatrix} \in S$ (do $ab \in \mathbb{R}$).<br>
+        Theo Tiêu chuẩn vành con, $S$ là một vành con của $M_2(\mathbb{R})$.
+      </p>
+      <p><b>(b) Khảo sát phần tử đơn vị của $S$:</b><br>
+        Xét ma trận $E = E_{11} = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} \in S$. Với mọi $A = \begin{pmatrix} a & 0 \\ 0 & 0 \end{pmatrix} \in S$:
+        $$AE = \begin{pmatrix} a & 0 \\ 0 & 0 \end{pmatrix}\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} = \begin{pmatrix} a & 0 \\ 0 & 0 \end{pmatrix} = A$$
+        $$EA = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}\begin{pmatrix} a & 0 \\ 0 & 0 \end{pmatrix} = \begin{pmatrix} a & 0 \\ 0 & 0 \end{pmatrix} = A$$
+        Do đó $E_{11}$ chính là <b>phần tử đơn vị của vành con $S$</b> ($1_S = E_{11}$).<br>
+        Rõ ràng $1_S = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} \neq \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = I_2 = 1_{M_2(\mathbb{R})}$.<br>
+        Vậy vành con $S$ có phần tử đơn vị riêng khác hoàn toàn phần tử đơn vị của vành mẹ. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Quy ước về Vành con:</b> Trong giáo trình của TS. Huỳnh Việt Khánh, tiêu chuẩn vành con <i>không đòi hỏi</i> vành con phải chứa cùng phần tử đơn vị với vành mẹ. Ví dụ này là minh chứng then chốt: một vành con có thể có đơn vị riêng, hoặc thậm chí không có đơn vị dù vành mẹ có đơn vị.
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 6.19 -->
+  <div class="ex-study-card" id="ex-6-19">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-c">Nhóm C · Phản ví dụ</span>
+        <span class="ex-level-badge">🟠 Vận dụng cao</span>
+        <span class="ex-title-label">BÀI TẬP 6.19: 4 Phản ví dụ Kinh điển cho Sơ đồ Vành</span>
+      </div>
+      <button class="ex-status-btn" data-id="6-19" data-status="todo" onclick="toggleExStatus(this, '6-19')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Các chiều mũi tên đi lên trong sơ đồ phân loại các lớp vành nói chung là sai. Hãy phân tích 4 phản ví dụ sau và chỉ rõ giả thiết còn thiếu:</p>
+      <p>
+        (a) $2\mathbb{Z}$ là vành giao hoán không có ước của không nhưng không là miền nguyên.<br>
+        (b) $M_2(\mathbb{R})$ là vành có đơn vị nhưng không giao hoán.<br>
+        (c) $\mathbb{Z}/6\mathbb{Z}$ là vành giao hoán có đơn vị nhưng không là miền nguyên.<br>
+        (d) $\mathbb{Z}$ là miền nguyên nhưng không là trường.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Đối chiếu từng định nghĩa: Miền nguyên cần (giao hoán + có 1 + không có ước của 0).<br>
+        • Trường cần (miền nguyên + mọi phần tử khác 0 khả nghịch).
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) $2\mathbb{Z}$: Vành giao hoán, không có ước của 0 $\not\implies$ Miền nguyên:</b><br>
+        $2\mathbb{Z}$ giao hoán và không có ước của không, nhưng thiếu <b>sự tồn tại của phần tử đơn vị $1_R$</b>.
+      </p>
+      <p><b>(b) $M_2(\mathbb{R})$: Vành có 1 $\not\implies$ Vành giao hoán:</b><br>
+        $M_2(\mathbb{R})$ có đơn vị $I_2$ nhưng phép nhân ma trận thiếu <b>tính giao hoán</b>: $E_{12}E_{21} \neq E_{21}E_{12}$.
+      </p>
+      <p><b>(c) $\mathbb{Z}/6\mathbb{Z}$: Vành giao hoán có 1 $\not\implies$ Miền nguyên:</b><br>
+        $\mathbb{Z}/6\mathbb{Z}$ giao hoán và có đơn vị $[1]_6$, nhưng vi phạm điều kiện <b>không có ước của không</b> vì $[2][3] = [0]$.
+      </p>
+      <p><b>(d) $\mathbb{Z}$: Miền nguyên $\not\implies$ Trường:</b><br>
+        $\mathbb{Z}$ là miền nguyên nhưng thiếu điều kiện <b>mọi phần tử khác 0 đều khả nghịch</b>; chẳng hạn phần tử $2 \neq 0$ không có nghịch đảo nhân trong $\mathbb{Z}$. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Tổng kết sư phạm:</b> Bộ 4 phản ví dụ này xuất hiện liên tục trong các câu hỏi trắc nghiệm và tự luận lý thuyết đại số. Thuộc lòng các phản ví dụ giúp loại trừ sai sót ngộ nhận chiều đảo.
+      </p>
+    </div>
+  </div>
+</div>

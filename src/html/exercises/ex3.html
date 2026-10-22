@@ -1,0 +1,239 @@
+<!-- ==================== BÀI TẬP CHƯƠNG 3: HOÀN CHỈNH ==================== -->
+<div class="chapter-content" id="tab-ex3">
+  <h2 class="section-title">Hệ thống Bài tập & Lời giải: Chương 3. Lớp kề & Định lý Lagrange</h2>
+  <p>
+    Rèn luyện kĩ năng tính lớp kề trái và phải, xác định chỉ số $[G : H]$, khai thác các hệ quả số học Euler – Fermat và phân tích thấu đáo các phản ví dụ bác bỏ hai mệnh đề đảo sai của Định lý Lagrange.
+  </p>
+
+  <!-- BÀI TẬP 3.1 -->
+  <div class="ex-study-card" id="ex-3-1">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-a">Nhóm A · Nhận diện</span>
+        <span class="ex-level-badge">🟢 Cơ bản</span>
+        <span class="ex-title-label">BÀI TẬP 3.1: Phân hoạch Lớp kề Trái và Phải trong S₃</span>
+      </div>
+      <button class="ex-status-btn" data-id="3-1" data-status="todo" onclick="toggleExStatus(this, '3-1')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Trong nhóm đối xứng $S_3$, xét nhóm con $H = \langle(1\,2)\rangle = \{e, (1\,2)\}$. Giữ nguyên quy ước tích hoán vị đọc từ phải sang trái:</p>
+      <p>
+        (a) Tính chỉ số $[S_3 : H]$.<br>
+        (b) Liệt kê đầy đủ các lớp kề trái và các lớp kề phải của $H$ trong $S_3$.<br>
+        (c) Chỉ ra một phần tử $g \in S_3$ sao cho lớp kề trái $gH$ khác với lớp kề phải $Hg$.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • <b>Chỉ số:</b> Áp dụng định lý Lagrange $[S_3 : H] = |S_3| / |H| = 6 / 2 = 3$.<br>
+        • <b>Lớp kề trái:</b> $gH = \{gh \mid h \in H\}$; <b>Lớp kề phải:</b> $Hg = \{hg \mid h \in H\}$.<br>
+        • Nhớ rằng các phép toán đọc từ phải sang trái: $(1\,3)(1\,2) = (1\,2\,3)$ nhưng $(1\,2)(1\,3) = (1\,3\,2)$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Tính chỉ số $[S_3 : H]$:</b><br>
+        Vì $S_3$ là nhóm hữu hạn cấp $|S_3| = 3! = 6$ và $|H| = 2$, theo Định lý Lagrange:
+        $$[S_3 : H] = \frac{|S_3|}{|H|} = \frac{6}{2} = 3$$
+        Do đó có đúng 3 lớp kề trái và 3 lớp kề phải.
+      </p>
+      <p><b>(b) Liệt kê các lớp kề:</b></p>
+      <p>
+        • <i>Các lớp kề trái:</i><br>
+        - $eH = \{e, (1\,2)\} = H$<br>
+        - $(1\,3)H = \{(1\,3)e, (1\,3)(1\,2)\} = \{(1\,3), (1\,2\,3)\}$<br>
+        - $(2\,3)H = \{(2\,3)e, (2\,3)(1\,2)\} = \{(2\,3), (1\,3\,2)\}$
+      </p>
+      <p>
+        • <i>Các lớp kề phải:</i><br>
+        - $He = \{e, (1\,2)\} = H$<br>
+        - $H(1\,3) = \{e(1\,3), (1\,2)(1\,3)\} = \{(1\,3), (1\,3\,2)\}$<br>
+        - $H(2\,3) = \{e(2\,3), (1\,2)(2\,3)\} = \{(2\,3), (1\,2\,3)\}$
+      </p>
+      <p><b>(c) So sánh lớp kề trái và phải:</b><br>
+        Chọn $g = (1\,3)$, ta thấy:
+        $$(1\,3)H = \{(1\,3), (1\,2\,3)\} \neq \{(1\,3), (1\,3\,2)\} = H(1\,3)$$
+        Hai tập hợp này phân biệt dù có chung phần tử đại diện $(1\,3)$. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Nền tảng dẫn sang Chương 4:</b> Sự lệch nhau giữa phân hoạch trái và phân hoạch phải chính là lý do khiến phép nhân lớp kề trên tập thương $S_3/H$ bị thất bại. Điều kiện $gH = Hg$ với mọi $g$ sẽ định nghĩa khái niệm <i>nhóm con chuẩn tắc</i>.
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 3.2 -->
+  <div class="ex-study-card" id="ex-3-2">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-a">Nhóm A · Nhận diện</span>
+        <span class="ex-level-badge">🟢 Cơ bản</span>
+        <span class="ex-title-label">BÀI TẬP 3.2: Lớp kề Dạng Cộng trong Z/15Z</span>
+      </div>
+      <button class="ex-status-btn" data-id="3-2" data-status="todo" onclick="toggleExStatus(this, '3-2')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Trong nhóm cộng $G = \mathbb{Z}/15\mathbb{Z}$, đặt $H = \langle[5]\rangle$.</p>
+      <p>
+        (a) Liệt kê tất cả các phần tử của $H$ và tính chỉ số $[G : H]$.<br>
+        (b) Viết toàn bộ các lớp kề của $H$ trong $G$ bằng cách chọn một hệ đại diện thích hợp.<br>
+        (c) Giải thích rõ vì sao $[11] + H = [1] + H$ nhưng $[12] + H \neq [1] + H$.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Trong ký hiệu cộng, lớp kề chứa $a$ có dạng $a + H = \{a + h \mid h \in H\}$.<br>
+        • Hai lớp trùng nhau: $a + H = b + H \iff a - b \in H$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Nhóm con $H$ và chỉ số $[G : H]$:</b><br>
+        Cấp của phần tử $[5]$ trong $\mathbb{Z}/15\mathbb{Z}$ là $\frac{15}{\gcd(15, 5)} = 3$.<br>
+        Do đó: $H = \{[0], [5], [10]\}$, có cấp $|H| = 3$.<br>
+        Chỉ số: $[G : H] = \frac{|G|}{|H|} = \frac{15}{3} = 5$.
+      </p>
+      <p><b>(b) Toàn bộ 5 lớp kề của $H$:</b><br>
+        Chọn hệ đại diện $\{[0], [1], [2], [3], [4]\}$:<br>
+        • $[0] + H = \{[0], [5], [10]\}$<br>
+        • $[1] + H = \{[1], [6], [11]\}$<br>
+        • $[2] + H = \{[2], [7], [12]\}$<br>
+        • $[3] + H = \{[3], [8], [13]\}$<br>
+        • $[4] + H = \{[4], [9], [14]\}$<br>
+        Năm lớp kề này đôi một rời nhau và phủ kín $\mathbb{Z}/15\mathbb{Z}$.
+      </p>
+      <p><b>(c) So sánh các lớp kề:</b><br>
+        • Xét hiệu $[11] - [1] = [10] \in H$. Do đó $[11] + H = [1] + H$.<br>
+        • Xét hiệu $[12] - [1] = [11] \notin H$ (vì $11$ không chia hết cho 5). Do đó $[12] + H \neq [1] + H$ (thực tế $[12] + H = [2] + H$). <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Quy tắc kiểm tra nhanh:</b> Muốn biết hai phần tử $a, b$ có cùng lớp kề hay không, không cần liệt kê toàn bộ tập hợp lớp kề; chỉ cần xét hiệu $a - b$ (hoặc $a^{-1}b$ trong phép nhân) có rơi vào nhóm con $H$ hay không.
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 3.9 -->
+  <div class="ex-study-card" id="ex-3-9">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-b">Nhóm B · Vận dụng</span>
+        <span class="ex-level-badge">🟡 Vận dụng</span>
+        <span class="ex-title-label">BÀI TẬP 3.9: Hệ quả Số học Euler và Fermat Nhỏ</span>
+      </div>
+      <button class="ex-status-btn" data-id="3-9" data-status="todo" onclick="toggleExStatus(this, '3-9')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Thực hiện hai phép tính sau và ghi rõ định lý cùng giả thiết được sử dụng:</p>
+      <p>
+        (a) Tìm số dư của $3^{100}$ khi chia cho $35$ bằng Định lý Euler.<br>
+        (b) Tìm số dư của $7^{222}$ khi chia cho $13$ bằng Định lý Fermat nhỏ.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Định lý Euler: Nếu $\gcd(a, n) = 1$ thì $a^{\varphi(n)} \equiv 1 \pmod n$. Tính $\varphi(35) = 35(1 - 1/5)(1 - 1/7) = 24$.<br>
+        • Định lý Fermat nhỏ: Nếu $p$ nguyên tố và $p \nmid a$ thì $a^{p-1} \equiv 1 \pmod p$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Tính $3^{100} \pmod{35}$:</b><br>
+        • Ta có $35 = 5 \times 7$. Hàm phi Euler là:
+        $$\varphi(35) = \varphi(5)\varphi(7) = 4 \times 6 = 24$$
+        • Vì $\gcd(3, 35) = 1$, theo Định lý Euler: $3^{24} \equiv 1 \pmod{35}$.<br>
+        • Chia số mũ cho 24: $100 = 24 \times 4 + 4$. Do đó:
+        $$3^{100} = (3^{24})^4 \cdot 3^4 \equiv 1^4 \cdot 81 \equiv 81 \pmod{35}$$
+        • Vì $81 = 35 \times 2 + 11$, suy ra $3^{100} \equiv 11 \pmod{35}$. Số dư là <b>11</b>.
+      </p>
+      <p><b>(b) Tính $7^{222} \pmod{13}$:</b><br>
+        • Vì 13 là số nguyên tố và $\gcd(7, 13) = 1$, theo Định lý Fermat nhỏ: $7^{12} \equiv 1 \pmod{13}$.<br>
+        • Chia số mũ cho 12: $222 = 12 \times 18 + 6$. Do đó:
+        $$7^{222} = (7^{12})^{18} \cdot 7^6 \equiv 1^{18} \cdot 7^6 = 7^6 \pmod{13}$$
+        • Tính lũy thừa $7^6$ theo từng bước:<br>
+        $7^2 = 49 \equiv -3 \pmod{13}$<br>
+        $7^6 = (7^2)^3 \equiv (-3)^3 = -27 \pmod{13}$<br>
+        Vì $-27 = 13 \times (-3) + 12 \equiv 12 \pmod{13}$.<br>
+        Số dư cần tìm là <b>12</b>. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Điều kiện áp dụng:</b> Cả hai định lý đều đòi hỏi điều kiện <b>nguyên tố cùng nhau</b> giữa cơ số và môđun. Nếu $\gcd(a, n) > 1$, tuyệt đối không được dùng $a^{\varphi(n)} \equiv 1 \pmod n$.
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 3.12 -->
+  <div class="ex-study-card" id="ex-3-12">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-c">Nhóm C · Phản ví dụ</span>
+        <span class="ex-level-badge">🟠 Vận dụng cao</span>
+        <span class="ex-title-label">BÀI TẬP 3.12: Hai Chiều Đảo Sai của Định lý Lagrange</span>
+      </div>
+      <button class="ex-status-btn" data-id="3-12" data-status="todo" onclick="toggleExStatus(this, '3-12')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Định lý Lagrange khẳng định: Nếu $H \le G$ thì $|H|$ chia hết $|G|$, và $\operatorname{ord}(g)$ chia hết $|G|$.</p>
+      <p>
+        (a) Bác bỏ mệnh đề đảo 1: "Nếu $d$ chia hết $|G|$ thì $G$ luôn có một phần tử cấp $d$" bằng nhóm Klein $V_4$.<br>
+        (b) Bác bỏ mệnh đề đảo 2: "Nếu $d$ chia hết $|G|$ thì $G$ luôn có một nhóm con cấp $d$" bằng nhóm thay phiên $A_4$ ($|A_4| = 12, d = 6$).
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Câu (a): Nhóm Klein $V_4 = \{e, a, b, c\}$ có cấp 4. Xét cấp của từng phần tử.<br>
+        • Câu (b): Giả sử phản chứng $A_4$ có nhóm con $H$ cấp 6. Khi đó $[A_4 : H] = 2 \implies H$ chuẩn tắc, kéo theo mọi bình phương đều thuộc $H$. Khai thác các chu trình cấp 3.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Bác bỏ chiều đảo về cấp của phần tử:</b><br>
+        Xét nhóm Klein $V_4 = \{e, a, b, c\}$ có cấp $|V_4| = 4$. Số $d = 4$ là một ước của 4.<br>
+        Tuy nhiên, trong $V_4$, phần tử đơn vị $e$ có cấp 1, còn ba phần tử $a, b, c$ đều thỏa mãn $a^2 = b^2 = c^2 = e$ nên đều có cấp 2.<br>
+        Không tồn tại bất kỳ phần tử nào có cấp 4 trong $V_4$.
+      </p>
+      <p><b>(b) Bác bỏ chiều đảo về cấp của nhóm con:</b><br>
+        Nhóm thay phiên $A_4$ gồm 12 hoán vị chẵn của $S_4$, nên $|A_4| = 12$. Số $d = 6$ là ước của 12.<br>
+        Giả sử phản chứng tồn tại nhóm con $H \le A_4$ có $|H| = 6$.<br>
+        • Khi đó chỉ số $[A_4 : H] = 12 / 6 = 2$. Mọi nhóm con chỉ số 2 đều chuẩn tắc trong nhóm mẹ, nên $g^2 \in H$ với mọi $g \in A_4$.<br>
+        • Trong $A_4$, có đúng 8 chu trình bậc 3 (dạng $(i\,j\,k)$). Mỗi chu trình bậc 3 đều là bình phương của một chu trình bậc 3 khác: $(i\,j\,k) = (i\,k\,j)^2$.<br>
+        • Do đó, cả 8 chu trình bậc 3 này đều phải thuộc $H$.<br>
+        • Cùng với phần tử đơn vị $e$, nhóm con $H$ phải chứa ít nhất $8 + 1 = 9$ phần tử, mâu thuẫn với giả thiết $|H| = 6$.<br>
+        Vậy $A_4$ không có nhóm con nào cấp 6. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Trọng tâm ôn thi:</b> Nhớ rõ hai phản ví dụ kinh điển này: $V_4$ bác bỏ chiều đảo cấp phần tử, còn $A_4$ bác bỏ chiều đảo cấp nhóm con. Chiều đảo của Lagrange chỉ đúng từng phần qua Định lý Cauchy (cho số nguyên tố $p$) và các Định lý Sylow.
+      </p>
+    </div>
+  </div>
+</div>

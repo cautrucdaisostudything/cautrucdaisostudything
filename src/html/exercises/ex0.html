@@ -1,0 +1,312 @@
+<!-- ==================== BÀI TẬP CHƯƠNG 0: HOÀN CHỈNH ==================== -->
+<div class="chapter-content active" id="tab-ex0">
+<h2 class="section-title">Hệ thống Bài tập & Lời giải: Chương 0. Ngôn ngữ & Công cụ</h2>
+<p>
+Hệ thống bài tập Chương 0 được chia thành bốn nhóm: Nhóm A rèn nhận diện và tính toán; Nhóm B yêu cầu áp dụng trực tiếp; Nhóm C dành cho chứng minh và xây dựng phản ví dụ; Nhóm D tổng hợp và chuẩn bị cho các cấu trúc thương về sau.
+</p>
+
+<!-- BÀI TẬP 0.1 (NHÓM A) -->
+<div class="ex-study-card" id="ex-0-1">
+<div class="ex-header-bar">
+<div class="ex-meta-tags">
+<span class="ex-group-badge badge-group-a">Nhóm A · Nhận diện</span>
+<span class="ex-level-badge">🟢 Cơ bản</span>
+<span class="ex-title-label">BÀI TẬP 0.1: Khảo sát Ánh xạ, Tập ảnh và Nghịch ảnh</span>
+</div>
+<button class="ex-status-btn" data-id="0-1" data-status="todo" onclick="toggleExStatus(this, '0-1')">
+<span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+</button>
+</div>
+<div class="ex-problem-statement">
+<p>Cho ánh xạ $f: \mathbb{Z} \to \mathbb{Z}$ xác định bởi công thức $f(x) = x^2 - 1$.</p>
+<p>
+(a) Tìm ảnh của tập con $A = \{-2, -1, 0, 1, 2\}$.<br>
+(b) Tìm nghịch ảnh $f^{-1}(B)$ với $B = \{0, 3, 8\}$ và nghịch ảnh $f^{-1}(\{-2\})$.<br>
+(c) Ánh xạ $f$ có là đơn ánh hay toàn ánh không? Giải thích rõ.
+</p>
+</div>
+<div class="inner-tabs-nav">
+<button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+<button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+<button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+</div>
+<div class="inner-tab-pane pane-hint" data-pane="hint">
+<p>
+• Ảnh $f(A) = \{f(x) \mid x \in A\}$. Tính trực tiếp từng giá trị và loại bỏ các phần tử trùng lặp.<br>
+• Nghịch ảnh $f^{-1}(B) = \{x \in \mathbb{Z} \mid f(x) \in B\}$. Giải phương trình $x^2 - 1 = y$ với từng $y \in B$ và chỉ lấy nghiệm nguyên $x \in \mathbb{Z}$.
+</p>
+</div>
+<div class="inner-tab-pane active" data-pane="sol">
+<p><b>(a) Ảnh của tập con $A$:</b><br>
+Ta tính: $f(-2) = 3$, $f(-1) = 0$, $f(0) = -1$, $f(1) = 0$, $f(2) = 3$. Gom các giá trị phân biệt:<br>
+$$f(A) = \{-1, 0, 3\}$$
+</p>
+<p><b>(b) Nghịch ảnh:</b><br>
+• Với $B = \{0, 3, 8\}$: giải $x^2 - 1 \in \{0, 3, 8\} \iff x^2 \in \{1, 4, 9\} \iff x \in \{\pm 1, \pm 2, \pm 3\}$. Do đó:
+$$f^{-1}(B) = \{-3, -2, -1, 1, 2, 3\}$$
+• Với tập $\{-2\}$: giải $x^2 - 1 = -2 \iff x^2 = -1$ (vô nghiệm trên $\mathbb{Z}$). Vậy $f^{-1}(\{-2\}) = \emptyset$.
+</p>
+<p><b>(c) Tính chất ánh xạ:</b><br>
+• $f$ không là đơn ánh vì $f(1) = f(-1) = 0$ nhưng $1 \neq -1$.<br>
+• $f$ không là toàn ánh vì $f^{-1}(\{-2\}) = \emptyset$ (phần tử $-2 \in \mathbb{Z}$ của đối miền không có nghịch ảnh). <span class="qed">∎</span>
+</p>
+</div>
+<div class="inner-tab-pane pane-traps" data-pane="traps">
+<p>
+<b>⚠️ Bẫy ngộ nhận:</b> Ký hiệu $f^{-1}(B)$ không có nghĩa là hàm ngược $f^{-1}$ tồn tại. Nghịch ảnh của một tập con luôn xác định tốt cho mọi ánh xạ, ngay cả khi ánh xạ đó không đơn ánh hay không toàn ánh.
+</p>
+</div>
+</div>
+
+<!-- BÀI TẬP 0.4 (NHÓM A) -->
+<div class="ex-study-card" id="ex-0-4">
+<div class="ex-header-bar">
+<div class="ex-meta-tags">
+<span class="ex-group-badge badge-group-a">Nhóm A · Tính toán</span>
+<span class="ex-level-badge">🟢 Cơ bản</span>
+<span class="ex-title-label">BÀI TẬP 0.4: Thuật toán Euclid & Đồng nhất thức Bézout</span>
+</div>
+<button class="ex-status-btn" data-id="0-4" data-status="todo" onclick="toggleExStatus(this, '0-4')">
+<span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+</button>
+</div>
+<div class="ex-problem-statement">
+<p>
+(a) Dùng thuật toán Euclid tính $d = \gcd(414, 662)$.<br>
+(b) Truy ngược các phép chia để tìm một cặp số nguyên $u, v \in \mathbb{Z}$ sao cho $414u + 662v = \gcd(414, 662)$.
+</p>
+</div>
+<div class="inner-tabs-nav">
+<button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+<button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+<button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+</div>
+<div class="inner-tab-pane pane-hint" data-pane="hint">
+<p>
+• Thực hiện liên tiếp các phép chia có dư cho đến khi số dư bằng $0$. Số dư khác $0$ cuối cùng chính là ƯCLN.<br>
+• Để biểu diễn Bézout, giữ nguyên các số dư ở mỗi bước và biểu diễn ngược từ dưới lên.
+</p>
+</div>
+<div class="inner-tab-pane active" data-pane="sol">
+<p><b>(a) Thuật toán Euclid:</b></p>
+$$\begin{aligned}
+662 &= 1 \cdot 414 + 248 \\
+414 &= 1 \cdot 248 + 166 \\
+248 &= 1 \cdot 166 + 82 \\
+166 &= 2 \cdot 82 + 2 \\
+82 &= 41 \cdot 2 + 0
+\end{aligned}$$
+Số dư khác không cuối cùng là $2$, do đó $\gcd(414, 662) = 2$.
+<p><b>(b) Truy ngược tìm Bézout:</b></p>
+$$\begin{aligned}
+2 &= 166 - 2 \cdot 82 \\
+&= 166 - 2(248 - 166) = 3 \cdot 166 - 2 \cdot 248 \\
+&= 3(414 - 248) - 2 \cdot 248 = 3 \cdot 414 - 5 \cdot 248 \\
+&= 3 \cdot 414 - 5(662 - 414) = 8 \cdot 414 - 5 \cdot 662
+\end{aligned}$$
+Vậy ta có đồng nhất thức Bézout với $u = 8$ và $v = -5$:
+$$2 = 414 \cdot (8) + 662 \cdot (-5) \quad \blacksquare$$
+</div>
+<div class="inner-tab-pane pane-traps" data-pane="traps">
+<p>
+<b>⚠️ Sai lầm thường gặp:</b> Khi truy ngược, học viên hay tính nhẩm rút gọn giá trị số học (ví dụ nhân $3 \times 414$ thành $1242$). Phải luôn giữ nguyên $414$ và $662$ đóng vai trò là "biến số", chỉ gom cộng trừ các hệ số đi kèm trước chúng.
+</p>
+</div>
+</div>
+
+<!-- BÀI TẬP 0.13 (NHÓM B) -->
+<div class="ex-study-card" id="ex-0-13">
+<div class="ex-header-bar">
+<div class="ex-meta-tags">
+<span class="ex-group-badge badge-group-b">Nhóm B · Vận dụng</span>
+<span class="ex-level-badge">🟡 Vận dụng</span>
+<span class="ex-title-label">BÀI TẬP 0.13: Ánh xạ Nhân Môđulô và Điều kiện Khả nghịch</span>
+</div>
+<button class="ex-status-btn" data-id="0-13" data-status="todo" onclick="toggleExStatus(this, '0-13')">
+<span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+</button>
+</div>
+<div class="ex-problem-statement">
+<p>Với $m \in \mathbb{Z}$ và $n \ge 1$, xét công thức ánh xạ $T_m: \mathbb{Z}/n\mathbb{Z} \to \mathbb{Z}/n\mathbb{Z}$ định bởi $T_m([a]_n) = [ma]_n$.</p>
+<p>
+(a) Chứng minh $T_m$ xác định tốt.<br>
+(b) Chứng minh các điều kiện sau tương đương: (i) $T_m$ là đơn ánh; (ii) $T_m$ là toàn ánh; (iii) $\gcd(m, n) = 1$.
+</p>
+</div>
+<div class="inner-tabs-nav">
+<button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+<button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+<button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+</div>
+<div class="inner-tab-pane pane-hint" data-pane="hint">
+<p>
+• Xác định tốt: Giả sử $[a]_n = [a']_n \iff a \equiv a' \pmod n$, chứng minh $[ma]_n = [ma']_n$.<br>
+• Do $\mathbb{Z}/n\mathbb{Z}$ là tập hữu hạn, một ánh xạ từ nó vào chính nó là đơn ánh khi và chỉ khi là toàn ánh.<br>
+• Phương trình $ma \equiv 1 \pmod n$ có nghiệm khi và chỉ khi $\gcd(m, n) = 1$ theo Bézout.
+</p>
+</div>
+<div class="inner-tab-pane active" data-pane="sol">
+<p><b>(a) Chứng minh $T_m$ xác định tốt:</b><br>
+Giả sử $[a]_n = [a']_n$. Khi đó $a \equiv a' \pmod n \iff n \mid (a - a')$. Suy ra $n \mid m(a - a') = ma - ma'$. Điều này có nghĩa là $ma \equiv ma' \pmod n$, tức $[ma]_n = [ma']_n$. Vậy $T_m$ xác định tốt.</p>
+<p><b>(b) Chứng minh tính tương đương:</b><br>
+Vì tập $\mathbb{Z}/n\mathbb{Z}$ hữu hạn gồm đúng $n$ phần tử, một tự ánh xạ trên nó là đơn ánh khi và chỉ khi là toàn ánh. Ta chứng minh $T_m$ toàn ánh $\iff \gcd(m, n) = 1$:<br>
+• $(\implies)$ Nếu $T_m$ toàn ánh, tồn tại $[a]_n$ sao後 $T_m([a]_n) = [1]_n \iff ma \equiv 1 \pmod n \iff ma - 1 = qn \iff ma - qn = 1$. Theo định lý Bézout, điều này kéo theo $\gcd(m, n) = 1$.<br>
+• $(\impliedby)$ Nếu $\gcd(m, n) = 1$, theo Bézout tồn tại $u, v \in \mathbb{Z}$ sao cho $um + vn = 1$. Khi đó với mọi $[b]_n$, ta có $[m(ub)]_n = [(1 - vn)b]_n = [b]_n$. Do đó $T_m([ub]_n) = [b]_n$, tức $T_m$ toàn ánh. <span class="qed">∎</span>
+</p>
+</div>
+<div class="inner-tab-pane pane-traps" data-pane="traps">
+<p>
+<b>⚠️ Ý nghĩa cho Chương 1:</b> Kết quả này giải thích tại sao tập các phần tử khả nghịch trong $\mathbb{Z}/n\mathbb{Z}$ chính là nhóm $U(n) = \{[a]_n \mid \gcd(a, n) = 1\}$.
+</p>
+</div>
+</div>
+
+<!-- BÀI TẬP 0.16 (NHÓM C) -->
+<div class="ex-study-card" id="ex-0-16">
+<div class="ex-header-bar">
+<div class="ex-meta-tags">
+<span class="ex-group-badge badge-group-c">Nhóm C · Chứng minh</span>
+<span class="ex-level-badge">🟠 Vận dụng cao</span>
+<span class="ex-title-label">BÀI TẬP 0.16: Ba Điều kiện Tương đương của Lớp Tương đương</span>
+</div>
+<button class="ex-status-btn" data-id="0-16" data-status="todo" onclick="toggleExStatus(this, '0-16')">
+<span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+</button>
+</div>
+<div class="ex-problem-statement">
+<p>Cho $\sim$ là một quan hệ tương đương trên tập hợp $X$. Không viện dẫn trực tiếp Định lý phân hoạch, hãy chứng minh:
+$$[x] = [y] \iff x \sim y \iff [x] \cap [y] \neq \emptyset$$
+Ghi rõ nơi sử dụng tính đối xứng và nơi sử dụng tính bắc cầu.
+</p>
+</div>
+<div class="inner-tabs-nav">
+<button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+<button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+<button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+</div>
+<div class="inner-tab-pane pane-hint" data-pane="hint">
+<p>
+Thiết lập chu trình chứng minh 3 bước: $[x] = [y] \implies x \sim y \implies [x] \cap [y] \neq \emptyset \implies [x] = [y]$.
+</p>
+</div>
+<div class="inner-tab-pane active" data-pane="sol">
+<p><b>1. $[x] = [y] \implies x \sim y$:</b><br>
+Theo tính phản xạ, $y \sim y$, nên $y \in [y]$. Vì $[x] = [y]$, suy ra $y \in [x]$. Theo định nghĩa lớp tương đương, điều này nghĩa là $x \sim y$.</p>
+<p><b>2. $x \sim y \implies [x] \cap [y] \neq \emptyset$:</b><br>
+Từ $x \sim y$, áp dụng <i>tính đối xứng</i> ta có $y \sim x$, suy ra $x \in [y]$. Lại có $x \in [x]$ (phản xạ). Do đó $x \in [x] \cap [y]$, tức giao khác rỗng.</p>
+<p><b>3. $[x] \cap [y] \neq \emptyset \implies [x] = [y]$:</b><br>
+Giả sử tồn tại $z \in [x] \cap [y]$. Khi đó $x \sim z$ và $y \sim z$. Áp dụng <i>tính đối xứng</i> cho $y \sim z$, ta được $z \sim y$. Áp dụng <i>tính bắc cầu</i> cho $x \sim z$ và $z \sim y$, ta suy ra $x \sim y$.<br>
+Bây giờ lấy $t \in [x]$ tùy ý $\implies x \sim t \implies t \sim x$ (đối xứng). Vì $t \sim x$ và $x \sim y$, tính bắc cầu cho $t \sim y \implies y \sim t \implies t \in [y]$. Vậy $[x] \subseteq [y]$. Hoàn toàn tương tự, $[y] \subseteq [x]$. Suy ra $[x] = [y]$. <span class="qed">∎</span>
+</p>
+</div>
+<div class="inner-tab-pane pane-traps" data-pane="traps">
+<p>
+<b>⚠️ Điểm nhấn sư phạm:</b> Bài toán làm sáng tỏ lý do vì sao một quan hệ tương đương luôn chia tập hợp thành các khối hoàn toàn rời nhau: Hai lớp chỉ cần có chung một phần tử bất kỳ thì lập tức hòa làm một!
+</p>
+</div>
+</div>
+
+<!-- BÀI TẬP 0.18 (NHÓM C) -->
+<div class="ex-study-card" id="ex-0-18">
+<div class="ex-header-bar">
+<div class="ex-meta-tags">
+<span class="ex-group-badge badge-group-c">Nhóm C · Chứng minh</span>
+<span class="ex-level-badge">🟠 Vận dụng cao</span>
+<span class="ex-title-label">BÀI TẬP 0.18: Tiên đề Phép toán Mới và Phần tử Nghịch đảo</span>
+</div>
+<button class="ex-status-btn" data-id="0-18" data-status="todo" onclick="toggleExStatus(this, '0-18')">
+<span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+</button>
+</div>
+<div class="ex-problem-statement">
+<p>Trên tập số nguyên $\mathbb{Z}$, xét phép toán: $a * b = a + b + ab$.</p>
+<p>
+(a) Chứng minh $*$ có tính kết hợp và giao hoán.<br>
+(b) Tìm phần tử đơn vị của phép toán $*$.<br>
+(c) Xác định chính xác những phần tử có phần tử nghịch đảo đối với phép toán $*$.
+</p>
+</div>
+<div class="inner-tabs-nav">
+<button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+<button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+<button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+</div>
+<div class="inner-tab-pane pane-hint" data-pane="hint">
+<p>
+• Đặt ý tưởng Polya: So sánh $1 + (a * b)$ với $(1 + a)(1 + b)$. Đồng nhất thức này sẽ chuyển toàn bộ phép toán mới về phép nhân số nguyên thông thường!
+</p>
+</div>
+<div class="inner-tab-pane active" data-pane="sol">
+<p><b>(a) Tính kết hợp và giao hoán:</b><br>
+• Giao hoán: $a * b = a + b + ab = b + a + ba = b * a$ với mọi $a, b \in \mathbb{Z}$.<br>
+• Kết hợp: Nhận xét rằng $1 + (a * b) = 1 + a + b + ab = (1 + a)(1 + b)$. Do đó:
+$$1 + ((a * b) * c) = (1 + a * b)(1 + c) = (1 + a)(1 + b)(1 + c)$$
+$$1 + (a * (b * c)) = (1 + a)(1 + b * c) = (1 + a)(1 + b)(1 + c)$$
+Hai biểu thức bằng nhau, trừ $1$ ở hai vế suy ra $(a * b) * c = a * (b * c)$.</p>
+<p><b>(b) Phần tử đơn vị:</b><br>
+Ta tìm $e \in \mathbb{Z}$ sao cho $a * e = a \iff a + e + ae = a \iff e(1 + a) = 0$ với mọi $a \in \mathbb{Z}$. Cho $a = 0$ ta được $e = 0$. Kiểm tra lại: $a * 0 = a + 0 + 0 = a$. Do đó phần tử đơn vị là $e = 0$.</p>
+<p><b>(c) Phần tử có nghịch đảo:</b><br>
+Phần tử $b$ là nghịch đảo của $a$ khi và chỉ khi:
+$$a * b = 0 \iff 1 + (a * b) = 1 + 0 \iff (1 + a)(1 + b) = 1$$
+Vì $a, b \in \mathbb{Z}$, thừa số $1 + a$ phải là ước của $1$ trong $\mathbb{Z}$, nghĩa là $1 + a \in \{1, -1\}$:<br>
+• Nếu $1 + a = 1 \implies a = 0$; khi đó $1 + b = 1 \implies b = 0$.<br>
+• Nếu $1 + a = -1 \implies a = -2$; khi đó $1 + b = -1 \implies b = -2$.<br>
+Vậy chỉ có đúng hai phần tử có nghịch đảo trong $\mathbb{Z}$ là $0$ (tự nghịch đảo) và $-2$ (tự nghịch đảo). <span class="qed">∎</span>
+</p>
+</div>
+<div class="inner-tab-pane pane-traps" data-pane="traps">
+<p>
+<b>⚠️ Bẫy chia trong tập số nguyên:</b> Rất nhiều học viên giải $b = \frac{-a}{1 + a}$ rồi vội vàng kết luận mọi $a \neq -1$ đều có nghịch đảo. Sai lầm ở chỗ đây là tập số nguyên $\mathbb{Z}$, phân số $\frac{-a}{1 + a}$ chỉ thuộc $\mathbb{Z}$ khi mẫu là ước của tử, dẫn đến chỉ có $a = 0$ và $a = -2$ thỏa mãn.
+</p>
+</div>
+</div>
+
+<!-- BÀI TẬP 0.20 (NHÓM C/D) -->
+<div class="ex-study-card" id="ex-0-20">
+<div class="ex-header-bar">
+<div class="ex-meta-tags">
+<span class="ex-group-badge badge-group-d">Nhóm D · Tổng hợp</span>
+<span class="ex-level-badge">🔴 Nâng cao</span>
+<span class="ex-title-label">BÀI TẬP 0.20: Nhúng Tập thương Phân số vào Trường Số thực</span>
+</div>
+<button class="ex-status-btn" data-id="0-20" data-status="todo" onclick="toggleExStatus(this, '0-20')">
+<span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+</button>
+</div>
+<div class="ex-problem-statement">
+<p>
+Trên tập $P = \mathbb{Z} \times (\mathbb{Z} \setminus \{0\})$, xét quan hệ $(a, b) \sim (c, d) \iff ad = bc$. Xét ánh xạ:
+$$j: P/\sim \;\longrightarrow \mathbb{R}, \quad j([(a, b)]) = \frac{a}{b}$$
+Chứng minh $j$ xác định tốt và là một đơn ánh. Mô tả ảnh của $j$ mà không giả sử trước rằng $P/\sim$ chính là tập $\mathbb{Q}$.
+</p>
+</div>
+<div class="inner-tabs-nav">
+<button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+<button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+<button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+</div>
+<div class="inner-tab-pane pane-hint" data-pane="hint">
+<p>
+• Xác định tốt: Giả sử $[(a, b)] = [(c, d)] \iff ad = bc$. Chứng minh hai số thực $a/b$ và $c/d$ trùng nhau.<br>
+• Đơn ánh: Giả sử $j([(a, b)]) = j([(c, d)]) \iff a/b = c/d$ trong $\mathbb{R}$, suy ra đẳng thức nguyên $ad = bc$.
+</p>
+</div>
+<div class="inner-tab-pane active" data-pane="sol">
+<p><b>1. Chứng minh $j$ xác định tốt:</b><br>
+Giả sử $[(a, b)] = [(a', b')]$ trong $P/\sim$. Khi đó $(a, b) \sim (a', b') \iff ab' = ba'$. Vì $b, b' \neq 0$, chia hai vế trong trường số thực $\mathbb{R}$ cho $bb'$ ta được $\frac{a}{b} = \frac{a'}{b'}$. Do đó $j([(a, b)]) = j([(a', b')])$. Ánh xạ $j$ xác định tốt.</p>
+<p><b>2. Chứng minh $j$ là đơn ánh:</b><br>
+Giả sử $j([(a, b)]) = j([(c, d)])$. Theo định nghĩa của $j$, ta có đẳng thức số thực $\frac{a}{b} = \frac{c}{d}$. Quy đồng mẫu số trong $\mathbb{R}$, ta suy ra $ad = bc$. Vì $a, b, c, d \in \mathbb{Z}$, đây là đẳng thức trên các số nguyên, nghĩa là $(a, b) \sim (c, d)$. Do đó $[(a, b)] = [(c, d)]$. Vậy $j$ là đơn ánh.</p>
+<p><b>3. Mô tả ảnh của $j$:</b><br>
+Tập ảnh là:
+$$\operatorname{im} j = \left\{ \frac{a}{b} \in \mathbb{R} \;\Bigg|\; a, b \in \mathbb{Z}, b \neq 0 \right\}$$
+Đây chính là định nghĩa tập hợp của trường số hữu tỉ $\mathbb{Q} \subset \mathbb{R}$. Do $j$ là đơn ánh, nó thiết lập một song ánh tự nhiên giữa tập thương $P/\sim$ và tập số hữu tỉ $\mathbb{Q}$. <span class="qed">∎</span>
+</p>
+</div>
+<div class="inner-tab-pane pane-traps" data-pane="traps">
+<p>
+<b>⚠️ Ý nghĩa nền tảng cho Chương 9:</b> Đây chính là khuôn mẫu chuẩn mực của phép dựng <i>Trường các thương</i> $\operatorname{Frac}(R)$ cho một miền nguyên bất kỳ mà bạn sẽ gặp lại ở Chương 9.
+</p>
+</div>
+</div>
+</div>
+<!-- ==================== HẾT BÀI TẬP CHƯƠNG 0 ==================== -->

@@ -1,0 +1,376 @@
+<!-- ======================================================== -->
+<div class="chapter-content active" id="tab-c9">
+  <h2 class="section-title">Chương 9. Trường Con và Trường Các Thương</h2>
+  
+  <p class="welcome-copy">
+    Trong một miền nguyên bất kỳ (như vành số nguyên $\mathbb{Z}$ hay vành đa thức $F[x]$), 
+    mọi phép nhân giữa hai phần tử khác không đều khác không, nhưng phép chia nói chung không thể thực hiện được vì thiếu các phần tử nghịch đảo. 
+    Làm thế nào để "nhúng" một miền nguyên vào một trường nhỏ nhất chứa nó, nơi mọi phần tử khác không đều có nghịch đảo? 
+    Chương này giải quyết trọn vẹn bài toán đó thông qua <b>Phép dựng trường các thương $\operatorname{Frac}(R)$</b>, 
+    kiểm soát cấu trúc bằng <b>Tính chất phổ dụng</b>, và đúc kết <b>Mạch khái niệm xuyên suốt toàn bộ giáo trình</b>.
+  </p>
+
+  <!-- 9.1 ĐỘNG CƠ SƯ PHẠM: TỪ BẾ TẮC PHÉP CHIA ĐẾN PHÉP MỞ RỘNG TRƯỜNG -->
+  <h3 class="subsection-title">9.1. Khởi Nguồn Sư Phạm: Từ Sự Bế Tắc Của Phép Chia Đến Tư Tưởng Mở Rộng Trường</h3>
+  <p>
+    Trong lịch sử phát triển của toán học, con người xuất phát từ tập số tự nhiên $\mathbb{N}$, mở rộng thành vành số nguyên $\mathbb{Z}$ để phép trừ luôn thực hiện được. 
+    Tuy nhiên, trong $\mathbb{Z}$, phương trình $2x = 1$ hoàn toàn vô nghiệm vì $2$ không có nghịch đảo nhân. 
+    Nhu cầu thực hiện phép chia đã thúc đẩy việc khai sinh ra trường số hữu tỉ $\mathbb{Q}$ bằng cách tạo nên các phân số hình thức $\dfrac{a}{b}$ với $b \neq 0$.
+  </p>
+  <p>
+    Tư tưởng này hoàn toàn có thể tổng quát hóa cho một <b>miền nguyên $R$ bất kỳ</b>:
+  </p>
+  <ul class="bullet-list">
+    <li>Từ vành đa thức một biến $F[x]$, ta muốn chia các đa thức cho nhau $\implies$ Dẫn đến trường các phân thức hữu tỉ $F(x)$.</li>
+    <li>Từ vành số nguyên Gauss $\mathbb{Z}[i]$, ta muốn chia các số nguyên phức $\implies$ Dẫn đến trường số hữu tỉ Gauss $\mathbb{Q}(i)$.</li>
+  </ul>
+  <p>
+    Hành trình này đòi hỏi ta phải khảo sát cấu trúc con của trường trước khi tiến hành phép dựng mở rộng.
+  </p>
+
+  <!-- 9.2 TIÊU CHUẨN TRƯỜNG CON & TRƯỜNG CON NGUYÊN TỐ -->
+  <h3 class="subsection-title">9.2. Tiêu Chuẩn Trường Con và Cấu Trúc Trường Con Nguyên Tố</h3>
+  
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 9.1</span>
+      <span class="tag">Trường Con (Subfield) & Trường Mở Rộng</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $K$ là một trường. Một tập hợp con $F \subseteq K$ được gọi là một <b>trường con</b> của $K$ nếu thỏa mãn đồng thời các điều kiện:</p>
+      <ul class="bullet-list">
+        <li><b>1. Chứa ít nhất hai phần tử:</b> $|F| \ge 2$.</li>
+        <li><b>2. Tính kế thừa cấu trúc:</b> Bản thân $F$ lập thành một trường dưới hai phép toán cộng và nhân thu hẹp từ $K$.</li>
+      </ul>
+      <div class="corollary-box">
+        <b>Quy ước đơn vị bắt buộc của giáo trình:</b>
+        <br>• Khác với vành con (có thể có đơn vị riêng), <b>một trường con $F \subseteq K$ bắt buộc phải chứa cùng phần tử không $0_K$ và cùng phần tử đơn vị $1_K$ với trường mẹ</b> ($0_F = 0_K$ và $1_F = 1_K$).
+        <br>• Khi $F$ là trường con của $K$, ta cũng nói $K$ là một <i>trường mở rộng</i> của $F$, ký hiệu là $K/F$.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong trường mẹ $K=\mathbb{R}$, xét $F=\mathbb{Q}(\sqrt{2})=\{a+b\sqrt{2}:a,b\in\mathbb{Q}\}$. Chứng minh $F$ là trường con của $\mathbb{R}$.</p>
+          <p><b>2. Hộp công cụ.</b> Vì $1\in F$, tiêu chuẩn trường con yêu cầu đóng với phép trừ và phép chia cho phần tử khác không.</p>
+          <p><b>3. Lời giải.</b> Lấy $z_1=a_1+b_1\sqrt2,z_2=a_2+b_2\sqrt2\in F$. Ta có $z_1-z_2=(a_1-a_2)+(b_1-b_2)\sqrt2\in F$. Với $z=a+b\sqrt2\ne0$, $a^2-2b^2\ne0$: nếu bằng $0$ và $b\ne0$ thì $\sqrt2=a/b\in\mathbb{Q}$, mâu thuẫn; nếu $b=0$ thì $a=0$. Do đó $z^{-1}=\frac{a-b\sqrt2}{a^2-2b^2}=\frac{a}{a^2-2b^2}-\frac{b}{a^2-2b^2}\sqrt2\in F$. Suy ra với mọi $z_1,z_2\in F$, $z_2\ne0$, thương $z_1/z_2=z_1z_2^{-1}\in F$. Vậy $F$ là trường con (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Khi trục căn thức ở mẫu, phải kiểm tra $a^2-2b^2\ne0$. Trường con cũng phải chứa cùng phần tử đơn vị $1$ với trường mẹ.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 9.2</span>
+      <span class="tag">Tiêu Chuẩn Trường Con Rút Gọn (Subfield Test)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $K$ là một trường. Tập con $F \subseteq K$ chứa phần tử đơn vị $1_K$ là một trường con của $K$ khi và chỉ khi thỏa mãn đồng thời hai điều kiện:</p>
+      <div class="math-display">
+        $$\text{1. Đóng đối với phép trừ: } \forall x, y \in F \implies x - y \in F$$
+        $$\text{2. Đóng đối với phép chia: } \forall x, y \in F \; (y \neq 0_K) \implies x y^{-1} \in F$$
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $K=\mathbb{R}$, xét $F=\mathbb{Q}(\sqrt2)$. Áp dụng tiêu chuẩn trường con hai bước.</p>
+          <p><b>2. Hộp công cụ.</b> Do $1\in F$, chỉ cần kiểm tra $x-y\in F$ và $xy^{-1}\in F$ với mọi $x,y\in F$, $y\ne0$.</p>
+          <p><b>3. Lời giải.</b> Với $x=a_1+b_1\sqrt2,y=a_2+b_2\sqrt2$, hiệu $(a_1-a_2)+(b_1-b_2)\sqrt2$ thuộc $F$. Với mẫu $y=a+b\sqrt2\ne0$, ta có $a^2-2b^2\ne0$ vì nếu không, $\sqrt2=a/b$ (trường hợp $b=0$ cũng chỉ cho $a=0$). Do đó $y^{-1}=\frac{a-b\sqrt2}{a^2-2b^2}\in F$. Tích $xy^{-1}$ vẫn thuộc $F$ vì đóng với phép nhân; vậy tiêu chuẩn cho $F\le\mathbb{R}$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Kiểm tra nghịch đảo của $y$ là bước thiết yếu để suy ra đóng với phép chia. Phải loại trường hợp mẫu chuẩn bằng $0$ trước khi chia.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 9.3</span>
+      <span class="tag">Trường Con Nguyên Tố (Prime Subfield)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $K$ là một trường bất kỳ. Cấu trúc <b>trường con nguyên tố</b> $P_K$ của $K$ được xác định như sau:</p>
+      <ul class="bullet-list">
+        <li><b>Định nghĩa bằng giao:</b> Là giao của tất cả các trường con chứa trong $K$:
+          $$P_K = \bigcap \{F \subseteq K \mid F \text{ là trường con của } K\}$$
+        </li>
+        <li><b>Tính chất tối tiểu:</b> $P_K$ là trường con nhỏ nhất của $K$, không chứa bất kỳ một trường con thực sự nào khác.</li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Xác định trường con nguyên tố của $K=\mathbb{R}$, trường có đặc số $0$.</p>
+          <p><b>2. Hộp công cụ.</b> Trường con nguyên tố là trường con nhỏ nhất; mọi trường con chứa $1$ và đóng với cộng, trừ, nhân, chia khác không.</p>
+          <p><b>3. Lời giải.</b> Với mọi trường con $F\subseteq\mathbb{R}$, từ $1\in F$ và phép cộng suy ra $n\cdot1\in F$ cho mọi $n\in\mathbb{Z}$. Đóng với phép chia cho phần tử khác không cho $m/n\in F$ với mọi $m\in\mathbb{Z}, n\ne0$, nên $\mathbb{Q}\subseteq F$. Vì $\mathbb{Q}$ cũng là trường con của $\mathbb{R}$, nó chính là giao nhỏ nhất: $P_{\mathbb{R}}=\mathbb{Q}$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Trường con nguyên tố được sinh bởi đơn vị và các phép toán trường; không phải trường con nhỏ nhất theo lực lượng nếu không xét điều kiện chứa cùng $1$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.5rem; border-left: 4px solid #10b981;">
+    <div class="card-header" style="color: #047857;">
+      <span class="label">🏛️ ĐỊNH LÝ 9.4</span>
+      <span class="tag" style="background: rgba(16, 185, 129, 0.15); color: #047857;">Phân Loại Trường Con Nguyên Tố Theo Đặc Số</span>
+    </div>
+    <div class="card-body">
+      <p>Cấu trúc của trường con nguyên tố $P_K$ được quyết định hoàn toàn bởi đặc số $\operatorname{char}(K)$ của trường:</p>
+      <ul class="bullet-list">
+        <li><b>Trường hợp 1 ($\operatorname{char}(K) = 0$):</b> Trường con nguyên tố $P_K$ đẳng cấu chính tắc với trường số hữu tỉ:
+          $$P_K \;\cong\; \mathbb{Q}$$
+          <i>Hệ quả:</i> Mọi trường có đặc số 0 (như $\mathbb{Q}, \mathbb{R}, \mathbb{C}, \mathbb{Q}(\sqrt{2})$) đều chứa một bản sao đẳng cấu của $\mathbb{Q}$.
+        </li>
+        <li><b>Trường hợp 2 ($\operatorname{char}(K) = p > 0$ với $p$ nguyên tố):</b> Trường con nguyên tố $P_K$ đẳng cấu chính tắc với trường hữu hạn:
+          $$P_K \;\cong\; \mathbb{F}_p = \mathbb{Z}/p\mathbb{Z}$$
+        </li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Minh họa phân loại trường con nguyên tố bằng $K=\mathbb{R}$ và $K=\mathbb{F}_4=\mathbb{F}_2[\alpha]$, $\alpha^2+\alpha+1=0$.</p>
+          <p><b>2. Hộp công cụ.</b> Đặc số $0$ cho trường con nguyên tố đẳng cấu với $\mathbb{Q}$; đặc số nguyên tố $p$ cho trường con nguyên tố $\mathbb{F}_p$ do đơn vị sinh ra.</p>
+          <p><b>3. Lời giải.</b> Với $\mathbb{R}$, đặc số bằng $0$ nên $P_{\mathbb{R}}=\mathbb{Q}$. Trong $\mathbb{F}_4$, ta có $1+1=0$, do đó đặc số bằng $2$; các bội của đơn vị chỉ là $0$ và $1$. Tập $\{0,1\}$ là bản sao của $\mathbb{F}_2$, và mọi trường con đều phải chứa $0,1$, nên $P_{\mathbb{F}_4}=\{0,1\}\cong\mathbb{F}_2$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> $\mathbb{F}_4$ có bốn phần tử nhưng đặc số $2$; số phần tử của trường không phải đặc số của nó.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 9.3 PHÉP DỰNG HÌNH THỨC TRƯỜNG CÁC THƯƠNG -->
+  <h3 class="subsection-title">9.3. Phép Dựng Hình Thức Trường Các Thương <span>$\operatorname{Frac}(R)$</span> Trên Miền Nguyên</h3>
+  <p>
+    Cho $R$ là một miền nguyên bất kỳ. Ta xây dựng trường các thương qua hai bước hình thức chặt chẽ:
+  </p>
+
+  <!-- BƯỚC 1: QUAN HỆ TƯƠNG ĐƯƠNG -->
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ BƯỚC 1: QUAN HỆ TƯƠNG ĐƯƠNG PHÂN SỐ</span>
+      <span class="tag">Vai Trò Sống Còn Của Miền Nguyên</span>
+    </div>
+    <div class="card-body">
+      <p>Xét tập hợp tất cả các cặp phần tử có mẫu khác không: $P = R \times (R \setminus \{0_R\}) = \{(a, b) \mid a, b \in R, b \neq 0_R\}$.</p>
+      <p>Trên tập $P$, định nghĩa quan hệ hai ngôi $\sim$ theo quy tắc <b>nhân chéo hình thức</b>:</p>
+      <div class="math-display">
+        $$(a, b) \sim (c, d) \iff ad = bc$$
+      </div>
+      <p><b>Định lý:</b> Quan hệ $\sim$ là một quan hệ tương đương trên $P$.</p>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Thử quan hệ nhân chéo trên các cặp có mẫu khác không của $R=\mathbb{Z}/6\mathbb{Z}$. Kiểm tra tính bắc cầu.</p>
+          <p><b>2. Hộp công cụ.</b> Quan hệ tương đương phải phản xạ, đối xứng và bắc cầu. Tính miền nguyên cho phép khử thừa số mẫu khác không; trong $\mathbb{Z}/6\mathbb{Z}$ có $[2][3]=[0]$ với cả hai thừa số khác không.</p>
+          <p><b>3. Lời giải.</b> Xét $A=([2],[2]),B=([0],[3]),C=([0],[1])$; mọi mẫu đều khác $[0]$. Ta có $A\sim B$ vì $[2][3]=[2][0]=[0]$, và $B\sim C$ vì $[0][1]=[3][0]=[0]$. Nhưng $A\not\sim C$, bởi $[2][1]=[2]\ne[0]=[2][0]$. Quan hệ không bắc cầu, nên không thể lấy thương các cặp theo cách này (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Vấn đề không nằm ở việc mẫu bằng không (các mẫu đều khác không), mà ở ước của không khiến phép khử trong chứng minh bắc cầu thất bại.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="proof-block">
+    <summary>🔍 Xem chứng minh tính bắc cầu và vai trò thiết yếu của Miền nguyên</summary>
+    <div class="proof-content">
+      <p>
+        • Tính phản xạ: $(a, b) \sim (a, b) \iff ab = ba$ (luôn đúng do $R$ giao hoán).<br>
+        • Tính đối xứng: $(a, b) \sim (c, d) \implies ad = bc \implies cb = da \implies (c, d) \sim (a, b)$.<br>
+        • <i>Tính bắc cầu (Trọng tâm):</i> Giả sử $(a, b) \sim (c, d)$ và $(c, d) \sim (e, f)$. Khi đó $ad = bc$ và $cf = de$.<br>
+        Nhân $f$ vào đẳng thức đầu và nhân $b$ vào đẳng thức sau:
+        $$adf = bcf \quad \text{và} \quad bcf = bde \implies adf = bde \implies (af - be)d = 0_R$$
+        Vì mẫu số $d \neq 0_R$ và <b>$R$ là một miền nguyên (hoàn toàn không có ước của không)</b>, ta suy ra ngay:
+        $$af - be = 0_R \implies af = be \implies (a, b) \sim (e, f) \quad \blacksquare$$
+      </p>
+    </div>
+  </details>
+
+  <details class="ex-card counter" data-type="ex" open style="margin-bottom: 1.5rem;">
+    <summary>⚠️ Cảnh báo bẫy: Phép dựng phân số THẤT BẠI HOÀN TOÀN nếu vành có ước của không (Bài tập 9.4)</summary>
+    <div class="ex-content">
+      <p>
+        Trong vành $R = \mathbb{Z}/6\mathbb{Z}$ (có ước của không $[2][3] = [0]$), xét quan hệ nhân chéo trên các cặp có mẫu khác không:
+        <br>• Cặp $([2], [2]) \sim ([0], [3])$ vì $[2][3] = [2][0] = [0]$.
+        <br>• Cặp $([0], [3]) \sim ([0], [1])$ vì $[0][1] = [3][0] = [0]$.
+        <br>• Tuy nhiên, kiểm tra cặp đầu và cuối: $[2] \cdot [1] = [2]$, trong khi $[2] \cdot [0] = [0]$. Vì $[2] \neq [0]$, suy ra $([2], [2]) \not\sim ([0], [1])$!
+        <br><b>Kết luận:</b> Quan hệ <b>không có tính bắc cầu</b>, do đó không phân hoạch được thành các lớp! Giả thiết "miền nguyên" là điều kiện sống còn của phép dựng.
+      </p>
+    </div>
+  </details>
+
+  <!-- BƯỚC 2: CÁC PHÉP TOÁN -->
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ BƯỚC 2: PHÉP TOÁN VÀ CẤU TRÚC TRƯỜNG</span>
+      <span class="tag">Xác Định Tốt Trên Tập Thương</span>
+    </div>
+    <div class="card-body">
+      <p>Ký hiệu lớp tương đương của $(a, b)$ là phân số hình thức $\dfrac{a}{b} = [(a, b)]$. Tập thương ký hiệu là:</p>
+      <div class="math-display">
+        $$\operatorname{Frac}(R) = P/\sim \;=\; \left\{ \dfrac{a}{b} \;\Bigg|\; a, b \in R, b \neq 0_R \right\}$$
+      </div>
+      <p>Trang bị hai phép toán phân số thông thường:</p>
+      <div class="math-display">
+        $$\text{Phép cộng: } \dfrac{a}{b} + \dfrac{c}{d} = \dfrac{ad + bc}{bd}$$
+        $$\text{Phép nhân: } \dfrac{a}{b} \cdot \dfrac{c}{d} = \dfrac{ac}{bd}$$
+      </div>
+      <p><b>Định lý:</b> Cả hai phép toán đều xác định tốt và biến $\operatorname{Frac}(R)$ thành một <b>trường</b>, gọi là <b>trường các thương</b> (field of fractions) của $R$.</p>
+      <ul class="bullet-list">
+        <li>Phần tử không: $0_{\operatorname{Frac}(R)} = \dfrac{0_R}{1_R} = \dfrac{0_R}{b}$ với mọi $b \neq 0_R$.</li>
+        <li>Phần tử đơn vị: $1_{\operatorname{Frac}(R)} = \dfrac{1_R}{1_R} = \dfrac{b}{b}$ với mọi $b \neq 0_R$.</li>
+        <li>Phần tử đối: $-\left(\dfrac{a}{b}\right) = \dfrac{-a}{b}$.</li>
+        <li>Phần tử nghịch đảo: Nếu $\dfrac{a}{b} \neq 0_{\operatorname{Frac}(R)}$ (tức $a \neq 0_R$), thì:
+          $$\left(\dfrac{a}{b}\right)^{-1} = \dfrac{b}{a} \in \operatorname{Frac}(R)$$
+        </li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $\operatorname{Frac}(\mathbb{Z})=\mathbb{Q}$, biểu diễn $\frac12=\frac24$ và $\frac13=\frac26$. Tính tổng, tích bằng hai cách chọn đại diện.</p>
+          <p><b>2. Hộp công cụ.</b> Ta có $(a,b)\sim(c,d)$ khi $ad=bc$. Phép cộng là $\frac ab+\frac cd=\frac{ad+bc}{bd}$, phép nhân là $\frac ab\frac cd=\frac{ac}{bd}$. Để xác định tốt, cần chứng minh đổi đại diện không đổi lớp kết quả.</p>
+          <p><b>3. Lời giải.</b> Hai cặp $(1,2)\sim(2,4)$ và $(1,3)\sim(2,6)$ vì $1\cdot4=2\cdot2$ và $1\cdot6=3\cdot2$. Dùng đại diện đầu, tổng là $\frac{1\cdot3+1\cdot2}{2\cdot3}=\frac56$; dùng đại diện sau, tổng là $\frac{2\cdot6+2\cdot4}{4\cdot6}=\frac{20}{24}=\frac56$. Tích lần lượt là $\frac{1\cdot1}{2\cdot3}=\frac16$ và $\frac{2\cdot2}{4\cdot6}=\frac4{24}=\frac16$. Tổng quát, nếu $ab'=a'b$ và $cd'=c'd$, thay vào hai biểu thức nhân chéo cho thấy các tổng và tích tạo ra vẫn tương đương; do đó cả hai phép toán độc lập với đại diện (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Các phép toán được định nghĩa trên lớp tương đương, không phải trên cách viết phân số cụ thể. Việc chứng minh xác định tốt phụ thuộc vào tính miền nguyên để khử mẫu khác không.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 9.4 TÍNH CHẤT PHỔ DỤNG VÀ BA NHẬN DIỆN KINH ĐIỂN -->
+  <h3 class="subsection-title">9.4. Tính Chất Phổ Dụng và Ba Nhận Diện Trường Kinh Điển</h3>
+  
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 9.5</span>
+      <span class="tag">Tính Chất Phổ Dụng Của Trường Các Thương (Định lý 9.8 Giáo trình)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $R$ là một miền nguyên. Ánh xạ $\iota_R : R \hookrightarrow \operatorname{Frac}(R)$ định bởi $\iota_R(a) = \dfrac{a}{1_R}$ là một <b>đơn cấu vành bảo toàn đơn vị</b> (phép nhúng chính tắc). Khi đó:</p>
+      <ul class="bullet-list">
+        <li>Với mọi trường $K$ và mọi đơn cấu vành $f : R \hookrightarrow K$, luôn tồn tại <b>duy nhất một đồng cấu trường</b> $\tilde{f} : \operatorname{Frac}(R) \to K$ sao cho sơ đồ giao hoán:
+          $$\tilde{f} \circ \iota_R = f, \quad \text{với công thức: } \tilde{f}\left(\dfrac{a}{b}\right) = f(a)(f(b))^{-1}$$
+        </li>
+      </ul>
+      <div class="corollary-box">
+        <b>💡 Ý nghĩa triết học & đại số:</b> Tính chất phổ dụng khẳng định $\operatorname{Frac}(R)$ là trường "bé nhất" chứa $R$, và nó là <b>duy nhất sai khác một đẳng cấu</b>. 
+        Mọi trường chứa $R$ đều bắt buộc phải chứa một bản sao đẳng cấu của $\operatorname{Frac}(R)$!
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Xét đơn cấu chính tắc $\iota:\mathbb{Z}\hookrightarrow\mathbb{R}$, $n\mapsto n$. Xác định phần mở rộng $\widetilde\iota:\mathbb{Q}\to\mathbb{R}$ do tính chất phổ dụng.</p>
+          <p><b>2. Hộp công cụ.</b> $\operatorname{Frac}(\mathbb{Z})=\mathbb{Q}$ và công thức mở rộng là $\widetilde\iota(a/b)=\iota(a)\iota(b)^{-1}$ với $b\ne0$.</p>
+          <p><b>3. Lời giải.</b> Vì $\iota(b)=b$ có nghịch đảo trong $\mathbb{R}$, công thức cho $\widetilde\iota(a/b)=a/b$. Nếu $a/b=c/d$, thì $ad=bc$, nên ảnh không phụ thuộc cách biểu diễn phân số. Công thức phân số bảo toàn cộng và nhân. Hơn nữa, mọi đồng cấu trường mở rộng $\iota$ bắt buộc gửi $a/b=(a/1)(b/1)^{-1}$ tới $a\cdot b^{-1}$, nên mở rộng là duy nhất (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Mẫu $b$ phải khác $0$ để có nghịch đảo. Tính duy nhất là hệ quả của việc ảnh của tử và mẫu đã được ấn định.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.5rem;">
+    <div class="card-header">
+      <span class="label">🏛️ BA NHẬN DIỆN KINH ĐIỂN</span>
+      <span class="tag">Ứng Dụng Thực Chiến Của Tính Chất Phổ Dụng</span>
+    </div>
+    <div class="card-body">
+      <ul class="bullet-list">
+        <li><b>1. Từ vành số nguyên đến trường số hữu tỉ:</b>
+          $$\operatorname{Frac}(\mathbb{Z}) \;\cong\; \mathbb{Q}$$
+          Mọi số hữu tỉ đều là thương của hai số nguyên với mẫu khác không.
+        </li>
+        <li><b>2. Từ vành đa thức đến trường phân thức hữu tỉ:</b> Cho $F$ là một trường. Trường các thương của miền nguyên đa thức $F[x]$ là trường các phân thức hữu tỉ một biến $F(x)$:
+          $$\operatorname{Frac}(F[x]) \;\cong\; F(x) = \left\{ \dfrac{p(x)}{q(x)} \;\Bigg|\; p(x), q(x) \in F[x], q(x) \neq 0 \right\}$$
+        </li>
+        <li><b>3. Từ số nguyên Gauss đến số hữu tỉ Gauss:</b> Xét vành số nguyên Gauss $\mathbb{Z}[i] = \{a + bi \mid a, b \in \mathbb{Z}\}$. Trường các thương của nó là trường số hữu tỉ Gauss $\mathbb{Q}(i)$:
+          $$\operatorname{Frac}(\mathbb{Z}[i]) \;\cong\; \mathbb{Q}(i) = \{u + vi \mid u, v \in \mathbb{Q}\}$$
+          <i>(Tương tự với Bài tập 9.15: $\operatorname{Frac}(\mathbb{Z}[\sqrt{2}]) \cong \mathbb{Q}(\sqrt{2})$).</i>
+        </li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Nhận diện $\operatorname{Frac}(\mathbb{R}[x])$ và $\operatorname{Frac}(\mathbb{Z}[i])$; rút gọn $\frac{1+2i}{3-i}$.</p>
+          <p><b>2. Hộp công cụ.</b> Trường thương gồm phân số $a/b$ với $b\ne0$. Với số Gauss, nhân tử và mẫu với liên hợp; mẫu thu được là chuẩn $c^2+d^2$.</p>
+          <p><b>3. Lời giải.</b> Các thương của đa thức thực là $P(x)/Q(x)$ với $Q\ne0$, nên $\operatorname{Frac}(\mathbb{R}[x])\cong\mathbb{R}(x)$. Tính cụ thể $\frac{1+2i}{3-i}=\frac{(1+2i)(3+i)}{(3-i)(3+i)}=\frac{1+7i}{10}=\frac1{10}+\frac7{10}i\in\mathbb{Q}(i)$. Tổng quát, $\frac{a+bi}{c+di}=\frac{(ac+bd)+(bc-ad)i}{c^2+d^2}$ với $c,d$ không đồng thời bằng $0$, nên hệ số thuộc $\mathbb{Q}$. Ngược lại, mọi $u+vi$ với $u,v\in\mathbb{Q}$ có mẫu chung nguyên, biểu diễn được thành thương của hai phần tử $\mathbb{Z}[i]$. Vì vậy $\operatorname{Frac}(\mathbb{Z}[i])\cong\mathbb{Q}(i)$; hiển nhiên $\operatorname{Frac}(\mathbb{Z})=\mathbb{Q}$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Mẫu $c^2+d^2$ dương do $c,d$ không đồng thời bằng $0$. Trường phân thức $\mathbb{R}(x)$ chứa các tỷ số đa thức, không chỉ các đa thức.</p>
+        </div>
+      </details>
+</div>
+  </div>
+
+  <!-- 9.5 ĐỐI CHIẾU BẢN CHẤT: VÀNH THƯƠNG VS TRƯỜNG THƯƠNG -->
+  <h3 class="subsection-title">9.5. Phân Biệt Bản Chất Sâu Sắc: Vành Thương <span>$R/I$</span> vs. Trường Các Thương <span>$\operatorname{Frac}(R)$</span></h3>
+  <p>
+    Hai cấu trúc này đều dùng từ "thương" trong tên gọi, nhưng phản ánh hai cơ chế toán học <b>hoàn toàn đối lập nhau</b>:
+  </p>
+
+  <div class="table-wrapper" style="margin-bottom: 2rem;">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th style="width: 25%;">Tiêu Chí Khảo Sát</th>
+          <th style="width: 37%;">Vành Thương $R/I$ (Chương 7)</th>
+          <th style="width: 38%;">Trường Các Thương $\operatorname{Frac}(R)$ (Chương 9)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Cơ chế tác động</b></td>
+          <td><b>"Thu gọn" (Chia nhỏ):</b> Đồng nhất các phần tử của $I$ về $0$.</td>
+          <td><b>"Làm giàu" (Mở rộng):</b> Thêm vào các nghịch đảo của mọi phần tử khác không.</td>
+        </tr>
+        <tr>
+          <td><b>Bản chất phần tử</b></td>
+          <td>Là các lớp cộng: $a + I$.</td>
+          <td>Là các phân số hình thức: $\dfrac{a}{b}$ ($b \neq 0$).</td>
+        </tr>
+        <tr>
+          <td><b>Ánh xạ tự nhiên</b></td>
+          <td>Phép chiếu <b>toàn ánh</b>: $\pi_I : R \twoheadrightarrow R/I$.</td>
+          <td>Phép nhúng <b>đơn ánh</b>: $\iota_R : R \hookrightarrow \operatorname{Frac}(R)$.</td>
+        </tr>
+        <tr>
+          <td><b>Khi nào thành trường?</b></td>
+          <td>Chỉ thành trường khi $I$ là <b>iđêan cực đại</b>.</td>
+          <td><b>Luôn luôn là một trường</b> (với mọi miền nguyên $R$).</td>
+        </tr>
+        <tr>
+          <td><b>Ví dụ đối chiếu trên $\mathbb{Z}$</b></td>
+          <td>$\mathbb{Z}/5\mathbb{Z} = \mathbb{F}_5$ (trường hữu hạn cấp 5, do $(5)$ cực đại).</td>
+          <td>$\operatorname{Frac}(\mathbb{Z}) = \mathbb{Q}$ (trường số hữu tỉ vô hạn).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <details class="ex-card" style="margin-top: 1rem;" open>
+    <summary>Ví dụ&amp; Phân tích</summary>
+    <div class="ex-content">
+      <p><b>1. Bối cảnh và đề bài.</b> Đối chiếu hai cấu trúc tạo từ cùng $R=\mathbb{Z}$: vành thương $\mathbb{Z}/5\mathbb{Z}$ và trường các thương $\operatorname{Frac}(\mathbb{Z})$.</p>
+      <p><b>2. Hộp công cụ.</b> Vành thương $R/I$ đồng nhất các phần tử sai khác bởi iđêan $I$; trường các thương bổ sung nghịch đảo của mọi phần tử khác không thông qua phân số $a/b$.</p>
+      <p><b>3. Lời giải.</b> Với $I=5\mathbb{Z}$, hai số nguyên cùng lớp khi hiệu của chúng chia hết cho $5$. Các lớp là $[0],[1],[2],[3],[4]$, nên $\mathbb{Z}/5\mathbb{Z}=\mathbb{F}_5$ là trường hữu hạn có $5$ phần tử; chẳng hạn $[2]^{-1}=[3]$ vì $2\cdot3\equiv1\pmod5$. Ngược lại, $\operatorname{Frac}(\mathbb{Z})=\{a/b:a,b\in\mathbb{Z},b\ne0\}=\mathbb{Q}$ thêm các nghịch đảo, chẳng hạn $2^{-1}=1/2$, và là trường vô hạn. Vậy một phép thu gọn hữu hạn và một phép mở rộng vô hạn có cùng vành nguồn nhưng tạo ra hai trường khác bản chất (đpcm).</p>
+      <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> $R/I$ là thương theo một iđêan, còn $\operatorname{Frac}(R)$ chỉ dựng được từ miền nguyên và mở rộng bằng nghịch đảo. Đừng nhầm hai nghĩa của từ “thương”.</p>
+    </div>
+  </details>
+
+  <!-- 9.6 MẠCH KHÁI NIỆM TOÀN GIÁO TRÌNH -->
+  <h3 class="subsection-title">9.6. Mạch Khái Niệm Xuyên Suốt Toàn Bộ Giáo Trình Đại Số</h3>
+  <p>
+    Toàn bộ cuốn giáo trình của tác giả TS. Huỳnh Việt Khánh được tổ chức quanh một câu hỏi logic duy nhất: 
+    <i>Dữ liệu nào phải được bảo toàn khi ta chuyển dịch từ một cấu trúc đại số này sang một cấu trúc đại số khác?</i>
+  </p>
+
+  <div style="background: var(--eq-bg, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 14px; padding: 22px; margin: 1.5rem 0; text-align: center;">
+    <div style="font-weight: 700; color: var(--thm-color, #1e3a8a); margin-bottom: 12px; font-size: 1.15rem;">
+      🌐 Bản Đồ Tiến Hóa Xuyên Suốt Của Giáo Trình Cấu Trúc Đại Số
+    </div>
+    
+    <div style="display: inline-block; font-size: 0.95rem; font-weight: 600; color: #1e40af; line-height: 2;">
+      Phép toán hai ngôi $\longrightarrow$ Nhóm và Vành $\longrightarrow$ Cấu trúc con, Quan hệ & Thương $\longrightarrow$ Đồng cấu $\longrightarrow$ Trường các thương
+    </div>
+
+    <div style="margin-top: 14px; text-align: left; font-size: 0.92rem; color: #334155; line-height: 1.7;">
+      <b>Bốn Trụ Cột Hợp Nhất Của Hệ Thống:</b>
+      <br>• <b>1. Phép toán hai ngôi:</b> Tính đóng là tiên quyết, các tiên đề kết hợp, trung hòa, đối xứng phân tầng từ nửa nhóm lên nhóm và vành.
+      <br>• <b>2. Cấu trúc con & Cấu trúc thương:</b> Nhóm con chuẩn tắc $N$ và Iđêan $I$ ra đời cùng một sứ mệnh: làm cho phép toán đại diện trên tập thương xác định tốt!
+      <br>• <b>3. Đồng cấu & Đẳng cấu:</b> Kết nối thế giới nội tại với ánh xạ bên ngoài. Hạt nhân luôn là cấu trúc tạo thương, và Định lý Đẳng cấu Thứ nhất biến thương thành ảnh.
+      <br>• <b>4. Trường các thương:</b> Khép lại hành trình bằng một đơn cấu nhúng tự nhiên để mở rộng miền nguyên thành một trường đại số hoàn chỉnh.
+    </div>
+  </div>
+
+</div>
+<!-- ==================== HẾT CHƯƠNG 9 HOÀN CHỈNH ==================== -->

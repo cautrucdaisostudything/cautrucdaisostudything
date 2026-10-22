@@ -1,0 +1,78 @@
+<div class="practice-review-view" id="practiceReviewView" role="tabpanel" aria-labelledby="practiceTabReview" hidden>
+    <h2 class="section-title">Soạn đề ôn tập</h2>
+    <p class="review-intro">Tạo đề từ các định nghĩa và định lý đã có trong giáo trình. Mỗi câu có thể mở lại đúng mục lý thuyết nguồn để tra cứu.</p>
+    <section class="review-builder" aria-labelledby="review-builder-title">
+      <div class="review-builder-heading">
+        <div>
+          <p class="review-eyebrow">ÔN TẬP CÁ NHÂN</p>
+          <h3 id="review-builder-title">Cấu hình đề</h3>
+        </div>
+        <span class="review-time-note">◷ Đồng hồ bắt đầu khi mở đề</span>
+      </div>
+      <div id="reviewConfig" class="review-config">
+        <fieldset class="review-fieldset review-scope-fieldset">
+          <legend>Phạm vi đề</legend>
+          <div class="review-choice-row">
+            <label><input type="radio" name="reviewScope" value="all" checked> Toàn bộ</label>
+            <label><input type="radio" name="reviewScope" value="part-1"> Phần I: Nhóm</label>
+            <label><input type="radio" name="reviewScope" value="part-2"> Phần II: Vành</label>
+            <label><input type="radio" name="reviewScope" value="part-3"> Phần III: Trường</label>
+            <label><input type="radio" name="reviewScope" value="custom"> Tùy chọn chương</label>
+          </div>
+        </fieldset>
+        <div id="reviewTopics" class="review-topics" aria-label="Chọn chủ đề lý thuyết"></div>
+        <div class="review-options-grid">
+          <fieldset class="review-fieldset">
+            <legend>Độ khó</legend>
+            <div class="review-choice-row">
+              <label><input type="radio" name="reviewDifficulty" value="mixed" checked> Hỗn hợp</label>
+              <label><input type="radio" name="reviewDifficulty" value="easy"> Dễ</label>
+              <label><input type="radio" name="reviewDifficulty" value="medium"> Trung bình</label>
+              <label><input type="radio" name="reviewDifficulty" value="hard"> Khó</label>
+            </div>
+          </fieldset>
+          <fieldset class="review-fieldset">
+            <legend>Loại câu hỏi</legend>
+            <div class="review-choice-row">
+              <label><input type="checkbox" name="reviewType" value="choice" checked> Trắc nghiệm</label>
+              <label><input type="checkbox" name="reviewType" value="matching" checked> Ghép nối</label>
+              <label><input type="checkbox" name="reviewType" value="short" checked> Trả lời ngắn</label>
+              <label><input type="checkbox" name="reviewType" value="essay" checked> Tự luận</label>
+            </div>
+          </fieldset>
+          <fieldset class="review-fieldset">
+            <legend>Trọng tâm</legend>
+            <div class="review-choice-row">
+              <label><input type="checkbox" name="reviewFocus" value="definition" checked> Định nghĩa</label>
+              <label><input type="checkbox" name="reviewFocus" value="theorem" checked> Định lý &amp; điều kiện</label>
+              <label><input type="checkbox" name="reviewFocus" value="property" checked> Tính chất &amp; công thức</label>
+              <label><input type="checkbox" name="reviewFocus" value="understanding" checked> Hiểu &amp; phân biệt</label>
+              <label><input type="checkbox" name="reviewFocus" value="application" checked> Vận dụng</label>
+            </div>
+          </fieldset>
+          <label class="review-count-label" for="reviewCount">Số câu
+            <select id="reviewCount">
+              <option value="20" selected>20 câu</option>
+              <option value="15">15 câu</option>
+              <option value="10">10 câu</option>
+              <option value="5">5 câu</option>
+            </select>
+          </label>
+          <fieldset class="review-fieldset review-mode-fieldset">
+            <legend>Chế độ</legend>
+            <div class="review-choice-row">
+              <label><input type="radio" name="reviewMode" value="test" checked> Kiểm tra</label>
+              <label><input type="radio" name="reviewMode" value="practice"> Luyện tập</label>
+            </div>
+          </fieldset>
+        </div>
+        <div id="reviewAvailability" class="review-availability" role="status" aria-live="polite"></div>
+        <button id="reviewGenerate" class="review-primary-btn" type="button">Tạo đề 20 câu</button>
+      </div>
+    </section>
+    <section id="reviewSession" class="review-session" aria-live="polite" hidden></section>
+    <section id="reviewHistory" class="review-history" aria-labelledby="review-history-title">
+      <h3 id="review-history-title">Đề gần đây</h3>
+      <div id="reviewHistoryList"></div>
+    </section>
+  </div>

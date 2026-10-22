@@ -1,0 +1,234 @@
+<!-- ==================== BÀI TẬP CHƯƠNG 7: HOÀN CHỈNH ==================== -->
+<div class="chapter-content" id="tab-ex7">
+  <h2 class="section-title">Hệ thống Bài tập & Lời giải: Chương 7. Iđêan & Vành thương</h2>
+  <p>
+    Giải thích nguồn gốc tính hấp thụ của Iđêan, phân biệt iđêan một phía với iđêan hai phía, chứng minh tính chất iđêan trong trường và mối liên hệ giữa iđêan nguyên tố/cực đại với vành thương.
+  </p>
+
+  <!-- BÀI TẬP 7.1 -->
+  <div class="ex-study-card" id="ex-7-1">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-a">Nhóm A · Nhận diện</span>
+        <span class="ex-level-badge">🟢 Cơ bản</span>
+        <span class="ex-title-label">BÀI TẬP 7.1: Tại sao Vành con Thất bại khi Tạo Vành thương?</span>
+      </div>
+      <button class="ex-status-btn" data-id="7-1" data-status="todo" onclick="toggleExStatus(this, '7-1')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Xem $\mathbb{Z}$ như một vành con của trường số hữu tỉ $\mathbb{Q}$.</p>
+      <p>
+        (a) Chứng minh $\mathbb{Z}$ không phải là một iđêan của $\mathbb{Q}$.<br>
+        (b) Trên tập các lớp thương cộng $\mathbb{Q}/\mathbb{Z}$, xét lớp $[0] = 0 + \mathbb{Z} = 1 + \mathbb{Z}$. Hãy nhân lớp này với lớp $\frac{1}{2} + \mathbb{Z}$ bằng hai đại diện $0$ và $1$.<br>
+        (c) Từ đó giải thích vì sao công thức nhân lớp $(a + \mathbb{Z})(b + \mathbb{Z}) = ab + \mathbb{Z}$ không xác định tốt trên $\mathbb{Q}/\mathbb{Z}$.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Điều kiện iđêan: Với mọi $r \in \mathbb{Q}$ và $x \in \mathbb{Z}$ thì tích $rx$ phải thuộc $\mathbb{Z}$.<br>
+        • Thử tính toán trực tiếp giá trị nhân lớp bằng hai cách chọn đại diện cho cùng một lớp đầu vào.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Chứng minh $\mathbb{Z}$ không là iđêan của $\mathbb{Q}$:</b><br>
+        Lấy phần tử của vành mẹ $r = \frac{1}{2} \in \mathbb{Q}$ và phần tử $x = 1 \in \mathbb{Z}$.<br>
+        Tích: $rx = \frac{1}{2} \times 1 = \frac{1}{2} \notin \mathbb{Z}$.<br>
+        Tập $\mathbb{Z}$ không có tính hấp thụ đối với phép nhân từ vành mẹ $\mathbb{Q}$, nên $\mathbb{Z}$ không phải là iđêan của $\mathbb{Q}$.
+      </p>
+      <p><b>(b) Nhân lớp bằng hai đại diện khác nhau:</b><br>
+        Trong nhóm thương cộng $\mathbb{Q}/\mathbb{Z}$, vì $1 - 0 = 1 \in \mathbb{Z}$ nên $0 + \mathbb{Z} = 1 + \mathbb{Z}$.<br>
+        • Cách 1: Dùng đại diện $0$:
+        $$(0 + \mathbb{Z})\left(\frac{1}{2} + \mathbb{Z}\right) = \left(0 \times \frac{1}{2}\right) + \mathbb{Z} = 0 + \mathbb{Z}$$
+        • Cách 2: Dùng đại diện $1$:
+        $$(1 + \mathbb{Z})\left(\frac{1}{2} + \mathbb{Z}\right) = \left(1 \times \frac{1}{2}\right) + \mathbb{Z} = \frac{1}{2} + \mathbb{Z}$$
+      </p>
+      <p><b>(c) Kết luận về tính xác định tốt:</b><br>
+        Hiệu giữa hai kết quả là $\frac{1}{2} - 0 = \frac{1}{2} \notin \mathbb{Z}$, do đó $0 + \mathbb{Z} \neq \frac{1}{2} + \mathbb{Z}$.<br>
+        Cùng một lớp đầu vào nhưng hai cách chọn đại diện cho hai kết quả khác nhau ở đầu ra.<br>
+        Vậy phép nhân lớp <b>không xác định tốt</b>! Muốn phép nhân lớp xác định tốt, vành con bắt buộc phải có tính hấp thụ (tức là một Iđêan). <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Bản chất lý thuyết:</b> Đây là bài toán kinh điển giải thích tại sao trong lý thuyết vành ta không thể định nghĩa "vành thương theo một vành con tùy ý", mà bắt buộc phải là "vành thương theo một Iđêan".
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 7.3 -->
+  <div class="ex-study-card" id="ex-7-3">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-b">Nhóm B · Vận dụng</span>
+        <span class="ex-level-badge">🟡 Vận dụng</span>
+        <span class="ex-title-label">BÀI TẬP 7.3: Phân biệt Iđêan Trái và Iđêan Phải</span>
+      </div>
+      <button class="ex-status-btn" data-id="7-3" data-status="todo" onclick="toggleExStatus(this, '7-3')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Trong vành không giao hoán $R = M_2(\mathbb{R})$, xét tập con:</p>
+      <p>$$I = R E_{11} = \left\{ \begin{pmatrix} a & 0 \\ c & 0 \end{pmatrix} \;\Bigg|\; a, c \in \mathbb{R} \right\}$$</p>
+      <p>
+        (a) Chứng minh $I$ là một iđêan trái của $M_2(\mathbb{R})$.<br>
+        (b) Chỉ ra một phép nhân cụ thể để chứng minh $I$ không phải là một iđêan phải của $M_2(\mathbb{R})$.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Iđêan trái: Với mọi $M \in M_2(\mathbb{R})$ và $X \in I$, tích $MX$ phải thuộc $I$.<br>
+        • Để bác bỏ iđêan phải: Tìm một ma trận $X \in I$ và $M \in M_2(\mathbb{R})$ sao cho tích $XM \notin I$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Chứng minh $I$ là iđêan trái:</b><br>
+        • Rõ ràng $I$ là một nhóm con cộng của $M_2(\mathbb{R})$ (khác rỗng và đóng với trừ).<br>
+        • Lấy ma trận tùy ý $M = \begin{pmatrix} x & y \\ z & t \end{pmatrix} \in M_2(\mathbb{R})$ và $X = \begin{pmatrix} a & 0 \\ c & 0 \end{pmatrix} \in I$.<br>
+        Nhân bên trái:
+        $$MX = \begin{pmatrix} x & y \\ z & t \end{pmatrix}\begin{pmatrix} a & 0 \\ c & 0 \end{pmatrix} = \begin{pmatrix} xa + yc & 0 \\ za + tc & 0 \end{pmatrix}$$
+        Cột thứ hai của ma trận kết quả hoàn toàn bằng 0, do đó $MX \in I$.<br>
+        Vậy $I$ là một iđêan trái của $M_2(\mathbb{R})$.
+      </p>
+      <p><b>(b) Bác bỏ iđêan phải:</b><br>
+        Chọn $X = E_{11} = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} \in I$ và $M = E_{12} = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix} \in M_2(\mathbb{R})$.<br>
+        Nhân bên phải:
+        $$XM = E_{11}E_{12} = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}\begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix} = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix} = E_{12}$$
+        Ma trận kết quả có phần tử ở vị trí $(1, 2)$ là $1 \neq 0$, nên $E_{12} \notin I$.<br>
+        Do đó $I$ không hấp thụ phép nhân từ bên phải; $I$ <b>không phải là iđêan phải</b>. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Nhận xét:</b> Trong vành giao hoán, iđêan trái, iđêan phải và iđêan hai phía hoàn toàn trùng nhau. Nhưng trong vành không giao hoán (như vành ma trận), thứ tự thừa số nhân bên trái hay bên phải có ý nghĩa quyết định.
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 7.11 -->
+  <div class="ex-study-card" id="ex-7-11">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-b">Nhóm B · Vận dụng</span>
+        <span class="ex-level-badge">🟡 Vận dụng</span>
+        <span class="ex-title-label">BÀI TẬP 7.11: Iđêan Chứa Đơn vị và Iđêan của một Trường</span>
+      </div>
+      <button class="ex-status-btn" data-id="7-11" data-status="todo" onclick="toggleExStatus(this, '7-11')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Cho $R$ là một vành có phần tử đơn vị $1_R$ và $I$ là một iđêan của $R$.</p>
+      <p>
+        (a) Chứng minh $I = R$ khi và chỉ khi $1_R \in I$.<br>
+        (b) Chứng minh nếu $I$ chứa một phần tử khả nghịch $u \in R^\times$ thì $I = R$.<br>
+        (c) Suy ra một trường $F$ chỉ có đúng hai iđêan là $\{0\}$ và chính nó $F$.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Nếu $1_R \in I$, áp dụng tính hấp thụ: mọi phần tử $r \in R$ đều viết được thành $r = r \cdot 1_R \in I$.<br>
+        • Trong một trường, mọi phần tử khác không đều khả nghịch.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Chứng minh $I = R \iff 1_R \in I$:</b><br>
+        • Chiều thuận ($\implies$): Nếu $I = R$, hiển nhiên $1_R \in R = I$.<br>
+        • Chiều đảo ($\Longleftarrow$): Giả sử $1_R \in I$. Với mọi phần tử $r \in R$, theo tính hấp thụ của iđêan: $r = r \cdot 1_R \in I$. Do đó $R \subseteq I$. Kết hợp với $I \subseteq R$, ta được $I = R$.
+      </p>
+      <p><b>(b) Nếu $I$ chứa phần tử khả nghịch $u$:</b><br>
+        Vì $u \in I$ và $u$ khả nghịch, tồn tại $u^{-1} \in R$.<br>
+        Theo tính hấp thụ của iđêan: $1_R = u^{-1}u \in I$.<br>
+        Áp dụng kết quả câu (a), ta suy ra ngay $I = R$.
+      </p>
+      <p><b>(c) Cấu trúc iđêan của trường $F$:</b><br>
+        Giả sử $I$ là một iđêan của trường $F$.<br>
+        • Nếu $I \neq \{0\}$, tồn tại ít nhất một phần tử khác không $a \in I$ ($a \neq 0$).<br>
+        • Vì $F$ là một trường, mọi phần tử khác không đều khả nghịch, nên $a \in F^\times$.<br>
+        • Theo câu (b), vì $I$ chứa phần tử khả nghịch $a$, ta suy ra $I = F$.<br>
+        Vậy một trường chỉ có đúng hai iđêan là $\{0\}$ và $F$. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Hệ quả quan trọng:</b> Vì trường không có iđêan thực sự khác không, mọi đồng cấu vành đi từ một trường $f: F \to R$ (với $R \neq \{0\}$) đều có hạt nhân $\ker f = \{0\}$, tức là <b>luôn luôn là đơn cấu</b>!
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 7.15 -->
+  <div class="ex-study-card" id="ex-7-15">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-c">Nhóm C · Chứng minh</span>
+        <span class="ex-level-badge">🟠 Vận dụng cao</span>
+        <span class="ex-title-label">BÀI TẬP 7.15: Iđêan Nguyên tố và Iđêan Cực đại trong ℤ</span>
+      </div>
+      <button class="ex-status-btn" data-id="7-15" data-status="todo" onclick="toggleExStatus(this, '7-15')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Trong vành số nguyên $\mathbb{Z}$, xét iđêan chính $I = n\mathbb{Z}$ với $n \ge 0$.</p>
+      <p>
+        (a) Chứng minh $n\mathbb{Z}$ là iđêan nguyên tố khi và chỉ khi $n = 0$ hoặc $n = p$ (số nguyên tố).<br>
+        (b) Chứng minh $n\mathbb{Z}$ là iđêan cực đại khi và chỉ khi $n = p$ (số nguyên tố).<br>
+        (c) Giải thích vì sao iđêan $(0)$ nguyên tố nhưng không cực đại trong $\mathbb{Z}$.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Áp dụng tiêu chuẩn cấu trúc thương: $I$ nguyên tố $\iff R/I$ là miền nguyên; $I$ cực đại $\iff R/I$ là trường.<br>
+        • Xét riêng các trường hợp $n = 0$, $n = 1$, $n$ hợp số và $n = p$ nguyên tố.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Tiêu chuẩn Iđêan nguyên tố:</b><br>
+        Iđêan $n\mathbb{Z}$ nguyên tố khi và chỉ khi thương $\mathbb{Z}/n\mathbb{Z}$ là một miền nguyên.<br>
+        • Nếu $n = 0$: $\mathbb{Z}/(0) \cong \mathbb{Z}$ là một miền nguyên. Do đó $(0)$ là iđêan nguyên tố.<br>
+        • Nếu $n = 1$: $\mathbb{Z}/\mathbb{Z} = \{0\}$ là vành không (không phải miền nguyên), nên $\mathbb{Z}$ không nguyên tố.<br>
+        • Nếu $n$ là hợp số ($n = ab$ với $1 < a, b < n$): trong $\mathbb{Z}/n\mathbb{Z}$ ta có $[a][b] = [0]$ với $[a], [b] \neq [0]$, có ước của không nên không là miền nguyên.<br>
+        • Nếu $n = p$ là số nguyên tố: $\mathbb{Z}/p\mathbb{Z} = \mathbb{F}_p$ là một trường (cũng là miền nguyên).<br>
+        Vậy $n\mathbb{Z}$ nguyên tố $\iff n = 0$ hoặc $n = p$ nguyên tố.
+      </p>
+      <p><b>(b) Tiêu chuẩn Iđêan cực đại:</b><br>
+        Iđêan $n\mathbb{Z}$ cực đại khi và chỉ khi thương $\mathbb{Z}/n\mathbb{Z}$ là một trường.<br>
+        • Với $n = 0$: $\mathbb{Z}/(0) \cong \mathbb{Z}$ không phải là trường (2 không khả nghịch).<br>
+        • Chỉ khi $n = p$ là số nguyên tố thì $\mathbb{Z}/p\mathbb{Z}$ mới là một trường.<br>
+        Vậy $n\mathbb{Z}$ cực đại $\iff n = p$ là số nguyên tố.
+      </p>
+      <p><b>(c) Trường hợp iđêan $(0)$:</b><br>
+        • $(0)$ nguyên tố vì $\mathbb{Z}/(0) \cong \mathbb{Z}$ là miền nguyên.<br>
+        • $(0)$ không cực đại vì $\mathbb{Z}/(0) \cong \mathbb{Z}$ không phải là trường.<br>
+        • Dưới góc độ bao hàm tập hợp: ta thấy $(0) \subsetneq 2\mathbb{Z} \subsetneq \mathbb{Z}$, tồn tại iđêan thực sự $2\mathbb{Z}$ chen vào giữa $(0)$ và $\mathbb{Z}$, nên $(0)$ vi phạm tính cực đại. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Ghi nhớ:</b> Trong mọi vành giao hoán có đơn vị, <b>iđêan cực đại luôn là iđêan nguyên tố</b>. Chiều ngược lại không luôn đúng, và iđêan $(0)$ trong $\mathbb{Z}$ chính là phản ví dụ mẫu mực.
+      </p>
+    </div>
+  </div>
+</div>

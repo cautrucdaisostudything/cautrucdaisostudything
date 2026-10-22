@@ -1,0 +1,175 @@
+<!-- ==================== BÀI TẬP CHƯƠNG 4: HOÀN CHỈNH ==================== -->
+<div class="chapter-content" id="tab-ex4">
+  <h2 class="section-title">Hệ thống Bài tập & Lời giải: Chương 4. Chuẩn tắc & Nhóm thương</h2>
+  <p>
+    Làm chủ tiêu chuẩn liên hợp $gNg^{-1} = N$, chứng minh định lý kinh điển "chỉ số 2 luôn chuẩn tắc", phân tích tâm $Z(G)$ và hiểu bản chất sự hình thành nhóm thương.
+  </p>
+
+  <!-- BÀI TẬP 4.1 -->
+  <div class="ex-study-card" id="ex-4-1">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-a">Nhóm A · Nhận diện</span>
+        <span class="ex-level-badge">🟢 Cơ bản</span>
+        <span class="ex-title-label">BÀI TẬP 4.1: Kiểm tra Tính Chuẩn tắc bằng Phép Liên hợp</span>
+      </div>
+      <button class="ex-status-btn" data-id="4-1" data-status="todo" onclick="toggleExStatus(this, '4-1')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Trong nhóm $S_3$, đặt $H = \langle(1\,2)\rangle = \{e, (1\,2)\}$.</p>
+      <p>
+        (a) Tính các nhóm con liên hợp $gHg^{-1}$ với tất cả 6 phần tử $g \in S_3$.<br>
+        (b) Chỉ ra chính xác những phần tử $g$ thỏa mãn $gHg^{-1} = H$. Nhóm con $H$ có chuẩn tắc trong $S_3$ không?
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Vì $e$ liên hợp với chính nó ($geg^{-1} = e$), ta chỉ cần tính $g(1\,2)g^{-1}$.<br>
+        • Công thức liên hợp hoán vị: Với $\tau = (a\,b)$, thì $g(a\,b)g^{-1} = (g(a)\;g(b))$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Tính $g(1\,2)g^{-1}$ với các $g \in S_3$:</b></p>
+      <p>
+        • Với $g = e$: $e(1\,2)e = (1\,2) \implies eHe^{-1} = H$.<br>
+        • Với $g = (1\,2)$: $(1\,2)(1\,2)(1\,2) = (1\,2) \implies (1\,2)H(1\,2)^{-1} = H$.<br>
+        • Với $g = (1\,3)$: $(1\,3)(1\,2)(1\,3) = (2\,3) \implies (1\,3)H(1\,3)^{-1} = \{e, (2\,3)\} \neq H$.<br>
+        • Với $g = (2\,3)$: $(2\,3)(1\,2)(2\,3) = (1\,3) \implies (2\,3)H(2\,3)^{-1} = \{e, (1\,3)\} \neq H$.<br>
+        • Với $g = (1\,2\,3)$: $(1\,2\,3)(1\,2)(1\,3\,2) = (2\,3) \implies (1\,2\,3)H(1\,2\,3)^{-1} = \{e, (2\,3)\} \neq H$.<br>
+        • Với $g = (1\,3\,2)$: $(1\,3\,2)(1\,2)(1\,2\,3) = (1\,3) \implies (1\,3\,2)H(1\,3\,2)^{-1} = \{e, (1\,3)\} \neq H$.
+      </p>
+      <p><b>(b) Kết luận về tính chuẩn tắc:</b><br>
+        Chỉ có hai phần tử giữ nguyên $H$ qua phép liên hợp là $g \in \{e, (1\,2)\} = H$.<br>
+        Với $g = (1\,3)$, ta có $(1\,3)H(1\,3)^{-1} \neq H$.<br>
+        <b>Kết luận:</b> $H$ <b>không phải</b> là nhóm con chuẩn tắc của $S_3$ ($H \not\trianglelefteq S_3$). <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Nhóm chuẩn hóa $N_G(H)$</b>: Tập các phần tử $\{g \in G \mid gHg^{-1} = H\}$ lập thành một nhóm con gọi là <i>nhóm chuẩn hóa</i> của $H$. Ở đây $N_{S_3}(H) = H$. $H$ chuẩn tắc khi và chỉ khi $N_G(H) = G$.
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 4.6 -->
+  <div class="ex-study-card" id="ex-4-6">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-b">Nhóm B · Vận dụng</span>
+        <span class="ex-level-badge">🟡 Vận dụng</span>
+        <span class="ex-title-label">BÀI TẬP 4.6: Nhóm con Chỉ số 2 Luôn Chuẩn tắc</span>
+      </div>
+      <button class="ex-status-btn" data-id="4-6" data-status="todo" onclick="toggleExStatus(this, '4-6')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Cho $H \le G$ là một nhóm con thỏa mãn $[G : H] = 2$.</p>
+      <p>
+        (a) Chứng minh $H \trianglelefteq G$.<br>
+        (b) Áp dụng kết quả trên để chứng minh nhóm thay phiên $A_n \trianglelefteq S_n$ với mọi $n \ge 2$.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Chỉ số $[G : H] = 2$ nghĩa là nhóm $G$ được phân hoạch thành đúng 2 lớp kề.<br>
+        • Một lớp chắc chắn là $H$, lớp còn lại bắt buộc phải là phần bù $G \setminus H$ cho cả phân hoạch trái và phải.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Chứng minh $H \trianglelefteq G$:</b></p>
+      <p>
+        Ta cần chứng minh $gH = Hg$ với mọi $g \in G$.<br>
+        • <i>Trường hợp 1:</i> Nếu $g \in H$, thì rõ ràng $gH = H = Hg$.<br>
+        • <i>Trường hợp 2:</i> Nếu $g \notin H$. Do $[G : H] = 2$, có đúng hai lớp kề trái tạo thành phân hoạch của $G$: một lớp là $eH = H$, lớp còn lại là $gH$. Do đó:
+        $$gH = G \setminus H \quad (1)$$
+        Tương tự, có đúng hai lớp kề phải tạo thành phân hoạch của $G$: một lớp là $He = H$, lớp còn lại là $Hg$. Do đó:
+        $$Hg = G \setminus H \quad (2)$$
+        Từ (1) và (2) suy ra $gH = Hg$.<br>
+        Vậy trong mọi trường hợp, $gH = Hg$ với mọi $g \in G$. Do đó $H \trianglelefteq G$.
+      </p>
+      <p><b>(b) Áp dụng cho $A_n \le S_n$:</b><br>
+        Với mọi $n \ge 2$, nhóm đối xứng $S_n$ có cấp $n!$, và nhóm thay phiên $A_n$ gồm các hoán vị chẵn có cấp $n! / 2$.<br>
+        Chỉ số là:
+        $$[S_n : A_n] = \frac{|S_n|}{|A_n|} = \frac{n!}{n!/2} = 2$$
+        Theo kết quả câu (a), ta suy ra ngay $A_n \trianglelefteq S_n$ với mọi $n \ge 2$. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Nhận xét sư phạm:</b> Định lý này đúng cho cả nhóm $G$ vô hạn! Bất cứ nhóm con nào có chỉ số bằng 2 (dù nhóm mẹ hữu hạn hay vô hạn) thì đều tự động là nhóm con chuẩn tắc.
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 4.22 -->
+  <div class="ex-study-card" id="ex-4-22">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-d">Nhóm D · Tổng hợp</span>
+        <span class="ex-level-badge">🔴 Nâng cao</span>
+        <span class="ex-title-label">BÀI TẬP 4.22: Tâm Z(G) và Định lý Nhóm Thương Cyclic</span>
+      </div>
+      <button class="ex-status-btn" data-id="4-22" data-status="todo" onclick="toggleExStatus(this, '4-22')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Cho $G$ là một nhóm và tâm của $G$ là $Z(G) = \{z \in G \mid zg = gz, \forall g \in G\}$.</p>
+      <p>
+        (a) Chứng minh $Z(G)$ luôn là một nhóm con chuẩn tắc của $G$ ($Z(G) \trianglelefteq G$).<br>
+        (b) Chứng minh nếu nhóm thương $G/Z(G)$ là một nhóm cyclic thì $G$ bắt buộc phải là nhóm giao hoán.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Chuẩn tắc: Chứng minh $gzg^{-1} \in Z(G)$ với mọi $g \in G, z \in Z(G)$.<br>
+        • Nếu $G/Z(G)$ cyclic sinh bởi lớp $gZ(G)$, thì mọi phần tử $x \in G$ đều biểu diễn được dưới dạng $x = g^m z$ với $z \in Z(G)$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Chứng minh $Z(G) \trianglelefteq G$:</b><br>
+        • $Z(G) \neq \emptyset$ vì $e \in Z(G)$.<br>
+        • Lấy $z \in Z(G)$ và $g \in G$ tùy ý. Theo định nghĩa tâm, $zg = gz \implies gzg^{-1} = z$.<br>
+        Vì $z \in Z(G)$, ta suy ra $gzg^{-1} \in Z(G)$.<br>
+        Theo tiêu chuẩn liên hợp, $Z(G) \trianglelefteq G$.
+      </p>
+      <p><b>(b) Chứng minh $G$ giao hoán khi $G/Z(G)$ cyclic:</b><br>
+        Giả sử $G/Z(G)$ là nhóm cyclic, sinh bởi phần tử đại diện $g \in G$, tức là:
+        $$G/Z(G) = \langle gZ(G) \rangle$$
+        Lấy hai phần tử tùy ý $x, y \in G$. Khi đó các lớp $xZ(G)$ và $yZ(G)$ đều thuộc nhóm thương, nên tồn tại các số nguyên $m, n \in \mathbb{Z}$ sao cho:
+        $$xZ(G) = (gZ(G))^m = g^m Z(G) \implies x = g^m z_1 \quad (\text{với } z_1 \in Z(G))$$
+        $$yZ(G) = (gZ(G))^n = g^n Z(G) \implies y = g^n z_2 \quad (\text{với } z_2 \in Z(G))$$
+        Xét tích $xy$:
+        $$xy = (g^m z_1)(g^n z_2)$$
+        Vì $z_1 \in Z(G)$, nó giao hoán với mọi phần tử của $G$, đặc biệt $z_1 g^n = g^n z_1$. Do đó:
+        $$xy = g^m (g^n z_1) z_2 = (g^m g^n)(z_1 z_2) = g^{m+n} (z_1 z_2)$$
+        Mặt khác, các lũy thừa của cùng một phần tử $g$ luôn giao hoán ($g^{m+n} = g^{n+m}$), và $z_2$ cũng thuộc tâm nên:
+        $$yx = (g^n z_2)(g^m z_1) = g^n (g^m z_2) z_1 = g^{n+m} (z_2 z_1) = g^{m+n} (z_1 z_2)$$
+        Do đó $xy = yx$. Đẳng thức đúng với mọi $x, y \in G$, nên $G$ là nhóm giao hoán. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Hệ quả quan trọng:</b> Nếu $G$ không giao hoán thì $G/Z(G)$ <b>không bao giờ là nhóm cyclic</b>. Chẳng hạn, nhóm thương $G/Z(G)$ không thể có cấp nguyên tố $p$ (vì mọi nhóm cấp nguyên tố đều cyclic).
+      </p>
+    </div>
+  </div>
+</div>

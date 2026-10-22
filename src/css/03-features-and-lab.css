@@ -1,0 +1,851 @@
+/* 1. Thanh tiến độ đọc bài đổi màu theo mùa ở mép trên Topbar */
+  #seasonalReadingBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3.5px;
+    width: 0%;
+    z-index: 9999;
+    background: linear-gradient(90deg, var(--brand), var(--def-accent), var(--gold));
+    box-shadow: 0 0 10px color-mix(in srgb, var(--def-accent) 70%, transparent);
+    transition: width 0.12s ease-out, background 0.35s ease;
+    pointer-events: none;
+  }
+  body[data-app-mode="slides"] #seasonalReadingBar {
+    display: none;
+  }
+
+  /* 2. Canvas hiệu ứng hạt thiên nhiên 4 mùa (Xuân - Hạ - Thu - Đông) */
+  #seasonalParticlesCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 82;
+    opacity: 0.85;
+    transition: opacity 0.4s ease;
+  }
+  body[data-app-mode="slides"] #seasonalParticlesCanvas,
+  :root[data-theme="study"] #seasonalParticlesCanvas.auto-hide-study {
+    opacity: 0 !important;
+  }
+
+  /* Nút bật/tắt hiệu ứng mùa trên Topbar */
+  #btnParticlesToggle {
+    border-color: var(--line);
+    background: var(--paper);
+    color: var(--ink-soft);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  #btnParticlesToggle:hover {
+    border-color: var(--def-accent);
+    color: var(--brand);
+    background: var(--brand-soft);
+  }
+  #btnParticlesToggle[aria-pressed="false"] {
+    opacity: 0.65;
+  }
+
+  /* 3. Nâng cấp nút Copy LaTeX tương tác thực tế trên các khung .math-display */
+  .math-display {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  }
+  .math-display:hover {
+    border-color: var(--def-accent);
+    box-shadow: 0 4px 14px -6px color-mix(in srgb, var(--brand) 30%, transparent);
+  }
+  .math-display:hover::after {
+    content: "📋 Chép LaTeX";
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: var(--font-ui);
+    color: var(--brand);
+    background: var(--paper);
+    padding: 3px 9px;
+    border-radius: 6px;
+    border: 1px solid var(--def-border);
+    box-shadow: var(--shadow-sm);
+  }
+  .math-display.is-copied {
+    border-color: var(--ex-color) !important;
+  }
+  .math-display.is-copied::after {
+    content: "✓ Đã chép LaTeX!" !important;
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    font-size: 11px;
+    font-weight: 800;
+    font-family: var(--font-ui);
+    color: var(--ex-color) !important;
+    background: var(--ex-bg) !important;
+    padding: 3px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--ex-border) !important;
+  }
+
+  /* 4. Khắc phục triệt để lỗi "chữ trắng trên nền trắng" khi bật ❄️ Giao diện: Đông */
+  :root[data-theme="winter"] main.content [style*="background: #ffffff"],
+  :root[data-theme="winter"] main.content [style*="background:#ffffff"],
+  :root[data-theme="winter"] main.content [style*="background: #fff;"],
+  :root[data-theme="winter"] main.content [style*="background:#fff;"] {
+    background: #13223c !important;
+    color: var(--ink) !important;
+    border-color: #2b4570 !important;
+  }
+  :root[data-theme="winter"] main.content [style*="background: #eff6ff"],
+  :root[data-theme="winter"] main.content [style*="background: #f0fdf4"],
+  :root[data-theme="winter"] main.content [style*="background: #fffbeb"],
+  :root[data-theme="winter"] main.content [style*="background: #ecfdf5"] {
+    background: #162947 !important;
+    color: var(--ink) !important;
+  }
+  :root[data-theme="winter"] main.content [style*="color: #334155"],
+  :root[data-theme="winter"] main.content [style*="color:#334155"],
+  :root[data-theme="winter"] main.content [style*="color: #1e293b"],
+  :root[data-theme="winter"] main.content [style*="color:#1e293b"],
+  :root[data-theme="winter"] main.content [style*="color: #475569"] {
+    color: var(--ink-soft) !important;
+  }
+  :root[data-theme="winter"] main.content [style*="color: #1e3a8a"],
+  :root[data-theme="winter"] main.content [style*="color: #1e40af"],
+  :root[data-theme="winter"] main.content [style*="color: #1d4ed8"],
+  :root[data-theme="winter"] main.content [style*="color: #2563eb"] {
+    color: #7dd3fc !important;
+  }
+  :root[data-theme="winter"] main.content [style*="color: #065f46"],
+  :root[data-theme="winter"] main.content [style*="color: #047857"],
+  :root[data-theme="winter"] main.content [style*="color: #059669"],
+  :root[data-theme="winter"] main.content [style*="color: #064e3b"] {
+    color: #6ee7b7 !important;
+  }
+  :root[data-theme="winter"] main.content [style*="color: #b91c1c"],
+  :root[data-theme="winter"] main.content [style*="color: #78350f"],
+  :root[data-theme="winter"] main.content [style*="color: #b45309"] {
+    color: #fde68a !important;
+  }
+
+  /* 5. Tăng độ sắc nét cho Bảng Cayley màu trong Phòng LAB ở mọi chế độ */
+  table.lab-cayley td {
+    color: #09152b !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+  }
+  :root[data-theme="winter"] table.lab-cayley td.on {
+    box-shadow: 0 0 0 2.5px #fde047 !important;
+  }
+  :root[data-theme="winter"] table.lab-cayley td.rc {
+    outline: 2.5px solid #38bdf8 !important;
+  }
+
+/* ======================================================== */
+/* Giao diện mở rộng cho 4 Tab trong Phòng LAB */
+  .lab-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .lab-ring-Presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-left: auto;
+  }
+  .lab-preset-chip {
+    padding: 5px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink-soft);
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .lab-preset-chip:hover,
+  .lab-preset-chip.active {
+    background: var(--brand-grad);
+    color: #fff;
+    border-color: transparent;
+  }
+  .ring-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .ring-stat-box {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px 14px;
+    background: var(--paper);
+  }
+  .ring-stat-box h4 {
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-family: var(--font-ui);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .ring-pill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .ring-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 9px;
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid var(--line);
+    background: var(--eq-bg);
+    color: var(--ink);
+  }
+  .ring-pill small {
+    color: var(--mute);
+    font-size: 11px;
+  }
+  /* Trắc nghiệm bẫy (Quiz) */
+  .quiz-header-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: var(--eq-bg);
+    border: 1px solid var(--line);
+    margin-bottom: 14px;
+  }
+  .quiz-question-box {
+    padding: 18px 20px;
+    border-radius: 14px;
+    border: 1.5px solid var(--def-border);
+    background: var(--paper);
+    margin-bottom: 14px;
+  }
+  .quiz-question-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 800;
+    background: var(--def-bg);
+    color: var(--def-color);
+    border: 1px solid var(--def-border);
+    margin-bottom: 8px;
+  }
+  .quiz-question-text {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0 0 14px;
+  }
+  .quiz-options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .quiz-opt-btn {
+    text-align: left;
+    padding: 11px 15px;
+    border-radius: 10px;
+    border: 1.5px solid var(--line);
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-ui);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    line-height: 1.45;
+  }
+  .quiz-opt-btn:hover:not(:disabled) {
+    border-color: var(--def-accent);
+    background: var(--def-bg);
+    color: var(--brand);
+  }
+  .quiz-opt-btn.correct {
+    background: var(--ex-bg) !important;
+    border-color: var(--ex-color) !important;
+    color: var(--ex-color) !important;
+    font-weight: 800;
+  }
+  .quiz-opt-btn.wrong {
+    background: var(--warn-bg) !important;
+    border-color: var(--warn-color) !important;
+    color: var(--warn-color) !important;
+  }
+  .quiz-explanation {
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: var(--thm-bg);
+    border-left: 4px solid var(--thm-accent);
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.6;
+    display: none;
+  }
+  /* Thanh lọc trực tiếp Bảng Thuật Ngữ ở Tab Đối Chiếu */
+  .glossary-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 12px 0 14px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: var(--eq-bg);
+    border: 1px solid var(--line);
+    font-family: var(--font-ui);
+  }
+  .glossary-filter-bar input {
+    flex: 1 1 240px;
+    min-height: 38px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 13.5px;
+    outline: none;
+  }
+  .glossary-filter-bar input:focus {
+    border-color: var(--def-accent);
+    box-shadow: 0 0 0 3px var(--def-bg);
+  }
+  .glossary-count-badge {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--brand);
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--paper);
+    border: 1px solid var(--def-border);
+  }
+
+/* ======================================================== */
+/* 1. Huy hiệu định vị số trang sách PDF trên tiêu đề mỗi chương */
+  .chapter-page-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 12px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 700;
+    background: var(--def-bg);
+    color: var(--brand);
+    border: 1px solid var(--def-border);
+    vertical-align: middle;
+    text-decoration: none;
+    transition: all 0.18s ease;
+  }
+  .chapter-page-badge:hover {
+    background: var(--brand-grad);
+    color: #ffffff;
+    border-color: transparent;
+    transform: translateY(-1px);
+  }
+
+  /* 2. Thanh Bộ lọc Bài tập Đa chiều A - B - C - D & Chế độ Tự luyện */
+  .ex-Smart-Filter-Bar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+    margin-bottom: 22px;
+    border-radius: 16px;
+    background: var(--paper);
+    border: 1.5px solid var(--line);
+    box-shadow: var(--shadow-sm);
+    font-family: var(--font-ui);
+  }
+  .ex-filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .ex-filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+  .ex-filter-chip {
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--ink-soft);
+    font-family: var(--font-ui);
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .ex-filter-chip:hover {
+    border-color: var(--def-accent);
+    color: var(--brand);
+  }
+  .ex-filter-chip.active {
+    background: var(--brand-grad);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: var(--shadow-sm);
+  }
+  .blind-mode-btn {
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1.5px solid var(--thm-border);
+    background: var(--thm-bg);
+    color: var(--thm-color);
+    font-family: var(--font-ui);
+    font-size: 12.5px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .blind-mode-btn[aria-pressed="true"] {
+    background: var(--brand-grad);
+    color: #ffffff;
+    border-color: transparent;
+  }
+
+  /* 3. Vở nháp LaTeX trực tiếp trong từng bài tập */
+  .pane-scratch {
+    background: color-mix(in srgb, var(--paper) 96%, var(--bg));
+    border-top: 2px dashed var(--line);
+  }
+  .scratch-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 8px;
+  }
+  .scratch-sym-btn {
+    padding: 4px 9px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.12s ease;
+  }
+  .scratch-sym-btn:hover {
+    background: var(--def-bg);
+    border-color: var(--def-accent);
+    color: var(--brand);
+  }
+  .scratch-textarea {
+    width: 100%;
+    min-height: 110px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1.5px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.65;
+    resize: vertical;
+    outline: none;
+  }
+  .scratch-textarea:focus {
+    border-color: var(--def-accent);
+    box-shadow: 0 0 0 3px var(--def-bg);
+  }
+  .scratch-preview {
+    margin-top: 10px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: var(--eq-bg);
+    border: 1px solid var(--line);
+    min-height: 48px;
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--ink);
+  }
+  .scratch-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ex-color);
+    margin-left: 4px;
+  }
+
+  /* 4. Trợ lý Khung Sườn Chứng Minh Đại Số (Proof Skeleton Generator) */
+  .proof-assistant-box {
+    border: 1.5px solid var(--def-border);
+    border-radius: 16px;
+    background: var(--paper);
+    padding: 20px 24px;
+    margin: 1.5rem 0;
+    box-shadow: var(--shadow-sm);
+  }
+  .proof-select-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .proof-select-bar select {
+    flex: 1 1 320px;
+    min-height: 42px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1.5px solid var(--def-border);
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-ui);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .proof-grid-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: 16px;
+  }
+  @media (max-width: 820px) {
+    .proof-grid-layout { grid-template-columns: 1fr; }
+  }
+  .proof-checklist-card,
+  .proof-template-card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: var(--bg);
+  }
+  .proof-check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 8px 0;
+    font-size: 14px;
+    line-height: 1.55;
+    cursor: pointer;
+  }
+  .proof-check-item input[type="checkbox"] {
+    margin-top: 4px;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--ex-color);
+    cursor: pointer;
+  }
+  .proof-latex-code {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    background: var(--eq-bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 12px;
+    white-space: pre-wrap;
+    color: var(--ink);
+    margin: 8px 0;
+    max-height: 210px;
+    overflow-y: auto;
+  }
+
+/* ======================================================== */
+/* 1. Nút Đánh dấu "Lưu ôn thi" trên từng thẻ Định nghĩa / Định lý / Bài tập */
+  .bm-star-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+    padding: 3px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--mute);
+    font-family: var(--font-ui);
+    font-size: 11.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+  .bm-star-btn:hover {
+    border-color: var(--gold);
+    color: var(--brand);
+    background: var(--cor-bg);
+  }
+  .bm-star-btn.is-bookmarked {
+    background: var(--cor-bg);
+    color: var(--cor-color);
+    border-color: var(--gold);
+    font-weight: 800;
+  }
+  :root[data-theme="winter"] .bm-star-btn.is-bookmarked {
+    color: #fde047;
+    border-color: #fde047;
+  }
+
+  /* 2. Giao diện Máy tính Hoán vị Sn trong Phòng LAB */
+  .perm-input-grid {
+    display: grid;
+    grid-template-columns: 95px minmax(160px, 1fr) minmax(160px, 1fr) auto;
+    gap: 10px;
+    align-items: end;
+    margin-bottom: 14px;
+  }
+  @media (max-width: 760px) {
+    .perm-input-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .perm-input-grid label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink-soft);
+  }
+  .perm-input-grid input {
+    min-height: 40px;
+    padding: 8px 12px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    width: 100%;
+  }
+  .perm-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .perm-card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 13px 15px;
+    background: var(--paper);
+  }
+  .perm-card h4 {
+    margin: 0 0 8px;
+    font-size: 13.5px;
+    font-family: var(--font-ui);
+    color: var(--brand);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .perm-two-row {
+    display: inline-grid;
+    border: 1.5px solid var(--def-border);
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    margin: 6px 0;
+    background: var(--eq-bg);
+  }
+  .perm-two-row div {
+    display: flex;
+  }
+  .perm-two-row span {
+    min-width: 26px;
+    padding: 3px 6px;
+    text-align: center;
+    border-right: 1px solid var(--line);
+  }
+  .perm-two-row div:first-child {
+    border-bottom: 1px solid var(--line);
+    background: var(--def-bg);
+    color: var(--def-color);
+    font-weight: 700;
+  }
+  .perm-trace-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .perm-trace-chip {
+    padding: 4px 9px;
+    border-radius: 7px;
+    background: var(--eq-bg);
+    border: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  /* 3. Giao diện Sổ tay Ôn thi & Đề cương Cá nhân */
+  .notebook-item-card {
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--brand);
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: var(--paper);
+    margin-bottom: 12px;
+  }
+  .notebook-item-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-family: var(--font-ui);
+  }
+
+/* ======================================================== */
+/* ====================================================================
+     1. HỆ THỐNG CLASS ĐỒNG BỘ MÀU THEO THEME CHO CÁC SƠ ĐỒ & KHỐI TỔNG KẾT
+     ==================================================================== */
+  .theme-diagram-box {
+    background: var(--eq-bg, #f8fafc) !important;
+    border-color: var(--line, #e2e8f0) !important;
+    color: var(--ink, #0f172a) !important;
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  }
+
+  .theme-diagram-card {
+    background: var(--paper, #ffffff) !important;
+    color: var(--ink, #1e293b) !important;
+    border-color: var(--def-border, #bfdbfe) !important;
+    box-shadow: var(--shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.04));
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  }
+
+  /* Giữ sắc thái phân loại (Xanh lam / Ngọc lục bảo / Vàng / Tím) nhưng hòa trộn theo --paper */
+  .theme-diagram-card[data-accent="emerald"] {
+    border-color: color-mix(in srgb, #10b981 55%, var(--line)) !important;
+  }
+  .theme-diagram-card[data-accent="amber"] {
+    border-color: color-mix(in srgb, #f59e0b 55%, var(--line)) !important;
+  }
+  .theme-diagram-card[data-accent="purple"] {
+    border-color: color-mix(in srgb, #8b5cf6 55%, var(--line)) !important;
+  }
+  .theme-diagram-card[data-accent="rose"] {
+    border-color: color-mix(in srgb, #f43f5e 55%, var(--line)) !important;
+  }
+
+  /* Các nhãn pill/badge nhỏ bên trong sơ đồ (VD: "6. CẤU TRÚC TRƯỜNG") */
+  .theme-diagram-badge {
+    background: color-mix(in srgb, var(--brand, #0284c7) 14%, var(--paper)) !important;
+    color: var(--brand, #0284c7) !important;
+    border: 1px solid color-mix(in srgb, var(--brand, #0284c7) 30%, transparent) !important;
+  }
+  .theme-diagram-badge[data-badge-tone="emerald"] {
+    background: color-mix(in srgb, #10b981 15%, var(--paper)) !important;
+    color: color-mix(in srgb, #10b981 82%, var(--ink)) !important;
+    border-color: color-mix(in srgb, #10b981 35%, transparent) !important;
+  }
+  .theme-diagram-badge[data-badge-tone="amber"] {
+    background: color-mix(in srgb, #f59e0b 16%, var(--paper)) !important;
+    color: color-mix(in srgb, #d97706 82%, var(--ink)) !important;
+    border-color: color-mix(in srgb, #f59e0b 35%, transparent) !important;
+  }
+  .theme-diagram-badge[data-badge-tone="purple"] {
+    background: color-mix(in srgb, #8b5cf6 15%, var(--paper)) !important;
+    color: color-mix(in srgb, #7c3aed 82%, var(--ink)) !important;
+    border-color: color-mix(in srgb, #8b5cf6 35%, transparent) !important;
+  }
+  .theme-diagram-badge[data-badge-tone="rose"] {
+    background: color-mix(in srgb, #f43f5e 15%, var(--paper)) !important;
+    color: color-mix(in srgb, #e11d48 82%, var(--ink)) !important;
+    border-color: color-mix(in srgb, #f43f5e 35%, transparent) !important;
+  }
+
+  /* Chữ bên trong sơ đồ tự động đổi sáng/tối theo --ink và --ink-soft */
+  .theme-text-ink {
+    color: var(--ink, #1e293b) !important;
+  }
+  .theme-text-soft {
+    color: var(--ink-soft, #334155) !important;
+  }
+  .theme-text-brand {
+    color: var(--brand, #1e40af) !important;
+  }
+  .theme-text-emerald {
+    color: color-mix(in srgb, #10b981 78%, var(--ink)) !important;
+  }
+  .theme-text-amber {
+    color: color-mix(in srgb, #f59e0b 80%, var(--ink)) !important;
+  }
+  .theme-text-purple {
+    color: color-mix(in srgb, #8b5cf6 78%, var(--ink)) !important;
+  }
+  .theme-text-rose {
+    color: color-mix(in srgb, #f43f5e 80%, var(--ink)) !important;
+  }
+
+  /* ====================================================================
+     2. NHÃN "Copy LaTeX" & HIỆU ỨNG "✓ Đã chép LaTeX!" TRONG 1.5 GIÂY
+     ==================================================================== */
+  .math-display {
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  }
+  .math-display:hover {
+    border-color: var(--def-accent, #0284c7);
+    box-shadow: 0 4px 14px -6px color-mix(in srgb, var(--brand, #0284c7) 32%, transparent);
+  }
+  .math-display::after {
+    content: "Copy LaTeX";
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    padding: 3px 9px;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--paper, #ffffff) 92%, var(--bg, #f1f5f9));
+    border: 1px solid var(--line, #cbd5e1);
+    color: var(--mute, #64748b);
+    font-family: var(--font-ui, system-ui, sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.3;
+    opacity: 0;
+    transform: translateY(-2px);
+    transition: opacity 0.18s ease, transform 0.18s ease, background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    pointer-events: none;
+    user-select: none;
+    z-index: 3;
+  }
+  .math-display:hover::after {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .math-display.is-copied {
+    border-color: #10b981 !important;
+    box-shadow: 0 0 0 2px color-mix(in srgb, #10b981 28%, transparent) !important;
+  }
+  .math-display.is-copied::after {
+    content: "✓ Đã chép LaTeX!" !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    background: #10b981 !important;
+    border-color: #059669 !important;
+    color: #ffffff !important;
+  }

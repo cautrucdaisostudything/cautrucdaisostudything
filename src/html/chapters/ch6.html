@@ -1,0 +1,483 @@
+<!-- ======================================================== -->
+<div class="chapter-content active" id="tab-c6">
+  <h2 class="section-title">Chương 6. Cấu Trúc Vành, Miền Nguyên và Trường</h2>
+  
+  <p class="welcome-copy">
+    Khái niệm nhóm chỉ khảo sát một phép toán hai ngôi đơn lẻ. 
+    Tuy nhiên, trên các tập hợp quen thuộc như số nguyên $\mathbb{Z}$, số thực $\mathbb{R}$, ma trận $M_n(\mathbb{R})$ hay đa thức $\mathbb{R}[x]$, 
+    ta luôn có đồng thời hai phép toán: phép cộng và phép nhân liên kết với nhau qua các luật phân phối. 
+    Chương này phân tích cặn kẽ từng tầng tiên đề vành, phân biệt phần tử khả nghịch với ước của không, 
+    thiết lập sơ đồ phân cấp từ vành tổng quát tới trường, và khảo sát các hiện tượng đặc thù của vành con.
+  </p>
+
+  <!-- 6.1 ĐỘNG CƠ SƯ PHẠM -->
+  <h3 class="subsection-title">6.1. Khởi Nguồn Sư Phạm: Từ Một Phép Toán Đến Hệ Thống Hai Phép Toán</h3>
+  <p>
+    Xét các hệ thống số học quen thuộc $\mathbb{Z}, \mathbb{Q}, \mathbb{R}$. Chúng đều sở hữu hai phép toán cộng ($+$) và nhân ($\cdot$). 
+    Nếu xét riêng rẽ:
+  </p>
+  <ul class="bullet-list">
+    <li>Dưới phép cộng, $(\mathbb{Z}, +)$ là một nhóm Abel hoàn chỉnh có đơn vị là $0$ và nghịch đảo là phần tử đối $-a$.</li>
+    <li>Dưới phép nhân, $(\mathbb{Z}, \cdot)$ chỉ là một vị nhóm giao hoán có đơn vị là $1$, nhưng hầu hết các phần tử không có nghịch đảo nhân.</li>
+  </ul>
+  <p>
+    Điều gắn kết hai phép toán này lại thành một cấu trúc thống nhất chính là <b>luật phân phối</b>: $a(b + c) = ab + ac$. 
+    Cấu trúc <b>Vành</b> ra đời để trừu tượng hóa tất cả các không gian toán học có hai phép toán tương tác theo quy luật phân phối như vậy.
+  </p>
+
+  <!-- 6.2 ĐỊNH NGHĨA VÀNH & QUY ƯỚC GIÁO TRÌNH -->
+  <h3 class="subsection-title">6.2. Tiên Đề Cấu Trúc Vành và Các Quy Ước Chuẩn Mực</h3>
+  
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 6.1</span>
+      <span class="tag">Cấu Trúc Vành (Ring)</span>
+    </div>
+    <div class="card-body">
+      <p>Một <b>vành</b> $(R, +, \cdot)$ là một tập hợp khác rỗng $R$ trang bị hai phép toán hai ngôi (phép cộng $+$ và phép nhân $\cdot$) thỏa mãn đồng thời ba nhóm tiên đề:</p>
+      <ul class="bullet-list">
+        <li><b>1. Nhóm cộng Abel:</b> Cấu trúc $(R, +)$ là một nhóm giao hoán:
+          <ul style="margin: 4px 0 4px 1.5rem; list-style-type: circle;">
+            <li>Phép cộng có tính kết hợp: $(a + b) + c = a + (b + c)$ với mọi $a, b, c \in R$.</li>
+            <li>Có phần tử không $0_R \in R$ thỏa mãn: $a + 0_R = 0_R + a = a$ với mọi $a \in R$.</li>
+            <li>Mọi phần tử $a \in R$ đều có phần tử đối $-a \in R$ thỏa mãn: $a + (-a) = (-a) + a = 0_R$.</li>
+            <li>Phép cộng có tính giao hoán: $a + b = b + a$ với mọi $a, b \in R$.</li>
+          </ul>
+        </li>
+        <li><b>2. Nửa nhóm nhân:</b> Phép nhân có tính kết hợp:
+          $$(a \cdot b) \cdot c = a \cdot (b \cdot c) \quad \forall a, b, c \in R$$
+        </li>
+        <li><b>3. Luật phân phối hai phía:</b> Phép nhân phân phối đối với phép cộng ở cả bên trái và bên phải:
+          <ul style="margin: 4px 0 4px 1.5rem; list-style-type: circle;">
+            <li><i>Phân phối trái:</i> $a \cdot (b + c) = a \cdot b + a \cdot c$ với mọi $a, b, c \in R$.</li>
+            <li><i>Phân phối phải:</i> $(b + c) \cdot a = b \cdot a + c \cdot a$ với mọi $a, b, c \in R$.</li>
+          </ul>
+        </li>
+      </ul>
+      <div class="corollary-box">
+        <b>Quy ước bắt buộc của giáo trình Huỳnh Việt Khánh:</b>
+        <br>• Một vành <b>không mặc định giao hoán</b> và <b>không mặc định có phần tử đơn vị</b>.
+        <br>• <b>Vành giao hoán:</b> Là vành thỏa mãn thêm điều kiện $ab = ba$ với mọi $a, b \in R$.
+        <br>• <b>Vành có đơn vị:</b> Là vành tồn tại phần tử $1_R \in R$ sao cho $a \cdot 1_R = 1_R \cdot a = a$ với mọi $a \in R$.
+        <br>• <b>Vành không $\{0\}$:</b> Vành chỉ gồm duy nhất phần tử $0$ được phép xuất hiện; trong vành này $1_R = 0_R$.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> So sánh vành giao hoán $R=2\mathbb{Z}$ với vành ma trận $T=M_2(\mathbb{R})$. Xác định tính giao hoán và phần tử đơn vị của từng cấu trúc.</p>
+          <p><b>2. Hộp công cụ.</b> Vành cần nhóm cộng Abel, phép nhân kết hợp và hai luật phân phối. Đơn vị nhân phải thỏa $xe=ex=x$ với mọi $x$; định nghĩa vành không mặc định có đơn vị hoặc giao hoán.</p>
+          <p><b>3. Lời giải.</b> Với $2m,2n\in2\mathbb{Z}$, tổng và tích lần lượt là $2(m+n)$ và $4mn=2(2mn)$, nên phép toán đóng; các tiên đề còn lại được kế thừa từ $\mathbb{Z}$. Phép nhân giao hoán. Nếu $e\in2\mathbb{Z}$ là đơn vị thì $2e=2$, suy ra $e=1$, trái với $e$ chẵn; vậy $2\mathbb{Z}$ không có đơn vị. Trong $T$, lấy $A=E_{12}$, $B=E_{21}$. Ta có $AB=E_{11}$ nhưng $BA=E_{22}$, nên $AB\ne BA$; và $I_2A=AI_2=A$. Do đó $M_2(\mathbb{R})$ là vành không giao hoán có đơn vị $I_2$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Không suy ra mọi vành đều có đơn vị; vành con $2\mathbb{Z}$ là phản ví dụ. Với ma trận, không được đổi thứ tự nhân hoặc gộp $AB$ và $BA$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 6.3 HỆ QUẢ TÍNH TOÁN ĐẦU TIÊN -->
+  <h3 class="subsection-title">6.3. Các Hệ Quả Tính Toán Nền Tảng Trong Một Vành</h3>
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 6.2</span>
+      <span class="tag">Quy Tắc Tính Toán Cơ Bản (Định lý 6.1 Giáo trình)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $R$ là một vành. Với mọi $a, b, c \in R$, ta luôn có:</p>
+      <ul class="bullet-list">
+        <li><b>1. Nhân với phần tử không:</b> $a \cdot 0_R = 0_R \cdot a = 0_R$.</li>
+        <li><b>2. Quy tắc dấu:</b> $a(-b) = (-a)b = -(ab)$ và $(-a)(-b) = ab$.</li>
+        <li><b>3. Phân phối đối với phép trừ:</b> $a(b - c) = ab - ac$ và $(b - c)a = ba - ca$.</li>
+        <li><b>4. Nếu $R$ có đơn vị $1_R$:</b> $(-1_R)a = -a$ và $(-1_R)(-1_R) = 1_R$.</li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $M_2(\mathbb{R})$, đặt $A=E_{12}=\begin{pmatrix}0&1\\0&0\end{pmatrix}$, $B=E_{21}=\begin{pmatrix}0&0\\1&0\end{pmatrix}$. Kiểm tra quy tắc dấu và hai công thức khai triển bình phương.</p>
+          <p><b>2. Hộp công cụ.</b> Trong mọi vành, $(-A)(-B)=AB$. Khi nhân không giao hoán, $(A+B)^2=A^2+AB+BA+B^2$ và $(A-B)^2=A^2-AB-BA+B^2$; chỉ được gộp $AB+BA=2AB$ nếu $AB=BA$.</p>
+          <p><b>3. Lời giải.</b> Ta có $A^2=B^2=0$, $AB=E_{11}$, $BA=E_{22}$, nên $(-A)(-B)=AB=E_{11}$. Mặt khác, $(A+B)^2=E_{11}+E_{22}=I_2$, trong khi $A^2+2AB+B^2=2E_{11}$; hai ma trận khác nhau. Tương tự, $(A-B)^2=-E_{11}-E_{22}=-I_2$, còn $A^2-2AB+B^2=-2E_{11}$. Vậy hai khai triển kiểu giao hoán đều sai ở đây vì $AB\ne BA$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Lỗi phổ biến là thay $AB+BA$ bằng $2AB$ trong vành ma trận. Hãy giữ thứ tự từng tích cho đến khi đã chứng minh hai thừa số giao hoán.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="proof-block">
+    <summary>🔍 Xem chứng minh $a \cdot 0_R = 0_R$ và quy tắc dấu</summary>
+    <div class="proof-content">
+      <p>
+        • <i>Chứng minh $a \cdot 0_R = 0_R$:</i> Vì $0_R + 0_R = 0_R$, áp dụng luật phân phối trái:
+        $$a \cdot 0_R = a(0_R + 0_R) = a \cdot 0_R + a \cdot 0_R$$
+        Cộng vào hai vế phần tử đối $-(a \cdot 0_R)$ trong nhóm cộng $(R, +)$, ta được $0_R = a \cdot 0_R$. 
+        Chứng minh $0_R \cdot a = 0_R$ hoàn toàn tương tự bằng phân phối phải.<br>
+        • <i>Chứng minh $a(-b) = -(ab)$:</i> Ta có $ab + a(-b) = a(b + (-b)) = a \cdot 0_R = 0_R$. 
+        Do phần tử đối trong nhóm cộng là duy nhất, suy ra $a(-b) = -(ab)$. <span class="qed">∎</span>
+      </p>
+    </div>
+  </details>
+
+  <div class="corollary-box" style="margin: 1.2rem 0;">
+    <b>⚠️ Cảnh báo thứ tự khi khai triển bình phương:</b> Trong một vành không giao hoán:
+    $$(a - b)^2 = (a - b)(a - b) = a^2 - ab - ba + b^2$$
+    Hai số hạng ở giữa <b>chỉ gộp lại thành $-2ab$ khi và chỉ khi $ab = ba$</b>! Mỗi tích phải giữ đúng thứ tự sinh ra nó.
+  </div>
+
+  <!-- 6.4 PHẦN TỬ KHẢ NGHỊCH VÀ ƯỚC CỦA KHÔNG -->
+  <h3 class="subsection-title">6.4. Phần Tử Khả Nghịch, Nhóm Các Đơn Vị và Ước Của Không</h3>
+  <p>
+    Trong một vành có đơn vị $1_R \neq 0_R$, các phần tử khác không được chia thành các lớp hành vi đại số rất khác nhau:
+  </p>
+
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 6.3</span>
+      <span class="tag">Phần Tử Khả Nghịch & Nhóm $U(R)$</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $R$ là một vành có đơn vị $1_R$. Một phần tử $u \in R$ được gọi là <b>khả nghịch</b> (hay một <i>đơn vị / unit</i> của $R$) nếu thỏa mãn:</p>
+      <ul class="bullet-list">
+        <li>Tồn tại phần tử $v \in R$ sao cho:
+          $$u \cdot v = v \cdot u = 1_R$$
+        </li>
+      </ul>
+      <div class="corollary-box">
+        <b>💡 Nhóm các phần tử khả nghịch $U(R)$ (hay $R^\times$):</b>
+        <br>• Tập hợp tất cả các phần tử khả nghịch của $R$, ký hiệu là $U(R)$ hoặc $R^\times$, <b>lập thành một nhóm dưới phép nhân</b>.
+        <br>• Phần tử nghịch đảo của $u$ là duy nhất, ký hiệu là $u^{-1}$.
+        <br>• <i>Ví dụ:</i> $U(\mathbb{Z}) = \{1, -1\}$; $U(\mathbb{Z}/n\mathbb{Z}) = U(n)$; $U(M_n(\mathbb{R})) = \mathrm{GL}_n(\mathbb{R})$.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong vành $R=\mathbb{Z}/12\mathbb{Z}$, tìm nhóm đơn vị $U(R)$ và nghịch đảo của từng phần tử.</p>
+          <p><b>2. Hộp công cụ.</b> Lớp $[a]_{12}$ khả nghịch khi và chỉ khi $\gcd(a,12)=1$; khi đó Bézout cho $au+12v=1$, nên $[u]_{12}$ là nghịch đảo.</p>
+          <p><b>3. Lời giải.</b> Trong các lớp dư từ $[0]$ đến $[11]$, các số nguyên tố cùng nhau với $12$ là $1,5,7,11$. Ta có $[1]^{-1}=[1]$, $[5]^{-1}=[5]$ vì $25\equiv1$, $[7]^{-1}=[7]$ vì $49\equiv1$, và $[11]^{-1}=[11]$ vì $121\equiv1$ modulo $12$. Do đó $U(\mathbb{Z}/12\mathbb{Z})=\{[1],[5],[7],[11]\}$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> “Khác không” không đồng nghĩa “khả nghịch” trong vành modulo hợp số; chẳng hạn $[2]\ne[0]$ nhưng $\gcd(2,12)\ne1$, nên $[2]$ không là đơn vị.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 6.4</span>
+      <span class="tag">Ước Của Không (Zero Divisor)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $R$ là một vành. Một phần tử $a \neq 0_R$ được gọi là một <b>ước của không</b> nếu thỏa mãn một trong hai điều kiện:</p>
+      <ul class="bullet-list">
+        <li><b>Ước của không trái:</b> Tồn tại $b \in R, b \neq 0_R$ sao cho $a \cdot b = 0_R$.</li>
+        <li><b>Ước của không phải:</b> Tồn tại $c \in R, c \neq 0_R$ sao cho $c \cdot a = 0_R$.</li>
+      </ul>
+      <div class="corollary-box">
+        <b>💡 Ý nghĩa đối với Luật Giản Ước Nhân:</b>
+        <br>• Trong một vành, luật giản ước trái ($ax = ay \implies x = y$ với $a \neq 0$) đúng $\iff R$ không có ước của không trái.
+        <br>• Thật vậy, $ax = ay \iff a(x - y) = 0_R$. Nếu $a$ không là ước của không thì buộc $x - y = 0_R \implies x = y$.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $R=\mathbb{Z}/12\mathbb{Z}$, xác định các ước của không khác không; đồng thời tìm một cặp ma trận khác không có tích bằng không trong $M_2(\mathbb{R})$.</p>
+          <p><b>2. Hộp công cụ.</b> Ước của không là phần tử $a\ne0$ sao cho tồn tại $b\ne0$ với $ab=0$ hoặc $ba=0$. Trong $\mathbb{Z}/n\mathbb{Z}$, các lớp khác không không khả nghịch chính là ước của không.</p>
+          <p><b>3. Lời giải.</b> Các lớp không đơn vị khác $[0]$ modulo $12$ là $[2],[3],[4],[6],[8],[9],[10]$; mỗi lớp có ước chung với $12$ lớn hơn $1$. Cụ thể $[3][4]=[12]=[0]$ và $[2][6]=[12]=[0]$, với các thừa số đều khác không. Trong $M_2(\mathbb{R})$, lấy $A=E_{11}=\begin{pmatrix}1&0\\0&0\end{pmatrix}$ và $B=E_{21}=\begin{pmatrix}0&0\\1&0\end{pmatrix}$. Cả hai khác ma trận không, nhưng $AB=0$; vậy $A$ là ước của không trái (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Trong vành có ước của không, không được giản ước thừa số khác không một cách tùy tiện. Cũng cần nêu rõ phía trái/phải trong vành không giao hoán.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.5rem;">
+    <div class="card-header">
+      <span class="label">🏛️ MỆNH ĐỀ 6.5</span>
+      <span class="tag">Sự Rời Nhau Giữa Phần Tử Khả Nghịch và Ước Của Không</span>
+    </div>
+    <div class="card-body">
+      <p>Trong một vành có đơn vị $1_R \neq 0_R$, <b>một phần tử khả nghịch không bao giờ là một ước của không</b>.</p>
+      <p style="font-size:0.92rem; color:var(--text-muted); margin-top:4px;">
+        <i>Chứng minh:</i> Giả sử $u \in U(R)$ và $ub = 0_R$. Nhân $u^{-1}$ vào bên trái: $b = 1_R \cdot b = (u^{-1}u)b = u^{-1}(ub) = u^{-1} \cdot 0_R = 0_R$. 
+        Do đó không tồn tại $b \neq 0_R$ thỏa mãn $ub = 0_R$.
+      </p>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $R=\mathbb{Z}/12\mathbb{Z}$, xét đơn vị $u=[5]$ và giả sử $[5]b=[0]$. Dùng mệnh đề để xác định $b$.</p>
+          <p><b>2. Hộp công cụ.</b> Nếu $u$ khả nghịch và $ub=0$, nhân bên trái với $u^{-1}$ để suy ra $b=0$. Vì thế đơn vị không thể là ước của không.</p>
+          <p><b>3. Lời giải.</b> Ta có $[5]^{-1}=[5]$ vì $[5][5]=[25]=[1]$. Nhân đẳng thức $[5]b=[0]$ bên trái với $[5]$ được $b=[1]b=[5]([5]b)=[5][0]=[0]$. Vậy không tồn tại $b\ne[0]$ làm tích bằng không; $[5]$ không là ước của không (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Điều kiện $u$ khả nghịch là then chốt; nếu chỉ biết $u\ne0$, kết luận sai trong $\mathbb{Z}/12\mathbb{Z}$ vì $[3][4]=[0]$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 6.5 NẤC THANG CẤU TRÚC: MIỀN NGUYÊN, VÀNH CHIA, TRƯỜNG -->
+  <h3 class="subsection-title">6.5. Thang Bậc Cấu Trúc: Miền Nguyên, Vành Chia và Trường</h3>
+  <p>
+    Dựa trên tính giao hoán, sự tồn tại của đơn vị và sự vắng mặt của ước của không, ta có các lớp cấu trúc đặc sắc:
+  </p>
+
+  <!-- MIỀN NGUYÊN -->
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">NẤC THANG 1 · MIỀN NGUYÊN (INTEGRAL DOMAIN)</span>
+      <span class="tag">Không có Ước của Không</span>
+    </div>
+    <div class="card-body">
+      <p>Một vành $R$ được gọi là một <b>miền nguyên</b> nếu thỏa mãn đồng thời ba điều kiện:</p>
+      <ul class="bullet-list">
+        <li><b>1. Giao hoán có đơn vị khác không:</b> $R$ là vành giao hoán có đơn vị $1_R \neq 0_R$.</li>
+        <li><b>2. Không có ước của không:</b> Với mọi $a, b \in R$:
+          $$ab = 0_R \implies a = 0_R \quad \text{hoặc} \quad b = 0_R$$
+        </li>
+        <li><b>3. Thỏa mãn luật giản ước nhân:</b> Với mọi $a \neq 0_R$, $ab = ac \implies b = c$.</li>
+      </ul>
+      <div class="corollary-box">
+        <b>Ví dụ kinh điển:</b> $(\mathbb{Z}, +, \cdot)$ là miền nguyên chuẩn mực. Vành đa thức $\mathbb{R}[x], \mathbb{Z}[x]$ cũng là các miền nguyên.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Xét $R=(\mathbb{Z},+,\cdot)$. Chứng minh $R$ là miền nguyên nhưng không là trường.</p>
+          <p><b>2. Hộp công cụ.</b> Miền nguyên là vành giao hoán có đơn vị khác $0$ và không có ước của không. Trường còn đòi hỏi mọi phần tử khác $0$ phải khả nghịch.</p>
+          <p><b>3. Lời giải.</b> Các số nguyên tạo vành giao hoán có đơn vị $1\ne0$. Nếu $ab=0$ trong $\mathbb{Z}$ thì $a=0$ hoặc $b=0$, nên không có ước của không; do đó $\mathbb{Z}$ là miền nguyên. Tuy nhiên, nếu $2$ có nghịch đảo nguyên $m$ thì $2m=1$, điều này vô nghiệm trong $\mathbb{Z}$. Vậy $\mathbb{Z}$ không là trường (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Miền nguyên không đồng nghĩa trường: miền nguyên chỉ đảm bảo không có ước của không, còn trường yêu cầu phép chia cho mọi phần tử khác không.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- VÀNH CHIA -->
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">NẤC THANG 2 · VÀNH CHIA / THỂ (DIVISION RING / SKEW FIELD)</span>
+      <span class="tag">Khả Nghịch Toàn Bộ Nhưng Không Cần Giao Hoán</span>
+    </div>
+    <div class="card-body">
+      <p>Một vành $R$ được gọi là một <b>vành chia</b> (hay một <i>thể</i>) nếu thỏa mãn đồng thời hai điều kiện:</p>
+      <ul class="bullet-list">
+        <li><b>1. Có đơn vị khác không:</b> $R$ có phần tử đơn vị $1_R \neq 0_R$.</li>
+        <li><b>2. Mọi phần tử khác không đều khả nghịch:</b>
+          $$U(R) = R \setminus \{0_R\}$$
+        </li>
+      </ul>
+      <div class="corollary-box">
+        <b>Ví dụ:</b> Thể quaternion Hamilton $\mathbb{H}$ là một vành chia không giao hoán.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong thể quaternion Hamilton $\mathbb{H}=\{a+bi+cj+dk:a,b,c,d\in\mathbb{R}\}$, kiểm tra tính không giao hoán và khả nghịch của phần tử $q=1+i$.</p>
+          <p><b>2. Hộp công cụ.</b> Quaternion thỏa $i^2=j^2=k^2=-1$, $ij=k$, $ji=-k$. Với $q\ne0$, nghịch đảo là $q^{-1}=\overline q/(a^2+b^2+c^2+d^2)$.</p>
+          <p><b>3. Lời giải.</b> Ta có $ij=k$ nhưng $ji=-k$, nên phép nhân không giao hoán. Với $q=1+i$, liên hợp là $\overline q=1-i$ và chuẩn bình phương bằng $1^2+1^2=2$. Do đó $q^{-1}=(1-i)/2$; kiểm tra $(1+i)(1-i)/2=(1-i^2)/2=1$, và phép nhân ngược cũng bằng $1$. Tổng quát, mọi quaternion khác không có chuẩn dương nên có nghịch đảo; vì vậy $\mathbb{H}$ là vành chia không giao hoán (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Vành chia không nhất thiết là trường: trường bắt buộc giao hoán. Với quaternion, đảo thứ tự $ij$ thành $ji$ làm đổi dấu.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- TRƯỜNG -->
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem; border-left: 4px solid #10b981;">
+    <div class="card-header" style="color: #047857;">
+      <span class="label">NẤC THANG 3 · CẤU TRÚC TRƯỜNG (FIELD)</span>
+      <span class="tag" style="background: rgba(16, 185, 129, 0.15); color: #047857;">Đỉnh Cao Cấu Trúc Hai Phép Toán</span>
+    </div>
+    <div class="card-body">
+      <p>Một vành $R$ được gọi là một <b>trường</b> nếu thỏa mãn đồng thời ba điều kiện:</p>
+      <ul class="bullet-list">
+        <li><b>1. Giao hoán có đơn vị khác không:</b> $R$ là vành giao hoán có đơn vị $1_R \neq 0_R$.</li>
+        <li><b>2. Mọi phần tử khác không đều khả nghịch:</b> Với mỗi $a \in R \setminus \{0_R\}$, tồn tại $a^{-1} \in R$ sao cho $a \cdot a^{-1} = 1_R$.</li>
+        <li><b>3. Cấu trúc nhóm thành phần:</b> $(R, +)$ là nhóm Abel (đơn vị $0_R$) và $(R \setminus \{0_R\}, \cdot)$ là nhóm Abel (đơn vị $1_R$).</li>
+      </ul>
+      <div class="corollary-box" style="border-left-color: #10b981; background: rgba(16, 185, 129, 0.05);">
+        <b>💡 Các công thức liên kết bản chất:</b>
+        <br>• $\text{Trường} = \text{Miền nguyên} + \text{Mọi phần tử khác } 0 \text{ đều khả nghịch}$.
+        <br>• $\text{Trường} = \text{Vành chia} + \text{Tính giao hoán}$.
+        <br>• <i>Ví dụ:</i> $\mathbb{Q}, \mathbb{R}, \mathbb{C}$ và $\mathbb{Z}/p\mathbb{Z}$ ($p$ nguyên tố) là các trường.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Xét $\mathbb{F}_5=\mathbb{Z}/5\mathbb{Z}$. Chứng minh đây là trường và tìm nghịch đảo của $[2]$ và $[4]$.</p>
+          <p><b>2. Hộp công cụ.</b> Với $p$ nguyên tố, mọi lớp khác $[0]$ modulo $p$ nguyên tố cùng nhau với $p$. Đồng nhất thức Bézout $au+pv=1$ cho $[a][u]=[1]$.</p>
+          <p><b>3. Lời giải.</b> Các lớp khác không là $[1],[2],[3],[4]$. Ta có $[2][3]=[6]=[1]$, nên $[2]^{-1}=[3]$; $[4][4]=[16]=[1]$, nên $[4]^{-1}=[4]$. Tương tự, $[1]^{-1}=[1]$ và $[3]^{-1}=[2]$. Phép cộng và nhân modulo $5$ giao hoán, có đơn vị $[0],[1]$, và mọi phần tử khác không có nghịch đảo; vậy $\mathbb{F}_5$ là trường (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Tính nguyên tố của môđun là thiết yếu. Trong $\mathbb{Z}/12\mathbb{Z}$, chẳng hạn $[2]$ khác không nhưng không có nghịch đảo vì $\gcd(2,12)\ne1$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- SƠ ĐỒ BAO HÀM VÀ ĐỊNH LÝ WEDDERBURN -->
+  <div style="background: var(--eq-bg, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 14px; padding: 22px; margin: 1.8rem 0; text-align: center;">
+    <div style="font-weight: 700; color: var(--thm-color, #1e3a8a); margin-bottom: 14px; font-size: 1.15rem;">
+      🏛️ Sơ Đồ Mối Quan Hệ Bao Hàm Giữa Các Lớp Cấu Trúc
+    </div>
+    <div style="display: inline-block; font-family: var(--font-mono, monospace); line-height: 1.9; color: #1e293b;">
+      <div style="padding: 6px 18px; background: #ecfdf5; border: 2px solid #10b981; border-radius: 8px; display: inline-block; font-weight: bold; color: #065f46;">
+        TRƯỜNG (Field)
+      </div>
+      <br>
+      <span style="color: #64748b;">↙ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ↘</span><br>
+      <div style="display: flex; justify-content: center; gap: 40px; margin: 4px 0;">
+        <div style="padding: 6px 16px; background: #ffffff; border: 1.5px solid #3b82f6; border-radius: 6px; font-weight: 600; color: #1d4ed8;">
+          Miền nguyên (Integral Domain)
+        </div>
+        <div style="padding: 6px 16px; background: #ffffff; border: 1.5px solid #8b5cf6; border-radius: 6px; font-weight: 600; color: #6d28d9;">
+          Vành chia (Division Ring)
+        </div>
+      </div>
+      <span style="color: #64748b;">↓ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ↓</span><br>
+      <div style="display: flex; justify-content: center; gap: 40px; margin: 4px 0;">
+        <div style="padding: 6px 14px; background: #ffffff; border: 1.5px solid #94a3b8; border-radius: 6px;">
+          Vành giao hoán có 1
+        </div>
+        <div style="padding: 6px 14px; background: #ffffff; border: 1.5px solid #94a3b8; border-radius: 6px;">
+          Vành có 1 (Ring with 1)
+        </div>
+      </div>
+      <span style="color: #64748b;">↘ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ↙</span><br>
+      <div style="padding: 6px 18px; background: #ffffff; border: 2px solid #64748b; border-radius: 8px; display: inline-block; font-weight: bold; color: #334155;">
+        VÀNH TỔNG QUÁT (Ring)
+      </div>
+    </div>
+
+    <!-- ĐỊNH LÝ HỮU HẠN -->
+    <div style="margin-top: 18px; padding: 12px; background: #ffffff; border-radius: 8px; border-left: 3px solid #2563eb; text-align: left; font-size: 0.93rem; color: #334155;">
+      <b>🏛️ Hai Định lý Đảo Ngoạn Mục Trong Trường Hợp Hữu Hạn:</b>
+      <br>• <b>Mọi miền nguyên hữu hạn đều là một trường:</b> (Chứng minh bằng tính toàn ánh của ánh xạ nhân trái $L_a: R \to R$ nhờ luật giản ước và tính hữu hạn).
+      <br>• <b>Định lý Nhỏ Wedderburn (Wedderburn's Little Theorem):</b> <i>Mọi vành chia hữu hạn đều là một trường</i> (tính giao hoán tự động được thỏa mãn trong thế giới hữu hạn!).
+    </div>
+  </div>
+
+  <details class="ex-card" style="margin-top: 1rem;" open>
+    <summary>Ví dụ&amp; Phân tích</summary>
+    <div class="ex-content">
+      <p><b>1. Bối cảnh và đề bài.</b> Giải thích vì sao mọi miền nguyên hữu hạn là trường, rồi kiểm chứng lập luận với $R=\mathbb{Z}/5\mathbb{Z}$.</p>
+      <p><b>2. Hộp công cụ.</b> Với $a\ne0$ trong miền nguyên, ánh xạ nhân trái $L_a:R\to R$, $x\mapsto ax$, là đơn ánh nhờ không có ước của không. Trên tập hữu hạn, đơn ánh tự động là toàn ánh.</p>
+      <p><b>3. Lời giải.</b> Nếu $L_a(x)=L_a(y)$ thì $ax=ay$, nên $a(x-y)=0$. Vì $a\ne0$ và $R$ không có ước của không, $x=y$; vậy $L_a$ đơn ánh. Tính hữu hạn suy ra $L_a$ toàn ánh, nên tồn tại $x\in R$ sao cho $ax=1$. Do miền nguyên giao hoán, $xa=ax=1$, tức mọi $a\ne0$ khả nghịch và $R$ là trường. Chẳng hạn trong $\mathbb{F}_5$, $L_{[2]}$ hoán vị các lớp và $L_{[2]}([3])=[1]$, nên nghịch đảo của $[2]$ là $[3]$ (đpcm).</p>
+      <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Lập luận cần cả hai giả thiết: hữu hạn để đơn ánh suy ra toàn ánh, và không có ước của không để phép nhân trái đơn ánh. Với miền nguyên vô hạn như $\mathbb{Z}$, $2\mathbb{Z}$ không là toàn bộ $\mathbb{Z}$ nên $2$ không khả nghịch.</p>
+    </div>
+  </details>
+
+  <!-- 6.6 VÀNH CON & SỰ SAI KHÁC ĐƠN VỊ -->
+  <h3 class="subsection-title">6.6. Tiêu Chuẩn Vành Con và Hiện Tượng Đơn Vị Riêng</h3>
+  
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 6.6</span>
+      <span class="tag">Tiêu Chuẩn Vành Con (Subring Test)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $R$ là một vành. Tập con khác rỗng $S \subseteq R$ là một <b>vành con</b> của $R$ khi và chỉ khi thỏa mãn đồng thời hai điều kiện:</p>
+      <div class="math-display">
+        $$\forall x, y \in S \implies x - y \in S \quad \text{và} \quad xy \in S$$
+      </div>
+      <p style="font-size:0.92rem; color:var(--text-muted); margin-top:4px;">
+        Nói cách khác, $S$ là một nhóm con cộng của $(R, +)$ và đóng đối với phép nhân của $R$.
+      </p>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $R=M_2(\mathbb{R})$, xét $S=\left\{\begin{pmatrix}a&0\\0&0\end{pmatrix}:a\in\mathbb{R}\right\}$. Dùng tiêu chuẩn vành con và xác định đơn vị riêng của $S$.</p>
+          <p><b>2. Hộp công cụ.</b> Tập con khác rỗng $S$ là vành con nếu $x-y\in S$ và $xy\in S$ với mọi $x,y\in S$. Định nghĩa vành con không bắt buộc đơn vị phải trùng với đơn vị vành mẹ.</p>
+          <p><b>3. Lời giải.</b> Đặt $A(a)=\begin{pmatrix}a&0\\0&0\end{pmatrix}$. Ta có $A(a)-A(b)=A(a-b)\in S$ và $A(a)A(b)=A(ab)\in S$; ngoài ra $0=A(0)\in S$. Theo tiêu chuẩn, $S$ là vành con. Với mọi $A(a)\in S$, $A(a)E_{11}=E_{11}A(a)=A(a)$, nên đơn vị riêng của $S$ là $E_{11}=\begin{pmatrix}1&0\\0&0\end{pmatrix}$. Rõ ràng $E_{11}\ne I_2$, đơn vị của $M_2(\mathbb{R})$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Không được ép vành con có cùng đơn vị với vành mẹ. Cũng cần phân biệt $E_{11}$ là đơn vị trên riêng các ma trận trong $S$, không phải đơn vị trên toàn bộ $M_2(\mathbb{R})$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="ex-card counter" data-type="ex" open style="margin-bottom: 1.5rem;">
+    <summary>⚠️ Hiện tượng đặc thù: Vành con có thể không cùng đơn vị với vành mẹ!</summary>
+    <div class="ex-content">
+      <p>
+        Khác với lý thuyết nhóm (nhóm con bắt buộc phải có cùng phần tử đơn vị với nhóm mẹ), 
+        trong lý thuyết vành theo giáo trình Huỳnh Việt Khánh: <b>Vành con không bắt buộc phải có cùng đơn vị với vành mẹ</b>. Có 3 tình huống xảy ra:
+      </p>
+      <ul class="bullet-list">
+        <li><b>1. Vành mẹ có đơn vị nhưng vành con KHÔNG có đơn vị:</b> 
+          Xét vành số nguyên chẵn $2\mathbb{Z} \subset \mathbb{Z}$. Vành mẹ $\mathbb{Z}$ có đơn vị $1$, nhưng vành con $2\mathbb{Z}$ hoàn toàn không có đơn vị.
+        </li>
+        <li><b>2. Vành con có đơn vị RIÊNG khác với đơn vị vành mẹ:</b> 
+          Trong vành ma trận $M_2(\mathbb{R})$ có đơn vị là ma trận đơn vị $I_2$, xét tập con:
+          $$S = \left\{ \begin{pmatrix} a & 0 \\ 0 & 0 \end{pmatrix} \;\Bigg|\; a \in \mathbb{R} \right\}$$
+          Tập $S$ là một vành con. Phần tử $E_{11} = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} \in S$ thỏa mãn $A \cdot E_{11} = E_{11} \cdot A = A$ với mọi $A \in S$. 
+          Do đó $S$ có phần tử đơn vị riêng là $1_S = E_{11}$, hoàn toàn khác với đơn vị $1_R = I_2$ của vành mẹ!
+        </li>
+        <li><b>3. Vành con cùng đơn vị với vành mẹ:</b> $\mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}$, đều có chung đơn vị là $1$.</li>
+      </ul>
+    </div>
+  </details>
+
+  <!-- 6.7 BẢNG TỔNG HỢP KIỂM ĐỊNH CÁC VÀNH KINH ĐIỂN -->
+  <h3 class="subsection-title">6.7. Bảng Tổng Hợp Kiểm Định Toàn Diện Các Vành Chuẩn Mực</h3>
+  <div class="table-wrapper">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Cấu trúc Vành $(R, +, \cdot)$</th>
+          <th style="text-align:center;">Giao hoán?</th>
+          <th style="text-align:center;">Đơn vị $1_R$</th>
+          <th>Tập Khả Nghịch $U(R)$</th>
+          <th>Ước Của Không</th>
+          <th>Phân Loại Cấu Trúc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>$(\mathbb{Z}, +, \cdot)$</b></td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center;">$1$</td>
+          <td>$\{1, -1\}$</td>
+          <td>Không có</td>
+          <td><b>Miền nguyên</b> (không là trường)</td>
+        </tr>
+        <tr>
+          <td><b>$(2\mathbb{Z}, +, \cdot)$</b></td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#ef4444;">✖</td>
+          <td>$\emptyset$</td>
+          <td>Không có</td>
+          <td><b>Vành giao hoán không có đơn vị</b></td>
+        </tr>
+        <tr>
+          <td><b>$(\mathbb{Z}/6\mathbb{Z}, +, \cdot)$</b></td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center;">$[1]$</td>
+          <td>$\{[1], [5]\}$</td>
+          <td>$\{[2], [3], [4]\}$</td>
+          <td><b>Vành giao hoán có ước của không</b></td>
+        </tr>
+        <tr>
+          <td><b>$(\mathbb{Z}/5\mathbb{Z}, +, \cdot)$</b></td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center;">$[1]$</td>
+          <td>$\{[1], [2], [3], [4]\}$</td>
+          <td>Không có</td>
+          <td><b>Trường hữu hạn</b> $\mathbb{F}_5$</td>
+        </tr>
+        <tr>
+          <td><b>$(\mathbb{Q}, +, \cdot)$, $(\mathbb{R}, +, \cdot)$</b></td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center;">$1$</td>
+          <td>$R \setminus \{0\}$</td>
+          <td>Không có</td>
+          <td><b>Trường vô hạn</b></td>
+        </tr>
+        <tr>
+          <td><b>$(M_2(\mathbb{R}), +, \cdot)$</b></td>
+          <td style="text-align:center; color:#ef4444;">✖</td>
+          <td style="white-space:nowrap;">$I_2$</td>
+          <td>$\mathrm{GL}_2(\mathbb{R})$ ($\det A \neq 0$)</td>
+          <td>Các ma trận $\det A = 0, A \neq 0$</td>
+          <td><b>Vành không giao hoán có ước của không</b></td>
+        </tr>
+        <tr>
+          <td><b>$(\mathbb{R}[x], +, \cdot)$</b></td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center;">$1$</td>
+          <td>$\mathbb{R} \setminus \{0\}$ (đa thức hằng)</td>
+          <td>Không có</td>
+          <td><b>Miền nguyên</b> đa thức</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- ==================== HẾT CHƯƠNG 6 HOÀN CHỈNH ==================== -->

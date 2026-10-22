@@ -1,0 +1,528 @@
+<!-- ======================================================== -->
+<div class="chapter-content" id="tab-c7">
+  <h2 class="section-title">Chương 7. Iđêan và Vành Thương</h2>
+  
+  <p class="welcome-copy">
+    Trong lý thuyết nhóm, không phải nhóm con nào cũng tạo được nhóm thương mà cần đến tính chuẩn tắc. 
+    Hiện tượng tương tự xuất hiện sâu sắc hơn trong lý thuyết vành: một vành con thông thường không đủ sức làm cho phép nhân trên các lớp kề xác định tốt. 
+    Chương này truy tìm điều kiện thiết yếu để khắc phục trở ngại ấy, khai sinh ra khái niệm <b>Iđêan</b> (đối tượng hấp thụ phép nhân), 
+    xây dựng cấu trúc <b>Vành thương</b>, và phân loại chất lượng của vành thương thông qua <b>Iđêan nguyên tố</b> và <b>Iđêan cực đại</b>.
+  </p>
+
+  <!-- 7.1 ĐỘNG CƠ SƯ PHẠM: TẠI SAO VÀNH CON THẤT BẠI KHI TẠO THƯƠNG? -->
+  <h3 class="subsection-title">7.1. Khởi Nguồn Sư Phạm: Tại Sao Vành Con Thất Bại Khi Tạo Cấu Trúc Thương?</h3>
+  <p>
+    Cho $R$ là một vành và $S$ là một vành con của $R$. 
+    Vì $(R, +)$ là một nhóm Abel, nên nhóm con cộng $(S, +)$ tự động là một nhóm con chuẩn tắc của $(R, +)$. 
+    Do đó, ta luôn có <b>nhóm cộng thương</b> $R/S = \{a + S \mid a \in R\}$ với phép cộng lớp xác định tốt:
+    $$(a + S) + (b + S) = (a + b) + S$$
+    Tuy nhiên, nếu ta muốn biến $R/S$ thành một vành, đòi hỏi tự nhiên nhất là định nghĩa <b>phép nhân lớp</b> bằng các đại diện:
+    $$(a + S) \cdot (b + S) = ab + S$$
+    Phép nhân này có luôn xác định tốt không? Câu trả lời là <b>KHÔNG</b>!
+  </p>
+
+  <details class="ex-card counter" data-type="ex" open style="margin-bottom: 1.5rem;">
+    <summary>⚠️ Sự thất bại kinh điển của phép nhân lớp trên Q/Z (Bài tập 7.1)</summary>
+    <div class="ex-content">
+      <p>
+        Xem vành số nguyên $\mathbb{Z}$ là một vành con của trường số hữu tỉ $\mathbb{Q}$. 
+        Xét nhóm cộng thương $\mathbb{Q}/\mathbb{Z}$. Trên tập này, lớp không có hai đại diện quen thuộc là $0$ và $1$:
+        $$[0] = 0 + \mathbb{Z} = 1 + \mathbb{Z}$$
+        Bây giờ, ta lấy lớp này nhân với lớp $\dfrac{1}{2} + \mathbb{Z}$ theo công thức nhân đại diện:
+      </p>
+      <ul class="bullet-list">
+        <li><b>Dùng đại diện $0$:</b> $(0 + \mathbb{Z})\left(\dfrac{1}{2} + \mathbb{Z}\right) = \left(0 \cdot \dfrac{1}{2}\right) + \mathbb{Z} = 0 + \mathbb{Z} = \mathbb{Z}$.</li>
+        <li><b>Dùng đại diện $1$:</b> $(1 + \mathbb{Z})\left(\dfrac{1}{2} + \mathbb{Z}\right) = \left(1 \cdot \dfrac{1}{2}\right) + \mathbb{Z} = \dfrac{1}{2} + \mathbb{Z}$.</li>
+      </ul>
+      <p>
+        Vì $\dfrac{1}{2} \notin \mathbb{Z}$, nên hai lớp kết quả $\mathbb{Z}$ và $\dfrac{1}{2} + \mathbb{Z}$ là <b>hoàn toàn khác nhau</b>! 
+        Chỉ vì đổi đại diện của cùng một lớp mà kết quả phép nhân bị biến đổi. Phép nhân lớp trên $\mathbb{Q}/\mathbb{Z}$ thất bại hoàn toàn.
+      </p>
+    </div>
+  </details>
+
+  <p>
+    <b>Phân tích nguyên nhân:</b> Khi lấy hai đại diện khác $a + s_1$ và $b + s_2$ (với $s_1, s_2 \in S$), tích của chúng là:
+    $$(a + s_1)(b + s_2) = ab + as_2 + s_1 b + s_1 s_2$$
+    Muốn tích này thuộc cùng lớp $ab + S$, ta bắt buộc phải có $as_2 + s_1 b + s_1 s_2 \in S$. 
+    Vì $s_1 s_2 \in S$ (do $S$ là vành con), điều này đòi hỏi $as_2 \in S$ và $s_1 b \in S$ với mọi $a, b \in R$. 
+    Tức là: <i>Tập con $S$ phải có khả năng "nuốt chửng" (hấp thụ) mọi phép nhân từ các phần tử của toàn bộ vành mẹ $R$!</i> 
+    Tính chất này dẫn thẳng tới định nghĩa cấu trúc <b>Iđêan</b>.
+  </p>
+
+  <!-- 7.2 ĐỊNH NGHĨA IĐÊAN & TIÊU CHUẨN KIỂM TRA -->
+  <h3 class="subsection-title">7.2. Định Nghĩa Iđêan và Tiêu Chuẩn Kiểm Tra Hai Phía</h3>
+  
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 7.1</span>
+      <span class="tag">Iđêan Trái, Phải và Hai Phía</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $R$ là một vành và $I$ là một tập hợp con khác rỗng của $R$ ($I \subseteq R, I \neq \emptyset$).</p>
+      <ul class="bullet-list">
+        <li><b>1. Iđêan trái (Left Ideal):</b> Cấu trúc $I$ là một iđêan trái nếu:
+          <ul style="margin: 4px 0 4px 1.5rem; list-style-type: circle;">
+            <li>$(I, +)$ là một nhóm con của nhóm cộng $(R, +)$ ($\forall x, y \in I \implies x - y \in I$).</li>
+            <li>Hấp thụ phép nhân bên trái: $\forall r \in R, \forall x \in I \implies rx \in I$ (viết tắt là $RI \subseteq I$).</li>
+          </ul>
+        </li>
+        <li><b>2. Iđêan phải (Right Ideal):</b> Cấu trúc $I$ là một iđêan phải nếu:
+          <ul style="margin: 4px 0 4px 1.5rem; list-style-type: circle;">
+            <li>$(I, +)$ là một nhóm con của $(R, +)$ ($\forall x, y \in I \implies x - y \in I$).</li>
+            <li>Hấp thụ phép nhân bên phải: $\forall r \in R, \forall x \in I \implies xr \in I$ (viết tắt là $IR \subseteq I$).</li>
+          </ul>
+        </li>
+        <li><b>3. Iđêan hai phía (Two-sided Ideal):</b> Cấu trúc $I$ vừa là iđêan trái vừa là iđêan phải:
+          <div style="text-align: center; margin: 6px 0; font-weight: 600;">
+            $\forall r \in R, \forall x \in I \implies rx \in I \quad \text{và} \quad xr \in I$
+          </div>
+        </li>
+      </ul>
+      <div class="corollary-box">
+        <b>Quy ước chuẩn mực của giáo trình Huỳnh Việt Khánh:</b>
+        <br>• Khi dùng từ <b>iđêan</b> mà không nêu rõ phía, ta luôn hiểu đó là <b>iđêan hai phía</b>.
+        <br>• Ký hiệu: $I \trianglelefteq R$. Nếu $I \neq R$, ta gọi $I$ là <i>iđêan thực sự</i>, ký hiệu $I \subsetneq R$ (hoặc $I \triangleleft R$).
+        <br>• Nếu vành $R$ giao hoán, khái niệm iđêan trái, iđêan phải và iđêan hai phía trùng nhau hoàn toàn!
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $R=M_2(\mathbb{R})$, xét $I=\left\{\begin{pmatrix}a&0\\b&0\end{pmatrix}:a,b\in\mathbb{R}\right\}$. Xác định $I$ là iđêan trái, phải hay hai phía.</p>
+          <p><b>2. Hộp công cụ.</b> Iđêan trái cần đóng với phép trừ và hấp thụ phép nhân bên trái bởi mọi $A\in R$; iđêan phải cần tính hấp thụ tương tự ở bên phải.</p>
+          <p><b>3. Lời giải.</b> Hiệu hai ma trận thuộc $I$ vẫn có cột thứ hai bằng $0$. Với $X=\begin{pmatrix}a&0\\b&0\end{pmatrix}\in I$ và $A=\begin{pmatrix}p&q\\r&s\end{pmatrix}\in R$, ta có $AX=\begin{pmatrix}pa+qb&0\\ra+sb&0\end{pmatrix}\in I$, nên $I$ là iđêan trái. Nhưng $E_{11}\in I$ và $E_{11}E_{12}=E_{12}\notin I$, nên $I$ không là iđêan phải, do đó không là iđêan hai phía (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Trong vành ma trận, thứ tự nhân quyết định cột/hàng nào bị bảo toàn. Không nhầm iđêan trái với iđêan hai phía; ở vành không giao hoán, hai khái niệm có thể khác nhau.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 7.2</span>
+      <span class="tag">Tiêu Chuẩn Iđêan Rút Gọn (Ideal Test)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $R$ là một vành. Tập con $I \subseteq R$ là một <b>iđêan hai phía</b> của $R$ khi và chỉ khi thỏa mãn đồng thời hai điều kiện:</p>
+      <div class="math-display">
+        $$\text{1. } I \neq \emptyset \quad \text{và} \quad \forall x, y \in I \implies x - y \in I$$
+        $$\text{2. } \forall r \in R, \forall x \in I \implies rx \in I \quad \text{và} \quad xr \in I$$
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $R=\mathbb{Z}$, xét $I=6\mathbb{Z}$. Kiểm tra tiêu chuẩn iđêan hai phía.</p>
+          <p><b>2. Hộp công cụ.</b> Tập con khác rỗng $I$ là iđêan hai phía nếu $x-y\in I$ và $rx,xr\in I$ với mọi $x,y\in I,r\in R$.</p>
+          <p><b>3. Lời giải.</b> Vì $0\in I$, tập không rỗng. Lấy $x=6m,y=6n\in I$; khi đó $x-y=6(m-n)\in I$. Với $r\in\mathbb{Z}$ tùy ý, $rx=r(6m)=6(rm)\in I$ và $xr=(6m)r=6(mr)\in I$. Do phép nhân giao hoán, cả hai phía đều được hấp thụ. Theo tiêu chuẩn, $6\mathbb{Z}\trianglelefteq\mathbb{Z}$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Trong vành giao hoán, hai điều kiện hấp thụ trùng nhau, nhưng vẫn cần tính đóng cộng qua phép trừ và tính khác rỗng.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ĐỊNH LÝ IĐÊAN CỦA TRƯỜNG -->
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.5rem;">
+    <div class="card-header">
+      <span class="label">🏛️ MỆNH ĐỀ 7.3</span>
+      <span class="tag">Iđêan Chứa Phần Tử Khả Nghịch & Iđêan Của Một Trường (Bài tập 7.11)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $R$ là một vành có phần tử đơn vị $1_R$ và $I$ là một iđêan của $R$ ($I \trianglelefteq R$):</p>
+      <ul class="bullet-list">
+        <li><b>1. Chứa đơn vị:</b> $I = R \iff 1_R \in I$.</li>
+        <li><b>2. Chứa phần tử khả nghịch:</b> Nếu $I$ chứa dù chỉ một phần tử khả nghịch $u \in U(R)$, thì ngay lập tức $I = R$. 
+          <br><i>(Chứng minh: $u \in I \implies 1_R = u^{-1}u \in I \implies I = R$).</i>
+        </li>
+        <li><b>3. Cấu trúc iđêan của một trường:</b> Một trường $F$ <b>chỉ có đúng hai iđêan</b> là iđêan tầm thường $\{0_F\}$ và chính nó $F$.</li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Xét iđêan $I$ của trường $F=\mathbb{Q}$. Chứng minh $I=\{0\}$ hoặc $I=\mathbb{Q}$.</p>
+          <p><b>2. Hộp công cụ.</b> Nếu iđêan chứa đơn vị $u$, thì $u^{-1}u=1\in I$ và tính hấp thụ kéo theo $I=F$. Trong trường, mọi phần tử khác $0$ đều khả nghịch.</p>
+          <p><b>3. Lời giải.</b> Nếu $I$ không chứa phần tử khác $0$, thì $I=\{0\}$. Ngược lại, lấy $u\in I$ với $u\ne0$. Vì $F$ là trường, $u^{-1}\in F$; do $I$ hấp thụ phép nhân, $1=u^{-1}u\in I$. Với mọi $q\in\mathbb{Q}$, $q=q\cdot1\in I$, nên $I=\mathbb{Q}$. Vậy trường chỉ có hai iđêan là $\{0\}$ và chính nó (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Lập luận dùng tính khả nghịch của mọi phần tử khác không, không đúng cho vành tổng quát; chẳng hạn $\mathbb{Z}$ có iđêan $2\mathbb{Z}$ thực sự.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 7.3 IĐÊAN CHÍNH VÀ VÀNH IĐÊAN CHÍNH -->
+  <h3 class="subsection-title">7.3. Iđêan Sinh Bởi Một Tập Hợp và Iđêan Chính</h3>
+  <p>
+    Tương tự như nhóm con sinh, giao của một họ các iđêan luôn là một iđêan. 
+    Từ đó ta xây dựng iđêan nhỏ nhất sinh bởi một tập con $X \subseteq R$.
+  </p>
+
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 7.4</span>
+      <span class="tag">Iđêan Chính (Principal Ideal)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $R$ là một vành và $a \in R$.</p>
+      <ul class="bullet-list">
+        <li><b>Iđêan chính sinh bởi $a$:</b> Là iđêan nhỏ nhất của $R$ chứa phần tử $a$, ký hiệu là $(a)$ hoặc $RaR$.</li>
+        <li><b>Trong vành giao hoán có đơn vị:</b> Iđêan chính $(a)$ có dạng biểu diễn tường minh cực kỳ gọn gàng gồm mọi bội của $a$:
+          $$(a) = aR = \{ra \mid r \in R\}$$
+        </li>
+        <li><b>Vành iđêan chính (PID - Principal Ideal Domain):</b> Là một miền nguyên mà trong đó <b>mọi iđêan đều là iđêan chính</b>.</li>
+      </ul>
+      <div class="corollary-box">
+        <b>Hai mô hình PID chuẩn mực trong toán học:</b>
+        <br>• Vành số nguyên $\mathbb{Z}$: Mọi iđêan đều có dạng $(n) = n\mathbb{Z}$ với $n \ge 0$.
+        <br>• Vành đa thức $F[x]$ trên một trường $F$: Mọi iđêan đều có dạng $(p(x)) = p(x)F[x]$.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Tính iđêan $(30,18)$ trong $\mathbb{Z}$ và $(x^2-1,x^2+x-2)$ trong $\mathbb{R}[x]$.</p>
+          <p><b>2. Hộp công cụ.</b> Trong $\mathbb{Z}$, $(a,b)=(\gcd(a,b))$ nhờ Bézout. Trong $F[x]$, iđêan sinh bởi các đa thức được sinh bởi ước chung lớn nhất của chúng.</p>
+          <p><b>3. Lời giải.</b> Ta có $\gcd(30,18)=6$ và $6=2\cdot18-30$, nên $6\in(30,18)$; ngược lại $30=5\cdot6$ và $18=3\cdot6$. Vậy $(30,18)=(6)=6\mathbb{Z}$. Với đa thức, $x^2-1=(x-1)(x+1)$, $x^2+x-2=(x-1)(x+2)$ và hiệu hai đa thức là $x-1$. Do đó $x-1$ thuộc iđêan sinh, còn cả hai đa thức đều chia hết cho $x-1$, suy ra $(x^2-1,x^2+x-2)=(x-1)$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Cần có cả hai bao hàm: chứng minh gcd là tổ hợp của các phần tử sinh, đồng thời mọi phần tử sinh là bội của gcd.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 7.4 PHÉP DỰNG VÀNH THƯƠNG -->
+  <h3 class="subsection-title">7.4. Phép Dựng Cấu Trúc Vành Thương $R/I$ và Phép Chiếu Chính Tắc</h3>
+  <p>
+    Khi $I$ là một iđêan hai phía, cả phép cộng lớp lẫn phép nhân lớp đều xác định tốt, biến tập các lớp kề thành một vành mới:
+  </p>
+
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 7.5</span>
+      <span class="tag">Định Lý Cấu Trúc Vành Thương (Định lý 7.4 Giáo trình)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $R$ là một vành và $I$ là một iđêan của $R$ ($I \trianglelefteq R$). Khi đó:</p>
+      <ul class="bullet-list">
+        <li><b>1. Hai phép toán xác định tốt:</b> Trên tập thương các lớp cộng $R/I = \{a + I \mid a \in R\}$, hai phép toán:
+          $$(a + I) + (b + I) = (a + b) + I$$
+          $$(a + I) \cdot (b + I) = ab + I$$
+          đều <b>xác định tốt</b> (không phụ thuộc vào việc chọn đại diện $a, b$).
+        </li>
+        <li><b>2. Cấu trúc vành thương:</b> Tập $R/I$ cùng hai phép toán trên lập thành một vành, gọi là <b>vành thương</b> của $R$ theo iđêan $I$.</li>
+        <li><b>3. Phần tử không:</b> Là lớp $0_{R/I} = 0_R + I = I$.</li>
+        <li><b>4. Phần tử đơn vị:</b> Nếu $R$ có đơn vị $1_R$, thì vành thương $R/I$ có phần tử đơn vị là $1_{R/I} = 1_R + I$.</li>
+        <li><b>5. Tính kế thừa:</b> Nếu $R$ giao hoán thì vành thương $R/I$ cũng giao hoán.</li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Xét $R=\mathbb{Z}$, $I=6\mathbb{Z}$ và vành thương $R/I=\mathbb{Z}/6\mathbb{Z}$. Lập bảng cộng, bảng nhân; xác định phần tử không và đơn vị.</p>
+          <p><b>2. Hộp công cụ.</b> Vì $I$ là iđêan hai phía, $[a]+[b]=[a+b]$ và $[a][b]=[ab]$ modulo $6$ được xác định tốt. Hai đại diện cùng lớp sai khác nhau một bội của $6$.</p>
+          <p><b>3. Lời giải.</b> Các lớp là $[0],\ldots,[5]$. Phần tử không là $[0]=I$, đơn vị là $[1]=1+I$. Nếu $a'=a+6m$ và $b'=b+6n$, thì $a'b'-ab=6mb+6na+36mn\in I$, nên phép nhân lớp không phụ thuộc đại diện.</p>
+          <div class="table-wrapper">
+            <table class="compare-table">
+              <thead><tr><th>$+$</th><th>$[0]$</th><th>$[1]$</th><th>$[2]$</th><th>$[3]$</th><th>$[4]$</th><th>$[5]$</th></tr></thead>
+              <tbody>
+                <tr><th>$[0]$</th><td>$[0]$</td><td>$[1]$</td><td>$[2]$</td><td>$[3]$</td><td>$[4]$</td><td>$[5]$</td></tr>
+                <tr><th>$[1]$</th><td>$[1]$</td><td>$[2]$</td><td>$[3]$</td><td>$[4]$</td><td>$[5]$</td><td>$[0]$</td></tr>
+                <tr><th>$[2]$</th><td>$[2]$</td><td>$[3]$</td><td>$[4]$</td><td>$[5]$</td><td>$[0]$</td><td>$[1]$</td></tr>
+                <tr><th>$[3]$</th><td>$[3]$</td><td>$[4]$</td><td>$[5]$</td><td>$[0]$</td><td>$[1]$</td><td>$[2]$</td></tr>
+                <tr><th>$[4]$</th><td>$[4]$</td><td>$[5]$</td><td>$[0]$</td><td>$[1]$</td><td>$[2]$</td><td>$[3]$</td></tr>
+                <tr><th>$[5]$</th><td>$[5]$</td><td>$[0]$</td><td>$[1]$</td><td>$[2]$</td><td>$[3]$</td><td>$[4]$</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-wrapper">
+            <table class="compare-table">
+              <thead><tr><th>$\cdot$</th><th>$[0]$</th><th>$[1]$</th><th>$[2]$</th><th>$[3]$</th><th>$[4]$</th><th>$[5]$</th></tr></thead>
+              <tbody>
+                <tr><th>$[0]$</th><td>$[0]$</td><td>$[0]$</td><td>$[0]$</td><td>$[0]$</td><td>$[0]$</td><td>$[0]$</td></tr>
+                <tr><th>$[1]$</th><td>$[0]$</td><td>$[1]$</td><td>$[2]$</td><td>$[3]$</td><td>$[4]$</td><td>$[5]$</td></tr>
+                <tr><th>$[2]$</th><td>$[0]$</td><td>$[2]$</td><td>$[4]$</td><td>$[0]$</td><td>$[2]$</td><td>$[4]$</td></tr>
+                <tr><th>$[3]$</th><td>$[0]$</td><td>$[3]$</td><td>$[0]$</td><td>$[3]$</td><td>$[0]$</td><td>$[3]$</td></tr>
+                <tr><th>$[4]$</th><td>$[0]$</td><td>$[4]$</td><td>$[2]$</td><td>$[0]$</td><td>$[4]$</td><td>$[2]$</td></tr>
+                <tr><th>$[5]$</th><td>$[0]$</td><td>$[5]$</td><td>$[4]$</td><td>$[3]$</td><td>$[2]$</td><td>$[1]$</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Vậy $\mathbb{Z}/6\mathbb{Z}$ là vành giao hoán có đơn vị $[1]$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Phép toán lớp không phải phép toán trên đại diện tùy ý nếu chưa chứng minh xác định tốt. Các lớp $[2]$ và $[3]$ khác $[0]$ dù tích của chúng bằng $[0]$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="proof-block">
+    <summary>🔍 Xem chứng minh tính xác định tốt của phép nhân lớp nhờ tính hấp thụ của I</summary>
+    <div class="proof-content">
+      <p>
+        Giả sử có hai cách chọn đại diện khác nhau cho cùng một cặp lớp: $a + I = a' + I$ và $b + I = b' + I$. 
+        Điều này có nghĩa là $a' - a = x \in I$ và $b' - b = y \in I$, hay $a' = a + x$ và $b' = b + y$.<br>
+        Khai triển tích hai đại diện mới:
+        $$a'b' = (a + x)(b + y) = ab + ay + xb + xy$$
+        Ta khảo sát ba số hạng sau:
+        <br>&nbsp;&nbsp;• Vì $y \in I$ và $I$ là iđêan trái nên $ay \in I$.
+        <br>&nbsp;&nbsp;• Vì $x \in I$ và $I$ là iđêan phải nên $xb \in I$.
+        <br>&nbsp;&nbsp;• Vì $x, y \in I$ nên $xy \in I$.
+        <br>Do $(I, +)$ đóng, tổng $ay + xb + xy \in I$. 
+        Suy ra $a'b' - ab \in I \implies a'b' + I = ab + I$. 
+        Vậy phép nhân hoàn toàn độc lập với cách chọn đại diện! <span class="qed">∎</span>
+      </p>
+    </div>
+  </details>
+
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.5rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 7.6</span>
+      <span class="tag">Phép Chiếu Chính Tắc Của Vành (Canonical Projection)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $I \trianglelefteq R$. Ánh xạ chiếu chính tắc $\pi_I : R \to R/I$ xác định bởi:</p>
+      <div class="math-display">
+        $$\pi_I(a) = a + I \quad \forall a \in R$$
+      </div>
+      <p>là một <b>toàn cấu vành</b> (bảo toàn cả phép cộng và phép nhân). Hạt nhân của phép chiếu chính tắc chính là iđêan $I$:</p>
+      <div class="math-display">
+        $$\ker\pi_I = \{a \in R \mid \pi_I(a) = 0_{R/I}\} = \{a \in R \mid a + I = I\} = I$$
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Với $R=\mathbb{Z}$ và $I=6\mathbb{Z}$, xét phép chiếu $\pi_I:\mathbb{Z}\to\mathbb{Z}/6\mathbb{Z}$, $n\mapsto[n]_6$. Kiểm tra đây là toàn cấu và tìm hạt nhân.</p>
+          <p><b>2. Hộp công cụ.</b> Phép chiếu chính tắc bảo toàn cộng và nhân; hạt nhân là các phần tử được gửi về phần tử không $I$ của vành thương.</p>
+          <p><b>3. Lời giải.</b> Với $m,n\in\mathbb{Z}$, $\pi_I(m+n)=[m+n]_6=[m]_6+[n]_6$ và $\pi_I(mn)=[mn]_6=[m]_6[n]_6$. Mọi lớp $[k]_6$ là ảnh của $k$, nên ánh xạ toàn ánh. Cuối cùng, $\ker\pi_I=\{n:[n]_6=[0]_6\}=\{n:6\mid n\}=6\mathbb{Z}=I$. Do đó $\pi_I$ là toàn cấu vành có hạt nhân $I$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Hạt nhân nằm trong vành nguồn và là iđêan; không phải tập ảnh hay một lớp bất kỳ trong vành đích.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 7.5 IĐÊAN NGUYÊN TỐ VÀ IĐÊAN CỰC ĐẠI -->
+  <h3 class="subsection-title">7.5. Iđêan Nguyên Tố và Iđêan Cực Đại: Linh Hồn Phân Loại Cấu Trúc Thương</h3>
+  <p>
+    Vành thương $R/I$ nhận được có phẩm chất đại số như thế nào? Khi nào nó là một miền nguyên? Khi nào nó trở thành một trường? 
+    Câu trả lời được giải mã trọn vẹn thông qua hai lớp iđêan đặc biệt sau (xét trên vành giao hoán có đơn vị $1_R \neq 0_R$):
+  </p>
+
+  <!-- ĐỊNH NGHĨA IĐÊAN NGUYÊN TỐ -->
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 7.7</span>
+      <span class="tag">Iđêan Nguyên Tố (Prime Ideal)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $R$ là một vành giao hoán có đơn vị $1_R \neq 0_R$. Một iđêan thực sự $P \subsetneq R$ được gọi là một <b>iđêan nguyên tố</b> nếu thỏa mãn điều kiện:</p>
+      <ul class="bullet-list">
+        <li><b>Tính chất chia tích kéo theo chia thừa số:</b> Với mọi $a, b \in R$:
+          $$ab \in P \implies a \in P \quad \text{hoặc} \quad b \in P$$
+        </li>
+      </ul>
+      <div class="corollary-box">
+        <b>Nguồn gốc tên gọi:</b> Trong vành số nguyên $\mathbb{Z}$, nếu $p$ là số nguyên tố thì $ab \in p\mathbb{Z} \iff p \mid ab \implies p \mid a$ hoặc $p \mid b$. Định nghĩa trên chính là sự tổng quát hóa trực tiếp của khái niệm số nguyên tố Euclid!
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $R=\mathbb{Z}$, xét $P=5\mathbb{Z}$. Chứng minh $P$ là iđêan nguyên tố.</p>
+          <p><b>2. Hộp công cụ.</b> Iđêan thực sự $P$ nguyên tố nếu $ab\in P$ kéo theo $a\in P$ hoặc $b\in P$; trong $\mathbb{Z}$, điều này tương đương tính chất chia hết của số nguyên tố $5$.</p>
+          <p><b>3. Lời giải.</b> Ta có $5\mathbb{Z}\ne\mathbb{Z}$. Lấy $a,b\in\mathbb{Z}$ và giả sử $ab\in5\mathbb{Z}$, tức $5\mid ab$. Vì $5$ nguyên tố, định lý Euclid cho $5\mid a$ hoặc $5\mid b$, nên $a\in5\mathbb{Z}$ hoặc $b\in5\mathbb{Z}$. Vậy $5\mathbb{Z}$ là iđêan nguyên tố (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Cần xác nhận iđêan là thực sự trước khi gọi là nguyên tố. Với hợp số, tính chất này có thể thất bại: $6\mid2\cdot3$ nhưng $6$ không chia $2$ hay $3$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ĐỊNH NGHĨA IĐÊAN CỰC ĐẠI -->
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 7.8</span>
+      <span class="tag">Iđêan Cực Đại (Maximal Ideal)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $R$ là một vành có đơn vị $1_R \neq 0_R$. Một iđêan thực sự $M \subsetneq R$ được gọi là một <b>iđêan cực đại</b> nếu thỏa mãn điều kiện:</p>
+      <ul class="bullet-list">
+        <li><b>Không bị kẹp bởi bất kỳ iđêan thực sự nào lớn hơn:</b> Nếu $J$ là một iđêan của $R$ thỏa mãn:
+          $$M \subseteq J \subseteq R \implies J = M \quad \text{hoặc} \quad J = R$$
+        </li>
+      </ul>
+      <div class="corollary-box">
+        <b>💡 Nhận xét rút ra:</b> Nói cách khác, $M$ là iđêan thực sự "lớn nhất có thể" bên trong vành mẹ $R$; trên $M$ chỉ còn duy nhất chính vành $R$.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $R=\mathbb{R}[x]$, xét $M=(x^2+1)$. Chứng minh $M$ là iđêan cực đại.</p>
+          <p><b>2. Hộp công cụ.</b> $\mathbb{R}[x]$ là PID. Trong PID, iđêan sinh bởi đa thức bất khả quy là cực đại; tương đương, $\mathbb{R}[x]/(x^2+1)$ là trường.</p>
+          <p><b>3. Lời giải.</b> Đa thức $x^2+1$ không có nghiệm thực nên bất khả quy trên $\mathbb{R}$. Nếu $M\subseteq J\subsetneq R$ với $J$ là iđêan, viết $J=(d)$ vì vành là PID. Từ $(x^2+1)\subseteq(d)$ suy ra $d\mid x^2+1$. Tính bất khả quy buộc $d$ là đơn vị hoặc liên hợp của $x^2+1$. Trường hợp đơn vị cho $J=R$; trường hợp kia cho $J=M$. Do đó không có iđêan thực sự nằm nghiêm giữa $M$ và $R$, nên $M$ cực đại (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Bất khả quy được xét theo hệ số thực; $x^2+1$ bất khả quy trên $\mathbb{R}$ nhưng phân tích được trên $\mathbb{C}$. Cần dùng giả thiết PID để kết luận về mọi iđêan trung gian.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ĐỊNH LÝ ĐẶC TRƯNG THƯƠNG THEN CHỐT -->
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem; border-left: 4px solid #10b981;">
+    <div class="card-header" style="color: #047857;">
+      <span class="label">🏛️ ĐỊNH LÝ 7.9</span>
+      <span class="tag" style="background: rgba(16, 185, 129, 0.15); color: #047857;">Định Lý Cấu Trúc Thương Nguyên Tố & Cực Đại</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $R$ là một vành giao hoán có đơn vị $1_R \neq 0_R$ và $I$ là một iđêan thực sự của $R$ ($I \subsetneq R$). Khi đó:</p>
+      <ul class="bullet-list">
+        <li><b>1. Đặc trưng Miền nguyên:</b>
+          $$R/I \text{ là một miền nguyên} \iff I \text{ là một iđêan nguyên tố}$$
+        </li>
+        <li><b>2. Đặc trưng Cấu trúc Trường:</b>
+          $$R/I \text{ là một trường} \iff I \text{ là một iđêan cực đại}$$
+        </li>
+        <li><b>3. Mối quan hệ kế thừa then chốt:</b> Vì mọi trường đều là một miền nguyên, ta suy ra ngay trong mọi vành giao hoán có đơn vị:
+          $$\text{Mọi iđêan cực đại đều là iđêan nguyên tố} \quad (M \text{ cực đại} \implies M \text{ nguyên tố})$$
+        </li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Phân loại các iđêan $(x)$ trong $\mathbb{Z}[x]$, $(x^2+1)$ trong $\mathbb{R}[x]$ và $6\mathbb{Z}$ trong $\mathbb{Z}$ bằng cách xét các vành thương.</p>
+          <p><b>2. Hộp công cụ.</b> Với vành giao hoán có đơn vị và iđêan thực sự $I$, $R/I$ là miền nguyên khi và chỉ khi $I$ nguyên tố; $R/I$ là trường khi và chỉ khi $I$ cực đại.</p>
+          <p><b>3. Lời giải.</b> (i) Phép thế $x\mapsto0$ cho $\mathbb{Z}[x]/(x)\cong\mathbb{Z}$. Đây là miền nguyên nhưng không là trường vì $2$ không khả nghịch; vậy $(x)$ nguyên tố nhưng không cực đại. (ii) Phép thế $x\mapsto i$ cho $\mathbb{R}[x]/(x^2+1)\cong\mathbb{C}$, là trường; do đó $(x^2+1)$ cực đại và nguyên tố. (iii) Trong $\mathbb{Z}/6\mathbb{Z}$, $[2],[3]\ne[0]$ nhưng $[2][3]=[0]$, nên thương không là miền nguyên cũng không là trường. Suy ra $6\mathbb{Z}$ không nguyên tố và không cực đại (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Mọi iđêan cực đại đều nguyên tố, nhưng chiều ngược lại không đúng nói chung, như $(x)$ trong $\mathbb{Z}[x]$. Khi áp dụng định lý cần vành giao hoán có đơn vị và iđêan thực sự.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="proof-block">
+    <summary>🔍 Xem chứng minh $R/I$ là trường $\iff I$ cực đại</summary>
+    <div class="proof-content">
+      <p>
+        Theo Mệnh đề 7.3, một vành giao hoán có đơn vị là một trường khi và chỉ khi nó chỉ có đúng hai iđêan là $\{0\}$ và chính nó.<br>
+        Theo Định lý Tương ứng cho vành, các iđêan của vành thương $R/I$ tương ứng song ánh 1-1 với các iđêan $J$ của $R$ chứa $I$ ($I \subseteq J \subseteq R$).<br>
+        Do đó: $R/I$ là trường $\iff R/I$ chỉ có 2 iđêan là $\{0_{R/I}\}$ và $R/I \iff$ Giữa $I$ và $R$ không có bất kỳ iđêan trung gian nào khác ngoài $I$ và $R \iff I$ là một iđêan cực đại! <span class="qed">∎</span>
+      </p>
+    </div>
+  </details>
+
+  <!-- 7.6 BỘ BẪY NGỘ NHẬN & PHẢN VÍ DỤ SƯ PHẠM -->
+  <h3 class="subsection-title">7.6. Bộ Bẫy Ngộ Nhận & Phản Ví Dụ Sư Phạm Kinh Điển</h3>
+
+  <details class="ex-card counter" data-type="ex" open style="margin-bottom: 1.2rem;">
+    <summary>⚠️ Bẫy 1: "Iđêan nguyên tố thì chắc chắn cực đại?" $\implies$ HOÀN TOÀN SAI!</summary>
+    <div class="ex-content">
+      <p><b>1. Phản ví dụ mẫu mực trong vành số nguyên $\mathbb{Z}$:</b></p>
+      <p>
+        Xét iđêan không $I = (0) = \{0\}$ trong vành $\mathbb{Z}$.
+        <br>• Vành thương $\mathbb{Z}/(0) \cong \mathbb{Z}$ là một miền nguyên $\implies (0)$ là một <b>iđêan nguyên tố</b>.
+        <br>• Tuy nhiên, $\mathbb{Z}$ không phải là một trường (số $2$ không có nghịch đảo) $\implies (0)$ <b>không phải là iđêan cực đại</b>!
+        <br>Thật vậy, ta có chuỗi bao hàm thực sự: $(0) \subsetneq 2\mathbb{Z} \subsetneq \mathbb{Z}$.
+      </p>
+      <p><b>2. Phản ví dụ trong vành đa thức hai biến $\mathbb{R}[x, y]$:</b></p>
+      <p>
+        Iđêan $(x)$ là nguyên tố vì $\mathbb{R}[x, y]/(x) \cong \mathbb{R}[y]$ là miền nguyên. 
+        Nhưng $(x)$ không cực đại vì bị kẹp trong chuỗi: $(x) \subsetneq (x, y) \subsetneq \mathbb{R}[x, y]$.
+      </p>
+    </div>
+  </details>
+
+  <details class="ex-card counter" data-type="ex" open style="margin-bottom: 1.5rem;">
+    <summary>⚠️ Bẫy 2: Nhầm lẫn giữa "Vành con" và "Iđêan"</summary>
+    <div class="ex-content">
+      <p>
+        • Vành con $S$ chỉ đòi hỏi tính đóng nội tại: $s_1 s_2 \in S$.
+        <br>• Iđêan $I$ đòi hỏi tính hấp thụ ngoại tại: $rx \in I$ với <b>mọi phần tử $r$ của cả vành mẹ</b>.
+        <br>• <i>Quy tắc:</i> Mọi iđêan đều là vành con, nhưng <b>vành con nói chung KHÔNG phải là iđêan</b>! 
+        Ví dụ $\mathbb{Z}$ là vành con của $\mathbb{Q}$, nhưng $\mathbb{Z}$ không là iđêan của $\mathbb{Q}$ vì $\dfrac{1}{2} \in \mathbb{Q}, 1 \in \mathbb{Z}$ nhưng $\dfrac{1}{2} \cdot 1 = \dfrac{1}{2} \notin \mathbb{Z}$.
+      </p>
+    </div>
+  </details>
+
+  <!-- 7.7 MÔ HÌNH DỰNG TRƯỜNG THỰC CHIẾN -->
+  <h3 class="subsection-title">7.7. Mô Hình Dựng Trường Thực Chiến: Dựng Trường Số Phức $\mathbb{C}$ Từ $\mathbb{R}[x]$</h3>
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ VÍ DỤ KINH ĐIỂN</span>
+      <span class="tag">Dựng Trường $\mathbb{C}$ Từ Vành Thương Đa Thức</span>
+    </div>
+    <div class="card-body">
+      <p>
+        Xét vành đa thức hệ số thực $\mathbb{R}[x]$ và iđêan chính sinh bởi đa thức bậc hai $p(x) = x^2 + 1$:
+        $$I = (x^2 + 1) = \{(x^2 + 1)f(x) \mid f(x) \in \mathbb{R}[x]\}$$
+      </p>
+      <ul class="bullet-list">
+        <li><b>1. Tính cực đại:</b> Vì $x^2 + 1$ không có nghiệm thực nên nó bất khả quy trên $\mathbb{R}$. Do $\mathbb{R}[x]$ là vành iđêan chính (PID), mọi đa thức bất khả quy đều sinh ra một <b>iđêan cực đại</b>.</li>
+        <li><b>2. Vành thương là một trường:</b> Theo Định lý 7.9, vành thương $\mathbb{R}[x]/(x^2 + 1)$ là một <b>trường</b>!</li>
+        <li><b>3. Dạng phần tử:</b> Thực hiện phép chia đa thức cho $x^2 + 1$, mọi phần tử của vành thương đều có biểu diễn duy nhất dưới dạng nhị thức bậc nhất:
+          $$f(x) + I = a + bx + I \quad (a, b \in \mathbb{R})$$
+        </li>
+        <li><b>4. Sự xuất hiện của đơn vị ảo $i$:</b> Vì $x^2 + 1 \equiv 0 \pmod{x^2 + 1}$, nên lớp $x + I$ thỏa mãn $(x + I)^2 = -1 + I$. 
+          Đặt lớp $x + I$ là $i$, phép nhân hai lớp trở thành:
+          $$(a + bi)(c + di) = (ac - bd) + (ad + bc)i$$
+        </li>
+      </ul>
+      <div class="corollary-box">
+        <b>Kết luận:</b> Ta có đẳng cấu trường tuyệt đẹp: $\dfrac{\mathbb{R}[x]}{(x^2 + 1)} \;\cong\; \mathbb{C}$. 
+        Đây chính là cách đại số trừu tượng "khai sinh" ra số phức một cách hoàn toàn chặt chẽ mà không cần thừa nhận tiên đề số ảo!
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $K=\mathbb{R}[x]/(x^2+1)$, đặt $i=[x]$. Tính nghịch đảo của lớp $2+i$.</p>
+          <p><b>2. Hộp công cụ.</b> Trong thương, $x^2+1=0$, nên $i^2=-1$. Mọi lớp có dạng duy nhất $a+bi$; dùng liên hợp và chuẩn để tìm nghịch đảo.</p>
+          <p><b>3. Lời giải.</b> Ta có $(2+i)(2-i)=4-i^2=5$, nên $(2+i)^{-1}=\frac{2-i}{5}$. Kiểm tra $(2+i)\frac{2-i}{5}=\frac{4-i^2}{5}=1$, và tích theo thứ tự ngược cũng bằng $1$. Tổng quát, với $a+bi\ne0$, $a^2+b^2>0$ và nghịch đảo là $(a-bi)/(a^2+b^2)$; vì vậy mọi lớp khác không khả nghịch, phù hợp với $K\cong\mathbb{C}$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Trong thương phải dùng quan hệ $i^2=-1$, không xem $i$ như biến tự do. Mẫu số $a^2+b^2$ chỉ bằng $0$ khi $a=b=0$ trên $\mathbb{R}$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 7.8 BẢNG TỔNG HỢP SO SÁNH IĐÊAN VÀ CẤU TRÚC THƯƠNG TRONG Z -->
+  <h3 class="subsection-title">7.8. Bảng Tổng Hợp Khảo Sát Iđêan và Cấu Trúc Thương Trong $\mathbb{Z}$</h3>
+  <p style="font-size:0.95rem; color:var(--text-muted);">
+    Trong vành số nguyên $\mathbb{Z}$, mọi iđêan đều có dạng $n\mathbb{Z}$ ($n \ge 0$). Bảng sau khảo sát trọn vẹn các trạng thái phân loại theo $n$:
+  </p>
+
+  <div class="table-wrapper">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Iđêan $I = n\mathbb{Z}$</th>
+          <th style="text-align:center;">Vành con?</th>
+          <th style="text-align:center;">Nguyên tố?</th>
+          <th style="text-align:center;">Cực đại?</th>
+          <th>Vành thương $\mathbb{Z}/n\mathbb{Z}$</th>
+          <th>Bản chất cấu trúc thương</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>$n = 0$</b> ($I = (0)$)</td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#10b981; font-weight:bold;">✔</td>
+          <td style="text-align:center; color:#ef4444; font-weight:bold;">✖</td>
+          <td>$\mathbb{Z}/(0) \cong \mathbb{Z}$</td>
+          <td><b>Miền nguyên vô hạn</b> (không là trường).</td>
+        </tr>
+        <tr>
+          <td><b>$n = 1$</b> ($I = \mathbb{Z}$)</td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#ef4444;">✖</td>
+          <td style="text-align:center; color:#ef4444;">✖</td>
+          <td>$\mathbb{Z}/\mathbb{Z} = \{[0]\}$</td>
+          <td><b>Vành không</b> (không là miền nguyên, không là trường).</td>
+        </tr>
+        <tr>
+          <td><b>$n = p$</b> ($p$ nguyên tố: $2, 3, 5, \dots$)</td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#10b981; font-weight:bold;">✔</td>
+          <td style="text-align:center; color:#10b981; font-weight:bold;">✔</td>
+          <td>$\mathbb{Z}/p\mathbb{Z} = \mathbb{F}_p$</td>
+          <td><b>Trường hữu hạn</b> cấp $p$ (vừa là miền nguyên, vừa là trường).</td>
+        </tr>
+        <tr>
+          <td><b>$n = 6$</b> (Hợp số)</td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#ef4444; font-weight:bold;">✖</td>
+          <td style="text-align:center; color:#ef4444; font-weight:bold;">✖</td>
+          <td>$\mathbb{Z}/6\mathbb{Z}$</td>
+          <td><b>Vành có ước của không</b> ($[2][3] = [0]$, không là miền nguyên).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- ==================== HẾT CHƯƠNG 7 HOÀN CHỈNH ==================== -->

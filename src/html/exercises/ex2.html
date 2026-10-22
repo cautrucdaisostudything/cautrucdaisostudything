@@ -1,0 +1,226 @@
+<!-- ==================== BÀI TẬP CHƯƠNG 2: HOÀN CHỈNH ==================== -->
+<div class="chapter-content" id="tab-ex2">
+  <h2 class="section-title">Hệ thống Bài tập & Lời giải: Chương 2. Nhóm con & Nhóm Cyclic</h2>
+  <p>
+    Nắm vững tiêu chuẩn nhóm con rút gọn, tiêu chuẩn nhóm con cho tập hữu hạn, tính cấp phần tử và định lý phân loại hoàn chỉnh cấu trúc nhóm cyclic.
+  </p>
+
+  <!-- BÀI TẬP 2.1 -->
+  <div class="ex-study-card" id="ex-2-1">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-a">Nhóm A · Nhận diện</span>
+        <span class="ex-level-badge">🟢 Cơ bản</span>
+        <span class="ex-title-label">BÀI TẬP 2.1: Tiêu chuẩn Nhóm con Rút gọn Dạng Cộng</span>
+      </div>
+      <button class="ex-status-btn" data-id="2-1" data-status="todo" onclick="toggleExStatus(this, '2-1')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Trong các tập hợp sau, dùng tiêu chuẩn nhóm con rút gọn để xác định tập nào là nhóm con của $(\mathbb{Z}, +)$:</p>
+      <p>
+        (a) $5\mathbb{Z} = \{5k \mid k \in \mathbb{Z}\}$;<br>
+        (b) Tập các số nguyên không âm $\mathbb{N} = \{m \in \mathbb{Z} \mid m \ge 0\}$;<br>
+        (c) Tập các số nguyên lẻ $2\mathbb{Z} + 1 = \{2k + 1 \mid k \in \mathbb{Z}\}$.<br>
+        Với mỗi trường hợp phủ định, hãy chỉ ra cụ thể phần tử vi phạm tiêu chuẩn.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Trong ký hiệu cộng, tiêu chuẩn nhóm con rút gọn phát biểu: $H \le G \iff H \neq \emptyset$ và với mọi $x, y \in H$ thì <b>$x - y \in H$</b>.<br>
+        • Một nhóm con luôn phải chứa phần tử đơn vị (với phép cộng là số 0). Nếu tập không chứa 0, nó không thể là nhóm con.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) $5\mathbb{Z}$ trong $(\mathbb{Z}, +)$:</b><br>
+        • $0 = 5 \times 0 \in 5\mathbb{Z} \implies 5\mathbb{Z} \neq \emptyset$.<br>
+        • Lấy $x = 5k, y = 5l \in 5\mathbb{Z}$ ($k, l \in \mathbb{Z}$). Xét hiệu:
+        $$x - y = 5k - 5l = 5(k - l)$$
+        Vì $k, l \in \mathbb{Z} \implies k - l \in \mathbb{Z}$, do đó $x - y \in 5\mathbb{Z}$.<br>
+        Vậy $5\mathbb{Z} \le \mathbb{Z}$.
+      </p>
+      <p><b>(b) Tập các số nguyên không âm $\mathbb{N}$:</b><br>
+        Lấy $x = 2 \in \mathbb{N}$ và $y = 5 \in \mathbb{N}$. Hiệu $x - y = 2 - 5 = -3 \notin \mathbb{N}$.<br>
+        Do đó tập này không phải nhóm con của $\mathbb{Z}$ (thiếu phần tử đối).
+      </p>
+      <p><b>(c) Tập các số nguyên lẻ $2\mathbb{Z} + 1$:</b><br>
+        Phần tử đơn vị của $(\mathbb{Z}, +)$ là 0. Vì 0 là số chẵn nên $0 \notin 2\mathbb{Z} + 1$.<br>
+        Mặt khác, lấy $x = 3, y = 1 \in 2\mathbb{Z} + 1$, hiệu $x - y = 3 - 1 = 2$ là số chẵn, không thuộc tập số lẻ.<br>
+        Do đó tập các số nguyên lẻ không phải là nhóm con. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Bẫy thường gặp:</b> Nhiều sinh viên kiểm tra $x + y$ thay vì $x - y$. Tập $\mathbb{N}$ đóng đối với phép cộng ($x + y \ge 0$), nhưng lại không đóng đối với phép trừ ($x - y$). Luôn nhớ kiểm tra phép trừ trong ký hiệu cộng!
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 2.2 -->
+  <div class="ex-study-card" id="ex-2-2">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-a">Nhóm A · Nhận diện</span>
+        <span class="ex-level-badge">🟢 Cơ bản</span>
+        <span class="ex-title-label">BÀI TẬP 2.2: Tiêu chuẩn Nhóm con cho Tập con Hữu hạn</span>
+      </div>
+      <button class="ex-status-btn" data-id="2-2" data-status="todo" onclick="toggleExStatus(this, '2-2')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Trong nhóm đối xứng $S_3$, xét ba tập con sau:</p>
+      <p>
+        $$H = \{e, (1\,2\,3), (1\,3\,2)\}, \quad K = \{e, (1\,2), (1\,3)\}, \quad L = \{e, (1\,2)\}$$
+        (a) Xác định tập nào là nhóm con của $S_3$.<br>
+        (b) Với mỗi tập không phải nhóm con, hãy tìm một tích hai phần tử không thuộc tập để chứng minh tính không đóng.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • <b>Tiêu chuẩn cho tập con hữu hạn:</b> Nếu $H \subseteq G$ là tập hữu hạn khác rỗng, thì $H \le G$ khi và chỉ khi $H$ đóng đối với phép toán ($xy \in H$ với mọi $x, y \in H$).<br>
+        • Do đó, chỉ cần lập bảng nhân hoặc kiểm tra tích của các phần tử khác đơn vị.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Khảo sát từng tập:</b></p>
+      <p>
+        • <b>Tập $H = \{e, (1\,2\,3), (1\,3\,2)\}$:</b><br>
+        Ta có $(1\,2\,3)^2 = (1\,3\,2) \in H$, $(1\,3\,2)^2 = (1\,2\,3) \in H$, và $(1\,2\,3)(1\,3\,2) = e \in H$.<br>
+        Tập $H$ hữu hạn và đóng đối với phép nhân. Vậy $H \le S_3$ (đây chính là nhóm thay phiên $A_3$).
+      </p>
+      <p>
+        • <b>Tập $K = \{e, (1\,2), (1\,3)\}$:</b><br>
+        Lấy hai phần tử $(1\,2), (1\,3) \in K$. Xét tích:<br>
+        $$(1\,2)(1\,3) = (1\,3\,2) \notin K$$
+        Tập $K$ không đóng đối với phép nhân, nên $K$ không phải là nhóm con của $S_3$.
+      </p>
+      <p>
+        • <b>Tập $L = \{e, (1\,2)\}$:</b><br>
+        Vì $(1\,2)^2 = e \in L$, tập $L$ đóng đối với phép nhân. Vậy $L \le S_3$ (nhóm con sinh bởi một chuyển vị). <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Sức mạnh của tập hữu hạn:</b> Tiêu chuẩn "chỉ cần đóng đối với tích" chỉ áp dụng khi tập con là <b>hữu hạn</b>. Với tập con vô hạn (như $\mathbb{N} \subset \mathbb{Z}$ ở Bài 2.1), đóng đối với tích không đảm bảo có nghịch đảo!
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 2.12 -->
+  <div class="ex-study-card" id="ex-2-12">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-b">Nhóm B · Vận dụng</span>
+        <span class="ex-level-badge">🟡 Vận dụng</span>
+        <span class="ex-title-label">BÀI TẬP 2.12: Cấp của Phần tử và Phần tử sinh trong Z/nZ</span>
+      </div>
+      <button class="ex-status-btn" data-id="2-12" data-status="todo" onclick="toggleExStatus(this, '2-12')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Trong nhóm cộng cyclic $G = \mathbb{Z}/18\mathbb{Z}$:</p>
+      <p>
+        (a) Tính cấp của các phần tử $[1], [4], [6], [9]$ và $[15]$.<br>
+        (b) Liệt kê tất cả các phần tử sinh của $\mathbb{Z}/18\mathbb{Z}$. Có tất cả bao nhiêu phần tử sinh?<br>
+        (c) Tìm nhóm con duy nhất cấp 6 của $\mathbb{Z}/18\mathbb{Z}$ và liệt kê các phần tử của nó.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Công thức cấp phần tử trong nhóm cyclic cấp $n$: $\operatorname{ord}([k]_n) = \frac{n}{\gcd(n, k)}$.<br>
+        • Phần tử $[k]_n$ là phần tử sinh khi và chỉ khi $\operatorname{ord}([k]_n) = n \iff \gcd(k, n) = 1$. Số phần tử sinh đúng bằng $\varphi(n)$.<br>
+        • Nhóm con duy nhất cấp $d$ (với $d \mid n$) được sinh bởi $[n/d]_n$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Cấp của các phần tử trong $\mathbb{Z}/18\mathbb{Z}$:</b></p>
+      <p>
+        • $\operatorname{ord}([1]) = \frac{18}{\gcd(18, 1)} = \frac{18}{1} = 18$<br>
+        • $\operatorname{ord}([4]) = \frac{18}{\gcd(18, 4)} = \frac{18}{2} = 9$<br>
+        • $\operatorname{ord}([6]) = \frac{18}{\gcd(18, 6)} = \frac{18}{6} = 3$<br>
+        • $\operatorname{ord}([9]) = \frac{18}{\gcd(18, 9)} = \frac{18}{9} = 2$<br>
+        • $\operatorname{ord}([15]) = \frac{18}{\gcd(18, 15)} = \frac{18}{3} = 6$
+      </p>
+      <p><b>(b) Các phần tử sinh của $\mathbb{Z}/18\mathbb{Z}$:</b><br>
+        Đó là các lớp $[k]_{18}$ thỏa mãn $\gcd(k, 18) = 1$. Các số nguyên trong $\{0, 1, \dots, 17\}$ nguyên tố cùng nhau với 18 là:
+        $$\{1, 5, 7, 11, 13, 17\}$$
+        Vậy có đúng $\varphi(18) = 18 \times (1 - 1/2)(1 - 1/3) = 6$ phần tử sinh, gồm $\{[1], [5], [7], [11], [13], [17]\}$.
+      </p>
+      <p><b>(c) Nhóm con duy nhất cấp 6:</b><br>
+        Theo Định lý Cơ bản về nhóm cyclic, ước $d = 6$ cho nhóm con sinh bởi $[18/6] = [3]$:
+        $$H_6 = \langle [3] \rangle = \{[0], [3], [6], [9], [12], [15]\} \quad \blacksquare$$
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Bẫy sai lầm:</b> Không được nhầm lẫn giữa cấp của phần tử $a$ với bội của nó. Cấp là số nguyên dương $m$ nhỏ nhất sao cho $m \cdot a = 0$.
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 2.32 -->
+  <div class="ex-study-card" id="ex-2-32">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-d">Nhóm D · Tổng hợp</span>
+        <span class="ex-level-badge">🔴 Nâng cao</span>
+        <span class="ex-title-label">BÀI TẬP 2.32: Số Nghiệm của Phương trình xᵐ = e</span>
+      </div>
+      <button class="ex-status-btn" data-id="2-32" data-status="todo" onclick="toggleExStatus(this, '2-32')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Cho $G = \langle a \rangle$ là một nhóm cyclic cấp $n$. Chứng minh phương trình $x^m = e$ ($m \ge 1$) có đúng $\gcd(n, m)$ nghiệm trong $G$.</p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Biểu diễn mọi phần tử dưới dạng $x = a^k$ với $0 \le k < n$.<br>
+        • Đưa điều kiện $(a^k)^m = e$ về quan hệ chia hết $n \mid km$, sau đó chia cả hai vế cho $d = \gcd(n, m)$ để đếm số lượng thặng dư $k$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p>Vì $G = \langle a \rangle$ có cấp $n$, mọi phần tử của $G$ đều có dạng duy nhất $x = a^k$ với $0 \le k \le n - 1$.</p>
+      <p>
+        • Phương trình $x^m = e$ trở thành:
+        $$(a^k)^m = e \iff a^{km} = e \iff n \mid km$$
+        • Đặt $d = \gcd(n, m)$, ta viết $n = dn_0$ và $m = dm_0$ với $\gcd(n_0, m_0) = 1$.<br>
+        Khi đó quan hệ chia hết tương đương:
+        $$dn_0 \mid k(dm_0) \iff n_0 \mid km_0$$
+        • Vì $\gcd(n_0, m_0) = 1$, theo bổ đề Euclid ta suy ra $n_0 \mid k$.<br>
+        • Do đó, $k$ phải là bội của $n_0 = n/d$. Trong khoảng $0 \le k < n$, các bội của $n/d$ gồm:
+        $$k \in \left\{ 0, \frac{n}{d}, 2\frac{n}{d}, \dots, (d - 1)\frac{n}{d} \right\}$$
+        Có đúng $d = \gcd(n, m)$ giá trị của $k$.<br>
+        <b>Kết luận:</b> Phương trình $x^m = e$ có đúng $\gcd(n, m)$ nghiệm trong $G$. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Ý nghĩa cấu trúc:</b> Toàn bộ $\gcd(n, m)$ nghiệm này tạo thành nhóm con duy nhất cấp $\gcd(n, m)$ của $G$. Kết quả này chỉ đúng cho nhóm cyclic; trong nhóm không cyclic (như nhóm Klein $V_4$), phương trình $x^2 = e$ có tới 4 nghiệm dù cấp là 4.
+      </p>
+    </div>
+  </div>
+</div>

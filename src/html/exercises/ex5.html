@@ -1,0 +1,174 @@
+<!-- ==================== BÀI TẬP CHƯƠNG 5: HOÀN CHỈNH ==================== -->
+<div class="chapter-content" id="tab-ex5">
+  <h2 class="section-title">Hệ thống Bài tập & Lời giải: Chương 5. Đồng cấu & Đẳng cấu Nhóm</h2>
+  <p>
+    Thành thạo việc tính toán hạt nhân $\ker\varphi$, tập ảnh $\operatorname{im}\varphi$, áp dụng tiêu chuẩn đơn ánh và quy trình 3 bước kinh điển của Định lý Đẳng cấu thứ nhất.
+  </p>
+
+  <!-- BÀI TẬP 5.1 -->
+  <div class="ex-study-card" id="ex-5-1">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-a">Nhóm A · Nhận diện</span>
+        <span class="ex-level-badge">🟢 Cơ bản</span>
+        <span class="ex-title-label">BÀI TẬP 5.1: Xác định Đồng cấu Nhóm, Hạt nhân và Ảnh</span>
+      </div>
+      <button class="ex-status-btn" data-id="5-1" data-status="todo" onclick="toggleExStatus(this, '5-1')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Với mỗi ánh xạ sau, kiểm tra xem nó có phải là một đồng cấu nhóm hay không. Nếu có, hãy tìm hạt nhân $\ker\varphi$ và ảnh $\operatorname{im}\varphi$:</p>
+      <p>
+        (a) $\varphi: (\mathbb{R}, +) \to (\mathbb{R}^\times, \cdot)$ xác định bởi $\varphi(x) = 2^x$;<br>
+        (b) $\psi: \operatorname{GL}_2(\mathbb{R}) \to (\mathbb{R} \setminus \{0\}, \cdot)$ xác định bởi $\psi(A) = \det(A)$;<br>
+        (c) $f: (\mathbb{Z}, +) \to (\mathbb{Z}, +)$ xác định bởi $f(x) = x + 1$.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Đồng cấu phải bảo toàn phép toán: $\varphi(x * y) = \varphi(x) \circ \varphi(y)$.<br>
+        • Hạt nhân là tập các phần tử gửi về đơn vị đối miền: $\ker\varphi = \{x \in G \mid \varphi(x) = e_K\}$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) $\varphi(x) = 2^x$ từ $(\mathbb{R}, +)$ vào $(\mathbb{R}^\times, \cdot)$:</b><br>
+        • Với mọi $x, y \in \mathbb{R}$: $\varphi(x + y) = 2^{x+y} = 2^x \cdot 2^y = \varphi(x)\varphi(y)$. Vậy $\varphi$ là đồng cấu nhóm.<br>
+        • Hạt nhân: $\ker\varphi = \{x \in \mathbb{R} \mid 2^x = 1\} = \{0\}$. (Do đó $\varphi$ là đơn cấu).<br>
+        • Ảnh: $\operatorname{im}\varphi = \{2^x \mid x \in \mathbb{R}\} = \mathbb{R}^+ = (0, +\infty)$.
+      </p>
+      <p><b>(b) $\psi(A) = \det(A)$ từ $\operatorname{GL}_2(\mathbb{R})$ vào $(\mathbb{R}^\times, \cdot)$:</b><br>
+        • Theo tính chất định thức: $\det(AB) = \det(A)\det(B)$ với mọi $A, B \in \operatorname{GL}_2(\mathbb{R})$. Vậy $\psi$ là đồng cấu nhóm.<br>
+        • Hạt nhân: $\ker\psi = \{A \in \operatorname{GL}_2(\mathbb{R}) \mid \det(A) = 1\} = \operatorname{SL}_2(\mathbb{R})$ (nhóm tuyến tính đặc biệt).<br>
+        • Ảnh: Vì với mọi $r \in \mathbb{R}^\times$, ma trận đường chéo $\begin{pmatrix} r & 0 \\ 0 & 1 \end{pmatrix}$ có định thức $r$, nên $\operatorname{im}\psi = \mathbb{R}^\times$ (toàn ánh).
+      </p>
+      <p><b>(c) $f(x) = x + 1$ trên $(\mathbb{Z}, +)$:</b><br>
+        • Ta có $f(0 + 0) = f(0) = 1$, trong khi $f(0) + f(0) = 1 + 1 = 2 \neq 1$.<br>
+        Vì $f(0) \neq 0$ (không bảo toàn phần tử đơn vị), $f$ <b>không phải</b> là đồng cấu nhóm. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Phản xạ nhanh:</b> Mọi đồng cấu nhóm $\varphi$ bắt buộc phải thỏa mãn $\varphi(e_G) = e_K$. Nếu tính giá trị tại phần tử đơn vị mà khác đơn vị đối miền, kết luận ngay không phải đồng cấu!
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 5.5 -->
+  <div class="ex-study-card" id="ex-5-5">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-b">Nhóm B · Vận dụng</span>
+        <span class="ex-level-badge">🟡 Vận dụng</span>
+        <span class="ex-title-label">BÀI TẬP 5.5: Tiêu chuẩn Đơn cấu qua Hạt nhân</span>
+      </div>
+      <button class="ex-status-btn" data-id="5-5" data-status="todo" onclick="toggleExStatus(this, '5-5')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Cho $\varphi: G \to K$ là một đồng cấu nhóm. Chứng minh $\varphi$ là đơn ánh khi và chỉ khi hạt nhân của nó là tầm thường, tức là $\ker\varphi = \{e_G\}$.</p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Chiều thuận ($\implies$): Định nghĩa đơn ánh và quan sát $\varphi(e_G) = e_K$.<br>
+        • Chiều đảo ($\Longleftarrow$): Giả sử $\varphi(a) = \varphi(b)$, nhân hai vế với $\varphi(b)^{-1}$ để đưa về $\varphi(ab^{-1}) = e_K$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>Chiều thuận ($\implies$):</b> Giả sử $\varphi$ là đơn ánh.<br>
+        Ta luôn có $\varphi(e_G) = e_K$, nên $e_G \in \ker\varphi$.<br>
+        Lấy $x \in \ker\varphi$ tùy ý, khi đó $\varphi(x) = e_K = \varphi(e_G)$.<br>
+        Vì $\varphi$ là đơn ánh, suy ra $x = e_G$. Vậy $\ker\varphi = \{e_G\}$.
+      </p>
+      <p><b>Chiều đảo ($\Longleftarrow$):</b> Giả sử $\ker\varphi = \{e_G\}$. Ta chứng minh $\varphi$ là đơn ánh.<br>
+        Giả sử $a, b \in G$ thỏa mãn $\varphi(a) = \varphi(b)$.<br>
+        Nhân hai vế ở bên phải với $\varphi(b)^{-1} = \varphi(b^{-1})$:
+        $$\varphi(a)\varphi(b^{-1}) = e_K$$
+        Vì $\varphi$ là đồng cấu nhóm:
+        $$\varphi(ab^{-1}) = e_K$$
+        Theo định nghĩa hạt nhân, điều này có nghĩa là $ab^{-1} \in \ker\varphi$.<br>
+        Nhưng vì giả thiết $\ker\varphi = \{e_G\}$, ta bắt buộc phải có:
+        $$ab^{-1} = e_G \implies a = b$$
+        Vậy $\varphi$ là một đơn ánh (đơn cấu). <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Sức mạnh đại số:</b> Trong ánh xạ thông thường, muốn chứng minh đơn ánh phải khảo sát mọi cặp $(a, b)$. Trong đại số trừu tượng, nhờ cấu trúc nhóm, ta chỉ cần giải một phương trình duy nhất: $\varphi(x) = e_K$!
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 5.39 -->
+  <div class="ex-study-card" id="ex-5-39">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-d">Nhóm D · Tổng hợp</span>
+        <span class="ex-level-badge">🔴 Nâng cao</span>
+        <span class="ex-title-label">BÀI TẬP 5.39: Phương pháp 3 bước Nhận diện Nhóm thương</span>
+      </div>
+      <button class="ex-status-btn" data-id="5-39" data-status="todo" onclick="toggleExStatus(this, '5-39')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Trên nhóm cộng $\mathbb{Z} \times \mathbb{Z}$, xét nhóm con đường chéo $\Delta = \{(k, k) \mid k \in \mathbb{Z}\}$.</p>
+      <p>
+        Dùng Định lý Đẳng cấu thứ nhất theo phương pháp 3 bước để chứng minh:
+        $$(\mathbb{Z} \times \mathbb{Z}) / \Delta \;\cong\; \mathbb{Z}$$
+        Giải thích ý nghĩa hình học của các lớp kề theo hiệu hai tọa độ.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Bước 1: Thiết lập đồng cấu $\delta: \mathbb{Z} \times \mathbb{Z} \to \mathbb{Z}$ định bởi $\delta(a, b) = a - b$.<br>
+        • Bước 2: Chứng minh $\delta$ là toàn ánh ($\operatorname{im}\delta = \mathbb{Z}$).<br>
+        • Bước 3: Tìm hạt nhân $\ker\delta$ và chỉ ra $\ker\delta = \Delta$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>1. Bước 1: Xây dựng đồng cấu $\delta$:</b><br>
+        Xét ánh xạ $\delta: \mathbb{Z} \times \mathbb{Z} \to \mathbb{Z}$ cho bởi $\delta(a, b) = a - b$.<br>
+        Với mọi $(a, b), (c, d) \in \mathbb{Z} \times \mathbb{Z}$:
+        $$\delta((a, b) + (c, d)) = \delta(a + c, b + d) = (a + c) - (b + d)$$
+        $$= (a - b) + (c - d) = \delta(a, b) + \delta(c, d)$$
+        Vậy $\delta$ là một đồng cấu nhóm.
+      </p>
+      <p><b>2. Bước 2: Chứng minh toàn ánh:</b><br>
+        Với bất kỳ số nguyên $n \in \mathbb{Z}$ ở đối miền, ta chọn cặp $(n, 0) \in \mathbb{Z} \times \mathbb{Z}$. Khi đó:
+        $$\delta(n, 0) = n - 0 = n$$
+        Do đó $\operatorname{im}\delta = \mathbb{Z}$, ánh xạ $\delta$ là toàn ánh.
+      </p>
+      <p><b>3. Bước 3: Tìm hạt nhân $\ker\delta$:</b><br>
+        $$\ker\delta = \{(a, b) \in \mathbb{Z} \times \mathbb{Z} \mid \delta(a, b) = 0\}$$
+        $$= \{(a, b) \in \mathbb{Z} \times \mathbb{Z} \mid a - b = 0\} = \{(a, a) \mid a \in \mathbb{Z}\} = \Delta$$
+      </p>
+      <p><b>Kết luận:</b><br>
+        Áp dụng Định lý Đẳng cấu thứ nhất cho nhóm:
+        $$(\mathbb{Z} \times \mathbb{Z}) / \ker\delta \;\cong\; \operatorname{im}\delta \implies (\mathbb{Z} \times \mathbb{Z}) / \Delta \;\cong\; \mathbb{Z}$$
+        <i>Ý nghĩa:</i> Mỗi lớp kề $(a, b) + \Delta$ gồm các điểm nguyên nằm trên đường thẳng $y = x + (b - a)$ song song với đường phân giác; đại diện cho khoảng cách có hướng giữa hai tọa độ. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Tuyệt chiêu phương pháp 3 bước:</b> Đây là kỹ thuật mẫu mực nhất trong các đề thi đại số: Bất cứ khi nào đề bài yêu cầu chứng minh $G/N \cong K$, đừng cố gắng chia lớp kề hay lập bảng phép toán. Hãy tìm một toàn cấu từ $G$ lên $K$ sao cho hạt nhân là $N$!
+      </p>
+    </div>
+  </div>
+</div>

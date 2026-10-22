@@ -1,0 +1,602 @@
+<!-- ======================================================== -->
+<div class="chapter-content" id="tab-c2">
+  <h2 class="section-title">Chương 2. Nhóm Con và Nhóm Cyclic</h2>
+  
+  <p class="welcome-copy">
+    Trong một nhóm đã biết, nhiều tập hợp con tự mang đầy đủ cấu trúc nhóm độc lập. 
+    Chương này xây dựng các công cụ tối giản để nhận diện nhóm con, nghiên cứu phép giao và phép hợp, 
+    tìm nhóm con nhỏ nhất sinh bởi một tập hợp, và khảo sát cấu trúc nhóm cyclic nảy sinh từ việc lặp một phần tử duy nhất.
+  </p>
+
+  <!-- 2.1 KHỞI NGUỒN CẤU TRÚC NỘI TẠI -->
+  <h3 class="subsection-title">2.1. Khởi Nguồn Cấu Trúc Nội Tại: Từ Tập Con Đến Khái Niệm Nhóm Con</h3>
+  <p>
+    Trong nhóm cộng số nguyên $(\mathbb{Z}, +)$, tập các số chẵn $2\mathbb{Z}$ đóng với phép cộng, chứa số $0$, và với mọi số chẵn $2m$ đều chứa số đối $-2m$. 
+    Do đó $2\mathbb{Z}$ tự nó là một nhóm hoàn chỉnh. Trái lại, tập $\mathbb{N} = \{0, 1, 2, \dots\}$ chứa $0$ và đóng với cộng, nhưng không chứa số đối của các số dương.
+  </p>
+  <p>
+    Trong nhóm hữu hạn $\mathbb{Z}/12\mathbb{Z}$, tập $H = \{[0], [4], [8]\}$ đóng với cộng và chứa số đối của từng phần tử, trong khi tập $K = \{[0], [4]\}$ thì thất bại vì $[4] + [4] = [8] \notin K$. 
+    Hiện tượng này dẫn đến nhu cầu định nghĩa chính xác và xây dựng tiêu chuẩn nhận diện nhóm con.
+  </p>
+
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 2.1</span>
+      <span class="tag">Khái Niệm Nhóm Con</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $(G, *)$ là một nhóm và $H$ là một tập hợp con của $G$ ($H \subseteq G$). Cấu trúc $H$ được gọi là một <b>nhóm con</b> của $G$ nếu thỏa mãn đồng thời các điều kiện sau:</p>
+      <ul class="bullet-list">
+        <li><b>1. Khác rỗng:</b> $H \neq \emptyset$.</li>
+        <li><b>2. Tính đóng đối với phép toán:</b> $\forall x, y \in H \implies x * y \in H$.</li>
+        <li><b>3. Chứa phần tử trung hòa:</b> Phần tử đơn vị $e$ của $G$ thuộc $H$ ($e \in H$).</li>
+        <li><b>4. Chứa phần tử nghịch đảo:</b> $\forall x \in H \implies x^{-1} \in H$.</li>
+      </ul>
+      <div class="corollary-box">
+        <b>💡 Nhận xét rút ra:</b> Nói cách khác, <i>một tập con $H \subseteq G$ là một nhóm con nếu phép toán của $G$, khi thu hẹp trên $H$, biến $H$ thành một nhóm tự thân</i>.
+        <br>• Ký hiệu: $H \le G$. Nếu $H \subseteq G$ và $H \neq G$, ta viết $H &lt; G$ (nhóm con thực sự).
+        <br>• Tính kết hợp luôn được kế thừa tự động từ nhóm mẹ $G$, không cần kiểm tra lại!
+        <br>• Mọi nhóm $G$ luôn có hai nhóm con hiển nhiên: nhóm con tầm thường $\{e\}$ và chính nó $G$.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Xét nhóm mẹ $G=(\mathbb{Z},+)$ và tập con $H=4\mathbb{Z}=\{4k:k\in\mathbb{Z}\}$. Chứng minh $H\le G$.</p>
+          <p><b>2. Hộp công cụ.</b> Theo định nghĩa, cần kiểm tra $H$ khác rỗng, đóng với phép toán, chứa đơn vị và chứa nghịch đảo. Tính kết hợp được kế thừa từ $\mathbb{Z}$.</p>
+          <p><b>3. Lời giải.</b> Ta có $0=4\cdot0\in H$, nên $H\ne\emptyset$. Lấy $x=4m,y=4n\in H$ tùy ý, khi đó $x+y=4(m+n)\in H$. Đơn vị $0$ thuộc $H$, và $-x=-4m=4(-m)\in H$. Vậy $H$ thỏa các điều kiện nhóm con, tức $4\mathbb{Z}\le\mathbb{Z}$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Tính đóng chưa đủ để kết luận là nhóm con: $\mathbb{N}$ đóng với cộng nhưng không chứa số đối của $1$. Ở đây tính đóng và tính đóng dưới phép lấy đối đều được chứng minh riêng.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 2.2 TIÊU CHUẨN NHÓM CON RÚT GỌN -->
+  <h3 class="subsection-title">2.2. Tiêu Chuẩn Nhóm Con: Tối Giản Hóa Tiên Đề Qua Các Phép Thử</h3>
+  <p>
+    Việc kiểm tra lần lượt cả 4 điều kiện trên rất dài dòng. Các định lý sau đây cung cấp những tiêu chuẩn rút gọn tối ưu:
+  </p>
+
+  <!-- ĐỊNH LÝ 2.2: TIÊU CHUẨN RÚT GỌN -->
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 2.2</span>
+      <span class="tag">Tiêu Chuẩn Nhóm Con Rút Gọn (Subgroup Test)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $G$ là một nhóm và $H$ là một tập hợp con khác rỗng của $G$ ($H \neq \emptyset$). Khi đó $H \le G$ khi và chỉ khi:</p>
+      <div class="math-display">
+        $$\forall x, y \in H \implies xy^{-1} \in H \quad \text{(Ký hiệu nhân)}$$
+      </div>
+      <div class="math-display">
+        $$\forall x, y \in H \implies x - y \in H \quad \text{(Ký hiệu cộng)}$$
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong nhóm mẹ cộng $G=(\mathbb{Z},+)$, xét $H=4\mathbb{Z}$. Dùng tiêu chuẩn rút gọn để kiểm tra $H$ có là nhóm con không.</p>
+          <p><b>2. Hộp công cụ.</b> Với nhóm viết theo phép cộng, tiêu chuẩn nhóm con là $H\ne\emptyset$ và $x-y\in H$ với mọi $x,y\in H$.</p>
+          <p><b>3. Lời giải.</b> Vì $0=4\cdot0\in H$, tập $H$ khác rỗng. Lấy $x=4m,y=4n\in H$ tùy ý. Khi đó $x-y=4m-4n=4(m-n)\in4\mathbb{Z}=H$. Vậy theo tiêu chuẩn rút gọn, $H\le G$ (đpcm). Chẳng hạn $8-12=-4=4(-1)$ vẫn thuộc $H$.</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Điều kiện $x-y\in H$ đồng thời mã hóa tính đóng, phần tử đơn vị và phần tử đối. Không được bỏ qua bước $H\ne\emptyset$; nếu $H=\emptyset$, điều kiện kéo theo có thể đúng một cách rỗng.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="proof-block">
+    <summary>🔍 Xem chứng minh tiêu chuẩn rút gọn $xy^{-1} \in H$</summary>
+    <div class="proof-content">
+      <p>
+        • $(\implies)$ Nếu $H \le G$, với mọi $x, y \in H$, ta có $y^{-1} \in H$. Vì $H$ đóng với tích nên $xy^{-1} \in H$.<br>
+        • $(\impliedby)$ Giả sử $H \neq \emptyset$ và $xy^{-1} \in H$ với mọi $x, y \in H$:
+        <br>&nbsp;&nbsp;1. <i>Chứa đơn vị:</i> Vì $H \neq \emptyset$, tồn tại $h \in H$. Lấy $x = h, y = h \implies e = hh^{-1} \in H$.
+        <br>&nbsp;&nbsp;2. <i>Chứa nghịch đảo:</i> Với $y \in H$, lấy $x = e \in H \implies y^{-1} = ey^{-1} \in H$.
+        <br>&nbsp;&nbsp;3. <i>Tính đóng:</i> Với $x, y \in H$, do $y^{-1} \in H$, áp dụng điều kiện cho cặp $(x, y^{-1})$ được $x(y^{-1})^{-1} = xy \in H$.
+        <br>Tính kết hợp kế thừa từ $G$. Vậy $H \le G$. <span class="qed">∎</span>
+      </p>
+    </div>
+  </details>
+
+  <!-- ĐỊNH LÝ 2.3: TẬP HỮU HẠN CHỈ CẦN TÍNH ĐÓNG -->
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 2.3</span>
+      <span class="tag">Tiêu Chuẩn Nhóm Con Cho Tập Hữu Hạn</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $H$ là một tập con <b>hữu hạn và khác rỗng</b> của nhóm $G$. Khi đó:</p>
+      <div class="math-display">
+        $$H \le G \iff \forall x, y \in H \implies xy \in H \quad \text{(Chỉ cần tính đóng!)}$$
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong nhóm cộng $G=\mathbb{Z}/12\mathbb{Z}$, xét $H=\{[0],[4],[8]\}$. Kiểm tra $H$ có là nhóm con.</p>
+          <p><b>2. Hộp công cụ.</b> Định lý tập hữu hạn nói rằng một tập con hữu hạn, khác rỗng của nhóm là nhóm con nếu nó đóng với phép toán.</p>
+          <p><b>3. Lời giải.</b> Tập $H$ có ba phần tử nên hữu hạn và khác rỗng. Các tổng modulo $12$ là $[0]+[x]=[x]$ với $[x]\in H$, cùng $[4]+[4]=[8]$, $[4]+[8]=[0]$, $[8]+[8]=[4]$; do giao hoán, các tổng đảo thứ tự cũng nằm trong $H$. Vậy $H$ đóng, nên theo định lý $H\le G$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Bước rút gọn chỉ dùng được vì $H$ hữu hạn và khác rỗng. Với tập vô hạn, tính đóng riêng không đủ; chẳng hạn $\mathbb{N}\subset\mathbb{Z}$ đóng với cộng nhưng không là nhóm con.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="proof-block">
+    <summary>🔍 Xem chứng minh bằng Đơn ánh trên Tập hữu hạn</summary>
+    <div class="proof-content">
+      <p>
+        Giả sử $H$ hữu hạn, khác rỗng và đóng với phép nhân. Cố định $a \in H$. 
+        Xét ánh xạ tịnh tiến trái $L_a: H \to H$ định bởi $L_a(x) = ax$. 
+        Theo luật giản ước trong $G$, $ax = ay \implies x = y$, do đó $L_a$ là một đơn ánh.
+      </p>
+      <p>
+        Vì $H$ là tập hữu hạn, <b>mọi đơn ánh từ $H$ vào chính nó bắt buộc phải là toàn ánh</b>. 
+        Do đó tồn tại $u \in H$ sao cho $au = a \implies u = e \in H$. 
+        Đồng thời tồn tại $y \in H$ sao cho $ay = e \implies y = a^{-1} \in H$. Vậy $H \le G$. <span class="qed">∎</span>
+      </p>
+    </div>
+  </details>
+
+  <!-- SƠ ĐỒ TIÊU CHUẨN NHÓM CON HÀI HÒA -->
+  <div style="background: var(--eq-bg, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 12px; padding: 18px; margin: 1.5rem 0;">
+    <div style="font-weight: 700; color: var(--thm-color, #1e3a8a); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+      <span>🧭</span> Cây Quyết Định: Lựa Chọn Tiêu Chuẩn Kiểm Tra Nhóm Con $H \subseteq G$
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+      <div style="background: #ffffff; border: 1.5px solid #bfdbfe; border-radius: 8px; padding: 12px;">
+        <b style="color: #2563eb;">Trường hợp $H$ tổng quát (hoặc vô hạn):</b>
+        <p style="margin: 6px 0 0; font-size: 0.92rem; color: #334155;">
+          Kiểm tra 2 bước: $H \neq \emptyset$ và $xy^{-1} \in H$ (dạng cộng: $x - y \in H$). Tiêu chuẩn này bao quát cả tính đóng, đơn vị và nghịch đảo.
+        </p>
+      </div>
+      <div style="background: #ffffff; border: 1.5px solid #a7f3d0; border-radius: 8px; padding: 12px;">
+        <b style="color: #059669;">Trường hợp $H$ hữu hạn:</b>
+        <p style="margin: 6px 0 0; font-size: 0.92rem; color: #334155;">
+          Chỉ cần kiểm tra $H \neq \emptyset$ và $xy \in H$ (tính đóng). Nghịch đảo và đơn vị tự động sinh ra nhờ tính hữu hạn!
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.3 GIAO VÀ HỢP CÁC NHÓM CON -->
+  <h3 class="subsection-title">2.3. Đại Số Các Nhóm Con: Phép Giao Bảo Toàn & Trở Ngại Của Phép Hợp</h3>
+  
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 2.4</span>
+      <span class="tag">Giao Của Một Họ Các Nhóm Con</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $\{H_i\}_{i \in I}$ là một họ bất kỳ các nhóm con của nhóm $G$. Khi đó giao của chúng:</p>
+      <div class="math-display">
+        $$\bigcap_{i \in I} H_i \le G$$
+      </div>
+      <p><i>Quy ước biên:</i> Giao của một họ rỗng các nhóm con trong nhóm mẹ $G$ được quy ước bằng chính $G$.</p>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $G=\mathbb{Z}/12\mathbb{Z}$, lấy $H=\langle[4]\rangle=\{[0],[4],[8]\}$ và $K=\langle[6]\rangle=\{[0],[6]\}$. Tìm $H\cap K$.</p>
+          <p><b>2. Hộp công cụ.</b> Giao của một họ nhóm con vẫn là nhóm con. Ta có thể tìm giao bằng cách liệt kê phần tử chung; để xác nhận, dùng tiêu chuẩn $x-y\in H\cap K$.</p>
+          <p><b>3. Lời giải.</b> So sánh hai tập, phần tử duy nhất chung là $[0]$, do đó $H\cap K=\{[0]\}$. Tập này khác rỗng; với $x=y=[0]$, hiệu bằng $[0]$, nên nó là nhóm con tầm thường $\langle[0]\rangle\le G$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Phép giao giữ lại phần tử thuộc đồng thời mọi nhóm con, không phải hợp các phần tử. Đặc biệt, giao có thể nhỏ hơn nghiêm ngặt từng nhóm con, như ví dụ này.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 2.5</span>
+      <span class="tag">Tiêu Chuẩn Hợp Của Hai Nhóm Con</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $H, K$ là hai nhóm con của nhóm $G$. Khi đó:</p>
+      <div class="math-display">
+        $$H \cup K \le G \iff H \subseteq K \quad \text{hoặc} \quad K \subseteq H$$
+      </div>
+      <p>Nói cách khác, hợp của hai nhóm con chỉ là nhóm con khi một trong hai nhóm con chứa nhóm con kia.</p>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $(\mathbb{Z},+)$, xét hai cặp nhóm con $H=2\mathbb{Z},K=4\mathbb{Z}$ và $H'=2\mathbb{Z},K'=3\mathbb{Z}$. Xác định hợp nào là nhóm con.</p>
+          <p><b>2. Hộp công cụ.</b> Hợp của hai nhóm con là nhóm con khi và chỉ khi một nhóm con chứa nhóm kia.</p>
+          <p><b>3. Lời giải.</b> Vì mọi bội của $4$ là bội của $2$, $K\subseteq H$, nên $H\cup K=H=2\mathbb{Z}$ là nhóm con. Với cặp sau, $2\in H'$ và $3\in K'$, nhưng $2+3=5\notin2\mathbb{Z}\cup3\mathbb{Z}$; hợp không đóng, nên không là nhóm con. Kết quả phù hợp với tiêu chuẩn vì $H'$ và $K'$ không chứa nhau.</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Hợp của các nhóm con không tự động là nhóm con. Chỉ cần tìm một tổng (hoặc tích) nằm ngoài hợp để bác bỏ tính đóng; không nhầm phép hợp với phép sinh nhóm con bởi hợp.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="proof-block">
+    <summary>🔍 Xem chứng minh phản chứng tiêu chuẩn hợp $H \cup K$</summary>
+    <div class="proof-content">
+      <p>
+        • Chiều $(\impliedby)$ hiển nhiên vì nếu $H \subseteq K$ thì $H \cup K = K \le G$.<br>
+        • Chiều $(\implies)$: Giả sử $H \cup K \le G$ nhưng $H \not\subseteq K$ và $K \not\subseteq H$. 
+        Khi đó tồn tại $h \in H \setminus K$ và $k \in K \setminus H$.<br>
+        Vì $h, k \in H \cup K$ và $H \cup K$ là nhóm con, tích $hk \in H \cup K$.
+        <br>&nbsp;&nbsp;- Nếu $hk \in H \implies k = h^{-1}(hk) \in H$ (mâu thuẫn với $k \notin H$).
+        <br>&nbsp;&nbsp;- Nếu $hk \in K \implies h = (hk)k^{-1} \in K$ (mâu thuẫn với $h \notin K$).
+        <br>Cả hai trường hợp đều mâu thuẫn. Vậy bắt buộc phải có quan hệ bao hàm. <span class="qed">∎</span>
+      </p>
+    </div>
+  </details>
+
+  <!-- 2.4 NHÓM CON SINH BỞI TẬP HỢP -->
+  <h3 class="subsection-title">2.4. Phép Dựng Nhóm Con Sinh Bởi Tập Hợp $\langle S \rangle$</h3>
+  <p>
+    Vì hợp của các nhóm con nói chung không phải là nhóm con, ta cần công cụ để tạo ra nhóm con bé nhất chứa một tập hợp cho trước.
+  </p>
+
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 2.6</span>
+      <span class="tag">Nhóm Con Sinh Bởi Tập Hợp</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $S$ là một tập hợp con của nhóm $G$. Cấu trúc $\langle S \rangle$ thỏa mãn:</p>
+      <ul class="bullet-list">
+        <li><b>1. Định nghĩa bằng giao (Từ trên xuống):</b> $\langle S \rangle = \bigcap \{H \le G \mid S \subseteq H\}$.</li>
+        <li><b>2. Tính chất nhỏ nhất:</b> $\langle S \rangle$ chứa $S$ và nằm trong mọi nhóm con của $G$ chứa $S$.</li>
+        <li><b>3. Mô tả phần tử tường minh (Từ dưới lên):</b> $\langle S \rangle$ là tập hợp tất cả các tích hữu hạn ("từ") tạo bởi các phần tử của $S$ và nghịch đảo của chúng:
+          $$\langle S \rangle = \{x_1^{k_1} x_2^{k_2} \cdots x_m^{k_m} \mid m \ge 1, x_i \in S, k_i \in \mathbb{Z}\}$$
+        </li>
+      </ul>
+      <div class="corollary-box">
+        <b>💡 Nhận xét rút ra:</b> Nói cách khác, <i>$\langle S \rangle$ là nhóm con nhỏ nhất của $G$ chứa tập hợp $S$</i>.
+        <br>• $S$ được gọi là một <b>tập sinh</b> của $\langle S \rangle$.
+        <br>• Quy ước trường hợp biên: $\langle \emptyset \rangle = \{e\}$.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $G=(\mathbb{Z}/12\mathbb{Z},+)$, cho $S=\{[4]\}$. Tìm nhóm con $\langle S\rangle$ do $S$ sinh ra.</p>
+          <p><b>2. Hộp công cụ.</b> Nhóm con sinh bởi $S$ là nhóm con nhỏ nhất chứa $S$, gồm các tổng hữu hạn của phần tử thuộc $S$ và các số đối của chúng.</p>
+          <p><b>3. Lời giải.</b> Bắt đầu từ $[0]$, cộng lặp $[4]$ được $[0],[4],[8],[12]=[0]$. Số đối của $[4]$ là $-[4]=[8]$, đã nằm trong danh sách. Vậy $\langle S\rangle=\{[0],[4],[8]\}$. Tập này chứa $[4]$ và đóng với cộng, còn mọi nhóm con chứa $[4]$ cũng phải chứa $[8]=[4]+[4]$ và $[0]=[4]+[8]$; vì thế đây là nhóm con nhỏ nhất (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Chỉ lấy các bội dương của phần tử sinh có thể bỏ sót số đối; trong nhóm hữu hạn này số đối xuất hiện sau vài lần cộng, nhưng cách định nghĩa luôn bao gồm cả nghịch đảo.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 2.5 CẤP PHẦN TỬ VÀ NHÓM CYCLIC -->
+  <h3 class="subsection-title">2.5. Cấp Của Phần Tử & Sự Hình Thành Nhóm Cyclic</h3>
+  <p>
+    Trường hợp cơ bản và quan trọng nhất của nhóm con sinh là khi tập sinh chỉ gồm đúng một phần tử: $S = \{a\}$. 
+    Khi đó $\langle a \rangle = \{a^k \mid k \in \mathbb{Z}\}$ (hoặc $\{ka \mid k \in \mathbb{Z}\}$ trong ký hiệu cộng).
+  </p>
+
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 2.7</span>
+      <span class="tag">Cấp của Phần tử (Order)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $a$ là một phần tử của nhóm $G$. <b>Cấp của phần tử $a$</b>, ký hiệu $\operatorname{ord}(a)$, được xác định như sau:</p>
+      <ul class="bullet-list">
+        <li><b>Định nghĩa theo lực lượng:</b> $\operatorname{ord}(a) = |\langle a \rangle|$.</li>
+        <li><b>Trường hợp cấp hữu hạn:</b> Là số nguyên dương $m \ge 1$ nhỏ nhất sao cho $a^m = e$ (hoặc $ma = 0$).</li>
+        <li><b>Trường hợp cấp vô hạn:</b> Nếu không tồn tại số nguyên dương $m$ nào để $a^m = e$, ta viết $\operatorname{ord}(a) = \infty$.</li>
+      </ul>
+      <div class="corollary-box">
+        <b>Quy tắc đẳng thức lũy thừa then chốt:</b>
+        <br>• Nếu $\operatorname{ord}(a) = n &lt; \infty$, thì: $a^r = a^s \iff r \equiv s \pmod n$. Nói riêng: $a^k = e \iff n \mid k$.
+        <br>• Nếu $\operatorname{ord}(a) = \infty$, thì: $a^r = a^s \iff r = s$.
+        <br>• Phần tử đơn vị $e$ là phần tử duy nhất có cấp bằng $1$. Không có phần tử cấp $0$.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong nhóm cộng $G=\mathbb{Z}/12\mathbb{Z}$, xét phần tử $a=[4]$. Tìm cấp và nhóm con cyclic mà $a$ sinh.</p>
+          <p><b>2. Hộp công cụ.</b> Cấp hữu hạn của $a$ là số nguyên dương nhỏ nhất $m$ sao cho $ma=[0]$; đồng thời $\operatorname{ord}(a)=|\langle a\rangle|$.</p>
+          <p><b>3. Lời giải.</b> Tính lần lượt $1a=[4]\ne[0]$, $2a=[8]\ne[0]$, $3a=[12]=[0]$. Vậy số dương nhỏ nhất đưa $a$ về đơn vị là $3$, nên $\operatorname{ord}([4])=3$. Các bội phân biệt trước khi quay về $[0]$ cho $\langle[4]\rangle=\{[0],[4],[8]\}$, đúng ba phần tử (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Không được kết luận cấp bằng $12$ chỉ vì nhóm mẹ có cấp $12$; phải tìm số mũ nhỏ nhất đưa phần tử về đơn vị. Cấp phần tử có thể là ước thực sự của cấp nhóm.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 2.8</span>
+      <span class="tag">Nhóm Cyclic (Nhóm Đơn Sinh)</span>
+    </div>
+    <div class="card-body">
+      <p>Một nhóm $G$ được gọi là một <b>nhóm cyclic</b> nếu thỏa mãn điều kiện:</p>
+      <ul class="bullet-list">
+        <li>Tồn tại một phần tử $a \in G$ sao cho $G = \langle a \rangle$. Phần tử $a$ gọi là một <b>phần tử sinh</b> của $G$.</li>
+      </ul>
+      <div class="corollary-box">
+        <b>💡 Đặc tính cốt lõi của Nhóm Cyclic:</b>
+        <br>1. <b>Mọi nhóm cyclic đều là nhóm giao hoán (Abel):</b> $a^r a^s = a^{r+s} = a^s a^r$.
+        <br>2. <b>Hai mô hình chuẩn mực:</b> Nhóm cyclic vô hạn có cùng bảng phép toán với $(\mathbb{Z}, +)$; nhóm cyclic cấp $n$ hữu hạn có cùng bảng phép toán với $(\mathbb{Z}/n\mathbb{Z}, +)$.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Xét nhóm cộng $G=\mathbb{Z}/8\mathbb{Z}$ và phần tử $a=[3]$. Kiểm tra $a$ có sinh toàn bộ $G$ không.</p>
+          <p><b>2. Hộp công cụ.</b> Nhóm là cyclic nếu tồn tại phần tử $a$ sao cho mọi phần tử của nhóm là một lũy thừa của $a$ (trong ký hiệu cộng là một bội $ka$).</p>
+          <p><b>3. Lời giải.</b> Tính các bội modulo $8$: $0[3]=[0]$, $[3]$, $[6]$, $[9]=[1]$, $[12]=[4]$, $[15]=[7]$, $[18]=[2]$, $[21]=[5]$, rồi $[24]=[0]$. Tám lớp dư xuất hiện trước khi chu kỳ lặp lại, nên $\langle[3]\rangle=G$ và $G$ cyclic cấp $8$. Phép cộng modulo $8$ giao hoán nên nhóm này còn là Abel.</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Phải kiểm tra các bội tạo ra đủ mọi phần tử, không chỉ thấy một vài phần tử khác nhau. Chiều ngược “Abel thì cyclic” sai; chẳng hạn $U(8)$ giao hoán nhưng không có phần tử cấp $4$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 2.6 ĐỊNH LÝ PHÂN LOẠI TOÀN DIỆN NHÓM CYCLIC -->
+  <h3 class="subsection-title">2.6. Định Lý Cấu Trúc Toàn Diện Của Nhóm Cyclic</h3>
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 2.9</span>
+      <span class="tag">Định Lý Cơ Bản Về Cấu Trúc Nhóm Cyclic (Định lý 2.12 Giáo trình)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $G = \langle a \rangle$ là một nhóm cyclic. Khi đó:</p>
+      <ul class="bullet-list">
+        <li><b>1. Tính kế thừa:</b> Mọi nhóm con của một nhóm cyclic đều là nhóm cyclic.</li>
+        <li><b>2. Phân loại nhóm con trong trường hợp vô hạn ($\cong \mathbb{Z}$):</b> Các nhóm con của $G$ có dạng duy nhất $\langle a^d \rangle$ với $d \ge 0$.</li>
+        <li><b>3. Phân loại nhóm con trong trường hợp cấp hữu hạn $n$ ($\cong \mathbb{Z}/n\mathbb{Z}$):</b>
+          <br>• Mọi nhóm con đều có dạng $\langle a^d \rangle$ với $d$ là một ước dương của $n$ ($d \mid n$).
+          <br>• Với mỗi ước dương $q$ của $n$, tồn tại <b>duy nhất một nhóm con</b> có cấp bằng $q$, đó là $\langle a^{n/q} \rangle$.
+        </li>
+        <li><b>4. Công thức tính cấp lũy thừa:</b> Nếu $\operatorname{ord}(a) = n$, với mọi số nguyên $k$:
+          $$\operatorname{ord}(a^k) = \frac{n}{\gcd(n, k)}$$
+        </li>
+        <li><b>5. Số lượng phần tử sinh & Hàm phi Euler:</b>
+          Phần tử $a^k$ sinh toàn bộ nhóm $G$ khi và chỉ khi $\gcd(n, k) = 1$. Do đó, nhóm cyclic cấp $n$ có đúng $\varphi(n)$ phần tử sinh.
+        </li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Cho $G=\langle a\rangle$ có cấp $12$. Tính cấp của $a^8$ và xác định nhóm con cấp $3$.</p>
+          <p><b>2. Hộp công cụ.</b> Trong nhóm cyclic cấp $n$, $\operatorname{ord}(a^k)=n/\gcd(n,k)$; nhóm con cấp $q$ là duy nhất và bằng $\langle a^{n/q}\rangle$.</p>
+          <p><b>3. Lời giải.</b> Ta có $\gcd(12,8)=4$, nên $\operatorname{ord}(a^8)=12/4=3$. Kiểm tra: $(a^8)^1=a^8\ne e$, $(a^8)^2=a^{16}=a^4\ne e$, còn $(a^8)^3=a^{24}=e$. Theo phân loại, nhóm con cấp $3$ là $\langle a^{12/3}\rangle=\langle a^4\rangle$. Vì $a^8=(a^4)^2$ và trong nhóm cấp $3$, bình phương một phần tử sinh vẫn sinh nhóm, nên $\langle a^8\rangle=\langle a^4\rangle$.</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Cấp của $a^k$ không nhất thiết là $n/k$; phải chia cho $\gcd(n,k)$. Khi xác định nhóm con cấp $q$, số mũ chuẩn là $n/q$, không phải $q$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 2.7 GIAO VÀ HỢP QUA ƯCLN VÀ BCNN -->
+  <h3 class="subsection-title">2.7. Giao Và Nhóm Con Sinh: Bản Hòa Ca Giữa Đại Số Và Số Học</h3>
+  <p>
+    Trong nhóm cyclic hữu hạn $G = \langle a \rangle$ cấp $n$, cấu trúc nhóm con phản ánh chính xác phép tính số học:
+  </p>
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ MỆNH ĐỀ 2.10</span>
+      <span class="tag">ƯCLN và BCNN Trên Nhóm Con Cyclic</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $c, d$ là các ước dương của $n$. Khi đó:</p>
+      <ul class="bullet-list">
+        <li><b>Giao hai nhóm con:</b> $\langle a^c \rangle \cap \langle a^d \rangle = \langle a^{\operatorname{lcm}(c, d)} \rangle$.</li>
+        <li><b>Nhóm con sinh bởi hợp:</b> $\langle \langle a^c \rangle \cup \langle a^d \rangle \rangle = \langle a^c, a^d \rangle = \langle a^{\gcd(c, d)} \rangle$ (nhờ đồng nhất thức Bézout).</li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $G=\langle a\rangle$ cấp $12$, lấy $c=4,d=6$. Tính giao của $\langle a^4\rangle,\langle a^6\rangle$ và nhóm con sinh bởi hợp của chúng.</p>
+          <p><b>2. Hộp công cụ.</b> Ta có $\langle a^c\rangle\cap\langle a^d\rangle=\langle a^{\operatorname{lcm}(c,d)}\rangle$ và $\langle a^c,a^d\rangle=\langle a^{\gcd(c,d)}\rangle$.</p>
+          <p><b>3. Lời giải.</b> Liệt kê $\langle a^4\rangle=\{e,a^4,a^8\}$ và $\langle a^6\rangle=\{e,a^6\}$, nên giao là $\{e\}=\langle a^{12}\rangle$ vì $\operatorname{lcm}(4,6)=12$. Mặt khác, $\gcd(4,6)=2$ và Bézout cho $2=2\cdot4-1\cdot6$, do đó $a^2=(a^4)^2(a^6)^{-1}\in\langle a^4,a^6\rangle$. Suy ra nhóm con sinh bởi hợp là $\langle a^2\rangle=\{e,a^2,a^4,a^6,a^8,a^{10}\}$, đúng cấp $12/2=6$.</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Giao ứng với BCNN, còn nhóm con sinh bởi hợp ứng với ƯCLN. Hợp thông thường không nhất thiết là nhóm con; ký hiệu $\langle H\cup K\rangle$ có nghĩa là phải sinh thêm các tích để thu được nhóm con nhỏ nhất chứa hợp.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 2.8 BỘ BẪY NGỘ NHẬN & PHẢN VÍ DỤ -->
+  <h3 class="subsection-title">2.8. Bộ Bẫy Ngộ Nhận & Phản Ví Dụ Sư Phạm Kinh Điển</h3>
+
+  <details class="ex-card counter" data-type="ex" open style="margin-bottom: 1rem;">
+    <summary>⚠️ Bẫy 1: Nhóm giao hoán CHƯA CHẮC là nhóm cyclic (Phản ví dụ U(8))</summary>
+    <div class="ex-content">
+      <p>
+        Mệnh đề <i>"Cyclic $\implies$ Giao hoán"</i> là đúng, nhưng chiều ngược lại <b>hoàn toàn sai</b>!
+        <br>• Xét nhóm nhân $U(8) = \{[1], [3], [5], [7]\}$ có cấp $|U(8)| = \varphi(8) = 4$.
+        <br>• Phép nhân trên $U(8)$ giao hoán, nhưng tính cấp từng phần tử: $1^2 \equiv 1, 3^2 \equiv 1, 5^2 \equiv 1, 7^2 \equiv 1 \pmod 8$.
+        <br>• Tất cả các phần tử khác đơn vị đều có cấp $2$. Không có phần tử nào có cấp $4$ để sinh toàn bộ nhóm.
+        <br>$\implies$ $U(8)$ là nhóm Abel nhưng <b>không cyclic</b>. 
+        Đồng thời, $U(8)$ có tới 3 nhóm con cấp 2 khác nhau: $\langle [3] \rangle, \langle [5] \rangle, \langle [7] \rangle$, bác bỏ tính duy nhất của nhóm con cùng cấp vốn chỉ có ở nhóm cyclic!
+      </p>
+    </div>
+  </details>
+
+  <details class="ex-card counter" data-type="ex" open style="margin-bottom: 1.5rem;">
+    <summary>⚠️ Bẫy 2: Cùng có cấp vô hạn chưa chắc sinh cùng một nhóm con</summary>
+    <div class="ex-content">
+      <p>
+        Trong nhóm cộng $\mathbb{Z}$, phần tử $1$ có cấp vô hạn và sinh ra $\langle 1 \rangle = \mathbb{Z}$. 
+        Phần tử $2$ cũng có cấp vô hạn nhưng sinh ra $\langle 2 \rangle = 2\mathbb{Z} \subsetneq \mathbb{Z}$.
+        <br>Trong nhóm vô hạn, hai phần tử cùng cấp $\infty$ vẫn có thể tạo nên hai nhóm con lồng nhau thực sự.
+      </p>
+    </div>
+  </details>
+
+  <!-- 2.9 HỆ THỐNG BẢNG KIỂM ĐỊNH & MẠNG LƯỚI NHÓM CON -->
+  <h3 class="subsection-title">2.9. Hệ Thống Bảng So Sánh & Mạng Lưới Nhóm Con Khoa Học</h3>
+
+  <p><b>1. Bảng Kiểm Định Nhóm Con Trên Các Mô Hình Quen Thuộc:</b></p>
+  <div class="table-wrapper" style="margin-bottom: 2rem;">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Tập con $H$ và Nhóm mẹ $G$</th>
+          <th style="text-align:center;">Khác rỗng</th>
+          <th style="text-align:center;">Tính đóng</th>
+          <th style="text-align:center;">Nghịch đảo</th>
+          <th style="text-align:center;">Tiêu chuẩn $xy^{-1} \in H$</th>
+          <th>Kết luận</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>$5\mathbb{Z} \subset (\mathbb{Z}, +)$</td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#10b981;">$5a - 5b = 5(a-b) \in 5\mathbb{Z}$</td>
+          <td><b>Là nhóm con</b> ($5\mathbb{Z} \le \mathbb{Z}$)</td>
+        </tr>
+        <tr>
+          <td>$\mathbb{N} \subset (\mathbb{Z}, +)$</td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#ef4444;">✖</td>
+          <td style="text-align:center; color:#ef4444;">$2 - 5 = -3 \notin \mathbb{N}$</td>
+          <td><b>Không là nhóm con</b> (thiếu đối xứng)</td>
+        </tr>
+        <tr>
+          <td>$\{[0], [4], [8]\} \subset \mathbb{Z}/12\mathbb{Z}$</td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#10b981;">Tập hữu hạn đóng với cộng</td>
+          <td><b>Là nhóm con</b> (cấp 3)</td>
+        </tr>
+        <tr>
+          <td>$\{[0], [4]\} \subset \mathbb{Z}/12\mathbb{Z}$</td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#ef4444;">✖</td>
+          <td style="text-align:center; color:#ef4444;">✖</td>
+          <td style="text-align:center; color:#ef4444;">$[4] + [4] = [8] \notin H$</td>
+          <td><b>Không là nhóm con</b> (không đóng)</td>
+        </tr>
+        <tr>
+          <td>$\mathbb{Q}^+ \subset (\mathbb{Q} \setminus \{0\}, \cdot)$</td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#10b981;">$x/y > 0$ khi $x, y > 0$</td>
+          <td><b>Là nhóm con</b></td>
+        </tr>
+        <tr>
+          <td>$\{e, (12), (13)\} \subset S_3$</td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#ef4444;">✖</td>
+          <td style="text-align:center; color:#10b981;">✔</td>
+          <td style="text-align:center; color:#ef4444;">$(12)(13) = (132) \notin H$</td>
+          <td><b>Không là nhóm con</b> (tự nghịch đảo nhưng không đóng)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><b>2. Phân Loại Hoàn Chỉnh Toàn Bộ Nhóm Con Của Nhóm Cyclic $\mathbb{Z}/12\mathbb{Z}$:</b></p>
+  <p style="font-size:0.92rem; color:var(--text-muted);">
+    Các ước số dương của $12$ là $\{1, 2, 3, 4, 6, 12\}$. Ứng với mỗi ước $d$, tồn tại duy nhất một nhóm con cấp $d$:
+  </p>
+
+  <div class="table-wrapper" style="margin-bottom: 2rem;">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Ước $d \mid 12$</th>
+          <th>Cấp Nhóm Con</th>
+          <th>Nhóm Con $H = \langle [12/d] \rangle$</th>
+          <th>Các Phần Tử</th>
+          <th>Tập Tất Cả Phần Tử Sinh Của $H$</th>
+          <th>Số Phần Tử Sinh $\varphi(d)$</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>$d = 1$</td>
+          <td>$1$</td>
+          <td>$\langle [0] \rangle$</td>
+          <td>$\{[0]\}$</td>
+          <td>$\{[0]\}$</td>
+          <td>$\varphi(1) = 1$</td>
+        </tr>
+        <tr>
+          <td>$d = 2$</td>
+          <td>$2$</td>
+          <td>$\langle [6] \rangle$</td>
+          <td>$\{[0], [6]\}$</td>
+          <td>$\{[6]\}$</td>
+          <td>$\varphi(2) = 1$</td>
+        </tr>
+        <tr>
+          <td>$d = 3$</td>
+          <td>$3$</td>
+          <td>$\langle [4] \rangle$</td>
+          <td>$\{[0], [4], [8]\}$</td>
+          <td>$\{[4], [8]\}$</td>
+          <td>$\varphi(3) = 2$</td>
+        </tr>
+        <tr>
+          <td>$d = 4$</td>
+          <td>$4$</td>
+          <td>$\langle [3] \rangle$</td>
+          <td>$\{[0], [3], [6], [9]\}$</td>
+          <td>$\{[3], [9]\}$</td>
+          <td>$\varphi(4) = 2$</td>
+        </tr>
+        <tr>
+          <td>$d = 6$</td>
+          <td>$6$</td>
+          <td>$\langle [2] \rangle$</td>
+          <td>$\{[0], [2], [4], [6], [8], [10]\}$</td>
+          <td>$\{[2], [10]\}$</td>
+          <td>$\varphi(6) = 2$</td>
+        </tr>
+        <tr>
+          <td>$d = 12$</td>
+          <td>$12$</td>
+          <td>$\langle [1] \rangle$</td>
+          <td>Toàn bộ $\mathbb{Z}/12\mathbb{Z}$</td>
+          <td>$\{[1], [5], [7], [11]\}$</td>
+          <td>$\varphi(12) = 4$</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SƠ ĐỒ MẠNG LƯỚI NHÓM CON (SUBGROUP LATTICE) ĐƯỢC CHUẨN HÓA GIAO DIỆN -->
+  <div style="background: var(--eq-bg, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 14px; padding: 22px; margin: 1.8rem 0; text-align: center;">
+    <div style="font-weight: 700; color: var(--thm-color, #1e3a8a); margin-bottom: 14px; font-size: 1.1rem;">
+      🕸️ Mạng Lưới Nhóm Con (Subgroup Lattice) Của $\mathbb{Z}/12\mathbb{Z}$
+    </div>
+    
+    <div style="display: inline-block; font-family: var(--font-mono, monospace); line-height: 1.8; text-align: center; color: #1e293b;">
+      <div style="padding: 6px 16px; background: #ffffff; border: 2px solid #2563eb; border-radius: 8px; display: inline-block; font-weight: bold; color: #1d4ed8;">
+        $\langle [1] \rangle = \mathbb{Z}/12\mathbb{Z}$ (Cấp 12)
+      </div>
+      <br>
+      <span style="color: #64748b;">│ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; │</span><br>
+      <span style="color: #64748b;">├── <b>÷ 2</b> ──────────┐ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; │ <b>÷ 3</b></span><br>
+      <span style="color: #64748b;">▼ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ▼ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ▼</span><br>
+      
+      <div style="display: flex; justify-content: center; gap: 36px; margin: 4px 0;">
+        <div style="padding: 5px 14px; background: #ffffff; border: 1.5px solid #3b82f6; border-radius: 6px; font-weight: 600;">
+          $\langle [2] \rangle$ (Cấp 6)
+        </div>
+        <div style="padding: 5px 14px; background: #ffffff; border: 1.5px solid #3b82f6; border-radius: 6px; font-weight: 600;">
+          $\langle [3] \rangle$ (Cấp 4)
+        </div>
+      </div>
+      
+      <span style="color: #64748b;">│ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; │ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; │</span><br>
+      <span style="color: #64748b;">│ <b>÷ 3</b> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; └── <b>÷ 2</b> ──┐ &nbsp; &nbsp; &nbsp; │ <b>÷ 2</b></span><br>
+      <span style="color: #64748b;">▼ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ▼ &nbsp; &nbsp; &nbsp; ▼</span><br>
+      
+      <div style="display: flex; justify-content: center; gap: 36px; margin: 4px 0;">
+        <div style="padding: 5px 14px; background: #ffffff; border: 1.5px solid #60a5fa; border-radius: 6px; font-weight: 600;">
+          $\langle [6] \rangle$ (Cấp 2)
+        </div>
+        <div style="padding: 5px 14px; background: #ffffff; border: 1.5px solid #60a5fa; border-radius: 6px; font-weight: 600;">
+          $\langle [4] \rangle$ (Cấp 3)
+        </div>
+      </div>
+      
+      <span style="color: #64748b;">\ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /</span><br>
+      <span style="color: #64748b;">\ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /</span><br>
+      <span style="color: #64748b;">▼ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ▼</span><br>
+      
+      <div style="padding: 6px 16px; background: #ffffff; border: 2px solid #94a3b8; border-radius: 8px; display: inline-block; font-weight: bold; color: #475569;">
+        $\langle [0] \rangle = \{[0]\}$ (Cấp 1 - Tầm thường)
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- ==================== HẾT CHƯƠNG 2 HOÀN CHỈNH ==================== -->

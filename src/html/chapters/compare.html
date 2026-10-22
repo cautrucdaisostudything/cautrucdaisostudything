@@ -1,0 +1,490 @@
+<div class="chapter-content active" id="tab-compare">
+    <h2 class="section-title">Đối Chiếu Song Hành & Cẩm Nang Tra Cứu Đại Số</h2>
+    
+    <p class="welcome-copy">
+      Đại số trừu tượng không phải là tập hợp các định nghĩa rời rạc, mà là một hệ thống phát triển logic có tính kế thừa sâu sắc. 
+      Khu vực này tổng hợp toàn bộ bức tranh đối chiếu song hành giữa <b>Nhóm, Vành và Trường</b>, 
+      thiết lập bảng tra cứu thuật ngữ song ngữ chuẩn mực theo giáo trình của TS. Huỳnh Việt Khánh, 
+      và cung cấp hệ thống cảnh báo bẫy sai lầm kinh điển xuyên suốt toàn bộ chương trình.
+    </p>
+
+    <!-- MỤC 1: BẢNG ĐỐI CHIẾU SONG HÀNH 3 TRỤ CỘT -->
+    <h3 class="subsection-title">1. Bảng Đối Chiếu Song Hành Toàn Diện: Nhóm vs. Vành vs. Trường</h3>
+    <p style="font-size:0.95rem; color:var(--text-muted);">
+      Bảng đối chiếu 10 phương diện cấu trúc nền tảng, làm rõ sự tương đồng hoàn hảo giữa các cấp độ đại số:
+    </p>
+
+    <div class="table-wrapper" style="margin-bottom: 2rem;">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="width: 18%;">Tiêu Chí Khảo Sát</th>
+            <th style="width: 27%;">Lý Thuyết Nhóm (Chương 1–5)</th>
+            <th style="width: 28%;">Lý Thuyết Vành (Chương 6–8)</th>
+            <th style="width: 27%;">Lý Thuyết Trường (Chương 9)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Dữ liệu đối tượng</b></td>
+            <td>Một phép toán hai ngôi: $(G, \cdot)$ thỏa mãn tính kết hợp, có đơn vị $e$, mọi phần tử khả nghịch.</td>
+            <td>Hai phép toán: $(R, +, \cdot)$ với $(R, +)$ là nhóm Abel, $(R, \cdot)$ là nửa nhóm, liên kết qua phân phối hai phía.</td>
+            <td>Hai phép toán: $(K, +, \cdot)$ với $(K, +)$ và $(K \setminus \{0_K\}, \cdot)$ đều là các nhóm Abel, liên kết qua phân phối.</td>
+          </tr>
+          <tr>
+            <td><b>Cấu trúc con nội tại</b></td>
+            <td><b>Nhóm con:</b> $H \le G$<br>Tiêu chuẩn: $xy^{-1} \in H$.</td>
+            <td><b>Vành con:</b> $S \subseteq R$<br>Tiêu chuẩn: $x - y \in S$ và $xy \in S$. <i>(Đơn vị có thể khác vành mẹ).</i></td>
+            <td><b>Trường con:</b> $F \subseteq K$<br>Tiêu chuẩn: $x - y \in F$ và $xy^{-1} \in F$ ($y \neq 0$). <i>(Bắt buộc cùng $1_K$).</i></td>
+          </tr>
+          <tr>
+            <td><b>Cấu trúc con tạo thương hợp lệ</b></td>
+            <td><b>Nhóm con chuẩn tắc:</b><br>$N \trianglelefteq G \iff gNg^{-1} \subseteq N$.</td>
+            <td><b>Iđêan hai phía:</b><br>$I \trianglelefteq R \iff RI \subseteq I, IR \subseteq I$.</td>
+            <td><b>Không có iđêan thực sự!</b><br>Trường chỉ có 2 iđêan tầm thường: $\{0\}$ và chính nó.</td>
+          </tr>
+          <tr>
+            <td><b>Cơ chế xác định tốt của phép toán lớp</b></td>
+            <td>$gN = Ng$<br>(Nhóm con hoán vị với mọi phần tử nhóm mẹ).</td>
+            <td>$rx \in I$ và $xr \in I$<br>(Iđêan hấp thụ phép nhân từ toàn bộ vành mẹ).</td>
+            <td>Đồng nhất phân số hình thức qua nhân chéo:<br>$(a, b) \sim (c, d) \iff ad = bc$.</td>
+          </tr>
+          <tr>
+            <td><b>Cấu trúc thương nhận được</b></td>
+            <td><b>Nhóm thương:</b> $G/N$<br>$(aN)(bN) = abN$<br>Đơn vị: lớp $eN = N$.</td>
+            <td><b>Vành thương:</b> $R/I$<br>$(a+I)(b+I) = ab+I$<br>Phần tử không: $0+I = I$.</td>
+            <td><b>Trường các thương:</b> $\operatorname{Frac}(R)$<br>$\dfrac{a}{b} \cdot \dfrac{c}{d} = \dfrac{ac}{bd}$, $\dfrac{a}{b} + \dfrac{c}{d} = \dfrac{ad+bc}{bd}$.</td>
+          </tr>
+          <tr>
+            <td><b>Ánh xạ tự nhiên</b></td>
+            <td>Phép chiếu chính tắc (Toàn cấu):<br>$\pi_N : G \twoheadrightarrow G/N, \; g \mapsto gN$.</td>
+            <td>Phép chiếu chính tắc (Toàn cấu):<br>$\pi_I : R \twoheadrightarrow R/I, \; r \mapsto r+I$.</td>
+            <td>Phép nhúng chính tắc (Đơn cấu):<br>$\iota_R : R \hookrightarrow \operatorname{Frac}(R), \; a \mapsto \dfrac{a}{1_R}$.</td>
+          </tr>
+          <tr>
+            <td><b>Hạt nhân của đồng cấu</b></td>
+            <td>$\ker\varphi = \{g \in G \mid \varphi(g) = e_K\}$<br>Luôn chuẩn tắc: $\ker\varphi \trianglelefteq G$.</td>
+            <td>$\ker f = \{r \in R \mid f(r) = 0_S\}$<br>Luôn là iđêan: $\ker f \trianglelefteq R$.</td>
+            <td>Mọi đồng cấu từ một trường vào một vành khác không đều là <b>đơn cấu</b> (vì $\ker = \{0\}$).</td>
+          </tr>
+          <tr>
+            <td><b>Định lý đẳng cấu thứ nhất</b></td>
+            <td>$\dfrac{G}{\ker\varphi} \;\cong\; \operatorname{im}\varphi$</td>
+            <td>$\dfrac{R}{\ker f} \;\cong\; \operatorname{im} f$</td>
+            <td>Tính chất phổ dụng: Đơn cấu $R \hookrightarrow K$ thác triển duy nhất thành $\operatorname{Frac}(R) \to K$.</td>
+          </tr>
+          <tr>
+            <td><b>Phân loại chất lượng thương</b></td>
+            <td>$[G : N] = p \implies G/N$ cyclic.</td>
+            <td>$R/I$ là miền nguyên $\iff I$ nguyên tố.<br>$R/I$ là trường $\iff I$ cực đại.</td>
+            <td>Mọi miền nguyên đều nhúng được vào một trường nhỏ nhất duy nhất sai khác một đẳng cấu.</td>
+          </tr>
+          <tr>
+            <td><b>Đại lượng chu kỳ / đo lường</b></td>
+            <td>Cấp nhóm $|G|$ và cấp phần tử $\operatorname{ord}(a)$. Hệ quả: $\operatorname{ord}(a) \mid |G|$ và $a^{|G|} = e$.</td>
+            <td>Đặc số $\operatorname{char}(R)$ (cấp của $1_R$ trong nhóm cộng). Với miền nguyên: $\operatorname{char}(R) \in \{0, p\}$.</td>
+            <td>Trường nguyên tố quyết định bởi đặc số: $\operatorname{char}(K)=0 \implies \mathbb{Q}$; $\operatorname{char}(K)=p \implies \mathbb{F}_p$.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- MỤC 2: SƠ ĐỒ CÂY TIẾN HÓA CẤU TRÚC ĐẠI SỐ & MINH HỌA THỰC CHIẾN -->
+    <h3 class="subsection-title">2. Sơ Đồ Cây Tiến Hóa Toàn Diện & Minh Họa Thực Chiến</h3>
+    
+    <div style="background: var(--eq-bg, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 14px; padding: 24px; margin: 1.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+      <div style="text-align: center; font-size: 1.15rem; font-weight: 700; color: var(--thm-color, #1e3a8a); margin-bottom: 1.2rem; display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <span>🌐</span> Cây Tiến Hóa Phân Cấp: Từ Tập Hợp Thô Đến Cấu Trúc Trường
+      </div>
+      
+      <!-- SƠ ĐỒ CÂY DẠNG CỘT TIẾN HÓA -->
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; font-family: var(--font-ui, sans-serif);">
+        <div style="padding: 6px 20px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; font-weight: 600; color: #475569;">
+          Tập hợp khác rỗng mang phép toán hai ngôi $*: X \times X \to X$ (Tính đóng)
+        </div>
+        <span style="color: #64748b; font-size: 0.9rem;">↓ <i>+ Tính kết hợp: $(a*b)*c = a*(b*c)$</i></span>
+
+        <div style="padding: 6px 20px; background: #ffffff; border: 1.5px solid #93c5fd; border-radius: 8px; font-weight: 600; color: #1e40af;">
+          NỬA NHÓM (Semigroup)
+        </div>
+        <span style="color: #64748b; font-size: 0.9rem;">↓ <i>+ Phần tử trung hòa (đơn vị): $a*e = e*a = a$</i></span>
+
+        <div style="padding: 6px 20px; background: #ffffff; border: 1.5px solid #60a5fa; border-radius: 8px; font-weight: 600; color: #1d4ed8;">
+          VỊ NHÓM (Monoid)
+        </div>
+        <span style="color: #64748b; font-size: 0.9rem;">↓ <i>+ Mọi phần tử đều khả đối xứng: $a*a^{-1} = a^{-1}*a = e$</i></span>
+
+        <div style="padding: 8px 24px; background: #eff6ff; border: 2px solid #2563eb; border-radius: 8px; font-weight: 700; color: #1e3a8a;">
+          NHÓM (Group)
+        </div>
+        <span style="color: #64748b; font-size: 0.9rem;">↓ <i>+ Tính giao hoán: $a*b = b*a$</i></span>
+
+        <div style="padding: 8px 24px; background: #f0fdf4; border: 2px solid #10b981; border-radius: 8px; font-weight: 700; color: #065f46;">
+          NHÓM ABEL (Abelian Group)
+        </div>
+        <span style="color: #64748b; font-size: 0.9rem;">↓ <i>+ Trang bị thêm phép nhân $\cdot$ kết hợp và phân phối hai phía với cộng</i></span>
+
+        <div style="padding: 8px 24px; background: #faf5ff; border: 2px solid #a855f7; border-radius: 8px; font-weight: 700; color: #581c87;">
+          VÀNH (Ring)
+        </div>
+        <span style="color: #64748b; font-size: 0.9rem;">↓ <i>+ Phép nhân giao hoán, có đơn vị $1_R \neq 0_R$ và KHÔNG có ước của không</i></span>
+
+        <div style="padding: 8px 24px; background: #fffbeb; border: 2px solid #f59e0b; border-radius: 8px; font-weight: 700; color: #78350f;">
+          MIỀN NGUYÊN (Integral Domain)
+        </div>
+        <span style="color: #64748b; font-size: 0.9rem;">↓ <i>+ Mọi phần tử khác không đều khả nghịch nhân (hoặc thông qua $\operatorname{Frac}(R)$)</i></span>
+
+        <div style="padding: 10px 28px; background: #ecfdf5; border: 2.5px solid #059669; border-radius: 10px; font-weight: 800; font-size: 1.1rem; color: #064e3b; box-shadow: 0 2px 6px rgba(5,150,105,0.2);">
+          TRƯỜNG (Field)
+        </div>
+      </div>
+
+      <!-- KHỐI VÍ DỤ MINH HỌA THỰC CHIẾN BẰNG HÀNH TRÌNH TẬP SỐ N* -> Q -->
+      <div style="margin-top: 2rem; border-top: 1.5px dashed var(--line, #cbd5e1); padding-top: 1.5rem;">
+        <div style="font-weight: 700; color: #1e3a8a; font-size: 1.05rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span>💡</span> Ví Dụ: Hành Trình Tiến Hóa Số Học Kinh Điển $(\mathbb{N}^* \longrightarrow \mathbb{Q})$
+        </div>
+        <p style="font-size: 0.93rem; color: #334155; margin-bottom: 14px; line-height: 1.6;">
+          Dưới đây là một mô hình số học xuyên suốt, minh chứng cụ thể cho từng nấc thang tiến hóa trên cây đại số:
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <!-- BƯỚC 1 -->
+          <div style="background: #ffffff; border: 1.5px solid #bfdbfe; border-radius: 8px; padding: 12px 16px; display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
+            <div>
+              <span style="font-size: 0.8rem; background: #dbeafe; color: #1e40af; padding: 2px 8px; border-radius: 4px; font-weight: 600;">1. NỬA NHÓM</span>
+              <div style="font-weight: 700; font-size: 1.05rem; color: #1e293b; margin-top: 4px;">$(\mathbb{N}^*, +)$</div>
+            </div>
+            <div style="font-size: 0.92rem; color: #475569; line-height: 1.5;">
+              • <b>Đã có:</b> Tổng hai số tự nhiên dương luôn là số tự nhiên dương (tính đóng), phép cộng có tính kết hợp.<br>
+              • <span style="color: #ef4444; font-weight: 600;">Điểm nghẽn:</span> Không chứa số $0$ nên <b>hoàn toàn không có phần tử đơn vị</b>!
+            </div>
+          </div>
+
+          <!-- BƯỚC 2 -->
+          <div style="background: #ffffff; border: 1.5px solid #bfdbfe; border-radius: 8px; padding: 12px 16px; display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
+            <div>
+              <span style="font-size: 0.8rem; background: #dbeafe; color: #1e40af; padding: 2px 8px; border-radius: 4px; font-weight: 600;">2. VỊ NHÓM</span>
+              <div style="font-weight: 700; font-size: 1.05rem; color: #1e293b; margin-top: 4px;">$(\mathbb{N}, +)$</div>
+            </div>
+            <div style="font-size: 0.92rem; color: #475569; line-height: 1.5;">
+              • <b>Bổ sung:</b> Đưa thêm số $0$ vào tập hợp để làm phần tử trung hòa ($n + 0 = 0 + n = n$).<br>
+              • <span style="color: #ef4444; font-weight: 600;">Điểm nghẽn:</span> Số $1 \in \mathbb{N}$ <b>không có số đối</b> trong $\mathbb{N}$ (vì $-1 \notin \mathbb{N}$). Thiếu khả đối xứng!
+            </div>
+          </div>
+
+          <!-- BƯỚC 3 -->
+          <div style="background: #ffffff; border: 1.5px solid #93c5fd; border-radius: 8px; padding: 12px 16px; display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
+            <div>
+              <span style="font-size: 0.8rem; background: #eff6ff; color: #1d4ed8; padding: 2px 8px; border-radius: 4px; font-weight: 700;">3. NHÓM ABEL</span>
+              <div style="font-weight: 700; font-size: 1.05rem; color: #1e293b; margin-top: 4px;">$(\mathbb{Z}, +)$</div>
+            </div>
+            <div style="font-size: 0.92rem; color: #475569; line-height: 1.5;">
+              • <b>Bổ sung:</b> Mở rộng thêm toàn bộ các số nguyên âm. Mọi số $a$ đều có phần tử đối là $-a \in \mathbb{Z}$. Phép cộng giao hoán.<br>
+              • <b>Kết quả:</b> Đạt tới cấu trúc <b>Nhóm Abel hoàn chỉnh</b> dưới phép cộng!
+            </div>
+          </div>
+
+          <!-- BƯỚC 4 -->
+          <div style="background: #ffffff; border: 1.5px solid #d8b4fe; border-radius: 8px; padding: 12px 16px; display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
+            <div>
+              <span style="font-size: 0.8rem; background: #faf5ff; color: #7e22ce; padding: 2px 8px; border-radius: 4px; font-weight: 700;">4. VÀNH GIAO HOÁN</span>
+              <div style="font-weight: 700; font-size: 1.05rem; color: #1e293b; margin-top: 4px;">$(\mathbb{Z}, +, \cdot)$</div>
+            </div>
+            <div style="font-size: 0.92rem; color: #475569; line-height: 1.5;">
+              • <b>Bổ sung:</b> Trang bị thêm phép toán thứ hai là phép nhân thông thường $\cdot$.<br>
+              • <b>Tương tác:</b> Phép nhân có tính kết hợp, giao hoán, có đơn vị $1$ và phân phối hoàn hảo với phép cộng: $a(b + c) = ab + ac$.
+            </div>
+          </div>
+
+          <!-- BƯỚC 5 -->
+          <div style="background: #ffffff; border: 1.5px solid #fde68a; border-radius: 8px; padding: 12px 16px; display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
+            <div>
+              <span style="font-size: 0.8rem; background: #fffbeb; color: #b45309; padding: 2px 8px; border-radius: 4px; font-weight: 700;">5. MIỀN NGUYÊN</span>
+              <div style="font-weight: 700; font-size: 1.05rem; color: #1e293b; margin-top: 4px;">Miền nguyên $\mathbb{Z}$</div>
+            </div>
+            <div style="font-size: 0.92rem; color: #475569; line-height: 1.5;">
+              • <b>Phẩm chất vượt trội:</b> Hoàn toàn <b>không có ước của không</b>: $ab = 0 \implies a = 0$ hoặc $b = 0$. Thỏa mãn luật giản ước nhân.<br>
+              • <span style="color: #ef4444; font-weight: 600;">Điểm nghẽn:</span> Số $2 \in \mathbb{Z}$ <b>không có nghịch đảo nhân</b> (vì $\dfrac{1}{2} \notin \mathbb{Z}$). Phép chia bị bế tắc!
+            </div>
+          </div>
+
+          <!-- BƯỚC 6 -->
+          <div style="background: #ffffff; border: 2px solid #34d399; border-radius: 8px; padding: 12px 16px; display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
+            <div>
+              <span style="font-size: 0.8rem; background: #ecfdf5; color: #065f46; padding: 2px 8px; border-radius: 4px; font-weight: 800;">6. CẤU TRÚC TRƯỜNG</span>
+              <div style="font-weight: 800; font-size: 1.05rem; color: #047857; margin-top: 4px;">$(\mathbb{Q}, +, \cdot) = \operatorname{Frac}(\mathbb{Z})$</div>
+            </div>
+            <div style="font-size: 0.92rem; color: #334155; line-height: 1.5;">
+              • <b>Bổ sung tối thượng:</b> Dựng trường các thương $\operatorname{Frac}(\mathbb{Z})$ bằng các phân số hình thức $\dfrac{a}{b}$ ($b \neq 0$).<br>
+              • <b>Đích đến:</b> Mọi số hữu tỉ khác không $\dfrac{a}{b}$ đều có nghịch đảo nhân là $\dfrac{b}{a}$. Phép chia luôn thực hiện được!
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MỤC 3: BẢNG TRA CỨU THUẬT NGỮ SONG NGỮ & KÝ HIỆU CHUẨN MỰC -->
+    <h3 class="subsection-title">3. Bảng Tra Cứu Ký Hiệu & Thuật Ngữ Chuẩn Mực (Bilingual Glossary)</h3>
+    <p style="font-size:0.95rem; color:var(--text-muted);">
+      Thuật ngữ tiếng Việt đối chiếu tiếng Anh gốc và lưu ý các dị bản lịch sử theo quy ước của TS. Huỳnh Việt Khánh:
+    </p>
+
+    <div class="table-wrapper" style="margin-bottom: 2rem;">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="width: 14%; text-align: center;">Ký Hiệu</th>
+            <th style="width: 24%;">Thuật Ngữ Chuẩn</th>
+            <th style="width: 24%;">Thuật Ngữ Tiếng Anh</th>
+            <th>Ý Nghĩa Đại Số & Ghi Chú Quy Ước</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: var(--thm-color);">$\mathbb{N}$</td>
+            <td>Tập số tự nhiên</td>
+            <td>Natural numbers</td>
+            <td>Giáo trình quy ước <b>chứa số 0</b>: $\mathbb{N} = \{0, 1, 2, \dots\}$.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: var(--thm-color);">$D_{2n}$</td>
+            <td>Nhóm Dihedral</td>
+            <td>Dihedral group</td>
+            <td>Nhóm các đối xứng của đa giác đều $n$ cạnh, <b>chỉ số ghi trực tiếp cấp của nhóm</b> ($|D_{2n}| = 2n$).</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: var(--thm-color);">$\circ$</td>
+            <td>Hợp thành ánh xạ</td>
+            <td>Composition of maps</td>
+            <td><b>Quy ước đọc từ phải sang trái</b>: $(f \circ g)(x) = f(g(x))$. Tích hoán vị tuân theo cùng quy ước.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: var(--thm-color);">$e, 1_G, 0_G$</td>
+            <td>Phần tử đơn vị / Phần tử không</td>
+            <td>Identity element / Unity / Zero</td>
+            <td>Phần tử trung hòa của phép toán. Ký hiệu $0$ dùng cho nhóm cộng; $e$ hoặc $1$ dùng cho nhóm nhân.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: var(--thm-color);">$u \in U(R)$</td>
+            <td>Phần tử khả nghịch (Đơn vị của vành)</td>
+            <td>Unit (Invertible element)</td>
+            <td>Phần tử có nghịch đảo nhân ($uv = vu = 1_R$). Phân biệt với <i>identity element</i> (phần tử đơn vị $1$).</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: var(--thm-color);">$H \le G$</td>
+            <td>Nhóm con</td>
+            <td>Subgroup</td>
+            <td>Tập con tự nó là một nhóm. Nếu $H \neq G$, viết $H &lt; G$ (nhóm con thực sự).</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: var(--thm-color);">$\langle a \rangle$</td>
+            <td>Nhóm cyclic (Nhóm đơn sinh)</td>
+            <td>Cyclic group</td>
+            <td>Nhóm sinh bởi một phần tử duy nhất. Các dị bản: <i>nhóm xilic, nhóm xyclic, nhóm đơn sinh</i>.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: var(--thm-color);">$\operatorname{ord}(a)$</td>
+            <td>Cấp của phần tử</td>
+            <td>Order of an element</td>
+            <td>Lực lượng $|\langle a \rangle|$, số nguyên dương nhỏ nhất thỏa $a^m = e$. Dị bản: <i>bậc của phần tử</i>.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: var(--thm-color);">$gH, Hg$</td>
+            <td>Lớp kề trái / Lớp kề phải</td>
+            <td>Left / Right coset</td>
+            <td>Các khối phân hoạch sinh bởi phép tịnh tiến. Dị bản: <i>lớp ghép, lớp môđulô</i>.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: var(--thm-color);">$[G : H]$</td>
+            <td>Chỉ số nhóm con</td>
+            <td>Index of a subgroup</td>
+            <td>Số lượng lớp kề trái phân biệt của $H$ trong $G$. Khi $G$ hữu hạn: $[G : H] = \dfrac{|G|}{|H|}$.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: var(--thm-color);">$N \trianglelefteq G$</td>
+            <td>Nhóm con chuẩn tắc</td>
+            <td>Normal subgroup</td>
+            <td>Nhóm con thỏa mãn $gN = Ng$ hoặc $gNg^{-1} = N$. Khác với $\le$ (nhóm con thông thường).</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: var(--thm-color);">$I \trianglelefteq R$</td>
+            <td>Iđêan (hai phía)</td>
+            <td>Two-sided Ideal</td>
+            <td>Tập con đóng với trừ và hấp thụ phép nhân hai phía: $RI \subseteq I$ và $IR \subseteq I$.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: var(--thm-color);">$\ker\varphi$</td>
+            <td>Hạt nhân</td>
+            <td>Kernel</td>
+            <td>Tập các phần tử bị gửi về đơn vị đối miền. Luôn chuẩn tắc trong nhóm nguồn / là iđêan trong vành nguồn.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: var(--thm-color);">$\operatorname{im}\varphi$</td>
+            <td>Tập ảnh</td>
+            <td>Image</td>
+            <td>$\varphi(G)$ hoặc $f(R)$, luôn là nhóm con / vành con của đối miền.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: var(--thm-color);">$\operatorname{char}(R)$</td>
+            <td>Đặc số của vành</td>
+            <td>Characteristic of a ring</td>
+            <td>Số nguyên dương $n$ nhỏ nhất thỏa $n \cdot 1_R = 0_R$ (hoặc $0$ nếu không tồn tại).</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: var(--thm-color);">$\operatorname{Frac}(R)$</td>
+            <td>Trường các thương</td>
+            <td>Field of fractions (Quotient field)</td>
+            <td>Trường nhỏ nhất chứa miền nguyên $R$, dựng bằng các phân số hình thức $\dfrac{a}{b}$ ($b \neq 0$).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- MỤC 4: BẢN ĐỒ BẪY SAI LẦM KINH ĐIỂN -->
+    <h3 class="subsection-title">4. Bản Đồ Bẫy Ngộ Nhận & Các Phản Ví Dụ Kinh Điển (Master Trap Checklist)</h3>
+    <p style="font-size:0.95rem; color:var(--text-muted);">
+      Hệ thống 8 bẫy tư duy đại số phổ biến nhất trong các kỳ thi học phần Cấu trúc Đại số:
+    </p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 2rem;">
+      <div class="math-card" style="border-left: 4px solid #ef4444; background: #fff;">
+        <b style="color: #b91c1c;">⚠️ Bẫy 1: Giao hoán kéo theo kết hợp?</b>
+        <p style="margin: 6px 0 0; font-size: 0.92rem; color: #334155;">
+          <b>SAI HOÀN TOÀN!</b> Phép trung bình cộng $x * y = \dfrac{x+y}{2}$ trên $\mathbb{R}$ giao hoán nhưng không kết hợp: $(0 * 0) * 4 = 2 \neq 1 = 0 * (0 * 4)$.
+        </p>
+      </div>
+
+      <div class="math-card" style="border-left: 4px solid #ef4444; background: #fff;">
+        <b style="color: #b91c1c;">⚠️ Bẫy 2: Chiều đảo Định lý Lagrange?</b>
+        <p style="margin: 6px 0 0; font-size: 0.92rem; color: #334155;">
+          <b>SAI HOÀN TOÀN!</b> Nếu $d \mid |G|$ thì $G$ chưa chắc có nhóm con cấp $d$ (nhóm $A_4$ có cấp 12 nhưng không có nhóm con cấp 6 nào) và chưa chắc có phần tử cấp $d$ ($V_4$ có cấp 4 nhưng không có phần tử cấp 4).
+        </p>
+      </div>
+
+      <div class="math-card" style="border-left: 4px solid #ef4444; background: #fff;">
+        <b style="color: #b91c1c;">⚠️ Bẫy 3: Giao hoán kéo theo Cyclic?</b>
+        <p style="margin: 6px 0 0; font-size: 0.92rem; color: #334155;">
+          <b>SAI!</b> Mọi nhóm cyclic đều giao hoán, nhưng nhóm $U(8) = \{[1], [3], [5], [7]\}$ và nhóm Klein $V_4$ giao hoán mà không cyclic vì mọi phần tử khác đơn vị đều có cấp 2.
+        </p>
+      </div>
+
+      <div class="math-card" style="border-left: 4px solid #ef4444; background: #fff;">
+        <b style="color: #b91c1c;">⚠️ Bẫy 4: Tính chuẩn tắc có tính bắc cầu?</b>
+        <p style="margin: 6px 0 0; font-size: 0.92rem; color: #334155;">
+          <b>KHÔNG!</b> $K \trianglelefteq H$ và $H \trianglelefteq G$ không kéo theo $K \trianglelefteq G$. Phản ví dụ trong nhóm Dihedral $D_8$: $\langle s \rangle \trianglelefteq \langle s, r^2 \rangle \trianglelefteq D_8$ nhưng $\langle s \rangle \not\trianglelefteq D_8$.
+        </p>
+      </div>
+
+      <div class="math-card" style="border-left: 4px solid #ef4444; background: #fff;">
+        <b style="color: #b91c1c;">⚠️ Bẫy 5: Vành con phải cùng đơn vị với vành mẹ?</b>
+        <p style="margin: 6px 0 0; font-size: 0.92rem; color: #334155;">
+          <b>KHÔNG!</b> Vành con $2\mathbb{Z} \subset \mathbb{Z}$ không có đơn vị; vành ma trận con $\{\operatorname{diag}(a, 0)\} \subset M_2(\mathbb{R})$ có đơn vị riêng $E_{11} \neq I_2$.
+        </p>
+      </div>
+
+      <div class="math-card" style="border-left: 4px solid #ef4444; background: #fff;">
+        <b style="color: #b91c1c;">⚠️ Bẫy 6: Iđêan nguyên tố thì luôn cực đại?</b>
+        <p style="margin: 6px 0 0; font-size: 0.92rem; color: #334155;">
+          <b>SAI!</b> Iđêan $(0)$ trong $\mathbb{Z}$ là nguyên tố (vì $\mathbb{Z}/(0) \cong \mathbb{Z}$ là miền nguyên), nhưng $(0)$ không cực đại vì bị kẹp trong $(0) \subsetneq 2\mathbb{Z} \subsetneq \mathbb{Z}$.
+        </p>
+      </div>
+
+      <div class="math-card" style="border-left: 4px solid #ef4444; background: #fff;">
+        <b style="color: #b91c1c;">⚠️ Bẫy 7: Khai triển $(ab)^n = a^n b^n$?</b>
+        <p style="margin: 6px 0 0; font-size: 0.92rem; color: #334155;">
+          <b>CHỈ ĐÚNG KHI GIAO HOÁN!</b> Trong nhóm hoặc vành không giao hoán, $(ab)^2 = abab \neq a^2b^2$ và $(a - b)^2 = a^2 - ab - ba + b^2 \neq a^2 - 2ab + b^2$.
+        </p>
+      </div>
+
+      <div class="math-card" style="border-left: 4px solid #ef4444; background: #fff;">
+        <b style="color: #b91c1c;">⚠️ Bẫy 8: Dựng phân số trên vành có ước của 0?</b>
+        <p style="margin: 6px 0 0; font-size: 0.92rem; color: #334155;">
+          <b>THẤT BẠI!</b> Trên $\mathbb{Z}/6\mathbb{Z}$, quan hệ nhân chéo mất tính bắc cầu vì $([2],[2]) \sim ([0],[3])$ và $([0],[3]) \sim ([0],[1])$ nhưng $([2],[2]) \not\sim ([0],[1])$. Miền nguyên là điều kiện sống còn của $\operatorname{Frac}(R)$.
+        </p>
+      </div>
+    </div>
+
+    <!-- MỤC 5: BẢNG TRA CỨU CÁC HỌ MÔ HÌNH CHUẨN MỰC -->
+    <h3 class="subsection-title">5. Bảng Tra Cứu Các Họ Mô Hình Chuẩn Mực Trong Toàn Bộ Giáo Trình</h3>
+    <div class="table-wrapper">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Mô Hình</th>
+            <th>Loại Cấu Trúc</th>
+            <th>Cấp / Lực Lượng</th>
+            <th>Tính Giao Hoán</th>
+            <th>Đặc Trưng Cốt Lõi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>$(\mathbb{Z}, +, \cdot)$</td>
+            <td>Miền nguyên</td>
+            <td>$\infty$ (Vô hạn đếm được)</td>
+            <td>Giao hoán</td>
+            <td>Vành iđêan chính chuẩn mực, $\operatorname{char} = 0$, $U(\mathbb{Z}) = \{1, -1\}$.</td>
+          </tr>
+          <tr>
+            <td>$(\mathbb{Z}/n\mathbb{Z}, +, \cdot)$</td>
+            <td>Vành giao hoán có 1</td>
+            <td>$n$ (Hữu hạn)</td>
+            <td>Giao hoán</td>
+            <td>Là trường $\iff n$ nguyên tố. Nếu $n$ là hợp số thì có ước của không.</td>
+          </tr>
+          <tr>
+            <td>$U(n) = (\mathbb{Z}/n\mathbb{Z})^\times$</td>
+            <td>Nhóm nhân Abel</td>
+            <td>$\varphi(n)$</td>
+            <td>Giao hoán</td>
+            <td>Nhóm các đơn vị modulo $n$, nền tảng của Định lý Euler $a^{\varphi(n)} \equiv 1 \pmod n$.</td>
+          </tr>
+          <tr>
+            <td>$S_n$ ($n \ge 3$)</td>
+            <td>Nhóm không giao hoán</td>
+            <td>$n!$</td>
+            <td><b>Không giao hoán</b></td>
+            <td>Nhóm đối xứng các hoán vị, quy ước đọc từ phải sang trái. Chuẩn tắc: $A_n$.</td>
+          </tr>
+          <tr>
+            <td>$D_{2n}$ ($n \ge 3$)</td>
+            <td>Nhóm không giao hoán</td>
+            <td>$2n$</td>
+            <td><b>Không giao hoán</b></td>
+            <td>Đối xứng đa giác đều $n$ cạnh, $sr = r^{-1}s$, chứa nhóm con quay chỉ số 2.</td>
+          </tr>
+          <tr>
+            <td>$\mathrm{GL}_n(\mathbb{R})$</td>
+            <td>Nhóm không giao hoán</td>
+            <td>$\infty$ (Liên tục)</td>
+            <td><b>Không giao hoán</b></td>
+            <td>Nhóm các ma trận khả nghịch ($\det A \neq 0$), hạt nhân định thức là $\mathrm{SL}_n(\mathbb{R})$.</td>
+          </tr>
+          <tr>
+            <td>$F[x]$ ($F$ là trường)</td>
+            <td>Miền nguyên (PID)</td>
+            <td>$\infty$</td>
+            <td>Giao hoán</td>
+            <td>Vành đa thức một biến, mọi iđêan đều chính, $(p(x))$ cực đại $\iff p(x)$ bất khả quy.</td>
+          </tr>
+          <tr>
+            <td>$\operatorname{Frac}(F[x]) = F(x)$</td>
+            <td>Trường các phân thức</td>
+            <td>$\infty$</td>
+            <td>Giao hoán</td>
+            <td>Trường các phân thức hữu tỉ $\dfrac{p(x)}{q(x)}$ ($q(x) \neq 0$).</td>
+          </tr>
+          <tr>
+            <td>$\mathbb{Z}[i]$ & $\mathbb{Q}(i)$</td>
+            <td>Miền nguyên Gauss & Trường Gauss</td>
+            <td>$\infty$</td>
+            <td>Giao hoán</td>
+            <td>$\mathbb{Z}[i] = \{a + bi \mid a, b \in \mathbb{Z}\}$; $\operatorname{Frac}(\mathbb{Z}[i]) \cong \mathbb{Q}(i) = \{u + vi \mid u, v \in \mathbb{Q}\}$.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div> <!-- Đóng tab-compare -->

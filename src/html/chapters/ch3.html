@@ -1,0 +1,354 @@
+<!-- ======================================================== -->
+<div class="chapter-content" id="tab-c3">
+  <h2 class="section-title">Chương 3. Lớp Kề và Định Lý Lagrange</h2>
+  
+  <p class="welcome-copy">
+    Cho một nhóm con $H$ của nhóm $G$. Ý tưởng trung tâm của chương này là dùng các phép tịnh tiến để dịch chuyển $H$ đi khắp nhóm mẹ $G$. 
+    Các vết dịch chuyển này tạo thành các <i>lớp kề</i>, phân hoạch nhóm mẹ thành các khối rời nhau có cùng kích thước. 
+    Từ cơ chế đếm này, ta đi thẳng tới một trong những kết quả nền tảng và đẹp nhất của đại số: <b>Định lý Lagrange</b>, 
+    khai thác các hệ quả số học Euler – Fermat và phân tích thấu đáo hai mệnh đề đảo sai lầm kinh điển.
+  </p>
+
+  <!-- 3.1 ĐỘNG CƠ TỪ LỚP ĐỒNG DƯ ĐẾN LỚP KỀ -->
+  <h3 class="subsection-title">3.1. Khởi Nguồn Sư Phạm: Từ Phép Tịnh Tiến Số Học Đến Khái Niệm Lớp Kề</h3>
+  <p>
+    Trong nhóm cộng số nguyên $(\mathbb{Z}, +)$, các lớp đồng dư modulo $n$ có dạng:
+    $$a + n\mathbb{Z} = \{a + nk \mid k \in \mathbb{Z}\}$$
+    Đây thực chất là nhóm con $n\mathbb{Z}$ được "dịch chuyển" tịnh tiến đi một đoạn $a$. 
+    Họ các tập hợp này phủ kín $\mathbb{Z}$, đôi một rời nhau hoặc trùng nhau hoàn toàn, tạo thành một phân hoạch của $\mathbb{Z}$.
+  </p>
+  <p>
+    Hiện tượng tịnh tiến kỳ diệu này vẫn tiếp tục xuất hiện trong các nhóm trừu tượng tổng quát, kể cả khi nhóm không giao hoán. 
+    Bằng cách nhân một phần tử $g \in G$ vào một nhóm con $H \le G$, ta tạo ra các "bản sao dịch chuyển" của $H$.
+  </p>
+
+  <!-- 3.2 ĐỊNH NGHĨA LỚP KỀ & CHỈ SỐ -->
+  <h3 class="subsection-title">3.2. Cấu Trúc Lớp Kề Trái, Lớp Kề Phải và Chỉ Số Của Nhóm Con</h3>
+  
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 3.1</span>
+      <span class="tag">Lớp Kề (Coset) & Đại Diện Lớp</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $G$ là một nhóm và $H$ là một nhóm con của $G$ ($H \le G$). Với mỗi phần tử $g \in G$, ta xác định:</p>
+      <ul class="bullet-list">
+        <li><b>1. Lớp kề trái của $H$ sinh bởi $g$:</b> Là tập hợp:
+          $$gH = \{gh \mid h \in H\}$$
+        </li>
+        <li><b>2. Lớp kề phải của $H$ sinh bởi $g$:</b> Là tập hợp:
+          $$Hg = \{hg \mid h \in H\}$$
+        </li>
+        <li><b>3. Phần tử đại diện:</b> Phần tử $g$ được gọi là một <i>đại diện</i> của lớp kề. Mọi phần tử thuộc lớp đều có thể làm đại diện cho lớp đó.</li>
+      </ul>
+      <div class="corollary-box">
+        <b>💡 Nhận xét rút ra:</b>
+        <br>• Bản thân nhóm con $H$ chính là lớp kề ứng với đại diện đơn vị: $eH = He = H$.
+        <br>• <b>Quy ước trong ký hiệu cộng:</b> Lớp kề có dạng $g + H = \{g + h \mid h \in H\}$. Nếu nhóm giao hoán thì $g + H = H + g$.
+        <br>• <b>Cảnh báo sư phạm:</b> Một lớp kề $gH$ nói chung <b>chỉ là một tập con, không phải là một nhóm con</b>! Thật vậy, $e \in gH \iff g \in H$. Nếu $g \notin H$, lớp $gH$ không chứa phần tử đơn vị nên không thể là nhóm con.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $G=S_3$, lấy $H=\langle(12)\rangle=\{e,(12)\}$. Hãy liệt kê mọi lớp kề trái, phải và kiểm tra chúng phân hoạch $S_3$.</p>
+          <p><b>2. Hộp công cụ.</b> Lớp trái là $gH=\{g, g(12)\}$, lớp phải là $Hg=\{g,(12)g\}$. Hai lớp cùng phía hoặc trùng nhau hoặc rời nhau; đại diện của chúng có thể chọn tùy ý trong mỗi lớp.</p>
+          <p><b>3. Lời giải.</b> Quy ước hợp thành từ phải sang trái. Các lớp trái phân biệt là $eH=\{e,(12)\}$, $(13)H=\{(13),(123)\}$, $(23)H=\{(23),(132)\}$. Chúng đôi một rời nhau và hợp lại gồm đủ sáu phần tử của $S_3$. Các lớp phải là $He=\{e,(12)\}$, $H(13)=\{(13),(132)\}$, $H(23)=\{(23),(123)\}$; chúng cũng rời nhau và phủ $S_3$. Mỗi lớp có đại diện hiển thị bên trái, nên có ba lớp mỗi phía.</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Lớp kề là một tập con dịch chuyển, không nhất thiết là nhóm con; chẳng hạn $(13)H$ không chứa $e$. Trong nhóm không giao hoán, không được đổi thứ tự nhân: $(13)H\ne H(13)$ dù hai lớp có cùng số phần tử.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 3.2</span>
+      <span class="tag">Chỉ Số Nhóm Con (Index)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $H \le G$. <b>Chỉ số</b> của nhóm con $H$ trong nhóm $G$ được xác định như sau:</p>
+      <ul class="bullet-list">
+        <li><b>Định nghĩa:</b> Là số lượng các lớp kề trái phân biệt của $H$ trong $G$, ký hiệu là $[G : H]$.</li>
+        <li><b>Ký hiệu tập thương:</b> Tập hợp tất cả các lớp kề trái được ký hiệu là $G/H = \{gH \mid g \in G\}$. Do đó $[G : H] = |G/H|$.</li>
+      </ul>
+      <div class="corollary-box">
+        <b>💡 Nhận xét rút ra:</b>
+        <br>• Số lượng lớp kề trái luôn bằng số lượng lớp kề phải (thông qua song ánh nghịch đảo $gH \mapsto Hg^{-1}$), kể cả khi nhóm $G$ vô hạn!
+        <br>• <i>Chỉ số hữu hạn không đồng nghĩa với nhóm hữu hạn:</i> Ví dụ $[\mathbb{Z} : n\mathbb{Z}] = n$ dù cả $\mathbb{Z}$ lẫn $n\mathbb{Z}$ đều là tập vô hạn.
+        <br>• Tại giai đoạn này, $G/H$ <b>chỉ là một tập hợp các khối (tập thương)</b>, ta chưa trang bị phép toán và chưa xem nó là một nhóm!
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong nhóm vô hạn $G=(\mathbb{Z},+)$, lấy nhóm con $H=3\mathbb{Z}$. Liệt kê các lớp kề và tìm chỉ số $[G:H]$.</p>
+          <p><b>2. Hộp công cụ.</b> Lớp kề cộng có dạng $r+H$; các lớp phân biệt tương ứng với phần dư modulo $3$. Chỉ số là số lớp kề phân biệt, không phải lực lượng của $G$.</p>
+          <p><b>3. Lời giải.</b> Mọi số nguyên có dạng $3k+r$ với duy nhất $r\in\{0,1,2\}$. Vì thế các lớp là $0+3\mathbb{Z}=3\mathbb{Z}$, $1+3\mathbb{Z}$ và $2+3\mathbb{Z}$. Chúng rời nhau, phủ toàn bộ $\mathbb{Z}$ và không lớp nào trùng lớp khác do phần dư khác nhau. Có đúng ba lớp, nên $[\mathbb{Z}:3\mathbb{Z}]=3$, mặc dù cả $\mathbb{Z}$ lẫn $3\mathbb{Z}$ đều vô hạn.</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Chỉ số đếm các khối, không đếm phần tử của nhóm mẹ. Vì vậy chỉ số hữu hạn không kéo theo nhóm mẹ hữu hạn.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 3.3 PHÂN HOẠCH NHÓM MẸ VÀ SONG ÁNH TỊNH TIẾN -->
+  <h3 class="subsection-title">3.3. Cơ Chế Phân Hoạch Nhóm Mẹ và Sự Bảo Toàn Kích Thước</h3>
+  <p>
+    Tại sao các lớp kề lại chia đều nhóm mẹ thành các khối hoàn toàn rời nhau? Câu trả lời nằm ở mối liên hệ chặt chẽ với quan hệ tương đương:
+  </p>
+
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 3.3</span>
+      <span class="tag">Cấu Trúc Phân Hoạch Của Các Lớp Kề (Định lý 3.1 Giáo trình)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $H \le G$. Khi đó:</p>
+      <ul class="bullet-list">
+        <li><b>1. Quan hệ tương đương cảm sinh:</b> Quan hệ trên $G$ định bởi:
+          $$x \sim_H y \iff x^{-1}y \in H$$
+          là một quan hệ tương đương. Lớp tương đương của $x$ chính là lớp kề trái $xH$.
+        </li>
+        <li><b>2. Tính chất phân hoạch:</b> Hai lớp kề trái bất kỳ <b>hoặc trùng nhau hoàn toàn, hoặc rời nhau đôi một</b>. Các khẳng định sau là tương đương:
+          <div style="text-align: center; margin: 8px 0; font-weight: 600;">
+            $aH = bH \iff b \in aH \iff a^{-1}b \in H \iff aH \cap bH \neq \emptyset$
+          </div>
+        </li>
+        <li><b>3. Lực lượng bảo toàn (Cùng kích thước):</b> Với mọi $g \in G$, ánh xạ tịnh tiến trái:
+          $$\lambda_g : H \longrightarrow gH, \quad h \longmapsto gh$$
+          là một <b>song ánh</b>. Do đó mọi lớp kề đều có cùng lực lượng với nhóm con $H$:
+          $$|gH| = |Hg| = |H|$$
+        </li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $S_3$, đặt $H=\{e,(12)\}$, $a=(13)$ và $b=(123)$. Kiểm tra $aH=bH$ bằng các tiêu chuẩn tương đương, rồi viết song ánh tịnh tiến từ $H$ đến $aH$.</p>
+          <p><b>2. Hộp công cụ.</b> Ta có $aH=bH\iff a^{-1}b\in H\iff aH\cap bH\ne\emptyset$. Với $g\in G$, ánh xạ $\lambda_g(h)=gh$ là song ánh $H\to gH$.</p>
+          <p><b>3. Lời giải.</b> Vì $a^{-1}=a=(13)$, phép tính từ phải sang trái cho $a^{-1}b=(13)(123)=(12)\in H$. Do đó $aH=bH$; quả thật $aH=\{(13),(123)\}$ và $b\in aH\cap bH$. Mặt khác, $\lambda_{(13)}(e)=(13)$ và $\lambda_{(13)}((12))=(13)(12)=(123)$. Hai ảnh phân biệt và đúng là hai phần tử của $aH$, nên đây là song ánh, suy ra $|aH|=|H|=2$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Thứ tự trong $a^{-1}b$ rất quan trọng; ở nhóm không giao hoán không thể thay bằng $ba^{-1}$. Song ánh chỉ so sánh lực lượng, không khẳng định lớp kề là nhóm con.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="proof-block">
+    <summary>🔍 Xem chứng minh tính song ánh của phép tịnh tiến $\lambda_g$</summary>
+    <div class="proof-content">
+      <p>
+        Ánh xạ $\lambda_g: H \to gH$ cho bởi $\lambda_g(h) = gh$.<br>
+        • <i>Đơn ánh:</i> Nếu $\lambda_g(h_1) = \lambda_g(h_2) \implies gh_1 = gh_2$. Nhân $g^{-1}$ ở bên trái hai vế suy ra $h_1 = h_2$.<br>
+        • <i>Toàn ánh:</i> Với mọi phần tử $x \in gH$, theo định nghĩa tồn tại $h \in H$ sao cho $x = gh$. Khi đó $\lambda_g(h) = x$.<br>
+        Ánh xạ ngược của $\lambda_g$ chính là $\lambda_{g^{-1}}: gH \to H, x \mapsto g^{-1}x$. 
+        Vậy $\lambda_g$ là một song ánh. Điều này đúng cho cả trường hợp $H$ vô hạn. <span class="qed">∎</span>
+      </p>
+    </div>
+  </details>
+
+  <!-- 3.4 ĐỊNH LÝ LAGRANGE VÀ HỆ QUẢ SỐ HỌC -->
+  <h3 class="subsection-title">3.4. Định Lý Lagrange và Các Hệ Quả Số Học Nền Tảng</h3>
+  <p>
+    Khi nhóm $G$ hữu hạn, việc hợp các khối rời nhau có cùng kích thước dẫn thẳng tới định lý đếm vĩ đại của Joseph-Louis Lagrange:
+  </p>
+
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 3.4</span>
+      <span class="tag">Định Lý Lagrange (Lagrange's Theorem)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $G$ là một nhóm hữu hạn và $H$ là một nhóm con của $G$ ($H \le G$). Khi đó:</p>
+      <div class="math-display">
+        $$|G| = [G : H] \cdot |H|$$
+      </div>
+      <p><b>Công thức thương số:</b></p>
+      <div class="math-display">
+        $$[G : H] = \dfrac{|G|}{|H|} \quad \text{và} \quad |H| \text{ bắt buộc phải là ước của } |G| \quad (|H| \mid |G|)$$
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Xét nhóm $G=S_3$ và nhóm con $H=\langle(12)\rangle=\{e,(12)\}$. Tính chỉ số và kiểm tra công thức Lagrange.</p>
+          <p><b>2. Hộp công cụ.</b> Với nhóm hữu hạn, $|G|=[G:H]|H|$; các lớp kề trái phân hoạch $G$ và mỗi lớp có cùng lực lượng $|H|$.</p>
+          <p><b>3. Lời giải.</b> Ta có $|S_3|=3!=6$ và $|H|=2$. Ba lớp trái là $H$, $(13)H=\{(13),(123)\}$ và $(23)H=\{(23),(132)\}$. Do đó $[S_3:H]=3$ và $[S_3:H]|H|=3\cdot2=6=|S_3|$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Mỗi lớp có đúng $|H|$ phần tử, nhưng chỉ số là số lớp. Không suy ngược rằng mọi ước của $|G|$ đều là cấp của một nhóm con; hai phản ví dụ tiếp theo sẽ làm rõ điều đó.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="proof-block">
+    <summary>🔍 Xem chứng minh Định lý Lagrange bằng đếm phân hoạch</summary>
+    <div class="proof-content">
+      <p>
+        Vì $G$ hữu hạn, phân hoạch bởi các lớp kề trái chỉ có một số hữu hạn khối rời nhau. 
+        Giả sử có $k = [G : H]$ lớp kề trái phân biệt với các đại diện là $g_1, g_2, \dots, g_k$:
+        $$G = g_1H \;\dot{\cup}\; g_2H \;\dot{\cup}\; \cdots \;\dot{\cup}\; g_kH$$
+        Vì các lớp kề đôi một rời nhau, lực lượng của $G$ bằng tổng lực lượng các lớp kề:
+        $$|G| = |g_1H| + |g_2H| + \cdots + |g_kH|$$
+        Theo Định lý 3.3, mỗi lớp kề đều có đúng $|H|$ phần tử:
+        $$|G| = \underbrace{|H| + |H| + \cdots + |H|}_{k \text{ lần}} = k \cdot |H| = [G : H] \cdot |H| \quad \blacksquare$$
+      </p>
+    </div>
+  </details>
+
+  <!-- HỆ THỐNG HỆ QUẢ SỐ HỌC CỦA LAGRANGE -->
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ HỆ QUẢ 3.5</span>
+      <span class="tag">Các Hệ Quả Trọng Yếu Của Định Lý Lagrange</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $G$ là một nhóm hữu hạn:</p>
+      <ul class="bullet-list">
+        <li><b>1. Cấp của phần tử chia hết cấp của nhóm:</b> Với mọi $a \in G$, ta có $\operatorname{ord}(a) \mid |G|$ (do $\operatorname{ord}(a) = |\langle a \rangle|$ và $\langle a \rangle \le G$).</li>
+        <li><b>2. Đồng nhất thức lũy thừa bậc $|G|$:</b> Với mọi $a \in G$, ta luôn có:
+          $$a^{|G|} = e$$
+        </li>
+        <li><b>3. Nhóm có cấp nguyên tố $p$ thì luôn Cyclic:</b> Nếu $|G| = p$ ($p$ nguyên tố), thì $G$ là nhóm cyclic, không có nhóm con thực sự nào khác $\{e\}$ và $G$, và $G \cong \mathbb{Z}/p\mathbb{Z}$.</li>
+        <li><b>4. Định lý Euler (Số học):</b> Áp dụng vào nhóm $U(n)$ có cấp $\varphi(n)$: với mọi $a$ thỏa $\gcd(a, n) = 1$, ta có:
+          $$a^{\varphi(n)} \equiv 1 \pmod n$$
+        </li>
+        <li><b>5. Định lý Fermat nhỏ (Số học):</b> Nếu $p$ là số nguyên tố và $p \nmid a$, thì:
+          $$a^{p-1} \equiv 1 \pmod p \implies a^p \equiv a \pmod p \quad \forall a \in \mathbb{Z}$$
+        </li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong nhóm nhân $U(10)=\{[1],[3],[7],[9]\}$, xét $[3]$; đồng thời áp dụng Fermat nhỏ với $a=3,p=7$.</p>
+          <p><b>2. Hộp công cụ.</b> Lagrange cho $\operatorname{ord}(a)\mid|G|$ và $a^{|G|}=e$. Euler cho $a^{\varphi(n)}\equiv1\pmod n$ nếu $\gcd(a,n)=1$; Fermat nhỏ là trường hợp modulo số nguyên tố $p$.</p>
+          <p><b>3. Lời giải.</b> Trong $U(10)$, $3^2\equiv9$, $3^3\equiv7$, $3^4\equiv1\pmod{10}$; các lũy thừa trước bậc $4$ chưa bằng $1$. Vậy $\operatorname{ord}([3])=4$, chia hết cấp $|U(10)|=\varphi(10)=4$, và Euler cho $3^4=81\equiv1\pmod{10}$. Với $p=7$, ta có $3^3=27\equiv-1\pmod7$, nên $3^6\equiv(-1)^2=1\pmod7$; đúng là $3^{p-1}\equiv1$.</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Euler đòi hỏi $\gcd(a,n)=1$; Fermat nhỏ đòi hỏi $p$ nguyên tố và $p\nmid a$. Không áp dụng các công thức này khi phần tử không khả nghịch modulo $n$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 3.5 HAI MỆNH ĐỀ ĐẢO SAI LẦM KINH ĐIỂN -->
+  <h3 class="subsection-title">3.5. Hai Mệnh Đề Đảo Sai Lầm Kinh Điển: Phản Ví Dụ Trong $V_4$ và $A_4$</h3>
+  <p>
+    Định lý Lagrange chỉ khẳng định: <i>Nếu $H \le G$ thì $|H|$ chia hết $|G|$</i>. 
+    <b>Chiều đảo lại của định lý Lagrange là HOÀN TOÀN SAI!</b> Giáo trình phân định rành mạch hai mệnh đề đảo sai lầm:
+  </p>
+
+  <details class="ex-card" style="margin-top: 1rem;" open>
+    <summary>Ví dụ &amp; Phân tích</summary>
+    <div class="ex-content">
+      <p><b>1. Bối cảnh và đề bài.</b> Xét nhóm Klein $V_4=\{e,\alpha,\beta,\gamma\}$ với $\alpha^2=\beta^2=\gamma^2=e$ và $|V_4|=4$. Kiểm tra mệnh đề đảo “nếu $d\mid|G|$ thì tồn tại phần tử cấp $d$” với $d=4$.</p>
+      <p><b>2. Hộp công cụ.</b> Cấp của phần tử là số nguyên dương nhỏ nhất $m$ sao cho $x^m=e$. Nếu $x$ có cấp $4$ thì bắt buộc $x^2\ne e$.</p>
+      <p><b>3. Lời giải.</b> Ta có $4\mid|V_4|=4$. Tuy nhiên, $e$ có cấp $1$, còn với từng phần tử khác đơn vị $x\in\{\alpha,\beta,\gamma\}$, $x^2=e$ và $x\ne e$, nên $\operatorname{ord}(x)=2$. Không phần tử nào có cấp $4$. Vậy chiều đảo thứ nhất của Lagrange sai (đpcm).</p>
+      <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Lagrange nói cấp phần tử phải chia cấp nhóm, không nói mọi ước đều xuất hiện làm cấp phần tử. Đừng suy từ $4\mid|V_4|$ rằng $V_4$ phải có phần tử cấp $4$.</p>
+    </div>
+  </details>
+
+  <details class="ex-card" style="margin-top: 1rem;" open>
+    <summary>Ví dụ &amp; Phân tích</summary>
+    <div class="ex-content">
+      <p><b>1. Bối cảnh và đề bài.</b> Xét nhóm thay phiên $A_4$ có $|A_4|=4!/2=12$. Mặc dù $6\mid12$, chứng minh $A_4$ không có nhóm con cấp $6$.</p>
+      <p><b>2. Hộp công cụ.</b> Nếu $H\le A_4$ có cấp $6$, thì $[A_4:H]=2$, nên $H$ chuẩn tắc. Khi đó phép chiếu $A_4\to A_4/H$ là đồng cấu vào nhóm cấp $2$; ảnh của phần tử cấp $3$ phải có cấp chia đồng thời $3$ và $2$.</p>
+      <p><b>3. Lời giải.</b> Giả sử tồn tại $H$ cấp $6$. Mỗi chu trình 3 trong $A_4$ có cấp $3$, nên ảnh của nó trong $A_4/H$ có cấp vừa chia $3$ vừa chia $2$; ảnh ấy phải là đơn vị. Do đó cả $8$ chu trình 3 đều nằm trong $H$, cùng với $e$, suy ra $|H|\ge9$, mâu thuẫn $|H|=6$. Vậy không có nhóm con cấp $6$ dù $6\mid|A_4|$ (đpcm).</p>
+      <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Cấp chia cấp nhóm là điều kiện cần, không đủ để bảo đảm nhóm con tồn tại. Trong lập luận, mấu chốt là chỉ số $2$ khiến $H$ chuẩn tắc, nhờ đó mới xét được thương $A_4/H$.</p>
+    </div>
+  </details>
+
+  <!-- 3.6 ĐỐI CHIẾU LỚP KỀ TRÁI VÀ PHẢI TRONG NHÓM KHÔNG GIAO HOÁN -->
+  <h3 class="subsection-title">3.6. Trực Quan Hóa: Sự Khác Biệt Giữa Lớp Trái và Lớp Phải Trong $S_3$</h3>
+  <p>
+    Trong một nhóm không giao hoán, lớp kề trái $gH$ và lớp kề phải $Hg$ có cùng kích thước $|H|$, cùng chứa phần tử đại diện $g$, nhưng <b>nói chung không phải là cùng một tập hợp</b>!
+  </p>
+
+  <div class="table-wrapper" style="margin-bottom: 1.5rem;">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th style="width: 50%;">Nhóm con $H = \langle (12) \rangle = \{e, (12)\}$ trong $S_3$</th>
+          <th style="width: 50%;">Nhóm con $K = A_3 = \{e, (123), (132)\}$ trong $S_3$</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <b>Cấp $|H| = 2$, chỉ số $[S_3 : H] = 3$:</b>
+            <br><br>• <i>Các lớp kề trái:</i>
+            <br>&nbsp;&nbsp;$eH = \{e, (12)\}$
+            <br>&nbsp;&nbsp;$(13)H = \{(13), (123)\}$
+            <br>&nbsp;&nbsp;$(23)H = \{(23), (132)\}$
+            <br><br>• <i>Các lớp kề phải:</i>
+            <br>&nbsp;&nbsp;$He = \{e, (12)\}$
+            <br>&nbsp;&nbsp;$H(13) = \{(13), \mathbf{(132)}\}$
+            <br>&nbsp;&nbsp;$H(23) = \{(23), \mathbf{(123)}\}$
+            <br><br>
+            <span style="color: #ef4444; font-weight: bold;">
+              ⚠️ Lệch nhau: $(13)H \neq H(13)$ và $(23)H \neq H(23)$!
+            </span>
+          </td>
+          <td>
+            <b>Cấp $|K| = 3$, chỉ số $[S_3 : K] = 2$:</b>
+            <br><br>• <i>Các lớp kề trái:</i>
+            <br>&nbsp;&nbsp;$eK = K = \{e, (123), (132)\}$
+            <br>&nbsp;&nbsp;$(12)K = \{(12), (13), (23)\}$
+            <br><br>• <i>Các lớp kề phải:</i>
+            <br>&nbsp;&nbsp;$Ke = K = \{e, (123), (132)\}$
+            <br>&nbsp;&nbsp;$K(12) = \{(12), (13), (23)\}$
+            <br><br>
+            <span style="color: #10b981; font-weight: bold;">
+              ✔ Trùng khít: $gK = Kg$ với mọi $g \in S_3$!
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ MỆNH ĐỀ 3.6</span>
+      <span class="tag">Nhóm Con Chỉ Số 2 Luôn Có Lớp Trái Bằng Lớp Phải</span>
+    </div>
+    <div class="card-body">
+      <p>Nếu $H \le G$ và $[G : H] = 2$, thì:</p>
+      <div class="math-display">
+        $$gH = Hg \quad \forall g \in G$$
+      </div>
+      <p>
+        <i>Chứng minh ngắn gọn:</i> Nếu $g \in H$ thì $gH = H = Hg$. 
+        Nếu $g \notin H$, vì phân hoạch trái chỉ có 2 khối nên khối còn lại là $gH = G \setminus H$. 
+        Phân hoạch phải cũng chỉ có 2 khối nên $Hg = G \setminus H$. Do đó $gH = Hg$.
+      </p>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $G=S_3$, lấy $H=A_3=\{e,(123),(132)\}$. Xác nhận $[G:H]=2$ và minh họa $gH=Hg$ với mọi $g\in S_3$.</p>
+          <p><b>2. Hộp công cụ.</b> Chỉ số $2$ nghĩa là có đúng hai lớp mỗi phía: $H$ và phần bù $G\setminus H$. Nếu $g\notin H$, cả $gH$ và $Hg$ đều là lớp duy nhất còn lại.</p>
+          <p><b>3. Lời giải.</b> Ta có $|S_3|=6$, $|A_3|=3$, nên $[S_3:A_3]=2$. Nếu $g\in H$, thì $gH=H=Hg$. Nếu $g\notin H$, các lớp trái và phải không chứa đơn vị, nên đều bằng phần bù $S_3\setminus H=\{(12),(13),(23)\}$. Chẳng hạn $(12)H=\{(12),(13),(23)\}=H(12)$. Vậy $gH=Hg$ với mọi $g\in S_3$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Kết luận là hai tập lớp kề bằng nhau, không khẳng định $gh=hg$ với từng $h\in H$. Chỉ số $2$ tạo đúng một lớp ngoài nhóm con, điều làm lập luận phần bù khả thi.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 3.7 CẦU NỐI SANG CHƯƠNG 4 -->
+  <h3 class="subsection-title">3.7. Cầu Nối Sư Phạm: Trở Ngại Khi Định Nghĩa Phép Nhân Trên Tập Thương</h3>
+  <div style="background: var(--eq-bg, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 12px; padding: 20px; margin: 1.5rem 0;">
+    <div style="font-weight: 700; color: var(--thm-color, #1e3a8a); margin-bottom: 8px; font-size: 1.05rem;">
+      🤔 Câu hỏi mở then chốt dẫn sang Chương 4:
+    </div>
+    <p style="margin: 0; line-height: 1.7; color: #334155;">
+      Trên tập thương các lớp kề $G/H = \{gH \mid g \in G\}$, nếu ta thử định nghĩa phép nhân tự nhiên bằng đại diện:
+      $$(aH)(bH) = abH$$
+      Phép toán này có <b>xác định tốt</b> (well-defined) không?
+      <br>• Trong $S_3$ với $H = \langle (12) \rangle$: vì $(13)H \neq H(13)$, việc thay đại diện khác nhau sẽ cho ra các lớp kết quả khác nhau! Phép nhân lớp kề <b>thất bại</b>.
+      <br>• Muốn phép nhân trên tập thương xác định tốt, điều kiện tiên quyết là <b>lớp trái phải luôn bằng lớp phải</b> ($gH = Hg$ với mọi $g$). 
+      Đó chính là khởi nguồn sinh ra khái niệm <b>Nhóm con chuẩn tắc</b> ở Chương 4!
+    </p>
+  </div>
+  <details class="ex-card" style="margin-top: 1rem;" open>
+    <summary>Ví dụ &amp; Phân tích</summary>
+    <div class="ex-content">
+      <p><b>1. Bối cảnh và đề bài.</b> Trong $S_3$, đặt $H=\langle(12)\rangle=\{e,(12)\}$ và $C=(13)H=\{(13),(123)\}$. Thử định nghĩa tích lớp $C\cdot C$ bằng cách nhân đại diện.</p>
+      <p><b>2. Hộp công cụ.</b> Công thức $(aH)(bH)=abH$ chỉ hợp lệ nếu kết quả không phụ thuộc đại diện được chọn. Hai đại diện khác nhau của cùng lớp phải cho cùng lớp kết quả.</p>
+      <p><b>3. Lời giải.</b> Dùng $(13)$ làm đại diện cho cả hai thừa số: $(13)(13)=e$, nên tích dự kiến là $eH=\{e,(12)\}$. Nhưng $(123)$ cũng thuộc $C$; thay đại diện thứ nhất bằng $(123)$, ta được $(123)(13)=(23)$ (hợp thành từ phải sang trái), nên lớp kết quả là $(23)H=\{(23),(132)\}$. Hai lớp kết quả khác nhau, vì vậy phép nhân trên $G/H$ không xác định tốt.</p>
+      <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Một lớp có nhiều đại diện; không thể nhân đại diện tùy ý nếu chưa chứng minh độc lập với lựa chọn. Ở đây $(13)H\ne H(13)$, báo hiệu $H$ không chuẩn tắc và dẫn tới trở ngại sẽ được giải quyết ở Chương 4.</p>
+    </div>
+  </details>
+
+</div>
+<!-- ==================== HẾT CHƯƠNG 3 HOÀN CHỈNH ==================== -->

@@ -1,0 +1,222 @@
+<!-- ==================== BÀI TẬP CHƯƠNG 1: HOÀN CHỈNH ==================== -->
+<div class="chapter-content" id="tab-ex1">
+  <h2 class="section-title">Hệ thống Bài tập & Lời giải: Chương 1. Nhóm & Ví dụ Cơ bản</h2>
+  <p>
+    Rèn luyện phương pháp kiểm tra 3 tiên đề nhóm, khai thác luật giản ước, làm chủ quy ước hợp thành từ phải sang trái và xử lý phép toán trong các nhóm không giao hoán.
+  </p>
+
+  <!-- BÀI TẬP 1.1 -->
+  <div class="ex-study-card" id="ex-1-1">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-a">Nhóm A · Nhận diện</span>
+        <span class="ex-level-badge">🟢 Cơ bản</span>
+        <span class="ex-title-label">BÀI TẬP 1.1: Phân loại Nửa nhóm, Vị nhóm và Nhóm</span>
+      </div>
+      <button class="ex-status-btn" data-id="1-1" data-status="todo" onclick="toggleExStatus(this, '1-1')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Với mỗi cấu trúc sau, trước hết kiểm tra tính đóng (phép toán hai ngôi). Nếu thỏa mãn, hãy xác định cấu trúc thu được là nửa nhóm, vị nhóm, nhóm hay nhóm giao hoán:</p>
+      <p>
+        (a) $(\mathbb{Z}, +)$;<br>
+        (b) $(\mathbb{N}, +)$ với quy ước $0 \in \mathbb{N}$;<br>
+        (c) $(\mathbb{Z}, \cdot)$;<br>
+        (d) $(\mathbb{Q} \setminus \{0\}, \cdot)$;<br>
+        (e) $(\mathbb{R}, *)$ với $x * y = \frac{x+y}{2}$;<br>
+        (f) Tập hợp các số nguyên lẻ $2\mathbb{Z} + 1$ với phép cộng thông thường.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Kiểm tra theo thứ tự bắt buộc: <b>1. Tính đóng</b> $\to$ <b>2. Tính kết hợp</b> (nửa nhóm) $\to$ <b>3. Phần tử đơn vị</b> (vị nhóm) $\to$ <b>4. Nghịch đảo</b> (nhóm) $\to$ <b>5. Tính giao hoán</b> (nhóm Abel).<br>
+        • Nếu dừng ở bước nào, chỉ ra rõ ràng tiên đề bị vi phạm kèm phản ví dụ cụ thể.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) $(\mathbb{Z}, +)$:</b> Tổng hai số nguyên luôn là số nguyên (đóng), phép cộng kết hợp, có đơn vị là 0, mọi $x$ có phần tử đối là $-x \in \mathbb{Z}$, phép cộng giao hoán. $\implies$ Là <b>nhóm giao hoán</b>.</p>
+      <p><b>(b) $(\mathbb{N}, +)$ với $0 \in \mathbb{N}$:</b> Phép cộng đóng, kết hợp, có đơn vị là 0. Tuy nhiên phần tử $1 \in \mathbb{N}$ không có số đối trong $\mathbb{N}$ (vì $-1 \notin \mathbb{N}$). $\implies$ Là <b>vị nhóm giao hoán</b>.</p>
+      <p><b>(c) $(\mathbb{Z}, \cdot)$:</b> Phép nhân đóng, kết hợp, có đơn vị là 1. Tuy nhiên chỉ có $\pm 1$ là khả nghịch; số $2 \in \mathbb{Z}$ không có nghịch đảo trong $\mathbb{Z}$. $\implies$ Là <b>vị nhóm giao hoán</b>.</p>
+      <p><b>(d) $(\mathbb{Q} \setminus \{0\}, \cdot)$:</b> Tích hai số hữu tỉ khác không là số hữu tỉ khác không (đóng), phép nhân kết hợp, đơn vị là 1, mọi $x \neq 0$ đều có nghịch đảo là $1/x \in \mathbb{Q} \setminus \{0\}$, phép nhân giao hoán. $\implies$ Là <b>nhóm giao hoán</b>.</p>
+      <p><b>(e) $(\mathbb{R}, *)$ với $x * y = \frac{x+y}{2}$:</b> Phép toán đóng trên $\mathbb{R}$. Thử tính kết hợp với bộ ba $(0, 0, 4)$:<br>
+        • $(0 * 0) * 4 = 0 * 4 = 2$<br>
+        • $0 * (0 * 4) = 0 * 2 = 1$<br>
+        Vì $(0 * 0) * 4 \neq 0 * (0 * 4)$, phép toán <i>không kết hợp</i>. Cấu trúc không phải nửa nhóm.</p>
+      <p><b>(f) Tập các số nguyên lẻ với phép cộng:</b> Lấy hai số lẻ $1, 3$. Tổng $1 + 3 = 4$ là số chẵn, không thuộc tập đang xét. <i>Phép cộng không đóng</i>, do đó không tạo thành phép toán hai ngôi. <span class="qed">∎</span></p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Bẫy sai lầm:</b> Với câu (e), phép toán $x * y = (x+y)/2$ có tính giao hoán, nhưng tuyệt đối không suy ra được tính kết hợp! Không được nhầm lẫn tính giao hoán thay thế được tính kết hợp.
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 1.3 -->
+  <div class="ex-study-card" id="ex-1-3">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-a">Nhóm A · Tính toán</span>
+        <span class="ex-level-badge">🟢 Cơ bản</span>
+        <span class="ex-title-label">BÀI TẬP 1.3: Tích Hoán vị và Quy ước Từ Phải Sang Trái</span>
+      </div>
+      <button class="ex-status-btn" data-id="1-3" data-status="todo" onclick="toggleExStatus(this, '1-3')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Trong nhóm đối xứng $S_4$, xét hai hoán vị $\sigma = (1\,2)(3\,4)$ và $\tau = (1\,2\,3)$. Tuân thủ quy ước hợp thành ánh xạ đọc từ phải sang trái:</p>
+      <p>
+        (a) Tính các tích $\sigma\tau$ và $\tau\sigma$. Hai hoán vị này có giao hoán không?<br>
+        (b) Tìm phần tử nghịch đảo $\sigma^{-1}$ và $\tau^{-1}$ dưới dạng tích các chu trình rời nhau.<br>
+        (c) Kiểm tra quy tắc nghịch đảo của một tích: $(\sigma\tau)^{-1} = \tau^{-1}\sigma^{-1}$.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • <b>Quy ước giáo trình:</b> $(\sigma\tau)(x) = \sigma(\tau(x))$, tức áp dụng hoán vị $\tau$ ở bên phải trước, sau đó mới áp dụng $\sigma$ ở bên trái.<br>
+        • <b>Nghịch đảo của chu trình:</b> Đảo ngược thứ tự các phần tử trong chu trình: $(a_1\, a_2\, \dots\, a_k)^{-1} = (a_k\, \dots\, a_2\, a_1)$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Tính tích $\sigma\tau$ và $\tau\sigma$:</b></p>
+      <p>
+        • Xét $\sigma\tau = (1\,2)(3\,4) \circ (1\,2\,3)$ (tính từ phải sang trái):<br>
+        - $1 \overset{\tau}{\mapsto} 2 \overset{\sigma}{\mapsto} 1 \implies 1 \mapsto 1$<br>
+        - $2 \overset{\tau}{\mapsto} 3 \overset{\sigma}{\mapsto} 4 \implies 2 \mapsto 4$<br>
+        - $4 \overset{\tau}{\mapsto} 4 \overset{\sigma}{\mapsto} 3 \implies 4 \mapsto 3$<br>
+        - $3 \overset{\tau}{\mapsto} 1 \overset{\sigma}{\mapsto} 2 \implies 3 \mapsto 2$<br>
+        Do đó: $\sigma\tau = (2\,4\,3)$.
+      </p>
+      <p>
+        • Xét $\tau\sigma = (1\,2\,3) \circ (1\,2)(3\,4)$:<br>
+        - $1 \overset{\sigma}{\mapsto} 2 \overset{\tau}{\mapsto} 3 \implies 1 \mapsto 3$<br>
+        - $3 \overset{\sigma}{\mapsto} 4 \overset{\tau}{\mapsto} 4 \implies 3 \mapsto 4$<br>
+        - $4 \overset{\sigma}{\mapsto} 3 \overset{\tau}{\mapsto} 1 \implies 4 \mapsto 1$<br>
+        - $2 \overset{\sigma}{\mapsto} 1 \overset{\tau}{\mapsto} 2 \implies 2 \mapsto 2$<br>
+        Do đó: $\tau\sigma = (1\,3\,4)$.<br>
+        Vì $(2\,4\,3) \neq (1\,3\,4)$, hai hoán vị $\sigma$ và $\tau$ <b>không giao hoán</b>.
+      </p>
+      <p><b>(b) Tìm phần tử nghịch đảo:</b><br>
+        • $\sigma = (1\,2)(3\,4)$ gồm các chuyển vị cấp 2 rời nhau, nên $\sigma^{-1} = (1\,2)(3\,4) = \sigma$.<br>
+        • $\tau = (1\,2\,3) \implies \tau^{-1} = (3\,2\,1) = (1\,3\,2)$.
+      </p>
+      <p><b>(c) Kiểm tra quy tắc nghịch đảo của tích:</b><br>
+        • Vế trái: $(\sigma\tau)^{-1} = ((2\,4\,3))^{-1} = (3\,4\,2) = (2\,3\,4)$.<br>
+        • Vế phải: $\tau^{-1}\sigma^{-1} = (1\,3\,2) \circ (1\,2)(3\,4)$:<br>
+        - $1 \mapsto 2 \mapsto 1$<br>
+        - $2 \mapsto 1 \mapsto 3$<br>
+        - $3 \mapsto 4 \mapsto 4$<br>
+        - $4 \mapsto 3 \mapsto 2$<br>
+        Kết quả cho chu trình $(2\,3\,4)$, hoàn toàn trùng khớp với vế trái. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Lỗi quy ước nghiêm trọng:</b> Một số tài liệu phương Tây đọc tích từ trái sang phải. Giáo trình TS. Huỳnh Việt Khánh quy ước chặt chẽ: tích các hoán vị luôn đọc từ phải sang trái. Nếu đọc từ trái sang phải, toàn bộ kết quả bài toán sẽ bị đảo lộn.
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 1.19 -->
+  <div class="ex-study-card" id="ex-1-19">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-c">Nhóm C · Chứng minh</span>
+        <span class="ex-level-badge">🟠 Vận dụng cao</span>
+        <span class="ex-title-label">BÀI TẬP 1.19: Nhóm có Mọi Phần tử Cấp 2 luôn Giao hoán</span>
+      </div>
+      <button class="ex-status-btn" data-id="1-19" data-status="todo" onclick="toggleExStatus(this, '1-19')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Cho $G$ là một nhóm thỏa mãn điều kiện $x^2 = e$ với mọi $x \in G$. Chứng minh $G$ là nhóm giao hoán (nhóm Abel). Chỉ rõ vị trí sử dụng giả thiết cho từng phần tử $a, b$ và cho tích $ab$.</p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Điều kiện $x^2 = e$ tương đương với $x = x^{-1}$ (mỗi phần tử tự là nghịch đảo của chính nó).<br>
+        • So sánh hai biểu thức tính nghịch đảo của tích $ab$: một biểu thức dùng công thức nghịch đảo của tích trong nhóm, biểu thức còn lại dùng giả thiết bài toán áp dụng cho phần tử $ab \in G$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p>Lấy hai phần tử tùy ý $a, b \in G$.</p>
+      <p>
+        • <b>Bước 1:</b> Vì $a^2 = e$, nhân $a^{-1}$ vào hai vế ta được $a = a^{-1}$. Tương tự với $b \in G$, ta có $b = b^{-1}$.<br>
+        • <b>Bước 2:</b> Vì $G$ là một nhóm, tính đóng bảo đảm $ab \in G$. Áp dụng giả thiết cho phần tử $ab$, ta có $(ab)^2 = e$, do đó:
+        $$(ab)^{-1} = ab \quad (1)$$
+        • <b>Bước 3:</b> Mặt khác, theo định lý tổng quát về nghịch đảo của một tích trong mọi nhóm:
+        $$(ab)^{-1} = b^{-1}a^{-1} \quad (2)$$
+        • <b>Bước 4:</b> Kết hợp (1) và (2), đồng thời thay $b^{-1} = b$ và $a^{-1} = a$ từ Bước 1:
+        $$ab = b^{-1}a^{-1} = ba$$
+        Đẳng thức $ab = ba$ đúng với mọi $a, b \in G$. Vậy $G$ là nhóm giao hoán. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Sai sót lập luận:</b> Khi viết $(ab)^2 = a^2b^2$, nhiều bạn ngộ nhận đây là quy tắc hiển nhiên. Trong nhóm tổng quát, $(ab)^2 = abab$, chỉ khi có tính giao hoán thì mới bằng $a^2b^2$. Lập luận qua nghịch đảo $(ab)^{-1}$ như trên là cách chuẩn xác nhất.
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 1.23 -->
+  <div class="ex-study-card" id="ex-1-23">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-b">Nhóm B · Vận dụng</span>
+        <span class="ex-level-badge">🟡 Vận dụng</span>
+        <span class="ex-title-label">BÀI TẬP 1.23: Tiêu chuẩn Giao hoán qua Lũy thừa Bình phương</span>
+      </div>
+      <button class="ex-status-btn" data-id="1-23" data-status="todo" onclick="toggleExStatus(this, '1-23')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Cho $G$ là một nhóm. Chứng minh $G$ là nhóm giao hoán khi và chỉ khi $(ab)^2 = a^2b^2$ với mọi $a, b \in G$.</p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Chiều thuận ($\implies$): Khai triển định nghĩa lũy thừa và đổi chỗ các thừa số.<br>
+        • Chiều đảo ($\Longleftarrow$): Khai triển $(ab)^2 = abab$ và $a^2b^2 = aabb$, áp dụng luật giản ước trái cho $a$ và luật giản ước phải cho $b$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>Chiều thuận ($\implies$):</b> Giả sử $G$ giao hoán. Khi đó với mọi $a, b \in G$:<br>
+        $$(ab)^2 = (ab)(ab) = a(ba)b = a(ab)b = (aa)(bb) = a^2b^2$$
+      </p>
+      <p><b>Chiều đảo ($\Longleftarrow$):</b> Giả sử $(ab)^2 = a^2b^2$ với mọi $a, b \in G$. Khai triển cả hai vế:
+        $$abab = aabb \iff a(ba)b = a(ab)b$$
+        • Nhân $a^{-1}$ vào bên trái cả hai vế (hoặc dùng luật giản ước trái):
+        $$ba \cdot b = ab \cdot b$$
+        • Nhân $b^{-1}$ vào bên phải cả hai vế (hoặc dùng luật giản ước phải):
+        $$ba = ab$$
+        Đẳng thức đúng với mọi $a, b \in G$. Vậy $G$ là nhóm giao hoán. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Nhấn mạnh lượng từ:</b> Đẳng thức $(ab)^2 = a^2b^2$ bắt buộc phải đúng <b>với mọi $a, b \in G$</b>. Nếu chỉ tồn tại một vài cặp $a, b$ cụ thể thỏa mãn thì không đủ để kết luận nhóm $G$ giao hoán.
+      </p>
+    </div>
+  </div>
+</div>

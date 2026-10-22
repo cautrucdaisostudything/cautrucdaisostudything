@@ -1,0 +1,15 @@
+<nav class="practice-segment-tabs" role="tablist" aria-label="Khu vực luyện tập">
+    <button type="button" class="practice-segment-btn active" id="practiceTabChapters" role="tab" aria-selected="true" aria-controls="practiceChapterView" data-practice-view="chapters">📚 Bài tập theo Chương</button>
+    <button type="button" class="practice-segment-btn" id="practiceTabReview" role="tab" aria-selected="false" aria-controls="practiceReviewView" data-practice-view="review">📝 Tự ôn tập</button>
+  </nav>
+
+  <div class="practice-chapter-view" id="practiceChapterView" role="tabpanel" aria-labelledby="practiceTabChapters">
+  <section class="practice-summary" aria-labelledby="practice-summary-title">
+    <div>
+      <h2 id="practice-summary-title">Tổng số bài tập đã hoàn thành</h2>
+      <p>Tính trên tất cả các chương, với trạng thái “Đã thành thạo”.</p>
+    </div>
+    <div class="practice-summary-total" role="status" aria-live="polite" aria-atomic="true">
+      <strong id="practice-completed-count">0</strong> / <span id="practice-exercise-count">0</span> bài tập
+    </div>
+  </section>

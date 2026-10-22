@@ -1,0 +1,385 @@
+<!-- ======================================================== -->
+<div class="chapter-content" id="tab-c5">
+  <h2 class="section-title">Chương 5. Đồng Cấu Nhóm và Các Định Lý Đẳng Cấu</h2>
+  
+  <p class="welcome-copy">
+    Ở các chương trước, ta nghiên cứu cấu trúc bên trong của một nhóm thông qua các nhóm con, lớp kề và nhóm thương. 
+    Chương này chuyển sang nghiên cứu nhóm từ "bên ngoài" thông qua các ánh xạ tôn trọng phép toán. 
+    Khái niệm đồng cấu, hạt nhân và tập ảnh kết hợp cùng bốn định lý đẳng cấu then chốt sẽ cung cấp công cụ tối thượng 
+    để nhận diện cấu trúc của mọi nhóm thương mà không cần thực hiện phép chia lớp kề trực tiếp.
+  </p>
+
+  <!-- 5.1 ĐỘNG CƠ SƯ PHẠM: TỪ ĐỔI TÊN ĐẾN BẢO TOÀN PHÉP TOÁN -->
+  <h3 class="subsection-title">5.1. Khởi Nguồn Sư Phạm: So Sánh Cấu Trúc Bằng Ánh Xạ Giữ Phép Toán</h3>
+  <p>
+    Trong toán học, hai nhóm có thể mang vẻ ngoài hoàn toàn khác nhau về bản chất phần tử:
+  </p>
+  <ul class="bullet-list">
+    <li>Nhóm cộng số thực $(\mathbb{R}, +)$ gồm các số thực dưới phép cộng thông thường.</li>
+    <li>Nhóm nhân số thực dương $(\mathbb{R}^+, \cdot)$ gồm các số thực dương dưới phép nhân thông thường.</li>
+  </ul>
+  <p>
+    Tuy nhiên, hàm số mũ quen thuộc $f(x) = e^x$ biến phép cộng thành phép nhân: $e^{x+y} = e^x \cdot e^y$. 
+    Ánh xạ này là một song ánh, cho thấy hai nhóm này thực chất có <b>cùng cấu trúc đại số trừu tượng</b>, 
+    chỉ khác nhau ở cách ta gọi tên phần tử và ký hiệu phép toán! 
+    Những ánh xạ "tôn trọng phép toán" như vậy được gọi là các <b>đồng cấu nhóm</b>.
+  </p>
+
+  <!-- 5.2 ĐỊNH NGHĨA ĐỒNG CẤU & PHÂN LOẠI ÁNH XẠ -->
+  <h3 class="subsection-title">5.2. Định Nghĩa Đồng Cấu, Đẳng Cấu và Bảng Phân Loại Toàn Diện</h3>
+  
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 5.1</span>
+      <span class="tag">Đồng Cấu Nhóm (Homomorphism)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $(G, \cdot)$ và $(K, *)$ là hai nhóm. Một ánh xạ $\varphi : G \to K$ được gọi là một <b>đồng cấu nhóm</b> nếu thỏa mãn điều kiện:</p>
+      <ul class="bullet-list">
+        <li><b>Bảo toàn phép toán:</b> 
+          $$\varphi(a \cdot b) = \varphi(a) * \varphi(b) \quad \forall a, b \in G$$
+        </li>
+      </ul>
+      <div class="corollary-box">
+        <b>💡 Các hệ quả tức thời suy ra từ định nghĩa:</b>
+        <br>• Bảo toàn phần tử đơn vị: $\varphi(e_G) = e_K$.
+        <br>• Bảo toàn phần tử nghịch đảo: $\varphi(a^{-1}) = (\varphi(a))^{-1}$ với mọi $a \in G$.
+        <br>• Bảo toàn lũy thừa nguyên: $\varphi(a^n) = (\varphi(a))^n$ (hoặc $\varphi(na) = n\varphi(a)$ trong ký hiệu cộng).
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Xét $\varphi:(\mathbb{R},+)\to(\mathbb{R}^+,\cdot)$, $\varphi(x)=e^x$. Kiểm tra $\varphi$ là đồng cấu nhóm.</p>
+          <p><b>2. Hộp công cụ.</b> Đồng cấu phải bảo toàn phép toán: $\varphi(x+y)=\varphi(x)\varphi(y)$ với mọi $x,y$ trong nhóm nguồn.</p>
+          <p><b>3. Lời giải.</b> Lấy $x,y\in\mathbb{R}$ tùy ý. Ta có $\varphi(x+y)=e^{x+y}=e^xe^y=\varphi(x)\varphi(y)$. Hơn nữa $e^x>0$, nên ảnh nằm trong $\mathbb{R}^+$; đồng thời $\varphi(0)=1$ và $\varphi(-x)=e^{-x}=(e^x)^{-1}$. Vậy $\varphi$ là đồng cấu nhóm (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Phải đối chiếu đúng hai phép toán: cộng ở miền và nhân ở đối miền. Không viết $e^{x+y}=e^x+e^y$; hàm mũ biến tổng thành tích.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 5.2</span>
+      <span class="tag">Phân Loại Các Dạng Đồng Cấu</span>
+    </div>
+    <div class="card-body">
+      <p>Một đồng cấu nhóm $\varphi: G \to K$ được phân loại dựa theo các tính chất ánh xạ:</p>
+      <ul class="bullet-list">
+        <li><b>Đơn cấu (Monomorphism):</b> Là một đồng cấu có tính <i>đơn ánh</i>.</li>
+        <li><b>Toàn cấu (Epimorphism):</b> Là một đồng cấu có tính <i>toàn ánh</i>.</li>
+        <li><b>Đẳng cấu (Isomorphism):</b> Là một đồng cấu vừa đơn ánh vừa toàn ánh (<i>song ánh</i>). Khi đó ta viết $G \cong K$.</li>
+        <li><b>Tự đồng cấu (Endomorphism):</b> Là một đồng cấu từ một nhóm vào chính nó ($\varphi: G \to G$).</li>
+        <li><b>Tự đẳng cấu (Automorphism):</b> Là một đẳng cấu từ một nhóm lên chính nó.</li>
+      </ul>
+      <div class="corollary-box">
+        <b>Ý nghĩa của Đẳng cấu ($G \cong K$):</b> Hai nhóm đẳng cấu là "hai bản sao giống hệt nhau" về mọi tính chất đại số. Mọi định lý đúng trong $G$ đều đúng trong $K$.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Dùng $\varphi(x)=e^x$ để phân loại ánh xạ $\varphi:(\mathbb{R},+)\to(\mathbb{R}^+,\cdot)$: đơn cấu, toàn cấu hay đẳng cấu?</p>
+          <p><b>2. Hộp công cụ.</b> Đơn cấu là đồng cấu đơn ánh; toàn cấu là đồng cấu toàn ánh; đẳng cấu là đồng cấu song ánh. Hàm mũ và logarit là hai ánh xạ ngược nhau giữa $\mathbb{R}$ và $\mathbb{R}^+$.</p>
+          <p><b>3. Lời giải.</b> Tính bảo toàn phép toán đã có: $e^{x+y}=e^xe^y$. Nếu $e^x=e^y$ thì lấy logarit hai vế được $x=y$, nên $\varphi$ đơn ánh. Với mọi $u>0$, chọn $x=\ln u\in\mathbb{R}$ thì $\varphi(x)=e^{\ln u}=u$, nên $\varphi$ toàn ánh. Do đó $\varphi$ vừa đơn cấu vừa toàn cấu, tức là đẳng cấu $\mathbb{R}\cong\mathbb{R}^+$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Đồng cấu không mặc nhiên là song ánh. Cần chứng minh riêng đơn ánh và toàn ánh; ở đây tính toàn ánh dựa vào điều kiện đối miền chỉ gồm số thực dương.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 5.3 HẠT NHÂN VÀ TẬP ẢNH -->
+  <h3 class="subsection-title">5.3. Hạt Nhân, Tập Ảnh và Tiêu Chuẩn Đơn Cấu Cốt Lõi</h3>
+  <p>
+    Để kiểm soát mức độ "mất mát thông tin" khi ánh xạ nhóm $G$ sang nhóm $K$, ta xét hai tập con then chốt:
+  </p>
+
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 5.3</span>
+      <span class="tag">Hạt Nhân (Kernel) và Tập Ảnh (Image)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $\varphi : G \to K$ là một đồng cấu nhóm. Ta xác định:</p>
+      <ul class="bullet-list">
+        <li><b>1. Hạt nhân của đồng cấu (Kernel):</b> Là tập hợp tất cả các phần tử thuộc miền xác định $G$ bị ánh xạ về phần tử đơn vị $e_K$ của đối miền:
+          $$\ker\varphi = \{g \in G \mid \varphi(g) = e_K\}$$
+        </li>
+        <li><b>2. Tập ảnh của đồng cấu (Image):</b> Là tập hợp tất cả các giá trị thực sự đạt tới trong đối miền $K$:
+          $$\operatorname{im}\varphi = \varphi(G) = \{\varphi(g) \mid g \in G\}$$
+        </li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Xét đồng cấu định thức $\det:\mathrm{GL}_2(\mathbb{R})\to\mathbb{R}^*$, $A\mapsto\det A$. Xác định tập ảnh và hạt nhân.</p>
+          <p><b>2. Hộp công cụ.</b> Tập ảnh gồm các giá trị thực sự đạt được; hạt nhân gồm các ma trận được gửi về đơn vị $1$ của $\mathbb{R}^*$.</p>
+          <p><b>3. Lời giải.</b> Với mọi $t\in\mathbb{R}^*$, ma trận $\begin{pmatrix}t&0\\0&1\end{pmatrix}$ khả nghịch và có định thức $t$, nên $\operatorname{im}(\det)=\mathbb{R}^*$. Mặt khác, $\ker(\det)=\{A\in\mathrm{GL}_2(\mathbb{R}):\det A=1\}=\mathrm{SL}_2(\mathbb{R})$. Vậy định thức là toàn cấu, có hạt nhân chính là nhóm ma trận định thức một (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Không nhầm tập ảnh với đối miền chỉ dựa trên ký hiệu; phải chứng minh mọi số thực khác $0$ đều đạt được. Hạt nhân là ma trận có định thức $1$, không phải ma trận không.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 5.4</span>
+      <span class="tag">Cấu Trúc Đại Số Của Hạt Nhân và Tiêu Chuẩn Đơn Ánh</span>
+    </div>
+    <div class="card-body">
+      <p>Với mọi đồng cấu nhóm $\varphi : G \to K$:</p>
+      <ul class="bullet-list">
+        <li><b>1. Cấu trúc tập ảnh:</b> $\operatorname{im}\varphi$ luôn là một <b>nhóm con</b> của đối miền $K$ ($\operatorname{im}\varphi \le K$).</li>
+        <li><b>2. Cấu trúc hạt nhân:</b> $\ker\varphi$ <b>luôn là một nhóm con chuẩn tắc</b> của miền xác định $G$ ($\ker\varphi \trianglelefteq G$).</li>
+        <li><b>3. Tiêu chuẩn đơn ánh cốt lõi:</b> Ánh xạ $\varphi$ là một đơn ánh khi và chỉ khi hạt nhân của nó là tầm thường:
+          $$\varphi \text{ là đơn ánh} \iff \ker\varphi = \{e_G\}$$
+        </li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Với $\det:\mathrm{GL}_2(\mathbb{R})\to\mathbb{R}^*$, xác định ảnh, hạt nhân, tính chuẩn tắc của hạt nhân và kết luận về tính đơn ánh.</p>
+          <p><b>2. Hộp công cụ.</b> Ảnh của đồng cấu là nhóm con; hạt nhân luôn chuẩn tắc; đồng cấu đơn ánh khi và chỉ khi hạt nhân chỉ gồm đơn vị.</p>
+          <p><b>3. Lời giải.</b> Như trên, $\operatorname{im}(\det)=\mathbb{R}^*$ vì $\det\begin{pmatrix}t&0\\0&1\end{pmatrix}=t$ với mọi $t\ne0$. Hạt nhân là $\mathrm{SL}_2(\mathbb{R})$. Thật vậy, nếu $A\in\mathrm{GL}_2$ và $N\in\mathrm{SL}_2$, thì $\det(ANA^{-1})=\det A\cdot1\cdot(\det A)^{-1}=1$, nên hạt nhân chuẩn tắc. Ma trận $\begin{pmatrix}2&0\\0&1/2\end{pmatrix}\ne I_2$ thuộc hạt nhân, vì vậy hạt nhân không tầm thường và định thức không đơn ánh. Ngược lại, $\ker(\exp)=\{0\}$, nên tiêu chuẩn cho thấy hàm mũ là đơn ánh; cả hai kết luận đều phù hợp với tiêu chuẩn (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Hạt nhân tầm thường tương đương đơn ánh, nhưng không nói gì về toàn ánh. Một đồng cấu có ảnh bằng toàn bộ đối miền vẫn có thể không đơn ánh, như định thức ở đây.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="proof-block">
+    <summary>🔍 Xem chứng minh tính chuẩn tắc của $\ker\varphi$ và tiêu chuẩn đơn ánh</summary>
+    <div class="proof-content">
+      <p>
+        • <i>Chứng minh $\ker\varphi \trianglelefteq G$:</i> Lấy $n \in \ker\varphi$ và $g \in G$ tùy ý. Ta tính giá trị liên hợp:
+        $$\varphi(gng^{-1}) = \varphi(g)\varphi(n)\varphi(g^{-1}) = \varphi(g) e_K (\varphi(g))^{-1} = \varphi(g)(\varphi(g))^{-1} = e_K$$
+        Do đó $gng^{-1} \in \ker\varphi$. Theo tiêu chuẩn một phía, $\ker\varphi \trianglelefteq G$.<br>
+        • <i>Chứng minh tiêu chuẩn đơn ánh:</i>
+        <br>&nbsp;&nbsp;$(\implies)$ Nếu $\varphi$ đơn ánh, vì $\varphi(e_G) = e_K$, phần tử duy nhất có ảnh $e_K$ phải là $e_G$, tức $\ker\varphi = \{e_G\}$.
+        <br>&nbsp;&nbsp;$(\impliedby)$ Giả sử $\ker\varphi = \{e_G\}$. Xét $\varphi(a) = \varphi(b) \implies \varphi(a)(\varphi(b))^{-1} = e_K \implies \varphi(ab^{-1}) = e_K$.
+        Theo định nghĩa, $ab^{-1} \in \ker\varphi = \{e_G\} \implies ab^{-1} = e_G \implies a = b$. Vậy $\varphi$ đơn ánh. <span class="qed">∎</span>
+      </p>
+    </div>
+  </details>
+
+  <!-- 5.4 ĐỊNH LÝ ĐẲNG CẤU THỨ NHẤT & PHƯƠNG PHÁP 3 BƯỚC -->
+  <h3 class="subsection-title">5.4. Định Lý Đẳng Cấu Thứ Nhất và Phương Pháp 3 Bước Nhận Diện Nhóm Thương</h3>
+  <p>
+    Vì $\ker\varphi$ luôn là nhóm con chuẩn tắc của $G$, ta luôn có thể tạo ra nhóm thương $G/\ker\varphi$. 
+    Định lý đẳng cấu thứ nhất khẳng định nhóm thương này phản chiếu trọn vẹn tập ảnh:
+  </p>
+
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 5.5</span>
+      <span class="tag">Định Lý Đẳng Cấu Thứ Nhất (First Isomorphism Theorem)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $\varphi : G \to K$ là một đồng cấu nhóm. Ánh xạ cảm sinh:</p>
+      <div class="math-display">
+        $$\Phi : \dfrac{G}{\ker\varphi} \stackrel{\cong}{\longrightarrow} \operatorname{im}\varphi, \quad \Phi(g\ker\varphi) = \varphi(g)$$
+      </div>
+      <p>là một <b>đẳng cấu nhóm</b>. Đặc biệt, nếu $\varphi$ là toàn ánh ($\operatorname{im}\varphi = K$), ta có:</p>
+      <div class="math-display">
+        $$\dfrac{G}{\ker\varphi} \;\cong\; K$$
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Chứng minh $\mathrm{GL}_2(\mathbb{R})/\mathrm{SL}_2(\mathbb{R})\cong\mathbb{R}^*$ bằng đồng cấu định thức.</p>
+          <p><b>2. Hộp công cụ.</b> Phương pháp ba bước: xây dựng đồng cấu $\varphi:G\to K$; chứng minh toàn ánh; xác định $\ker\varphi=N$. Khi đủ ba bước, Định lý Đẳng cấu Thứ nhất cho $G/N\cong K$.</p>
+          <p><b>3. Lời giải.</b> (1) Đặt $\varphi(A)=\det A$. Tính chất $\det(AB)=\det A\det B$ chứng minh đây là đồng cấu. (2) Với mọi $t\in\mathbb{R}^*$, ma trận $\operatorname{diag}(t,1)$ có định thức $t$, nên $\varphi$ toàn ánh. (3) $\ker\varphi=\{A:\det A=1\}=\mathrm{SL}_2(\mathbb{R})$. Theo định lý, ánh xạ cảm sinh $\Phi(A\mathrm{SL}_2)=\det A$ là đẳng cấu lên $\mathbb{R}^*$, do đó $\mathrm{GL}_2(\mathbb{R})/\mathrm{SL}_2(\mathbb{R})\cong\mathbb{R}^*$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Cần chứng minh ánh xạ cảm sinh không phụ thuộc đại diện; ở đây hai ma trận cùng lớp khi và chỉ khi chúng có cùng định thức. Không bỏ bước toàn ánh nếu muốn kết luận thương đẳng cấu với toàn bộ $\mathbb{R}^*$ thay vì chỉ với tập ảnh.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- HỘP PHƯƠNG PHÁP 3 BƯỚC KINH ĐIỂN -->
+  <div style="background: var(--eq-bg, #f8fafc); border: 1.5px solid #bfdbfe; border-radius: 12px; padding: 20px; margin: 1.5rem 0;">
+    <div style="font-weight: 700; color: #1d4ed8; font-size: 1.05rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+      <span>💡</span> Tuyệt Chiêu: Phương Pháp 3 Bước Nhận Diện Nhóm Thương $G/N \cong K$
+    </div>
+    <p style="margin: 0 0 10px; font-size: 0.95rem; color: #334155;">
+      Khi đề bài yêu cầu chứng minh một nhóm thương $G/N$ đẳng cấu với một nhóm quen thuộc $K$, 
+      <b>tuyệt đối không lập bảng nhân lớp kề thủ công</b>. Hãy thực hiện đúng quy trình 3 bước chuẩn mực:
+    </p>
+    <ul class="bullet-list" style="margin-bottom: 0;">
+      <li><b>Bước 1 (Xây dựng đồng cấu):</b> Xác định một ánh xạ tự nhiên $\varphi : G \to K$ và kiểm tra tính bảo toàn phép toán $\varphi(xy) = \varphi(x)\varphi(y)$.</li>
+      <li><b>Bước 2 (Chứng minh toàn ánh):</b> Chứng minh với mọi $k \in K$, luôn tìm được phần tử $g \in G$ sao cho $\varphi(g) = k$ (tức $\operatorname{im}\varphi = K$).</li>
+      <li><b>Bước 3 (Xác định hạt nhân):</b> Giải phương trình $\varphi(g) = e_K$ để tìm $\ker\varphi$, và chứng minh $\ker\varphi = N$.</li>
+    </ul>
+    <div style="margin-top: 10px; padding: 8px 12px; background: #ffffff; border-radius: 6px; font-size: 0.92rem; color: #1e40af; border-left: 3px solid #2563eb;">
+      <b>Kết luận:</b> Áp dụng Định lý Đẳng cấu Thứ nhất, ta suy ra ngay lập tức: $\dfrac{G}{N} = \dfrac{G}{\ker\varphi} \cong \operatorname{im}\varphi = K$.
+    </div>
+  </div>
+
+  <!-- 5.5 BỘ BA ĐỊNH LÝ ĐẲNG CẤU MỞ RỘNG -->
+  <h3 class="subsection-title">5.5. Hệ Thống Định Lý Cấu Trúc Mở Rộng: Định Lý Thứ Hai, Thứ Ba và Định Lý Tương Ứng</h3>
+
+  <!-- ĐỊNH LÝ 2 -->
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 5.6</span>
+      <span class="tag">Định Lý Đẳng Cấu Thứ Hai (Hình Thoi / Diamond Theorem)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $H \le G$ và $N \trianglelefteq G$. Khi đó tích $HN \le G$, giao $H \cap N \trianglelefteq H$, và ta có đẳng cấu:</p>
+      <div class="math-display">
+        $$\dfrac{H}{H \cap N} \;\cong\; \dfrac{HN}{N}$$
+      </div>
+      <p style="font-size: 0.92rem; color: var(--text-muted); margin-top: 4px;">
+        <i>Ý nghĩa:</i> Ta có thể "triệt tiêu" phần giao $H \cap N$ bên trong $H$ tương đương với việc đưa nhóm con $H$ vào không gian thương lớn $HN/N$.
+      </p>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $G=S_3$, lấy $H=\langle(12)\rangle=\{e,(12)\}$ và $N=A_3=\{e,(123),(132)\}\trianglelefteq S_3$. Tính hai vế của định lý hình thoi.</p>
+          <p><b>2. Hộp công cụ.</b> Định lý Đẳng cấu Thứ hai cho $H/(H\cap N)\cong HN/N$ khi $H\le G$ và $N\trianglelefteq G$.</p>
+          <p><b>3. Lời giải.</b> Không có phần tử chung khác đơn vị giữa nhóm con cấp $2$ và nhóm con cấp $3$, nên $H\cap N=\{e\}$ và $H/(H\cap N)\cong H\cong C_2$. Vì $(12)\notin A_3$ và $A_3$ có chỉ số $2$, tích $HN=S_3$, nên $HN/N=S_3/A_3\cong C_2$. Hai vế đều có cấp $2$, và định lý cho đẳng cấu $H/(H\cap N)\cong HN/N$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Tích $HN$ không phải phép hợp $H\cup N$; ở đây nó sinh toàn bộ $S_3$. Phải kiểm tra $N$ chuẩn tắc trong nhóm mẹ trước khi lập thương.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ĐỊNH LÝ 3 -->
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 5.7</span>
+      <span class="tag">Định Lý Đẳng Cấu Thứ Ba (Thương của Thương)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho hai nhóm con chuẩn tắc $N, H \trianglelefteq G$ thỏa mãn $N \subseteq H$. Khi đó $H/N \trianglelefteq G/N$, và ta có đẳng cấu:</p>
+      <div class="math-display">
+        $$\dfrac{G/N}{H/N} \;\cong\; \dfrac{G}{H}$$
+      </div>
+      <p style="font-size: 0.92rem; color: var(--text-muted); margin-top: 4px;">
+        <i>Quy tắc giản ước phân số:</i> Tương tự như việc giản ước phân số $\dfrac{a/c}{b/c} = \dfrac{a}{b}$, cấu trúc thương $N$ ở giữa có thể giản ước hoàn toàn!
+      </p>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $G=(\mathbb{Z},+)$, lấy $N=12\mathbb{Z}$ và $H=4\mathbb{Z}$. Xác định $(G/N)/(H/N)$ và so sánh với $G/H$.</p>
+          <p><b>2. Hộp công cụ.</b> Nếu $N\subseteq H\trianglelefteq G$, định lý thương của thương cho $(G/N)/(H/N)\cong G/H$. Trong nhóm cộng, các nhóm con của $\mathbb{Z}$ đều chuẩn tắc.</p>
+          <p><b>3. Lời giải.</b> Ta có $G/N\cong\mathbb{Z}/12\mathbb{Z}$ và $H/N=4\mathbb{Z}/12\mathbb{Z}=\{[0]_{12},[4]_{12},[8]_{12}\}$. Định nghĩa ánh xạ $\Psi: (\mathbb{Z}/12\mathbb{Z})/(H/N)\to\mathbb{Z}/4\mathbb{Z}$ bởi $\Psi([k]_{12}+H/N)=[k]_4$. Nếu đổi đại diện $k$ bởi bội của $4$ trong cùng lớp thương thì phần dư modulo $4$ không đổi; phép cộng cũng được bảo toàn. Các lớp được gửi lần lượt tới $[0]_4,[1]_4,[2]_4,[3]_4$, nên $\Psi$ là đẳng cấu. Vì $G/H=\mathbb{Z}/4\mathbb{Z}$, suy ra $(\mathbb{Z}/12\mathbb{Z})/(4\mathbb{Z}/12\mathbb{Z})\cong\mathbb{Z}/4\mathbb{Z}$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Điều kiện $N\subseteq H$ là thiết yếu để tạo nhóm con $H/N$. Không thể giản ước ký hiệu thương hình thức nếu chưa kiểm tra quan hệ bao hàm và tính chuẩn tắc.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ĐỊNH LÝ TƯƠNG ỨNG -->
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 5.8</span>
+      <span class="tag">Định Lý Tương Ứng (Correspondence Theorem / Mạng Lưới Nhóm Con)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $N \trianglelefteq G$. Phép chiếu chính tắc $\pi_N: G \to G/N$ thiết lập một <b>song ánh bảo toàn quan hệ bao hàm</b> giữa:</p>
+      <div class="math-display">
+        $$\{\text{Các nhóm con } H \le G \text{ chứa } N\} \;\longleftrightarrow\; \{\text{Các nhóm con của } G/N\}$$
+        $$H \;\longmapsto\; \dfrac{H}{N}$$
+      </div>
+      <p>Hơn nữa, quan hệ tương ứng này bảo toàn toàn bộ cấu trúc đại số:</p>
+      <ul class="bullet-list">
+        <li>$H_1 \subseteq H_2 \iff H_1/N \subseteq H_2/N$.</li>
+        <li>$H \trianglelefteq G \iff H/N \trianglelefteq G/N$.</li>
+        <li>Chỉ số được bảo toàn: $[G : H] = [G/N : H/N]$.</li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Xét $G=\mathbb{Z}$ và $N=12\mathbb{Z}$. Liệt kê các nhóm con $H$ chứa $N$ và nhóm con tương ứng $H/N$ trong $G/N\cong\mathbb{Z}/12\mathbb{Z}$.</p>
+          <p><b>2. Hộp công cụ.</b> Định lý tương ứng gửi $H$ đến $H/N$, với nghịch đảo là lấy tạo ảnh qua phép chiếu. Các nhóm con của $\mathbb{Z}$ có dạng $d\mathbb{Z}$; điều kiện $12\mathbb{Z}\subseteq d\mathbb{Z}$ tương đương $d\mid12$.</p>
+          <p><b>3. Lời giải.</b> Các ước dương của $12$ là $1,2,3,4,6,12$. Tương ứng: $\mathbb{Z}\mapsto\langle[1]_{12}\rangle=\mathbb{Z}/12\mathbb{Z}$; $2\mathbb{Z}\mapsto\langle[2]_{12}\rangle$; $3\mathbb{Z}\mapsto\langle[3]_{12}\rangle$; $4\mathbb{Z}\mapsto\langle[4]_{12}\rangle$; $6\mathbb{Z}\mapsto\langle[6]_{12}\rangle$; $12\mathbb{Z}\mapsto\{[0]_{12}\}$. Đây là sáu nhóm con của thương, mỗi nhóm con xuất hiện đúng một lần; nếu $d\mid d'$, thì $d'\mathbb{Z}\subseteq d\mathbb{Z}$ và các ảnh cũng được bao hàm tương ứng. Do đó ánh xạ là song ánh bảo toàn quan hệ bao hàm (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Chỉ các nhóm con chứa $N$ mới tương ứng với nhóm con của $G/N$. Không đảo chiều bao hàm khi dùng định lý: quan hệ bao hàm được bảo toàn giữa $H$ và $H/N$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 5.6 BẤT BIẾN ĐẲNG CẤU & BẪY CÙNG CẤP -->
+  <h3 class="subsection-title">5.6. Bất Biến Đẳng Cấu: Nhận Diện Hai Cấu Trúc Khác Nhau Dù Cùng Cấp</h3>
+  
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ MỆNH ĐỀ 5.9</span>
+      <span class="tag">Các Bất Biến Đại Số Được Bảo Toàn Qua Đẳng Cấu</span>
+    </div>
+    <div class="card-body">
+      <p>Nếu $\varphi : G \stackrel{\cong}{\to} K$ là một đẳng cấu nhóm, thì $\varphi$ bảo toàn toàn bộ đặc trưng đại số sau:</p>
+      <ul class="bullet-list">
+        <li><b>Bảo toàn cấp phần tử:</b> $\operatorname{ord}(\varphi(g)) = \operatorname{ord}(g)$ với mọi $g \in G$.</li>
+        <li><b>Bảo toàn tính cyclic:</b> $G$ là cyclic $\iff K$ là cyclic.</li>
+        <li><b>Bảo toàn tính giao hoán:</b> $G$ là nhóm Abel $\iff K$ là nhóm Abel.</li>
+        <li><b>Bảo toàn số lượng phần tử mỗi cấp:</b> Số phần tử có cấp $d$ trong $G$ bằng số phần tử có cấp $d$ trong $K$.</li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ&amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> So sánh $\mathbb{Z}/4\mathbb{Z}$ với $V_4=\{e,a,b,c\}$, trong đó mọi phần tử khác $e$ đều có bình phương bằng $e$; sau đó so sánh $\mathbb{Z}/6\mathbb{Z}$ với $S_3$.</p>
+          <p><b>2. Hộp công cụ.</b> Đẳng cấu bảo toàn cấp phần tử và tính giao hoán. Vì vậy chỉ cần tìm một bất biến đại số khác nhau để bác bỏ đẳng cấu.</p>
+          <p><b>3. Lời giải.</b> Hai nhóm đầu đều có cấp $4$, nhưng trong $\mathbb{Z}/4\mathbb{Z}$, phần tử $[1]$ có cấp $4$ vì $[1],[2],[3],[0]$ là các bội liên tiếp trước khi về đơn vị; trong $V_4$, mọi phần tử khác đơn vị có cấp $2$. Do đó chúng không đẳng cấu. Tương tự, $\mathbb{Z}/6\mathbb{Z}$ và $S_3$ cùng cấp $6$, nhưng nhóm thứ nhất giao hoán, còn $(12)(23)=(123)\ne(132)=(23)(12)$ trong $S_3$. Vậy cặp thứ hai cũng không đẳng cấu (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Cùng số phần tử không đủ để kết luận hai nhóm đẳng cấu. Hãy so sánh bất biến như cấp phần tử, tính cyclic hoặc tính giao hoán; chỉ một bất biến khác nhau đã đủ bác bỏ đẳng cấu.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="ex-card counter" data-type="ex" open style="margin-bottom: 1.5rem;">
+    <summary>⚠️ Cảnh báo bẫy: Cùng cấp $|G| = |K|$ CHƯA CHẮC đã đẳng cấu</summary>
+    <div class="ex-content">
+      <p>
+        <b>1. Cấp 4: $\mathbb{Z}/4\mathbb{Z} \not\cong V_4$:</b>
+        <br>Cả hai nhóm đều có 4 phần tử. Nhưng $\mathbb{Z}/4\mathbb{Z}$ có phần tử cấp 4 (là $[1]$ và $[3]$), 
+        trong khi nhóm Klein $V_4$ mọi phần tử khác đơn vị đều chỉ có cấp 2. Do bất biến cấp phần tử bị vi phạm, $\mathbb{Z}/4\mathbb{Z} \not\cong V_4$!
+      </p>
+      <p>
+        <b>2. Cấp 6: $\mathbb{Z}/6\mathbb{Z} \not\cong S_3$:</b>
+        <br>Cả hai nhóm đều có 6 phần tử. Nhưng $\mathbb{Z}/6\mathbb{Z}$ là nhóm Abel, còn $S_3$ là nhóm không giao hoán ($(12)(23) \neq (23)(12)$). Do đó chúng không đẳng cấu!
+      </p>
+    </div>
+  </details>
+
+  <!-- 5.7 BẢNG TỔNG HỢP SO SÁNH 4 ĐỊNH LÝ ĐẲNG CẤU -->
+  <h3 class="subsection-title">5.7. Bảng Tổng Hợp So Sánh Bốn Định Lý Đẳng Cấu Nhóm</h3>
+  <div class="table-wrapper">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Tên Định Lý</th>
+          <th>Dữ Kiện Giả Thiết</th>
+          <th>Đẳng Cấu Nhận Được</th>
+          <th>Ứng Dụng Thực Chiến & Bản Chất</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Định lý đẳng cấu 1</b></td>
+          <td>$\varphi: G \to K$ là đồng cấu</td>
+          <td>$\dfrac{G}{\ker\varphi} \;\cong\; \operatorname{im}\varphi$</td>
+          <td>Nhận diện nhóm thương bằng cách tìm toàn cấu có hạt nhân thích hợp.</td>
+        </tr>
+        <tr>
+          <td><b>Định lý đẳng cấu 2</b> (Hình thoi)</td>
+          <td>$H \le G$ và $N \trianglelefteq G$</td>
+          <td>$\dfrac{H}{H \cap N} \;\cong\; \dfrac{HN}{N}$</td>
+          <td>Chuyển đổi nhóm thương giữa nhóm con $H$ và không gian nhân $HN$.</td>
+        </tr>
+        <tr>
+          <td><b>Định lý đẳng cấu 3</b></td>
+          <td>$N \subseteq H$ cùng chuẩn tắc trong $G$</td>
+          <td>$\dfrac{G/N}{H/N} \;\cong\; \dfrac{G}{H}$</td>
+          <td>Giản ước cấu trúc thương lồng nhau (tương tự rút gọn phân số).</td>
+        </tr>
+        <tr>
+          <td><b>Định lý tương ứng</b></td>
+          <td>$N \trianglelefteq G$</td>
+          <td>Song ánh: $\{H \le G \mid N \subseteq H\} \longleftrightarrow \{L \le G/N\}$</td>
+          <td>Xác định toàn bộ mạng lưới nhóm con của nhóm thương qua nhóm mẹ.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- ==================== HẾT CHƯƠNG 5 HOÀN CHỈNH ==================== -->

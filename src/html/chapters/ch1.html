@@ -1,0 +1,481 @@
+<!-- ======================================================== -->
+<!-- NỘI DUNG CHƯƠNG 1: NHÓM VÀ CÁC VÍ DỤ CƠ BẢN (BẢN CHUẨN HOÁ) -->
+<!-- ======================================================== -->
+<div class="chapter-content active" id="tab-c1">
+  <h2 class="section-title">Chương 1. Nhóm và các Ví dụ Cơ bản</h2>
+  
+  <p class="welcome-copy">
+    Nhóm là cấu trúc đại số mô tả những phép toán có thể hợp thành và đảo ngược. 
+    Chương này phân tích cặn kẽ từng tầng tiên đề đại số, làm rõ ranh giới giữa nửa nhóm, vị nhóm, nhóm và nhóm Abel, 
+    khai thác luật giản ước, cơ chế giải phương trình và thiết lập hệ thống kiểm định khoa học cho các họ nhóm nền tảng.
+  </p>
+
+  <!-- 1.1 ĐỘNG CƠ SƯ PHẠM -->
+  <h3 class="subsection-title">1.1. Từ Biến Hình Đối Xứng Đến Tư Duy Tiên Đề Hóa</h3>
+  <p>
+    Xét các phép biến hình bảo toàn một tam giác đều: phép quay $r$ góc $120^\circ$ và phép đối xứng trục $s$ qua một đỉnh. 
+    Khi hợp thành các phép biến hình này, ta phát hiện hai đặc tính then chốt:
+  </p>
+  <ul class="bullet-list">
+    <li><b>Không giao hoán:</b> Theo quy ước hợp thành từ phải sang trái, $(s \circ r)(1) = s(2) = 3$, nhưng $(r \circ s)(1) = r(1) = 2$. Do đó $s \circ r \neq r \circ s$. Thứ tự thực hiện làm thay đổi kết quả!</li>
+    <li><b>Luôn kết hợp:</b> Với ba phép biến hình bất kỳ, $((f \circ g) \circ h)(x) = f(g(h(x))) = (f \circ (g \circ h))(x)$. Tính kết hợp luôn đúng dù phép toán không giao hoán.</li>
+  </ul>
+  <p>
+    Các hệ thống này đều có phép biến hình đồng nhất $\operatorname{id}$ (đóng vai trò đơn vị) và mỗi phép biến hình đều có phép biến hình ngược (nghịch đảo). Bốn đặc tính: <i>tính đóng, tính kết hợp, phần tử đơn vị</i> và <i>phần tử nghịch đảo</i> tạo nên định nghĩa cấu trúc <b>Nhóm</b>.
+  </p>
+
+  <!-- 1.2 THANG BẬC CẤU TRÚC ĐẠI SỐ -->
+  <h3 class="subsection-title">1.2. Thang Bậc Cấu Trúc Đại Số: Nửa Nhóm, Vị Nhóm, Nhóm và Nhóm Abel</h3>
+  
+  <p>
+    Cho $G$ là một tập hợp khác rỗng cùng một <b>phép toán hai ngôi</b> $* : G \times G \to G$. 
+    <br><i>Lưu ý tiên quyết về Tính đóng:</i> Điều kiện $\forall a, b \in G \implies a * b \in G$ đã được đảm bảo ngay trong định nghĩa của ánh xạ phép toán hai ngôi. Dưới nền tảng tính đóng, ta thiết lập 4 nấc thang cấu trúc đại số:
+  </p>
+
+  <!-- NẤC THANG 1: NỬA NHÓM -->
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">NẤC THANG 1 · NỬA NHÓM (SEMIGROUP)</span>
+      <span class="tag">Tiên đề Kết hợp</span>
+    </div>
+    <div class="card-body">
+      <p>Cấu trúc $(G, *)$ được gọi là một <b>nửa nhóm</b> nếu phép toán thỏa mãn:</p>
+      <ul class="bullet-list">
+        <li><b>Tính kết hợp:</b> $\forall a, b, c \in G \implies (a * b) * c = a * (b * c)$.</li>
+      </ul>
+      <div class="corollary-box">
+        <b>Ý nghĩa toán học:</b> Tính kết hợp cho phép bỏ dấu ngoặc khi thực hiện liên tiếp các phép toán, viết gọn là $a * b * c$.
+        <br><b>Ví dụ:</b> Tập các số nguyên dương lẻ với phép nhân, hoặc $(\mathbb{N}^*, +)$ là các nửa nhóm (vì chưa có phần tử trung hòa $0$).
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ</summary>
+        <div class="ex-content">
+          <p>Trong $(\mathbb{N}^*, +)$, lấy $a=2$, $b=3$, $c=4$. Ta có $(2+3)+4=5+4=9$ và $2+(3+4)=2+7=9$. Hai cách đặt ngoặc cho cùng kết quả, phù hợp với tính kết hợp; do đó $(\mathbb{N}^*, +)$ là một nửa nhóm.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- NẤC THANG 2: VỊ NHÓM -->
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">NẤC THANG 2 · VỊ NHÓM (MONOID)</span>
+      <span class="tag">Tiên đề Phần tử Trung hòa</span>
+    </div>
+    <div class="card-body">
+      <p>Cấu trúc $(G, *)$ được gọi là một <b>vị nhóm</b> nếu thỏa mãn đồng thời 2 điều kiện:</p>
+      <ul class="bullet-list">
+        <li><b>1. Tính kết hợp:</b> $(a * b) * c = a * (b * c)$ với mọi $a, b, c \in G$.</li>
+        <li><b>2. Có phần tử trung hòa (đơn vị):</b> Tồn tại phần tử $e \in G$ sao cho:
+          $$a * e = e * a = a \quad \forall a \in G$$
+        </li>
+      </ul>
+      <div class="corollary-box">
+        <b>💡 Nhận xét rút ra:</b> Nói cách khác, <i>một nửa nhóm $(G, *)$ có phần tử trung hòa được gọi là một vị nhóm</i>.
+        <br><b>Công thức liên kết:</b> $\text{Vị nhóm} = \text{Nửa nhóm} + \text{Phần tử trung hòa}$.
+        <br><b>Ví dụ:</b> $(\mathbb{N}, +)$ là một vị nhóm với phần tử trung hòa là $0$; $(\mathbb{Z}, \cdot)$ là một vị nhóm với phần tử trung hòa là $1$. Tuy nhiên cả hai đều chưa phải là nhóm!
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ</summary>
+        <div class="ex-content">
+          <p>Xét $(\mathbb{N}, +)$ với $\mathbb{N}=\{0,1,2,\ldots\}$. Phép cộng kết hợp, và $0$ là phần tử trung hòa vì $7+0=0+7=7$. Vậy $(\mathbb{N}, +)$ là một vị nhóm; chẳng hạn $4+0=4$ xác nhận vai trò của đơn vị.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- NẤC THANG 3: NHÓM -->
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">NẤC THANG 3 · CẤU TRÚC NHÓM (GROUP)</span>
+      <span class="tag">Tiên đề Khả đối xứng</span>
+    </div>
+    <div class="card-body">
+      <p>Cấu trúc $(G, *)$ được gọi là một <b>nhóm</b> nếu thỏa mãn đồng thời 3 điều kiện:</p>
+      <ul class="bullet-list">
+        <li><b>1. Tính kết hợp:</b> $(a * b) * c = a * (b * c)$ với mọi $a, b, c \in G$.</li>
+        <li><b>2. Có phần tử trung hòa (đơn vị):</b> Tồn tại $e \in G$ sao cho $a * e = e * a = a$ với mọi $a \in G$.</li>
+        <li><b>3. Mọi phần tử đều khả đối xứng (nghịch đảo):</b> Với mỗi $a \in G$, tồn tại một phần tử $b \in G$ sao cho:
+          $$a * b = b * a = e$$
+          Phần tử $b$ là duy nhất, gọi là <i>phần tử nghịch đảo</i> của $a$ và ký hiệu là $a^{-1}$ (hoặc $-a$ trong ký hiệu cộng).
+        </li>
+      </ul>
+      <div class="corollary-box">
+        <b>💡 Nhận xét rút ra:</b> Nói cách khác, <i>một vị nhóm $(G, *)$ mà mọi phần tử đều khả đối xứng được gọi là một nhóm</i>.
+        <br><b>Công thức liên kết:</b> $\text{Nhóm} = \text{Vị nhóm} + \text{Khả đối xứng (mọi phần tử)}$.
+        <br><b>Ví dụ:</b> $(\mathbb{Z}, +)$, $(\mathbb{Q} \setminus \{0\}, \cdot)$, nhóm ma trận $\mathrm{GL}_2(\mathbb{R})$.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ</summary>
+        <div class="ex-content">
+          <p>Trong $(\mathbb{Z}, +)$, phần tử đơn vị là $0$. Với $a=5$, chọn $-5$ làm nghịch đảo: $5+(-5)=(-5)+5=0$. Mọi số nguyên $n$ cũng có nghịch đảo $-n\in\mathbb{Z}$, nên $(\mathbb{Z}, +)$ là một nhóm.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- NẤC THANG 4: NHÓM ABEL (GIAO HOÁN) -->
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.5rem; border-left: 4px solid #10b981;">
+    <div class="card-header" style="color: #047857;">
+      <span class="label">NẤC THANG 4 · NHÓM ABEL / NHÓM GIAO HOÁN (ABELIAN GROUP)</span>
+      <span class="tag" style="background: rgba(16, 185, 129, 0.15); color: #047857;">Trục Độc Lập</span>
+    </div>
+    <div class="card-body">
+      <p>Cấu trúc $(G, *)$ được gọi là một <b>nhóm Abel</b> (hay <b>nhóm giao hoán</b>) nếu thỏa mãn đồng thời 4 điều kiện:</p>
+      <ul class="bullet-list">
+        <li><b>1. Tính kết hợp:</b> $(a * b) * c = a * (b * c)$ với mọi $a, b, c \in G$.</li>
+        <li><b>2. Có phần tử trung hòa:</b> Tồn tại $e \in G$ sao cho $a * e = e * a = a$ với mọi $a \in G$.</li>
+        <li><b>3. Mọi phần tử khả đối xứng:</b> Với mỗi $a \in G$, tồn tại $a^{-1} \in G$ sao cho $a * a^{-1} = a^{-1} * a = e$.</li>
+        <li><b>4. Tính giao hoán:</b> $\forall a, b \in G \implies a * b = b * a$.</li>
+      </ul>
+      <div class="corollary-box" style="border-left-color: #10b981; background: rgba(16, 185, 129, 0.05);">
+        <b>💡 Nhận xét rút ra:</b> Nói cách khác, <i>một nhóm $(G, *)$ có thêm tính giao hoán được gọi là nhóm Abel</i>.
+        <br><b>Quan sát sư phạm:</b> Tính giao hoán là một trục độc lập, có thể gắn với bất kỳ tầng nào: nửa nhóm giao hoán, vị nhóm giao hoán hoặc nhóm giao hoán (Abel).
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ</summary>
+        <div class="ex-content">
+          <p>Xét nhóm cộng $\mathbb{Z}/7\mathbb{Z}$ và hai lớp $[2],[5]$. Ta tính $[2]+[5]=[7]=[0]$; đổi thứ tự, $[5]+[2]=[7]=[0]$ vẫn cho kết quả đó. Phép cộng giao hoán, nên $\mathbb{Z}/7\mathbb{Z}$ là nhóm Abel.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- SƠ ĐỒ TỔNG KẾT PHÂN TẦNG (THIẾT KẾ MỚI HÀI HÒA THEO BẢNG MÀU STUDY LIGHT/CARD) -->
+  <div style="background: var(--eq-bg, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 14px; padding: 22px; margin: 1.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+    <div style="text-align: center; font-size: 1.15rem; font-weight: 700; color: var(--thm-color, #1e3a8a); margin-bottom: 1.2rem; display: flex; align-items: center; justify-content: center; gap: 8px;">
+      <span>🏛️</span> Sơ đồ Tổng kết Phân tầng Cấu trúc $(G; *)$
+    </div>
+    
+    <div style="display: grid; grid-template-columns: 3fr 1fr; gap: 18px; align-items: stretch;">
+      <!-- Vế trái: Chuỗi 3 tiên đề cốt lõi -->
+      <div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; text-align: center;">
+          <div style="border: 1.5px solid #bfdbfe; border-radius: 8px; padding: 10px 4px; background: #ffffff; color: #1e293b; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+            <span style="font-size: 0.85rem; color: #64748b; display: block;">Tiên đề 1</span>
+            Có tính<br><b style="color: #2563eb; font-size: 1rem;">kết hợp</b>
+          </div>
+          <div style="border: 1.5px solid #bfdbfe; border-radius: 8px; padding: 10px 4px; background: #ffffff; color: #1e293b; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+            <span style="font-size: 0.85rem; color: #64748b; display: block;">Tiên đề 2</span>
+            Có phần tử<br><b style="color: #2563eb; font-size: 1rem;">trung hòa</b>
+          </div>
+          <div style="border: 1.5px solid #bfdbfe; border-radius: 8px; padding: 10px 4px; background: #ffffff; color: #1e293b; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+            <span style="font-size: 0.85rem; color: #64748b; display: block;">Tiên đề 3</span>
+            Mọi phần tử<br><b style="color: #2563eb; font-size: 1rem;">khả đối xứng</b>
+          </div>
+        </div>
+
+        <!-- Móc ngoặc tầng 1 -->
+        <div style="margin-top: 10px; width: 33%; border-left: 2px solid #3b82f6; border-right: 2px solid #3b82f6; border-bottom: 2px solid #3b82f6; height: 10px;"></div>
+        <div style="color: #2563eb; font-weight: 600; font-size: 0.95rem; margin-top: 3px; padding-left: 2px;">
+          ↳ Nửa nhóm
+        </div>
+
+        <!-- Móc ngoặc tầng 2 -->
+        <div style="margin-top: 8px; width: 66%; border-left: 2px solid #3b82f6; border-right: 2px solid #3b82f6; border-bottom: 2px solid #3b82f6; height: 10px;"></div>
+        <div style="color: #1d4ed8; font-weight: 600; font-size: 0.95rem; margin-top: 3px; padding-left: 2px;">
+          ↳ Vị nhóm
+        </div>
+
+        <!-- Móc ngoặc tầng 3 -->
+        <div style="margin-top: 8px; width: 100%; border-left: 2px solid #1e40af; border-right: 2px solid #1e40af; border-bottom: 2px solid #1e40af; height: 10px;"></div>
+        <div style="color: #1e3a8a; font-weight: 700; font-size: 1.05rem; margin-top: 3px; padding-left: 2px; text-transform: uppercase;">
+          ↳ NHÓM
+        </div>
+      </div>
+
+      <!-- Vế phải: Trục giao hoán độc lập -->
+      <div style="border-left: 2px dashed #cbd5e1; padding-left: 18px; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+        <div style="border: 1.5px solid #a7f3d0; border-radius: 8px; padding: 10px 6px; background: #ffffff; color: #1e293b; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+          <span style="font-size: 0.85rem; color: #059669; display: block;">Trục độc lập</span>
+          Có tính<br><b style="color: #059669; font-size: 1rem;">giao hoán</b>
+        </div>
+        <div style="color: #047857; font-weight: 600; font-size: 0.95rem; line-height: 1.6;">
+          + Abel<br><span style="font-size: 0.85rem; color: #64748b; font-weight: normal;">hoặc</span><br>+ Giao hoán
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1.3 CÁC BẪY TIÊN ĐỀ & PHẢN VÍ DỤ -->
+  <h3 class="subsection-title">1.3. Nhận Diện Ranh Giới Tiên Đề Qua Các Phản Ví Dụ Kinh Điển</h3>
+  
+  <details class="ex-card counter" data-type="ex" open>
+    <summary>⚠️ Bẫy 1: Giao hoán KHÔNG BAO GIỜ kéo theo kết hợp</summary>
+    <div class="ex-content">
+      <p>
+        Trên $\mathbb{R}$, xét phép toán trung bình cộng $x * y = \frac{x + y}{2}$. 
+        Phép toán này đóng và hiển nhiên giao hoán ($x * y = y * x$). Tuy nhiên, xét bộ ba $(0, 0, 4)$:
+        $$(0 * 0) * 4 = 0 * 4 = 2, \quad \text{trong khi } 0 * (0 * 4) = 0 * 2 = 1$$
+        Vì $2 \neq 1$, phép toán <b>không kết hợp</b>. Cấu trúc này không phải là nửa nhóm!
+      </p>
+    </div>
+  </details>
+
+  <details class="ex-card counter" data-type="ex">
+    <summary>⚠️ Bẫy 2: Vị nhóm thiếu nghịch đảo</summary>
+    <div class="ex-content">
+      <p>
+        • $(\mathbb{N}, +)$ với $0 \in \mathbb{N}$ là một vị nhóm giao hoán, nhưng không là nhóm vì số $1$ không có số đối trong $\mathbb{N}$.<br>
+        • $(\mathbb{Z} \setminus \{0\}, \cdot)$ với phép nhân thông thường là vị nhóm giao hoán có đơn vị $1$, nhưng phần tử $2$ không có nghịch đảo trong $\mathbb{Z}$.
+      </p>
+    </div>
+  </details>
+
+  <!-- 1.4 HỆ QUẢ ĐẦU TIÊN & GIẢN ƯỚC -->
+  <h3 class="subsection-title">1.4. Hệ Quả Nền Tảng: Luật Giản Ước và Cơ Chế Giải Phương Trình Tuyến Tính</h3>
+  <div class="math-card thm" data-type="thm">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 1.2</span>
+      <span class="tag">Tính Duy Nhất và Luật Giản Ước</span>
+    </div>
+    <div class="card-body">
+      <p>Trong một nhóm $G$ bất kỳ:</p>
+      <ul class="bullet-list">
+        <li><b>Tính duy nhất:</b> Phần tử đơn vị $e$ và phần tử nghịch đảo $a^{-1}$ của mỗi phần tử $a$ là <b>duy nhất</b>.</li>
+        
+        <!-- Ý 1: TÁCH THÀNH 2 DÒNG RÕ RÀNG -->
+        <li>
+          <b>Luật giản ước hai phía:</b>
+          <ul style="margin: 6px 0 6px 1.5rem; list-style-type: circle; color: var(--text-main);">
+            <li><i>Giản ước trái:</i> $ax = ay \implies x = y$ (nhân $a^{-1}$ ở bên trái hai vế).</li>
+            <li><i>Giản ước phải:</i> $xa = ya \implies x = y$ (nhân $a^{-1}$ ở bên phải hai vế).</li>
+          </ul>
+        </li>
+
+        <!-- Ý 2: TÁCH THÀNH 2 DÒNG RÕ RÀNG -->
+        <li>
+          <b>Cơ chế giải phương trình tuyến tính:</b>
+          <ul style="margin: 6px 0 6px 1.5rem; list-style-type: circle; color: var(--text-main);">
+            <li><i>Phương trình nhân trái:</i> $ax = b$ có nghiệm duy nhất $x = a^{-1}b$.</li>
+            <li><i>Phương trình nhân phải:</i> $ya = b$ có nghiệm duy nhất $y = ba^{-1}$.</li>
+          </ul>
+        </li>
+
+        <li><b>Nghịch đảo của một tích:</b> $(ab)^{-1} = b^{-1}a^{-1}$ (bắt buộc đảo ngược thứ tự các thừa số).</li>
+      </ul>
+
+      <div class="corollary-box" style="margin-top: 10px;">
+        <b>⚠️ Nhắc nhở sư phạm về thứ tự:</b> Vì nhóm tổng quát không giao hoán, $a^{-1}b$ và $ba^{-1}$ nói chung là <b>hai phần tử hoàn toàn khác nhau</b>. Tuyệt đối không được viết biểu thức dưới dạng phân số hình thức $\dfrac{b}{a}$!
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ</summary>
+        <div class="ex-content">
+          <p>Trong $S_3$, hợp thành từ phải sang trái, lấy $a=(12)$ và $b=(123)$. Vì $a^{-1}=a$, phương trình $ax=b$ có nghiệm $x=a^{-1}b=(12)(123)=(23)$; kiểm tra $ax=(12)(23)=(123)=b$. Còn $ya=b$ có nghiệm $y=ba^{-1}=(123)(12)=(13)$; quả thật $(13)(12)=(123)$. Cuối cùng, $ab=(23)$ nên $(ab)^{-1}=(23)$, đồng thời $b^{-1}a^{-1}=(132)(12)=(23)$. Các phép tính xác nhận nghiệm đúng theo phía nhân và công thức $(ab)^{-1}=b^{-1}a^{-1}$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="proof-block">
+    <summary>🔍 Xem chứng minh công thức $(ab)^{-1} = b^{-1}a^{-1}$</summary>
+    <div class="proof-content">
+      <p>
+        Xét tích $(ab)(b^{-1}a^{-1})$. Nhờ tính kết hợp của nhóm:
+        $$(ab)(b^{-1}a^{-1}) = a(b b^{-1})a^{-1} = a(e)a^{-1} = aa^{-1} = e$$
+        Tương tự, $(b^{-1}a^{-1})(ab) = b^{-1}(a^{-1}a)b = b^{-1}(e)b = b^{-1}b = e$.
+        Do phần tử nghịch đảo trong một nhóm là duy nhất, ta kết luận $(ab)^{-1} = b^{-1}a^{-1}$. <span class="qed">∎</span>
+      </p>
+    </div>
+  </details>
+
+  <!-- 1.5 LŨY THỪA VÀ TIÊU CHUẨN GIAO HOÁN -->
+  <h3 class="subsection-title">1.5. Lũy Thừa Nguyên và Tiêu Chuẩn Giao Hoán</h3>
+  <p>
+    Với mọi $a \in G$ và $m, n \in \mathbb{Z}$, ta luôn có $a^m a^n = a^{m+n}$ và $(a^m)^n = a^{mn}$.
+    Tuy nhiên, đẳng thức $(ab)^n = a^n b^n$ nói chung <b>không đúng</b> khi nhóm chưa có tính giao hoán.
+  </p>
+  <div class="math-card thm" data-type="thm">
+    <div class="card-header">
+      <span class="label">🏛️ MỆNH ĐỀ 1.3</span>
+      <span class="tag">Tiêu Chuẩn Nhóm Giao Hoán qua Lũy Thừa Bậc 2</span>
+    </div>
+    <div class="card-body">
+      <p>
+        Một nhóm $G$ là nhóm giao hoán khi và chỉ khi $(ab)^2 = a^2b^2$ với mọi $a, b \in G$.
+      </p>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ</summary>
+        <div class="ex-content">
+          <p>Trong $S_3$, lấy $a=(12)$ và $b=(123)$, hợp thành từ phải sang trái. Ta có $ab=(23)$ nên $(ab)^2=(23)^2=e$. Mặt khác, $a^2=e$ và $b^2=(132)$, do đó $a^2b^2=e(132)=(132)\ne e$. Tiêu chuẩn không đúng với cặp này, xác nhận $S_3$ không giao hoán.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 1.6 BẢNG CAYLEY -->
+  <h3 class="subsection-title">1.6. Bảng Cayley: Cấu Trúc Hình Vuông Latinh của Nhóm Hữu Hạn</h3>
+  <p>
+    Bảng Cayley ghi nhận toàn bộ cấu trúc phép toán của một nhóm hữu hạn. 
+    Theo quy ước chuẩn của giáo trình: <b style="color:var(--thm-color);">Ô ở hàng $x$, cột $y$ chứa kết quả của phép toán $xy$</b>.
+  </p>
+  <div class="corollary-box">
+    <b>Đặc trưng hình vuông Latinh:</b> Do luật giản ước ($ax = ay \implies x = y$ và $xa = ya \implies x = y$), 
+    trên mỗi hàng và mỗi cột của bảng Cayley, mỗi phần tử của nhóm xuất hiện <b>đúng một lần</b>.
+  </div>
+
+  <!-- 1.7 HỆ THỐNG MÔ HÌNH CHUẨN MỰC -->
+  <h3 class="subsection-title">1.7. Hệ Thống Mô Hình Chuẩn Mực: Kiểm Định Tiên Đề & Đối Chiếu Các Họ Nhóm</h3>
+  
+  <p><b>1. Bảng Kiểm Định Từng Tiên Đề Trên Các Cấu Trúc Số Học Cơ Bản:</b></p>
+  <p style="font-size:0.95rem; color:var(--text-muted);">
+    Bảng khảo sát rành mạch 4 tiêu chuẩn đại số đối với các tập hợp và phép toán quen thuộc (mô hình hóa theo bảng giảng dạy sư phạm):
+  </p>
+
+  <div class="table-wrapper" style="margin-bottom: 2rem;">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Cấu trúc $(G, *)$</th>
+          <th style="text-align:center;">Kết hợp</th>
+          <th style="text-align:center;">Giao hoán</th>
+          <th style="text-align:center;">Phần tử trung hòa</th>
+          <th style="text-align:center;">Phần tử khả đối xứng</th>
+          <th>Kết luận Cấu trúc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>$(\mathbb{N}, +)$</b></td>
+          <td style="text-align:center; color:#10b981; font-weight:bold;">✔</td>
+          <td style="text-align:center; color:#10b981; font-weight:bold;">✔</td>
+          <td style="text-align:center;">$0$</td>
+          <td style="text-align:center; color:#ef4444;">Chỉ có $0$ (vì $-x \notin \mathbb{N}$)</td>
+          <td><b>Vị nhóm giao hoán</b> (chưa là nhóm)</td>
+        </tr>
+        <tr>
+          <td><b>$(\mathbb{Z}, -)$</b></td>
+          <td style="text-align:center; color:#ef4444; font-weight:bold;">✖</td>
+          <td style="text-align:center; color:#ef4444; font-weight:bold;">✖</td>
+          <td style="text-align:center; color:#ef4444;">✖ (chỉ có đơn vị phải $a-0=a$)</td>
+          <td style="text-align:center; color:#ef4444;">✖</td>
+          <td><b>Không là nửa nhóm</b> (thất bại kết hợp)</td>
+        </tr>
+        <tr>
+          <td><b>$(\mathbb{Z}, \cdot)$</b></td>
+          <td style="text-align:center; color:#10b981; font-weight:bold;">✔</td>
+          <td style="text-align:center; color:#10b981; font-weight:bold;">✔</td>
+          <td style="text-align:center;">$1$</td>
+          <td style="text-align:center; color:#ef4444;">Chỉ $\pm 1$ có nghịch đảo</td>
+          <td><b>Vị nhóm giao hoán</b> (chưa là nhóm)</td>
+        </tr>
+        <tr>
+          <td><b>$(\mathbb{Q}^*, \cdot)$</b></td>
+          <td style="text-align:center; color:#10b981; font-weight:bold;">✔</td>
+          <td style="text-align:center; color:#10b981; font-weight:bold;">✔</td>
+          <td style="text-align:center;">$1$</td>
+          <td style="text-align:center; color:#10b981;">$\forall x \in \mathbb{Q}^*$ (nghịch đảo là $\frac{1}{x}$)</td>
+          <td><b>Nhóm Abel</b></td>
+        </tr>
+        <tr>
+          <td><b>$(M_2(\mathbb{R}), \cdot)$</b></td>
+          <td style="text-align:center; color:#10b981; font-weight:bold;">✔</td>
+          <td style="text-align:center; color:#ef4444; font-weight:bold;">✖</td>
+          <td style="text-align:center;">$I_2$</td>
+          <td style="text-align:center;">Chỉ các ma trận $\det A \neq 0$</td>
+          <td><b>Vị nhóm không giao hoán</b></td>
+        </tr>
+        <tr>
+          <td><b>$(\mathbb{R}, *)$</b> ($x*y = \frac{x+y}{2}$)</td>
+          <td style="text-align:center; color:#ef4444; font-weight:bold;">✖</td>
+          <td style="text-align:center; color:#10b981; font-weight:bold;">✔</td>
+          <td style="text-align:center; color:#ef4444;">✖</td>
+          <td style="text-align:center; color:#ef4444;">✖</td>
+          <td><b>Không là nửa nhóm</b> (giao hoán nhưng không kết hợp)</td>
+        </tr>
+        <tr>
+          <td><b>$(2\mathbb{Z}+1, +)$</b></td>
+          <td colspan="4" style="text-align:center; color:#ef4444; font-style:italic;">Không đóng với phép cộng: $1 + 3 = 4 \notin 2\mathbb{Z}+1$</td>
+          <td><b>Không là phép toán hai ngôi</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><b>2. Bảng Phân Tích Các Họ Nhóm Chuẩn Mực Trong Giáo Trình:</b></p>
+  <p style="font-size:0.95rem; color:var(--text-muted);">
+    Tổng hợp có hệ thống các mô hình nhóm cơ bản theo giáo trình TS. Huỳnh Việt Khánh:
+  </p>
+
+  <div class="table-wrapper">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Họ Nhóm</th>
+          <th>Tập hợp & Phép toán</th>
+          <th>Cấp $|G|$</th>
+          <th>Giao hoán?</th>
+          <th>Phần tử đơn vị $e$</th>
+          <th>Quy tắc nghịch đảo $a^{-1}$</th>
+          <th>Bản chất cấu trúc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>$(\mathbb{Z}, +)$</b></td>
+          <td>Số nguyên, phép cộng</td>
+          <td>$\infty$</td>
+          <td>Có (Abel)</td>
+          <td>$0$</td>
+          <td>$-a$</td>
+          <td>Nhóm cyclic vô hạn chuẩn mực, sinh bởi $1$ và $-1$.</td>
+        </tr>
+        <tr>
+          <td><b>$(\mathbb{Z}/n\mathbb{Z}, +)$</b></td>
+          <td>Các lớp số dư modulo $n$, cộng modulo</td>
+          <td>$n$</td>
+          <td>Có (Abel)</td>
+          <td>$[0]_n$</td>
+          <td>$-[a]_n = [n - a]_n$</td>
+          <td>Mô hình số học đồng hồ $n$ giờ, nhóm cyclic cấp $n$.</td>
+        </tr>
+        <tr>
+          <td><b>$U(n)$</b></td>
+          <td>$\{[a]_n \mid \gcd(a, n) = 1\}$, nhân modulo</td>
+          <td>$\varphi(n)$</td>
+          <td>Có (Abel)</td>
+          <td>$[1]_n$</td>
+          <td>Tìm từ Bézout: $ua + vn = 1 \implies [a]^{-1} = [u]$</td>
+          <td>Nhóm nhân các phần tử khả nghịch trong $\mathbb{Z}/n\mathbb{Z}$.</td>
+        </tr>
+        <tr>
+          <td><b>$S_n$ ($n \ge 3$)</b></td>
+          <td>Hoán vị của $n$ phần tử, hợp thành ánh xạ</td>
+          <td>$n!$</td>
+          <td><b>KHÔNG</b></td>
+          <td>$\operatorname{id}$</td>
+          <td>Đọc ngược chu trình hoặc song ánh ngược $f^{-1}$</td>
+          <td>Mô hình hoán vị đối xứng, quy ước đọc từ phải sang trái.</td>
+        </tr>
+        <tr>
+          <td><b>$D_{2n}$ ($n \ge 3$)</b></td>
+          <td>Các đối xứng đa giác đều $n$ cạnh</td>
+          <td>$2n$</td>
+          <td><b>KHÔNG</b></td>
+          <td>$e$</td>
+          <td>$(r^k)^{-1} = r^{n-k}$<br>$(r^k s)^{-1} = r^k s$</td>
+          <td>Sinh bởi quay $r$ và lật $s$ với hệ thức $sr = r^{-1}s$. Các phép lật tự nghịch đảo.</td>
+        </tr>
+        <tr>
+          <td><b>$\mathrm{GL}_2(\mathbb{R})$</b></td>
+          <td>Ma trận thực cấp 2 khả nghịch ($\det A \neq 0$)</td>
+          <td style="text-align: center;">$\infty$</td>
+          <td style="text-align: center;"><b>KHÔNG</b></td>
+          <td style="white-space: nowrap;">${I_2 = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}}$</td>
+          <td style="white-space: nowrap;">${A^{-1} = \dfrac{1}{\det A}\begin{pmatrix} d & -b \\ -c & a \end{pmatrix}}$</td>
+          <td>Nhóm tuyến tính tổng quát, phép nhân ma trận không giao hoán.</td>
+        </tr>
+        <tr>
+          <td><b>$\operatorname{Aff}(\mathbb{R})$</b></td>
+          <td>Hàm $T_{a,b}(x) = ax + b$ ($a \neq 0$), hợp thành</td>
+          <td>$\infty$</td>
+          <td><b>KHÔNG</b></td>
+          <td>$T_{1,0} = \operatorname{id}$</td>
+          <td>$T_{a,b}^{-1} = T_{1/a, -b/a}$</td>
+          <td>Nhóm các phép biến hình afin trên đường thẳng thực.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- ==================== HẾT CHƯƠNG 1 ==================== -->

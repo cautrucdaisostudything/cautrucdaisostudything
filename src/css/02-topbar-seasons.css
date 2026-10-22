@@ -1,0 +1,110 @@
+/* Tinh chỉnh cụm Logo CẤU TRÚC ĐẠI SỐ có họa tiết mùa bên dưới */
+  .brand {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .brand svg.brand-logo-icon {
+    width: 36px;
+    height: 36px;
+    padding: 7px;
+    border-radius: 11px;
+    background: var(--brand-grad);
+    color: #fff;
+    box-shadow: 0 6px 14px -6px rgba(16, 42, 92, 0.55);
+    flex-shrink: 0;
+  }
+  .brand-title-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    line-height: 1.1;
+  }
+  .brand-main-text {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--brand);
+  }
+  .brand-sub-ornament {
+    position: relative;
+    height: 16px;
+    width: 172px;
+  }
+  .brand-sub-ornament svg.brand-flourish-svg {
+    position: absolute;
+    inset: 0;
+    width: 172px !important;
+    height: 16px !important;
+    padding: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+  }
+
+  :root:not([data-theme]) .brand-sub-ornament .sub-study,
+:root[data-theme="study"] .brand-sub-ornament .sub-study { opacity: 1; }
+:root[data-theme="spring"] .brand-sub-ornament .sub-spring { opacity: 1; }
+:root[data-theme="summer"] .brand-sub-ornament .sub-summer { opacity: 1; }
+:root[data-theme="autumn"] .brand-sub-ornament .sub-autumn { opacity: 1; }
+:root[data-theme="winter"] .brand-sub-ornament .sub-winter { opacity: 1; }
+
+  /* VÒM CẢNH SẮC 4 MÙA RỦ XUỐNG NGAY PHÍA DƯỚI CẤU TRÚC ĐẠI SỐ */
+  .seasonal-under-brand {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 380px;
+    height: 145px;
+    pointer-events: none;
+    z-index: 92;
+    overflow: visible;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+    transform-origin: top left;
+  }
+  .topbar.is-scrolled .seasonal-under-brand {
+    transform: scale(0.68);
+    opacity: 0.82;
+  }
+  body[data-app-mode="slides"] .seasonal-under-brand {
+    display: none;
+  }
+  .seasonal-under-brand .canopy-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+  :root:not([data-theme]) .seasonal-under-brand .canopy-spring,
+  :root[data-theme="spring"] .seasonal-under-brand .canopy-spring,
+  :root[data-theme="summer"] .seasonal-under-brand .canopy-summer,
+  :root[data-theme="autumn"] .seasonal-under-brand .canopy-autumn,
+  :root[data-theme="winter"] .seasonal-under-brand .canopy-winter {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @keyframes swayBranch {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(1.6deg); }
+  }
+  @keyframes floatPetals {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(4px); }
+  }
+  .sway-anim { animation: swayBranch 6s ease-in-out infinite; transform-origin: 0% 0%; }
+  .float-anim { animation: floatPetals 4s ease-in-out infinite; }
+  @media (max-width: 960px) {
+    .seasonal-under-brand { width: 220px; height: 90px; opacity: 0.75; }
+  }
+  @media (max-width: 640px) {
+    .seasonal-under-brand { display: none; }
+    .brand-sub-ornament { display: none; }
+  }

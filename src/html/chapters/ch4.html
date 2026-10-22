@@ -1,0 +1,428 @@
+<!-- ======================================================== -->
+<div class="chapter-content" id="tab-c4">
+  <h2 class="section-title">Chương 4. Nhóm Con Chuẩn Tắc và Nhóm Thương</h2>
+  
+  <p class="welcome-copy">
+    Từ một nhóm mẹ $G$ và một nhóm con $H$, ta đã có tập hợp các lớp kề $G/H$. 
+    Tuy nhiên, phép nhân đại diện $(aH)(bH) = abH$ không phải lúc nào cũng cho một phép toán hợp lệ trên tập ấy. 
+    Chương này truy tìm chính xác trở ngại khi đổi đại diện, xây dựng phép liên hợp, thiết lập khái niệm <b>Nhóm con chuẩn tắc</b> 
+    và chứng minh đây là điều kiện vừa đủ để phép nhân lớp kề xác định tốt, biến tập thương thành một <b>Nhóm thương</b> hoàn chỉnh.
+  </p>
+
+  <!-- 4.1 ĐỘNG CƠ: SỰ THẤT BẠI CỦA PHÉP NHÂN LỚP -->
+  <h3 class="subsection-title">4.1. Khởi Nguồn Sư Phạm: Sự Thất Bại Khi Nhân Đại Diện Lớp Kề</h3>
+  <p>
+    Xét nhóm đối xứng $S_3$ và nhóm con $H = \langle (12) \rangle = \{e, (12)\}$. Chỉ số $[S_3 : H] = 3$, tập các lớp kề trái gồm ba khối:
+    $$C_1 = eH = \{e, (12)\}, \quad C_2 = (13)H = \{(13), (123)\}, \quad C_3 = (23)H = \{(23), (132)\}$$
+    Thử định nghĩa phép nhân tự nhiên trên tập thương: nhân hai lớp bằng cách nhân hai đại diện tương ứng: $(xH)(yH) = xyH$.
+    Ta thử thực hiện phép nhân $C_2 \cdot C_2$ với hai cách chọn đại diện khác nhau cho cùng lớp $C_2$:
+  </p>
+  <ul class="bullet-list">
+    <li><b>Cách chọn 1:</b> Lấy đại diện $(13) \in C_2$ cho cả hai thừa số. Khi đó $(13)(13) = e \implies$ Lớp kết quả là $eH = C_1$.</li>
+    <li><b>Cách chọn 2:</b> Vì $(123) \in C_2$, lấy đại diện $(123) \in C_2$ và $(13) \in C_2$. Khi đó $(123)(13) = (23) \implies$ Lớp kết quả là $(23)H = C_3$.</li>
+  </ul>
+  <p>
+    Vì $C_1 \neq C_3$, kết quả phép nhân bị <b>thay đổi hoàn toàn khi ta đổi đại diện</b>! 
+    Phép toán này không xác định tốt (not well-defined). Phép nhân đại diện đã thất bại vì phân hoạch trái và phân hoạch phải của $H$ bị lệch nhau ($(13)H \neq H(13)$).
+  </p>
+
+  <!-- 4.2 PHÉP LIÊN HỢP VÀ ĐỊNH NGHĨA CHUẨN TẮC -->
+  <h3 class="subsection-title">4.2. Phép Liên Hợp và Định Nghĩa Nhóm Con Chuẩn Tắc</h3>
+  <p>
+    Để phép nhân lớp kề $(aN)(bN) = abN$ không phụ thuộc vào việc chọn đại diện, ta cần chuyển thừa số qua lại giữa $a$ và $N$, 
+    điều này dẫn trực tiếp đến khái niệm <b>phép liên hợp</b> và <b>tính chuẩn tắc</b>.
+  </p>
+
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 4.1</span>
+      <span class="tag">Phép Liên Hợp (Conjugation)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $G$ là một nhóm và $g \in G$. Ta xác định:</p>
+      <ul class="bullet-list">
+        <li><b>1. Phần tử liên hợp:</b> Phần tử $gxg^{-1}$ được gọi là phần tử <i>liên hợp của $x$ bởi $g$</i>.</li>
+        <li><b>2. Nhóm con liên hợp:</b> Nếu $H \le G$, tập hợp $gHg^{-1} = \{ghg^{-1} \mid h \in H\}$ là một nhóm con của $G$, gọi là nhóm con <i>liên hợp của $H$ bởi $g$</i>.</li>
+      </ul>
+      <div class="corollary-box">
+        <b>💡 Ý nghĩa hình học & đại số:</b> Phép biến đổi liên hợp $c_g: x \mapsto gxg^{-1}$ là một tự đẳng cấu của $G$ (phép "đổi hệ tọa độ"). Nó bảo toàn toàn bộ cấu trúc nhóm và bảo toàn cấp của phần tử.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $G=S_3$, lấy $H=\langle(12)\rangle=\{e,(12)\}$ và $g=(123)$. Tính phần tử liên hợp và nhóm con $gHg^{-1}$.</p>
+          <p><b>2. Hộp công cụ.</b> Liên hợp được tính theo $gxg^{-1}$; với chu trình, $g(i_1\ i_2\ \cdots\ i_k)g^{-1}=(g(i_1)\ g(i_2)\ \cdots\ g(i_k))$. Nhóm con liên hợp là tập các liên hợp của mọi phần tử trong $H$.</p>
+          <p><b>3. Lời giải.</b> Ta có $g(12)g^{-1}=(g(1)\ g(2))=(23)$ vì $g(1)=2,g(2)=3$. Đồng thời $geg^{-1}=e$. Do đó $gHg^{-1}=\{e,(23)\}=\langle(23)\rangle\ne H=\{e,(12)\}$. Như vậy phép liên hợp bảo toàn cấu trúc nhóm con nhưng có thể đưa nó sang một nhóm con khác (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Trong nhóm không giao hoán, không thể rút gọn $gxg^{-1}$ thành $x$. Việc một phần tử liên hợp khác phần tử ban đầu cho thấy nhóm con sinh bởi nó có thể không bất biến dưới liên hợp.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 4.2</span>
+      <span class="tag">Nhóm Con Chuẩn Tắc (Normal Subgroup)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $G$ là một nhóm và $N$ là một nhóm con của $G$ ($N \le G$). Nhóm con $N$ được gọi là một <b>nhóm con chuẩn tắc</b> của $G$ nếu thỏa mãn điều kiện:</p>
+      <ul class="bullet-list">
+        <li><b>Lớp kề trái trùng lớp kề phải tại mọi vị trí:</b>
+          $$gN = Ng \quad \forall g \in G$$
+        </li>
+      </ul>
+      <div class="corollary-box">
+        <b>💡 Nhận xét rút ra:</b> Nói cách khác, <i>nhóm con $N$ chuẩn tắc nếu nó hoán vị được với mọi phần tử của nhóm mẹ</i> (theo nghĩa tập hợp, không đòi hỏi $gn = ng$ với từng phần tử).
+        <br>• Ký hiệu chuẩn: $N \trianglelefteq G$. Nếu $N \neq G$, ta viết $N \triangleleft G$.
+        <br>• Mọi nhóm $G$ luôn có hai nhóm con chuẩn tắc tầm thường: $\{e\} \trianglelefteq G$ và $G \trianglelefteq G$.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $G=S_3$, xét $N=A_3=\{e,(123),(132)\}$. Chứng minh $N$ chuẩn tắc.</p>
+          <p><b>2. Hộp công cụ.</b> Một nhóm con $N$ chuẩn tắc khi $gNg^{-1}=N$ với mọi $g\in G$. Trong $S_3$, liên hợp của chu trình $(123)$ là một chu trình 3; hai chu trình 3 duy nhất là $(123)$ và $(132)$.</p>
+          <p><b>3. Lời giải.</b> Lấy $g\in S_3$ tùy ý. Ta có $geg^{-1}=e$. Theo công thức liên hợp chu trình, $g(123)g^{-1}$ là một trong $(123),(132)$, nên thuộc $A_3$; tương tự với $(132)$. Suy ra $gA_3g^{-1}\subseteq A_3$. Áp dụng cùng lập luận cho $g^{-1}$ cho bao hàm ngược, vậy $gA_3g^{-1}=A_3$ với mọi $g$, tức $A_3\trianglelefteq S_3$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Chuẩn tắc yêu cầu toàn bộ nhóm con bất biến dưới liên hợp, không yêu cầu từng phần tử của $A_3$ giao hoán với mọi phần tử của $S_3$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 4.3 CÁC TIÊU CHUẨN TƯƠNG ĐƯƠNG -->
+  <h3 class="subsection-title">4.3. Ba Tiêu Chuẩn Tương Đương Của Tính Chuẩn Tắc</h3>
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 4.3</span>
+      <span class="tag">Tiêu Chuẩn Tương Đương Của Tính Chuẩn Tắc (Định lý 4.1 Giáo trình)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $N \le G$. Ba mệnh đề sau đây là hoàn toàn tương đương:</p>
+      <ul class="bullet-list">
+        <li><b>(a) Tiêu chuẩn lớp kề:</b> $gN = Ng$ với mọi $g \in G$.</li>
+        <li><b>(b) Tiêu chuẩn bất biến qua liên hợp:</b> $gNg^{-1} = N$ với mọi $g \in G$.</li>
+        <li><b>(c) Tiêu chuẩn bao hàm một phía (Tiêu chuẩn thực hành nhanh nhất):</b>
+          $$\forall g \in G, \forall n \in N \implies gng^{-1} \in N$$
+        </li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Đặt $G=\mathrm{GL}_2(\mathbb{R})$ và $N=\mathrm{SL}_2(\mathbb{R})=\{A\in G:\det A=1\}$. Dùng tiêu chuẩn liên hợp một phía để chứng minh $N\trianglelefteq G$.</p>
+          <p><b>2. Hộp công cụ.</b> Nếu $N\le G$ và $gng^{-1}\in N$ với mọi $g\in G,n\in N$, thì $N$ chuẩn tắc trong $G$. Ta sử dụng tính nhân của định thức và $\det(g^{-1})=(\det g)^{-1}$.</p>
+          <p><b>3. Lời giải.</b> Lấy $g\in\mathrm{GL}_2(\mathbb{R})$ và $n\in\mathrm{SL}_2(\mathbb{R})$ tùy ý. Khi đó $gng^{-1}$ khả nghịch và $\det(gng^{-1})=\det(g)\det(n)\det(g^{-1})=\det(g)\cdot1\cdot(\det g)^{-1}=1$. Vậy $gng^{-1}\in N$. Theo tiêu chuẩn một phía, $\mathrm{SL}_2(\mathbb{R})\trianglelefteq\mathrm{GL}_2(\mathbb{R})$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Không cần giả sử $gn=ng$; định thức chứng minh tính bất biến của cả nhóm con dưới liên hợp. Điều kiện $g$ khả nghịch là thiết yếu để $g^{-1}$ tồn tại.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="proof-block">
+    <summary>🔍 Xem chứng minh tính tương đương giữa (b) và (c)</summary>
+    <div class="proof-content">
+      <p>
+        • $(b) \implies (c)$ là hiển nhiên vì $gNg^{-1} = N$ kéo theo mọi phần tử $gng^{-1} \in N$.<br>
+        • $(c) \implies (b)$: Giả sử $gng^{-1} \in N$ với mọi $g \in G, n \in N$. Điều này cho bao hàm $gNg^{-1} \subseteq N$ với mọi $g$.<br>
+        Để chứng minh bao hàm ngược, áp dụng giả thiết trên cho phần tử nghịch đảo $g^{-1} \in G$:
+        $$g^{-1}N(g^{-1})^{-1} \subseteq N \implies g^{-1}Ng \subseteq N$$
+        Nhân $g$ ở bên trái và $g^{-1}$ ở bên phải hai vế của bao hàm trên:
+        $$g(g^{-1}Ng)g^{-1} \subseteq gNg^{-1} \implies N \subseteq gNg^{-1}$$
+        Hai bao hàm cho đẳng thức $gNg^{-1} = N$. Lập luận này không đòi hỏi tính hữu hạn! <span class="qed">∎</span>
+      </p>
+    </div>
+  </details>
+
+  <!-- 4.4 BỐN CƠ CHẾ SINH RA CHUẨN TẮC -->
+  <h3 class="subsection-title">4.4. Bốn Cơ Chế Tự Nhiên Sinh Ra Nhóm Con Chuẩn Tắc</h3>
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ MỆNH ĐỀ 4.4</span>
+      <span class="tag">Các Cơ Chế Chuẩn Tắc Kinh Điển</span>
+    </div>
+    <div class="card-body">
+      <p>Trong thực hành, một nhóm con $N \le G$ chắc chắn chuẩn tắc nếu thỏa mãn một trong các dấu hiệu sau:</p>
+      <ul class="bullet-list">
+        <li><b>1. Nhóm mẹ giao hoán (Abel):</b> Nếu $G$ là nhóm Abel, thì <b>mọi nhóm con của $G$ đều là nhóm con chuẩn tắc</b> (vì $gng^{-1} = gg^{-1}n = n \in N$).</li>
+        <li><b>2. Nhóm con có chỉ số bằng 2:</b> Nếu $[G : N] = 2$, thì $N \trianglelefteq G$. 
+          <br><i>Hệ quả:</i> Nhóm thay phiên $A_n \trianglelefteq S_n$ vì $[S_n : A_n] = \dfrac{n!}{n!/2} = 2$; Nhóm các phép quay $\langle r \rangle \trianglelefteq D_{2n}$ vì $[D_{2n} : \langle r \rangle] = \dfrac{2n}{n} = 2$.
+        </li>
+        <li><b>3. Tâm của nhóm $Z(G)$ và nhóm con chứa trong tâm:</b> Tập các phần tử giao hoán với toàn bộ nhóm:
+          $$Z(G) = \{z \in G \mid zg = gz, \forall g \in G\}$$
+          luôn là một nhóm con chuẩn tắc của $G$. Mọi nhóm con $H \le Z(G)$ cũng đều chuẩn tắc trong $G$.
+        </li>
+        <li><b>4. Tính duy nhất theo cấp:</b> Nếu $N$ là nhóm con duy nhất của $G$ có cấp $|N| = k$, thì chắc chắn $N \trianglelefteq G$ (vì mọi liên hợp $gNg^{-1}$ đều có cùng cấp $k$, buộc $gNg^{-1} = N$).</li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Kiểm chứng bốn cơ chế chuẩn tắc bằng các cặp cụ thể: $5\mathbb{Z}\le\mathbb{Z}$; $A_3\le S_3$; nhóm con ma trận vô hướng trong $\mathrm{GL}_2(\mathbb{R})$; và nhóm con cấp $3$ trong $S_3$.</p>
+          <p><b>2. Hộp công cụ.</b> Nhóm Abel làm mọi nhóm con chuẩn tắc; nhóm con chỉ số $2$ chuẩn tắc; mọi nhóm con của tâm $Z(G)$ chuẩn tắc; nhóm con duy nhất có cấp xác định bất biến dưới liên hợp và do đó chuẩn tắc.</p>
+          <p><b>3. Lời giải.</b> (i) $\mathbb{Z}$ Abel nên $5\mathbb{Z}\trianglelefteq\mathbb{Z}$. (ii) $|S_3|=6,|A_3|=3$, nên $[S_3:A_3]=2$ và $A_3\trianglelefteq S_3$. (iii) $Z(\mathrm{GL}_2(\mathbb{R}))=\{\lambda I_2:\lambda\ne0\}$: giao hoán với mọi ma trận chéo buộc ma trận tâm phải chéo, rồi giao hoán với ma trận sơ cấp $\begin{pmatrix}1&1\\0&1\end{pmatrix}$ buộc hai phần tử đường chéo bằng nhau. Vì các ma trận vô hướng giao hoán với mọi $g$, mọi nhóm con $C\le Z(G)$ thỏa $gCg^{-1}=C$. (iv) Nhóm con cấp $3$ duy nhất của $S_3$ là $A_3=\{e,(123),(132)\}$; liên hợp bảo toàn cấp nên mọi liên hợp của $A_3$ vẫn là nhóm con cấp $3$, phải bằng $A_3$. Cả bốn nhóm con đều chuẩn tắc (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> “Chỉ số 2” không đồng nghĩa “nhóm Abel”; kết luận chuẩn tắc vẫn đúng nhờ phân hoạch chỉ có một lớp ngoài. Với cơ chế tâm, cần phân biệt ma trận vô hướng khác không với mọi ma trận vô hướng, vì phần tử của $\mathrm{GL}_2$ phải khả nghịch.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="ex-card" style="margin-top: 1rem;" open>
+    <summary>Ví dụ &amp; Phân tích</summary>
+    <div class="ex-content">
+      <p><b>1. Bối cảnh và đề bài.</b> Trong $G=D_8=\langle r,s\mid r^4=s^2=e,\ sr=r^{-1}s\rangle$, đặt $H=\langle s,r^2\rangle=\{e,r^2,s,r^2s\}$ và $K=\langle s\rangle=\{e,s\}$. Kiểm tra tính chuẩn tắc của chuỗi.</p>
+      <p><b>2. Hộp công cụ.</b> Nhóm con có chỉ số $2$ chuẩn tắc trong nhóm mẹ. Để bác bỏ $K\trianglelefteq G$, chỉ cần tìm $g\in G,k\in K$ sao cho $gkg^{-1}\notin K$.</p>
+      <p><b>3. Lời giải.</b> Ta có $[H:K]=4/2=2$, nên $K\trianglelefteq H$; và $[G:H]=8/4=2$, nên $H\trianglelefteq G$. Tuy nhiên, dùng $sr=r^{-1}s$ suy ra $rsr^{-1}=rsr^3=r^2s$. Phần tử $r^2s\notin\{e,s\}=K$, nên $K$ không chuẩn tắc trong $G$. Vậy chuẩn tắc không có tính bắc cầu (đpcm).</p>
+      <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Từ $K\trianglelefteq H$ và $H\trianglelefteq G$ không thể kết luận $K\trianglelefteq G$; phép thử phải dùng liên hợp bởi mọi phần tử của nhóm mẹ cuối cùng.</p>
+    </div>
+  </details>
+
+  <!-- 4.5 PHÉP DỰNG NHÓM THƯƠNG -->
+  <h3 class="subsection-title">4.5. Phép Dựng Cấu Trúc Nhóm Thương $G/N$</h3>
+  <p>
+    Khi và chỉ khi nhóm con có tính chuẩn tắc, phép nhân đại diện trên tập thương mới trở thành một phép toán hai ngôi xác định tốt:
+  </p>
+
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 4.5</span>
+      <span class="tag">Định Lý Cấu Trúc Nhóm Thương (Định lý 4.6 Giáo trình)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $G$ là một nhóm và $N \trianglelefteq G$. Khi đó:</p>
+      <ul class="bullet-list">
+        <li><b>1. Phép toán xác định tốt:</b> Công thức nhân các lớp kề:
+          $$(aN)(bN) = abN$$
+          là một phép toán hai ngôi <b>xác định tốt</b> trên tập thương $G/N$ (kết quả không phụ thuộc vào đại diện $a, b$).
+        </li>
+        <li><b>2. Cấu trúc nhóm thương:</b> Tập thương $G/N$ cùng phép nhân lớp kề lập thành một nhóm, gọi là <b>nhóm thương</b> của $G$ theo $N$.</li>
+        <li><b>3. Phần tử đơn vị:</b> Là lớp $eN = N$.</li>
+        <li><b>4. Phần tử nghịch đảo:</b> Nghịch đảo của lớp $aN$ là $(aN)^{-1} = a^{-1}N$.</li>
+        <li><b>5. Cấp của nhóm thương:</b> Khi $G$ hữu hạn, cấp của nhóm thương tính theo công thức:
+          $$|G/N| = [G : N] = \dfrac{|G|}{|N|}$$
+        </li>
+      </ul>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Xét $G=S_3$, $N=A_3=\{e,(123),(132)\}$. Mô tả phép toán của $G/N$, phần tử đơn vị, nghịch đảo và cấp nhóm thương.</p>
+          <p><b>2. Hộp công cụ.</b> Vì $N\trianglelefteq G$, tích lớp được xác định tốt bởi $(aN)(bN)=abN$. Đơn vị là $N$, nghịch đảo là $(aN)^{-1}=a^{-1}N$, và $|G/N|=|G|/|N|$ khi $G$ hữu hạn.</p>
+          <p><b>3. Lời giải.</b> Hai lớp là $N$ và $T=(12)N=\{(12),(13),(23)\}$. Bảng nhân là $\begin{array}{c|cc}\cdot&N&T\\\hline N&N&T\\T&T&N\end{array}$, vì $T^2=(12)^2N=N$. Do đó đơn vị là $N$, $T^{-1}=T$, và $|S_3/A_3|=6/3=2$. Ánh xạ dấu cho thấy thương này đẳng cấu với $\mathbb{Z}/2\mathbb{Z}$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Phép nhân lớp chỉ hợp lệ nhờ $N$ chuẩn tắc. Không nhân các đại diện trước khi xác nhận kết quả độc lập với lựa chọn đại diện.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="proof-block">
+    <summary>🔍 Xem chứng minh phép nhân lớp kề xác định tốt $\iff N \trianglelefteq G$</summary>
+    <div class="proof-content">
+      <p>
+        • $(\implies)$ Giả sử phép nhân lớp xác định tốt. Lấy $n \in N, g \in G$. Vì $nN = eN = N$, ta có $(nN)(gN) = (eN)(gN) = gN$. 
+        Theo công thức phép nhân: $ngN = gN \implies g^{-1}ng \in N$. Vì điều này đúng với mọi $g, n$, ta có $N \trianglelefteq G$.<br>
+        • $(\impliedby)$ Giả sử $N \trianglelefteq G$. Lấy các đại diện khác $a' \in aN$ và $b' \in bN$, tức $a' = an_1$ và $b' = bn_2$ với $n_1, n_2 \in N$. 
+        Xét tích mới:
+        $$a'b' = (an_1)(bn_2) = a(n_1 b)n_2$$
+        Vì $N \trianglelefteq G$, ta có $n_1 b \in Nb = bN$, nên tồn tại $n_3 \in N$ sao cho $n_1 b = bn_3$. Thay vào:
+        $$a'b' = a(bn_3)n_2 = (ab)(n_3 n_2)$$
+        Vì $N$ đóng, $n_3 n_2 \in N \implies a'b' \in abN \implies a'b'N = abN$. 
+        Vậy phép nhân độc lập hoàn toàn với cách chọn đại diện! <span class="qed">∎</span>
+      </p>
+    </div>
+  </details>
+
+  <!-- 4.6 PHÉP CHIẾU CHÍNH TẮC -->
+  <h3 class="subsection-title">4.6. Phép Chiếu Chính Tắc $\pi_N$: Cây Cầu Nối Sang Chương 5</h3>
+  <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
+    <div class="card-header">
+      <span class="label">📘 ĐỊNH NGHĨA 4.6</span>
+      <span class="tag">Phép Chiếu Chính Tắc (Canonical Projection)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $N \trianglelefteq G$. Ánh xạ $\pi_N: G \to G/N$ gửi mỗi phần tử đến lớp kề chứa nó:</p>
+      <div class="math-display">
+        $$\pi_N(g) = gN \quad \forall g \in G$$
+      </div>
+      <p>Ánh xạ này thỏa mãn hai tính chất cốt lõi:</p>
+      <ul class="bullet-list">
+        <li><b>1. Là một toàn ánh:</b> Mọi lớp $gN \in G/N$ đều có tạo ảnh là $g \in G$.</li>
+        <li><b>2. Bảo toàn phép toán:</b> $\pi_N(ab) = abN = (aN)(bN) = \pi_N(a)\pi_N(b)$.</li>
+        <li><b>3. Hạt nhân:</b> Tập các phần tử bị gửi về đơn vị $N$ của nhóm thương chính là:
+          $$\{g \in G \mid \pi_N(g) = N\} = N$$
+        </li>
+      </ul>
+      <div class="corollary-box">
+        <b>💡 Tiền đề cho Chương 5:</b> Ánh xạ bảo toàn phép toán $\pi_N$ chính là mô hình mẫu mực của một <i>đồng cấu nhóm</i>. Hạt nhân của nó là $N$, và các thớ của nó chính là các lớp kề.
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Trong $G=(\mathbb{Z}/12\mathbb{Z},+)$, lấy $N=\langle[4]\rangle=\{[0],[4],[8]\}$. Xét phép chiếu $\pi_N([k])=[k]+N$; kiểm tra bảo toàn phép toán và tìm hạt nhân.</p>
+          <p><b>2. Hộp công cụ.</b> Phép chiếu chính tắc gửi $g$ đến lớp $gN$, thỏa $\pi_N(x+y)=\pi_N(x)+\pi_N(y)$; hạt nhân là các phần tử được gửi về lớp đơn vị $N$.</p>
+          <p><b>3. Lời giải.</b> Với $[2],[3]\in G$, $\pi_N([2]+[3])=\pi_N([5])=[5]+N=[1]+N$. Mặt khác, $\pi_N([2])+\pi_N([3])=([2]+N)+([3]+N)=[5]+N$, nên phép toán được bảo toàn. Hạt nhân gồm các lớp $[k]$ thỏa $[k]+N=N$, tức $[k]\in N$; vậy $\ker\pi_N=\{[0],[4],[8]\}=N$. Đồng thời ảnh có bốn lớp, phù hợp $|G/N|=12/3=4$ (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Hạt nhân là tập phần tử ở miền được gửi về đơn vị của nhóm thương, không phải một lớp bất kỳ. Ở đây đơn vị của thương là cả lớp $N$, không chỉ phần tử $[0]$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 4.7 BẢNG CAYLEY NHÓM THƯƠNG MẪU & ĐỊNH LÝ TÂM -->
+  <h3 class="subsection-title">4.7. Minh Họa Tính Toán: Bảng Cayley Nhóm Thương & Định Lý Tâm $G/Z(G)$</h3>
+
+  <p><b>1. Bảng Cayley Của Nhóm Thương $(\mathbb{Z}/12\mathbb{Z}) / \langle [4]_{12} \rangle$:</b></p>
+  <p style="font-size:0.92rem; color:var(--text-muted);">
+    Đặt $N = \langle [4] \rangle = \{[0], [4], [8]\}$. Cấp $|N| = 3$. Cấp nhóm thương là $\dfrac{12}{3} = 4$. 
+    Bốn lớp kề là $C_0 = N, C_1 = [1]+N, C_2 = [2]+N, C_3 = [3]+N$. Bảng cộng của nhóm thương:
+  </p>
+
+  <div class="table-wrapper" style="margin-bottom: 2rem;">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>$+$</th>
+          <th style="text-align:center;">$C_0$</th>
+          <th style="text-align:center;">$C_1$</th>
+          <th style="text-align:center;">$C_2$</th>
+          <th style="text-align:center;">$C_3$</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>$C_0$</b></td>
+          <td style="text-align:center;">$C_0$</td>
+          <td style="text-align:center;">$C_1$</td>
+          <td style="text-align:center;">$C_2$</td>
+          <td style="text-align:center;">$C_3$</td>
+        </tr>
+        <tr>
+          <td><b>$C_1$</b></td>
+          <td style="text-align:center;">$C_1$</td>
+          <td style="text-align:center;">$C_2$</td>
+          <td style="text-align:center;">$C_3$</td>
+          <td style="text-align:center;">$C_0$</td>
+        </tr>
+        <tr>
+          <td><b>$C_2$</b></td>
+          <td style="text-align:center;">$C_2$</td>
+          <td style="text-align:center;">$C_3$</td>
+          <td style="text-align:center;">$C_0$</td>
+          <td style="text-align:center;">$C_1$</td>
+        </tr>
+        <tr>
+          <td><b>$C_3$</b></td>
+          <td style="text-align:center;">$C_3$</td>
+          <td style="text-align:center;">$C_0$</td>
+          <td style="text-align:center;">$C_1$</td>
+          <td style="text-align:center;">$C_2$</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:0.92rem; color:var(--text-muted); margin-top:-1.2rem; margin-bottom:1.5rem;">
+    <i>Nhận xét:</i> Bảng cộng này trùng khít hoàn toàn với bảng cộng của $\mathbb{Z}/4\mathbb{Z}$ sau phép đổi tên $[i]_4 \mapsto C_i$.
+  </p>
+
+  <!-- ĐỊNH LÝ G/Z(G) CYCLIC -->
+  <div class="math-card thm" data-type="thm" style="margin-bottom: 1.5rem;">
+    <div class="card-header">
+      <span class="label">🏛️ ĐỊNH LÝ 4.7</span>
+      <span class="tag">Định Lý Nhóm Thương Theo Tâm (Bài tập 4.22)</span>
+    </div>
+    <div class="card-body">
+      <p>Cho $G$ là một nhóm và $Z(G)$ là tâm của $G$. Khi đó:</p>
+      <div class="math-display">
+        $$\text{Nếu nhóm thương } G/Z(G) \text{ là một nhóm cyclic, thì } G \text{ bắt buộc phải là nhóm giao hoán (Abel).}$$
+      </div>
+      <details class="ex-card" style="margin-top: 1rem;" open>
+        <summary>Ví dụ &amp; Phân tích</summary>
+        <div class="ex-content">
+          <p><b>1. Bối cảnh và đề bài.</b> Xét $G=S_3$. Xác định $Z(G)$ và dùng định lý để giải thích vì sao $G/Z(G)$ không thể cyclic.</p>
+          <p><b>2. Hộp công cụ.</b> Định lý khẳng định $G/Z(G)$ cyclic thì $G$ Abel. Dạng phản đảo: nếu $G$ không Abel thì $G/Z(G)$ không cyclic.</p>
+          <p><b>3. Lời giải.</b> Phần tử duy nhất giao hoán với cả $(12)$ và $(23)$ trong $S_3$ là $e$, nên $Z(S_3)=\{e\}$. Do đó $S_3/Z(S_3)\cong S_3$. Nhưng $(12)(23)=(123)$ còn $(23)(12)=(132)$, nên $S_3$ không giao hoán, kéo theo thương này không cyclic. Nếu nó cyclic, định lý buộc $S_3$ Abel, trái với phép tính trên (đpcm).</p>
+          <p><b>4. Bình luận sư phạm và bẫy thường gặp.</b> Đây là phản đảo hợp lệ của mệnh đề kéo theo. Không nên suy rằng mọi thương của nhóm không Abel đều không cyclic; định lý chỉ nói riêng thương theo tâm $G/Z(G)$.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <details class="proof-block">
+    <summary>🔍 Xem chứng minh định lý kinh điển $G/Z(G)$ cyclic $\implies G$ Abel</summary>
+    <div class="proof-content">
+      <p>
+        Giả sử $G/Z(G) = \langle gZ(G) \rangle$ được sinh bởi một lớp đại diện $g \in G$.<br>
+        Khi đó mọi phần tử $x \in G$ đều thuộc một lớp kề có dạng $(gZ(G))^k = g^k Z(G)$. 
+        Do đó tồn tại số nguyên $k$ và $z_1 \in Z(G)$ sao cho $x = g^k z_1$.<br>
+        Tương tự, với phần tử $y \in G$ bất kỳ, tồn tại số nguyên $m$ và $z_2 \in Z(G)$ sao cho $y = g^m z_2$.<br>
+        Tính tích $xy$ và khai thác tính chất các phần tử tâm $z_1, z_2$ giao hoán với mọi phần tử của $G$:
+        $$xy = (g^k z_1)(g^m z_2) = g^k (z_1 g^m) z_2 = g^k (g^m z_1) z_2 = g^{k+m} z_1 z_2$$
+        Mặt khác:
+        $$yx = (g^m z_2)(g^k z_1) = g^m (z_2 g^k) z_1 = g^m (g^k z_2) z_1 = g^{m+k} z_2 z_1 = g^{k+m} z_1 z_2$$
+        Vì $xy = yx$ với mọi $x, y \in G$, nhóm $G$ bắt buộc phải là nhóm giao hoán! <span class="qed">∎</span>
+      </p>
+    </div>
+  </details>
+
+  <!-- 4.8 BẢNG TỔNG HỢP KIỂM ĐỊNH TÍNH CHUẨN TẮC -->
+  <h3 class="subsection-title">4.8. Bảng Tổng Hợp Kiểm Định Tính Chuẩn Tắc Trên Các Mô Hình Chuẩn</h3>
+  <div class="table-wrapper">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Nhóm mẹ $G$</th>
+          <th>Nhóm con $N$</th>
+          <th style="text-align:center;">Chỉ số $[G : N]$</th>
+          <th style="text-align:center;">Chuẩn tắc?</th>
+          <th>Căn cứ đại số & Nhóm thương $G/N$</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>$(\mathbb{Z}, +)$</td>
+          <td>$n\mathbb{Z}$ ($n \ge 1$)</td>
+          <td style="text-align:center;">$n$</td>
+          <td style="text-align:center; color:#10b981; font-weight:bold;">✔</td>
+          <td>Nhóm mẹ Abel $\implies$ mọi nhóm con chuẩn tắc. Thương là $\mathbb{Z}/n\mathbb{Z}$.</td>
+        </tr>
+        <tr>
+          <td>$S_3$</td>
+          <td>$A_3 = \langle (123) \rangle$</td>
+          <td style="text-align:center;">$\dfrac{6}{3} = 2$</td>
+          <td style="text-align:center; color:#10b981; font-weight:bold;">✔</td>
+          <td>Chỉ số bằng 2 $\implies$ chuẩn tắc. Thương $S_3/A_3 \cong \mathbb{Z}/2\mathbb{Z}$.</td>
+        </tr>
+        <tr>
+          <td>$S_3$</td>
+          <td>$H = \langle (12) \rangle$</td>
+          <td style="text-align:center;">$\dfrac{6}{2} = 3$</td>
+          <td style="text-align:center; color:#ef4444; font-weight:bold;">✖</td>
+          <td>$(13)H(13)^{-1} = \langle (23) \rangle \neq H$. Phép nhân lớp thất bại.</td>
+        </tr>
+        <tr>
+          <td>$S_n$ ($n \ge 2$)</td>
+          <td>$A_n$ (nhóm thay phiên)</td>
+          <td style="text-align:center;">$\dfrac{n!}{n!/2} = 2$</td>
+          <td style="text-align:center; color:#10b981; font-weight:bold;">✔</td>
+          <td>Chỉ số bằng 2 $\implies$ chuẩn tắc. Thương $S_n/A_n \cong \mathbb{Z}/2\mathbb{Z}$.</td>
+        </tr>
+        <tr>
+          <td>$D_{2n}$ ($n \ge 3$)</td>
+          <td>$\langle r \rangle$ (các phép quay)</td>
+          <td style="text-align:center;">$\dfrac{2n}{n} = 2$</td>
+          <td style="text-align:center; color:#10b981; font-weight:bold;">✔</td>
+          <td>Chỉ số bằng 2 $\implies$ chuẩn tắc. Thương $D_{2n}/\langle r \rangle \cong \mathbb{Z}/2\mathbb{Z}$.</td>
+        </tr>
+        <tr>
+          <td>$D_{2n}$ ($n \ge 3$)</td>
+          <td>$\langle s \rangle$ (đối xứng trục)</td>
+          <td style="text-align:center;">$\dfrac{2n}{2} = n$</td>
+          <td style="text-align:center; color:#ef4444; font-weight:bold;">✖</td>
+          <td>$rsr^{-1} = r^2 s \notin \langle s \rangle$ (khi $n \ge 3$). Không chuẩn tắc.</td>
+        </tr>
+        <tr>
+          <td>$\mathrm{GL}_2(\mathbb{R})$</td>
+          <td>$\mathrm{SL}_2(\mathbb{R})$ ($\det A = 1$)</td>
+          <td style="text-align:center;">$\infty$</td>
+          <td style="text-align:center; color:#10b981; font-weight:bold;">✔</td>
+          <td>$\det(M A M^{-1}) = \det(A) = 1$. Thương $\mathrm{GL}_2(\mathbb{R})/\mathrm{SL}_2(\mathbb{R}) \cong \mathbb{R}^\times$.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- ==================== HẾT CHƯƠNG 4 HOÀN CHỈNH ==================== -->

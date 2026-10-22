@@ -1,0 +1,227 @@
+<!-- ==================== BÀI TẬP CHƯƠNG 8: HOÀN CHỈNH ==================== -->
+<div class="chapter-content" id="tab-ex8">
+  <h2 class="section-title">Hệ thống Bài tập & Lời giải: Chương 8. Đồng cấu Vành & Đặc số</h2>
+  <p>
+    Rèn luyện kĩ năng kiểm tra đồng cấu vành, phân biệt đồng cấu bảo toàn đơn vị với đồng cấu không bảo toàn đơn vị, xác định đặc số $\operatorname{char}(R)$ và vận dụng 4 định lý đẳng cấu vành.
+  </p>
+
+  <!-- BÀI TẬP 8.1 -->
+  <div class="ex-study-card" id="ex-8-1">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-a">Nhóm A · Nhận diện</span>
+        <span class="ex-level-badge">🟢 Cơ bản</span>
+        <span class="ex-title-label">BÀI TẬP 8.1: Phép chiếu Chính tắc & Bảo toàn Đơn vị</span>
+      </div>
+      <button class="ex-status-btn" data-id="8-1" data-status="todo" onclick="toggleExStatus(this, '8-1')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Với $n \ge 1$, xét ánh xạ chiếu chính tắc $\rho_n: \mathbb{Z} \to \mathbb{Z}/n\mathbb{Z}$ xác định bởi $\rho_n(k) = [k]_n$.</p>
+      <p>
+        (a) Kiểm tra trực tiếp hai đẳng thức trong định nghĩa đồng cấu vành: $\rho_n(a + b) = \rho_n(a) + \rho_n(b)$ và $\rho_n(ab) = \rho_n(a)\rho_n(b)$.<br>
+        (b) Tìm hạt nhân $\ker\rho_n$, tập ảnh $\operatorname{im}\rho_n$, và xác định $\rho_n$ có bảo toàn phần tử đơn vị hay không.<br>
+        (c) Xét riêng ý nghĩa kết quả khi $n = 1$.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Khai thác định nghĩa phép cộng và nhân lớp đồng dư trong $\mathbb{Z}/n\mathbb{Z}$.<br>
+        • Hạt nhân của đồng cấu vành là tập các phần tử được gửi về phần tử không $0_S$ của đối miền: $\ker f = \{r \in R \mid f(r) = 0_S\}$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Kiểm tra tiên đề đồng cấu:</b><br>
+        Với mọi $a, b \in \mathbb{Z}$, theo định nghĩa phép toán trên $\mathbb{Z}/n\mathbb{Z}$:<br>
+        • $\rho_n(a + b) = [a + b]_n = [a]_n + [b]_n = \rho_n(a) + \rho_n(b)$<br>
+        • $\rho_n(ab) = [ab]_n = [a]_n[b]_n = \rho_n(a)\rho_n(b)$<br>
+        Vậy $\rho_n$ là một đồng cấu vành.
+      </p>
+      <p><b>(b) Tìm hạt nhân, ảnh và tính bảo toàn đơn vị:</b><br>
+        • Hạt nhân: $\ker\rho_n = \{k \in \mathbb{Z} \mid [k]_n = [0]_n\} = \{k \in \mathbb{Z} \mid n \mid k\} = n\mathbb{Z}$.<br>
+        • Ảnh: Vì mọi lớp $[r]_n \in \mathbb{Z}/n\mathbb{Z}$ đều có nghịch ảnh là $r \in \mathbb{Z}$, nên $\operatorname{im}\rho_n = \mathbb{Z}/n\mathbb{Z}$ (toàn cấu).<br>
+        • Bảo toàn đơn vị: $\rho_n(1) = [1]_n = 1_{\mathbb{Z}/n\mathbb{Z}}$, do đó $\rho_n$ bảo toàn đơn vị.
+      </p>
+      <p><b>(c) Trường hợp biên $n = 1$:</b><br>
+        Khi $n = 1$, vành đích là $\mathbb{Z}/1\mathbb{Z} = \{[0]_1\} = \{[1]_1\}$ (vành không). Khi đó $\ker\rho_1 = 1\mathbb{Z} = \mathbb{Z}$, toàn bộ vành nguồn bị gửi về $0$. Vì trong vành không thì $1 = 0$, điều kiện $\rho_1(1) = 1_{\{0\}}$ vẫn đúng. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Bản chất iđêan:</b> Định lý 8.3 khẳng định hạt nhân của mọi đồng cấu vành luôn là một iđêan hai phía. Ở đây $\ker\rho_n = n\mathbb{Z}$ minh họa trực tiếp rằng mọi iđêan của $\mathbb{Z}$ đều xuất hiện dưới dạng hạt nhân của một phép chiếu.
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 8.4 -->
+  <div class="ex-study-card" id="ex-8-4">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-b">Nhóm B · Vận dụng</span>
+        <span class="ex-level-badge">🟡 Vận dụng</span>
+        <span class="ex-title-label">BÀI TẬP 8.4: Đồng cấu Vành KHÔNG Bảo toàn Đơn vị</span>
+      </div>
+      <button class="ex-status-btn" data-id="8-4" data-status="todo" onclick="toggleExStatus(this, '8-4')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Xét ánh xạ $\delta: \mathbb{Z} \to M_2(\mathbb{Z})$ định bởi công thức $\delta(k) = k E_{11} = \begin{pmatrix} k & 0 \\ 0 & 0 \end{pmatrix}$.</p>
+      <p>
+        (a) Chứng minh $\delta$ là một đơn cấu vành nhưng không phải toàn ánh.<br>
+        (b) Chứng minh $\delta$ <b>không bảo toàn đơn vị</b> đối với vành mẹ $M_2(\mathbb{Z})$.<br>
+        (c) Mô tả vành ảnh $\operatorname{im}\delta$ và giải thích vì sao $\delta(1)$ không khả nghịch trong $M_2(\mathbb{Z})$ dù $1 \in \mathbb{Z}^\times$.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Kiểm tra bảo toàn phép cộng và phép nhân: chú ý tính chất $E_{11}^2 = E_{11}$.<br>
+        • Phần tử đơn vị của $M_2(\mathbb{Z})$ là $I_2$. So sánh $\delta(1)$ với $I_2$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Chứng minh $\delta$ là đơn cấu vành:</b><br>
+        Với mọi $a, b \in \mathbb{Z}$:<br>
+        • $\delta(a + b) = (a + b)E_{11} = a E_{11} + b E_{11} = \delta(a) + \delta(b)$<br>
+        • $\delta(ab) = (ab)E_{11} = (a E_{11})(b E_{11}) = \delta(a)\delta(b)$ (vì $E_{11}^2 = E_{11}$)<br>
+        Do đó $\delta$ là một đồng cấu vành.<br>
+        • Hạt nhân: $\ker\delta = \{k \in \mathbb{Z} \mid k E_{11} = 0\} = \{0\}$. Vì hạt nhân tầm thường nên $\delta$ là <b>đơn ánh</b> (đơn cấu).<br>
+        • Không toàn ánh vì chỉ đạt tới các ma trận có 3 phần tử bằng $0$.
+      </p>
+      <p><b>(b) Tính bảo toàn phần tử đơn vị:</b><br>
+        Đơn vị của vành nguồn $\mathbb{Z}$ là $1$. Ta có:
+        $$\delta(1) = 1 \cdot E_{11} = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$$
+        Trong khi đơn vị của vành đích $M_2(\mathbb{Z})$ là ma trận đơn vị $I_2 = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$.<br>
+        Vì $\delta(1) \neq I_2$, ánh xạ $\delta$ <b>không bảo toàn đơn vị</b>.
+      </p>
+      <p><b>(c) Khảo sát vành ảnh $\operatorname{im}\delta$:</b><br>
+        Vành ảnh là $\operatorname{im}\delta = \mathbb{Z}E_{11} = \left\{ \begin{pmatrix} k & 0 \\ 0 & 0 \end{pmatrix} \;\Big|\; k \in \mathbb{Z} \right\}$.<br>
+        Trong vành con $\operatorname{im}\delta$, ma trận $E_{11} = \delta(1)$ đóng vai trò là phần tử đơn vị riêng.<br>
+        Tuy nhiên, trong vành mẹ $M_2(\mathbb{Z})$, ma trận $\delta(1) = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$ có định thức $\det = 0$, do đó nó <b>không khả nghịch trong $M_2(\mathbb{Z})$</b> (thậm chí là một ước của không vì $\delta(1)E_{22} = 0$). <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Khác biệt cốt lõi giữa Nhóm và Vành:</b> Trong đồng cấu nhóm, $\varphi(e_G) = e_K$ luôn tự động đúng. Nhưng trong đồng cấu vành, $f(1_R) = 1_S$ <i>không tự động thỏa mãn</i> trừ khi có thêm giả thiết (ví dụ $f$ toàn ánh và $S \neq \{0\}$).
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 8.10 -->
+  <div class="ex-study-card" id="ex-8-10">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-b">Nhóm B · Vận dụng</span>
+        <span class="ex-level-badge">🟡 Vận dụng</span>
+        <span class="ex-title-label">BÀI TẬP 8.10: Phép thế Đa thức & Định lý Đẳng cấu Thứ nhất</span>
+      </div>
+      <button class="ex-status-btn" data-id="8-10" data-status="todo" onclick="toggleExStatus(this, '8-10')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Cho $F$ là một trường và $a \in F$. Xét ánh xạ tính giá trị đa thức $\operatorname{ev}_a: F[x] \to F$ xác định bởi $\operatorname{ev}_a(f) = f(a)$.</p>
+      <p>
+        (a) Chứng minh $\operatorname{ev}_a$ là một toàn cấu vành bảo toàn đơn vị.<br>
+        (b) Dùng thuật toán chia đa thức cho $x - a$ để chứng minh $\ker(\operatorname{ev}_a) = (x - a)$.<br>
+        (c) Áp dụng Định lý Đẳng cấu thứ nhất để suy ra $F[x]/(x - a) \cong F$.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Thuật toán chia Euclid trong vành đa thức $F[x]$: chia $f(x)$ cho nhị thức bậc nhất $x - a$. Số dư $r$ có bậc $< 1$, tức là một hằng số $r \in F$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) $\operatorname{ev}_a$ là toàn cấu bảo toàn đơn vị:</b><br>
+        Với mọi $f, g \in F[x]$:<br>
+        • $\operatorname{ev}_a(f + g) = (f + g)(a) = f(a) + g(a) = \operatorname{ev}_a(f) + \operatorname{ev}_a(g)$<br>
+        • $\operatorname{ev}_a(fg) = (fg)(a) = f(a)g(a) = \operatorname{ev}_a(f)\operatorname{ev}_a(g)$<br>
+        • Đa thức đơn vị $1 \in F[x]$ có giá trị tại $a$ bằng $1 \in F$, do đó $\operatorname{ev}_a(1) = 1$.<br>
+        • Với bất kỳ hằng số $c \in F$, xét đa thức hằng $f(x) = c$, ta có $\operatorname{ev}_a(f) = c$. Do đó $\operatorname{ev}_a$ là toàn ánh.
+      </p>
+      <p><b>(b) Tìm hạt nhân $\ker(\operatorname{ev}_a)$:</b><br>
+        Theo định nghĩa, $\ker(\operatorname{ev}_a) = \{f \in F[x] \mid f(a) = 0\}$.<br>
+        • Lấy $f(x) \in F[x]$ tùy ý. Thực hiện phép chia cho $x - a$, tồn tại duy nhất thương $q(x) \in F[x]$ và hằng số dư $r \in F$ sao cho:
+        $$f(x) = (x - a)q(x) + r$$
+        • Thế $x = a$ vào hai vế:
+        $$f(a) = (a - a)q(a) + r = 0 + r = r$$
+        • Do đó, $f(a) = 0 \iff r = 0 \iff f(x) = (x - a)q(x) \iff f(x) \in (x - a)$.<br>
+        Vậy $\ker(\operatorname{ev}_a) = (x - a)$ (iđêan sinh bởi $x - a$).
+      </p>
+      <p><b>(c) Nhận diện vành thương:</b><br>
+        Áp dụng Định lý Đẳng cấu thứ nhất cho vành:
+        $$F[x] / \ker(\operatorname{ev}_a) \;\cong\; \operatorname{im}(\operatorname{ev}_a) \implies F[x] / (x - a) \;\cong\; F \quad \blacksquare$$
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Ý nghĩa sâu sắc:</b> Vì $F$ là một trường, vành thương $F[x]/(x - a) \cong F$ cũng là một trường. Theo định lý đặc trưng thương, điều này chứng minh trực tiếp rằng nhị thức bậc nhất $(x - a)$ luôn là một <b>iđêan cực đại</b> trong vành đa thức $F[x]$.
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 8.24 -->
+  <div class="ex-study-card" id="ex-8-24">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-c">Nhóm C · Chứng minh</span>
+        <span class="ex-level-badge">🟠 Vận dụng cao</span>
+        <span class="ex-title-label">BÀI TẬP 8.24: Đặc số của Miền nguyên và Trường</span>
+      </div>
+      <button class="ex-status-btn" data-id="8-24" data-status="todo" onclick="toggleExStatus(this, '8-24')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Cho $R$ là một miền nguyên (hoặc một trường). Chứng minh đặc số $\operatorname{char}(R)$ chỉ có thể bằng $0$ hoặc là một số nguyên tố $p$.</p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Nếu $\operatorname{char}(R) = n > 0$, thì $n$ là số nguyên dương nhỏ nhất sao cho $n \cdot 1_R = 0_R$.<br>
+        • Giả sử phản chứng $n$ là hợp số $n = ab$ với $1 < a, b < n$, rồi khai triển tích $(a \cdot 1_R)(b \cdot 1_R)$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p>Cho $R$ là một miền nguyên. Khi đó $R \neq \{0\}$ và $1_R \neq 0_R$.</p>
+      <p>
+        • <i>Trường hợp 1:</i> Nếu không tồn tại số nguyên dương $n > 0$ nào thỏa $n \cdot 1_R = 0_R$, thì theo định nghĩa, $\operatorname{char}(R) = 0$. (Ví dụ: $\mathbb{Z}, \mathbb{Q}, \mathbb{R}$ đều có đặc số 0).<br>
+        • <i>Trường hợp 2:</i> Giả sử tồn tại số nguyên dương thỏa mãn và đặt $n = \operatorname{char}(R) > 0$. Khi đó $n \ge 2$ (vì nếu $n = 1$ thì $1 \cdot 1_R = 1_R = 0_R$, mâu thuẫn).<br>
+        Giả sử phản chứng $n$ là hợp số, nghĩa là $n = ab$ với $a, b \in \mathbb{Z}$ và $1 < a, b < n$.<br>
+        Xét tích trong vành $R$:
+        $$(a \cdot 1_R)(b \cdot 1_R) = (ab) \cdot (1_R \cdot 1_R) = n \cdot 1_R = 0_R$$
+        Vì $R$ là một miền nguyên, $R$ không có ước của không. Do đó tích bằng không kéo theo một trong hai thừa số phải bằng không:
+        $$a \cdot 1_R = 0_R \quad \text{hoặc} \quad b \cdot 1_R = 0_R$$
+        Điều này mâu thuẫn trực tiếp với tính nhỏ nhất của $n = \operatorname{char}(R)$ (vì cả $a$ và $b$ đều nguyên dương và nghiêm ngặt nhỏ hơn $n$).<br>
+        Vậy $n$ không thể là hợp số, bắt buộc $n = p$ là một số nguyên tố.<br>
+        <b>Kết luận:</b> Đặc số của một miền nguyên (hoặc trường) chỉ có thể là $0$ hoặc một số nguyên tố $p$. <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Phản ví dụ vành không phải miền nguyên:</b> Vành $\mathbb{Z}/6\mathbb{Z}$ có đặc số là $6$ (hợp số). Kết luận trên bị phá vỡ vì $\mathbb{Z}/6\mathbb{Z}$ có các ước của không ($[2][3] = [0]$). Giả thiết "miền nguyên" là bắt buộc!
+      </p>
+    </div>
+  </div>
+</div>

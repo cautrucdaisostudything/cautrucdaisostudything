@@ -1,0 +1,222 @@
+<!-- ==================== BÀI TẬP CHƯƠNG 9: HOÀN CHỈNH ==================== -->
+<div class="chapter-content" id="tab-ex9">
+  <h2 class="section-title">Hệ thống Bài tập & Lời giải: Chương 9. Trường các thương Frac(R)</h2>
+  <p>
+    Làm chủ tiêu chuẩn trường con, hiểu rõ lý do phép dựng phân số thất bại trên vành có ước của không, và vận dụng Tính chất phổ dụng để nhận diện các trường mở rộng.
+  </p>
+
+  <!-- BÀI TẬP 9.1 -->
+  <div class="ex-study-card" id="ex-9-1">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-a">Nhóm A · Nhận diện</span>
+        <span class="ex-level-badge">🟢 Cơ bản</span>
+        <span class="ex-title-label">BÀI TẬP 9.1: Phân loại Trường con và Vành con</span>
+      </div>
+      <button class="ex-status-btn" data-id="9-1" data-status="todo" onclick="toggleExStatus(this, '9-1')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Trong mỗi bao hàm sau, hãy xác định tập nhỏ hơn là trường con, là vành con nhưng không là trường con, hay không là vành con dưới các phép toán kế thừa:</p>
+      <p>
+        (a) $\mathbb{Q} \subseteq \mathbb{R}$;<br>
+        (b) $\mathbb{R} \subseteq \mathbb{C}$;<br>
+        (c) $\mathbb{Z} \subseteq \mathbb{Q}$;<br>
+        (d) $2\mathbb{Z} \subseteq \mathbb{Q}$.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Trường con: phải tự thân là một trường (chứa 1, đóng với phép trừ và phép chia cho phần tử khác không).<br>
+        • Vành con: đóng với trừ và nhân.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) $\mathbb{Q} \subseteq \mathbb{R}$:</b> $\mathbb{Q}$ chứa $1$, đóng với phép trừ và phép chia cho số khác không. $\implies$ Là <b>trường con</b> của $\mathbb{R}$.</p>
+      <p><b>(b) $\mathbb{R} \subseteq \mathbb{C}$:</b> $\mathbb{R}$ chứa $1$, là một trường dưới các phép toán của $\mathbb{C}$. $\implies$ Là <b>trường con</b> của $\mathbb{C}$.</p>
+      <p><b>(c) $\mathbb{Z} \subseteq \mathbb{Q}$:</b> $\mathbb{Z}$ đóng với phép trừ và nhân, chứa $1_{\mathbb{Q}} = 1$ nên là vành con có đơn vị. Tuy nhiên số $2 \in \mathbb{Z}$ không có nghịch đảo trong $\mathbb{Z}$ ($1/2 \notin \mathbb{Z}$). $\implies$ Là <b>vành con nhưng không là trường con</b>.</p>
+      <p><b>(d) $2\mathbb{Z} \subseteq \mathbb{Q}$:</b> $2\mathbb{Z}$ đóng với phép trừ và nhân nên là một vành con. Nó không chứa đơn vị $1$ của $\mathbb{Q}$ và không có nghịch đảo. $\implies$ Là <b>vành con không có đơn vị, không là trường con</b>. <span class="qed">∎</span></p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Quy ước trường con:</b> Khác với vành con (có thể có đơn vị riêng), một trường con $F \subseteq K$ bắt buộc phải chứa cùng phần tử đơn vị với trường mẹ: $1_F = 1_K$.
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 9.2 -->
+  <div class="ex-study-card" id="ex-9-2">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-a">Nhóm A · Tính toán</span>
+        <span class="ex-level-badge">🟢 Cơ bản</span>
+        <span class="ex-title-label">BÀI TẬP 9.2: Tiêu chuẩn Trường con & Số hữu tỉ Gauss Q(i)</span>
+      </div>
+      <button class="ex-status-btn" data-id="9-2" data-status="todo" onclick="toggleExStatus(this, '9-2')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Đặt $\mathbb{Q}(i) = \{a + bi \mid a, b \in \mathbb{Q}\} \subseteq \mathbb{C}$.</p>
+      <p>
+        (a) Dùng tiêu chuẩn trường con chứng minh $\mathbb{Q}(i)$ là một trường con của $\mathbb{C}$.<br>
+        (b) Với $a + bi \neq 0$, hãy viết nghịch đảo của nó dưới dạng $u + vi$ với $u, v \in \mathbb{Q}$.<br>
+        (c) Tính cụ thể nghịch đảo của số phức $z = 3 - 4i$.
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Tiêu chuẩn trường con: $1 \in F$, với mọi $x, y \in F \implies x - y \in F$ và với $y \neq 0 \implies xy^{-1} \in F$.<br>
+        • Nghịch đảo trong $\mathbb{C}$: Nhân liên hợp cả tử và mẫu với $a - bi$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Chứng minh $\mathbb{Q}(i)$ là trường con của $\mathbb{C}$:</b><br>
+        • $1 = 1 + 0i \in \mathbb{Q}(i)$ (vì $1, 0 \in \mathbb{Q}$).<br>
+        • <i>Đóng với phép trừ:</i> Lấy $z_1 = a + bi, z_2 = c + di \in \mathbb{Q}(i)$ ($a, b, c, d \in \mathbb{Q}$):
+        $$z_1 - z_2 = (a - c) + (b - d)i$$
+        Vì $a - c, b - d \in \mathbb{Q}$, nên $z_1 - z_2 \in \mathbb{Q}(i)$.<br>
+        • <i>Đóng với nghịch đảo và chia:</i> Với $z_2 = c + di \neq 0 \implies c^2 + d^2 > 0$:
+        $$z_2^{-1} = \frac{1}{c + di} = \frac{c - di}{c^2 + d^2} = \frac{c}{c^2 + d^2} - \frac{d}{c^2 + d^2}i$$
+        Vì $c, d \in \mathbb{Q} \implies \frac{c}{c^2+d^2}, \frac{-d}{c^2+d^2} \in \mathbb{Q}$, do đó $z_2^{-1} \in \mathbb{Q}(i)$.<br>
+        Tích của hai phần tử trong $\mathbb{Q}(i)$ cũng dễ thấy thuộc $\mathbb{Q}(i)$.<br>
+        Theo Tiêu chuẩn trường con, $\mathbb{Q}(i)$ là trường con của $\mathbb{C}$.
+      </p>
+      <p><b>(b) Công thức nghịch đảo tổng quát:</b><br>
+        Với $a + bi \neq 0$:
+        $$(a + bi)^{-1} = \frac{a}{a^2 + b^2} - \frac{b}{a^2 + b^2}i$$
+        với $u = \frac{a}{a^2 + b^2} \in \mathbb{Q}$ và $v = \frac{-b}{a^2 + b^2} \in \mathbb{Q}$.
+      </p>
+      <p><b>(c) Tính nghịch đảo của $z = 3 - 4i$:</b><br>
+        Ở đây $a = 3, b = -4 \implies a^2 + b^2 = 3^2 + (-4)^2 = 25$.<br>
+        $$(3 - 4i)^{-1} = \frac{3}{25} + \frac{4}{25}i \quad \blacksquare$$
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Nhận xét cấu trúc:</b> Trường $\mathbb{Q}(i)$ được gọi là <i>trường các số hữu tỉ Gauss</i>. Đây chính là trường các thương của vành số nguyên Gauss $\mathbb{Z}[i]$: $\operatorname{Frac}(\mathbb{Z}[i]) \cong \mathbb{Q}(i)$.
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 9.5 -->
+  <div class="ex-study-card" id="ex-9-5">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-b">Nhóm B · Vận dụng</span>
+        <span class="ex-level-badge">🟡 Vận dụng</span>
+        <span class="ex-title-label">BÀI TẬP 9.5: Tại sao Phép dựng Phân số Thất bại khi có Ước của 0?</span>
+      </div>
+      <button class="ex-status-btn" data-id="9-5" data-status="todo" onclick="toggleExStatus(this, '9-5')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Trong vành $R = \mathbb{Z}/6\mathbb{Z}$, xét quan hệ nhân chéo hình thức trên $P = R \times (R \setminus \{0\})$:</p>
+      <p>$$(a, b) \sim (c, d) \iff ad = bc$$</p>
+      <p>Chứng minh rằng vì $R$ có ước của không, quan hệ này <b>không có tính bắc cầu</b>, do đó không phải là một quan hệ tương đương.</p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • Khai thác cặp ước của không $[2][3] = [0]$ trong $\mathbb{Z}/6\mathbb{Z}$.<br>
+        • Tìm ba cặp $(a, b), (c, d), (u, v)$ sao cho $(a, b) \sim (c, d)$ và $(c, d) \sim (u, v)$ nhưng $(a, b) \not\sim (u, v)$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p>Trong vành $R = \mathbb{Z}/6\mathbb{Z}$, xét ba cặp phần tử thuộc $P = R \times (R \setminus \{[0]\})$:<br>
+        • Cặp 1: $X = ([0], [2])$<br>
+        • Cặp 2: $Y = ([0], [3])$<br>
+        • Cặp 3: $Z = ([2], [3])$
+      </p>
+      <p>
+        • <i>Kiểm tra $X \sim Y$:</i> Nhân chéo: $[0] \cdot [3] = [0]$ và $[2] \cdot [0] = [0]$. Vì $[0] = [0]$ nên $X \sim Y$.<br>
+        • <i>Kiểm tra $Y \sim Z$:</i> Nhân chéo: $[0] \cdot [3] = [0]$ và $[3] \cdot [2] = [6] = [0]$. Vì $[0] = [0]$ nên $Y \sim Z$.<br>
+        • <i>Kiểm tra $X \sim Z$:</i> Nhân chéo: vế trái là $[0] \cdot [3] = [0]$; vế phải là $[2] \cdot [2] = [4] \neq [0]$.<br>
+        Vì $[0] \neq [4]$ trong $\mathbb{Z}/6\mathbb{Z}$, ta có $X \not\sim Z$!
+      </p>
+      <p>
+        <b>Kết luận:</b> $X \sim Y$ và $Y \sim Z$ nhưng $X \not\sim Z$. Quan hệ nhân chéo vi phạm tính bắc cầu.<br>
+        Do đó, phép dựng trường các thương bằng các cặp phân số <b>hoàn toàn sụp đổ nếu vành có ước của không</b>. Giả thiết "miền nguyên" là điều kiện tiên quyết bắt buộc! <span class="qed">∎</span>
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Cơ chế toán học:</b> Khi chứng minh tính bắc cầu trên miền nguyên, từ $ad = bc$ và $cf = de$ ta nhân chéo được $a d f = b c f = b d e \implies d(af - be) = 0$. Vì $d \neq 0$ và miền nguyên không có ước của không, ta mới triệt tiêu được $d$ để suy ra $af = be$. Khi có ước của không, bước triệt tiêu này thất bại hoàn toàn!
+      </p>
+    </div>
+  </div>
+
+  <!-- BÀI TẬP 9.15 -->
+  <div class="ex-study-card" id="ex-9-15">
+    <div class="ex-header-bar">
+      <div class="ex-meta-tags">
+        <span class="ex-group-badge badge-group-c">Nhóm C · Tổng hợp</span>
+        <span class="ex-level-badge">🟠 Vận dụng cao</span>
+        <span class="ex-title-label">BÀI TẬP 9.15: Nhận diện Frac(Z[√2]) qua Tính chất Phổ dụng</span>
+      </div>
+      <button class="ex-status-btn" data-id="9-15" data-status="todo" onclick="toggleExStatus(this, '9-15')">
+        <span class="status-icon">⚪</span> <span class="status-text">Chưa làm</span>
+      </button>
+    </div>
+    <div class="ex-problem-statement">
+      <p>Xét vành con $R = \mathbb{Z}[\sqrt{2}] = \{a + b\sqrt{2} \mid a, b \in \mathbb{Z}\} \subset \mathbb{R}$.</p>
+      <p>
+        (a) Chứng minh $R$ là một miền nguyên.<br>
+        (b) Dùng Tính chất phổ dụng chứng minh trường các thương $\operatorname{Frac}(R)$ đẳng cấu với trường số:
+        $$\mathbb{Q}(\sqrt{2}) = \{u + v\sqrt{2} \mid u, v \in \mathbb{Q}\}$$
+      </p>
+    </div>
+    <div class="inner-tabs-nav">
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'hint')">💡 Gợi ý tư duy</button>
+      <button class="inner-tab-btn active" onclick="switchInnerTab(this, 'sol')">📘 Lời giải</button>
+      <button class="inner-tab-btn" onclick="switchInnerTab(this, 'traps')">⚠️ Bẫy sai lầm & Bình luận</button>
+    </div>
+    <div class="inner-tab-pane pane-hint" data-pane="hint">
+      <p>
+        • $\mathbb{Z}[\sqrt{2}]$ là vành con chứa 1 của trường $\mathbb{R}$, do đó kế thừa tính không có ước của không.<br>
+        • Tính chất phổ dụng: Đơn cấu nhúng $i: \mathbb{Z}[\sqrt{2}] \hookrightarrow \mathbb{Q}(\sqrt{2})$ cảm sinh duy nhất một đẳng cấu $\tilde{i}: \operatorname{Frac}(\mathbb{Z}[\sqrt{2}]) \to \mathbb{Q}(\sqrt{2})$.
+      </p>
+    </div>
+    <div class="inner-tab-pane active" data-pane="sol">
+      <p><b>(a) Chứng minh $\mathbb{Z}[\sqrt{2}]$ là miền nguyên:</b><br>
+        • $1 = 1 + 0\sqrt{2} \in \mathbb{Z}[\sqrt{2}]$, và hiển nhiên tập này đóng với phép trừ và phép nhân số thực.<br>
+        • Vì $\mathbb{Z}[\sqrt{2}] \subset \mathbb{R}$ và $\mathbb{R}$ là một trường (không có ước của không), nên $\mathbb{Z}[\sqrt{2}]$ là một vành giao hoán có đơn vị không có ước của không.<br>
+        Do đó $\mathbb{Z}[\sqrt{2}]$ là một <b>miền nguyên</b>.
+      </p>
+      <p><b>(b) Nhận diện $\operatorname{Frac}(\mathbb{Z}[\sqrt{2}]) \cong \mathbb{Q}(\sqrt{2})$:</b><br>
+        • Xét phép nhúng chính tắc $i: \mathbb{Z}[\sqrt{2}] \hookrightarrow \mathbb{Q}(\sqrt{2})$ cho bởi $i(x) = x$. Đây là một đơn cấu vành bảo toàn đơn vị.<br>
+        • Theo <i>Tính chất phổ dụng của trường các thương</i>, tồn tại duy nhất một đơn cấu vành:
+        $$\tilde{i}: \operatorname{Frac}(\mathbb{Z}[\sqrt{2}]) \longrightarrow \mathbb{Q}(\sqrt{2}), \quad \tilde{i}\left(\frac{x}{y}\right) = x y^{-1} = \frac{x}{y}$$
+        • Ta chứng minh $\tilde{i}$ là toàn ánh: Mọi phần tử của $\mathbb{Q}(\sqrt{2})$ có dạng $u + v\sqrt{2}$ với $u = \frac{a}{c}, v = \frac{b}{d}$ ($a, b, c, d \in \mathbb{Z}, cd \neq 0$). Quy đồng mẫu số chung:
+        $$u + v\sqrt{2} = \frac{ad + bc\sqrt{2}}{cd}$$
+        Đặt $x = ad + bc\sqrt{2} \in \mathbb{Z}[\sqrt{2}]$ và $y = cd \in \mathbb{Z}[\sqrt{2}]$ (với $y \neq 0$).<br>
+        Khi đó $\tilde{i}\left(\frac{x}{y}\right) = \frac{x}{y} = u + v\sqrt{2}$. Do đó $\tilde{i}$ là toàn ánh.<br>
+        • Đơn ánh kết hợp toàn ánh suy ra $\tilde{i}$ là một <b>đẳng cấu trường</b>:
+        $$\operatorname{Frac}(\mathbb{Z}[\sqrt{2}]) \;\cong\; \mathbb{Q}(\sqrt{2}) \quad \blacksquare$$
+      </p>
+    </div>
+    <div class="inner-tab-pane pane-traps" data-pane="traps">
+      <p>
+        <b>⚠️ Sức mạnh của Tính chất phổ dụng:</b> Thay vì phải đi kiểm tra từng tiên đề trường trên các lớp cặp phân số tương đương, ta chỉ cần chỉ ra trường đích là trường nhỏ nhất chứa miền nguyên thì nó tự động đẳng cấu với $\operatorname{Frac}(R)$!
+      </p>
+    </div>
+  </div>
+</div>
+<!-- ==================== HẾT BÀI TẬP CHƯƠNG 9 ==================== -->
+</div> <!-- Đóng tab-ex9 -->
