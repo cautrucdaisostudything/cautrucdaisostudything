@@ -22910,7 +22910,6 @@ if (btnResetAll) {
 <script>
 
 (function initAcademicSupportBatch1() {
-  const PDF_URL = "https://drive.google.com/file/d/1P8LiIMmnJVgh3m5Tosscmcfo76imEpq8/view?usp=sharing";
 
   // Dữ liệu 10 Khuôn Mẫu Chứng Minh Chuẩn Mực (Trang 11 & Phụ lục trang 161–162 Giáo trình)
   const PROOF_TEMPLATES = [
@@ -23036,40 +23035,7 @@ if (btnResetAll) {
     }
   ];
 
-  // Chỉ mục số trang sách PDF chính xác theo Mục lục Giáo trình (Tr. v–vii)
-  const CHAPTER_PAGES = {
-    "tab-c0": { theory: "Chương 0: Tr. 1–14", sol: "Gợi ý: Tr. 163" },
-    "tab-c1": { theory: "Chương 1: Tr. 16–34", sol: "Gợi ý: Tr. 164–166" },
-    "tab-c2": { theory: "Chương 2: Tr. 35–52", sol: "Gợi ý: Tr. 167–170" },
-    "tab-c3": { theory: "Chương 3: Tr. 53–68", sol: "Gợi ý: Tr. 171–173" },
-    "tab-c4": { theory: "Chương 4: Tr. 69–80", sol: "Gợi ý: Tr. 174–176" },
-    "tab-c5": { theory: "Chương 5: Tr. 81–94", sol: "Gợi ý: Tr. 177–180" },
-    "tab-c6": { theory: "Chương 6: Tr. 96–110", sol: "Gợi ý: Tr. 181–182" },
-    "tab-c7": { theory: "Chương 7: Tr. 111–126", sol: "Gợi ý: Tr. 183–187" },
-    "tab-c8": { theory: "Chương 8: Tr. 127–142", sol: "Gợi ý: Tr. 188–192" },
-    "tab-c9": { theory: "Chương 9: Tr. 143–160", sol: "Gợi ý: Tr. 193–198" },
-    "tab-compare": { theory: "Phụ lục & Bảng tra cứu: Tr. 161–162, 199–209", sol: "" }
-  };
-
   function runAcademicBatch1() {
-    // ====================================================================
-    // MỤC 4: GẮN HUY HIỆU SỐ TRANG SÁCH PDF CHO TOÀN BỘ CHƯƠNG
-    // ====================================================================
-    Object.keys(CHAPTER_PAGES).forEach(chId => {
-      const chEl = document.getElementById(chId);
-      const h2 = chEl?.querySelector("h2.section-title");
-      if (h2 && !h2.querySelector(".chapter-page-badge")) {
-        const info = CHAPTER_PAGES[chId];
-        const badge = document.createElement("a");
-        badge.className = "chapter-page-badge";
-        badge.href = PDF_URL;
-        badge.target = "_blank";
-        badge.rel = "noopener noreferrer";
-        badge.title = "Mở đối chiếu trang tương ứng trong Giáo trình PDF của TS. Huỳnh Việt Khánh";
-        badge.innerHTML = `📄 ${info.theory}${info.sol ? " · " + info.sol : ""} ↗`;
-        h2.appendChild(badge);
-      }
-    });
 
     // ====================================================================
     // MỤC 2: VỞ NHÁP LATEX TRỰC TIẾP TRÊN TỪNG BÀI TẬP & CHẾ ĐỘ TỰ LUYỆN
