@@ -586,6 +586,9 @@ function selectOption(optIdx) {
 
       ${showImmediate ? checkAnswer(qItem, chosen) : ""}
 
+      <div class="smart-q-footer">
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="lab-btn" id="sePrevBtn" ${idx === 0 ? "disabled" : ""}>← Câu trước</button>
           <button type="button" class="lab-btn primary" id="seNextBtn" ${idx === questions.length - 1 ? "disabled" : ""}>Câu tiếp theo →</button>
         </div>
         <button type="button" class="lab-btn" id="seOpenSourceBtn" title="Nhảy tới chương lý thuyết tương ứng trong Giáo trình">
