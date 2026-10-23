@@ -12,6 +12,205 @@
     { ch: 9, part: "part-3", tabId: "tab-c9", name: "Ch.9 · Trường con & Trường các thương" }
   ];
 
+  // ====================================================================
+  // NGÂN HÀNG MỞ RỘNG CHƯƠNG 0 (10 CÂU: c0_q01 -> c0_q10)
+  // ====================================================================
+  const questionsChapter0 = [
+    {
+      id: "c0_q01",
+      chapter: 0,
+      topic: "Ánh xạ, tập ảnh và nghịch ảnh (Bài tập 0.1)",
+      question: "Cho ánh xạ $f: \\mathbb{Z} \\to \\mathbb{Z}$ xác định bởi $f(x) = x^2 - 1$. Với $A = \\{-2, -1, 0, 1, 2\\}$ và $B = \\{0, 3, 8\\}$, khẳng định nào sau đây là ĐÚNG?",
+      options: {
+        A: "$f(A) = \\{-1, 0, 3\\}$, $f^{-1}(B) = \\{\\pm 1, \\pm 2, \\pm 3\\}$ và $f^{-1}(\\{-2\\}) = \\emptyset$.",
+        B: "$f^{-1}(B)$ không tồn tại vì $f$ không phải là song ánh trên $\\mathbb{Z}$.",
+        C: "$f(A) = \\{3, 0, -1, 0, 3\\}$ gồm 5 phần tử phân biệt và $f$ là đơn ánh.",
+        D: "$f$ là toàn ánh trên $\\mathbb{Z}$ vì mọi số nguyên đều có dạng $x^2 - 1$."
+      },
+      correct: "A",
+      explanations: {
+        A: "Chính xác! Lời giải: Ta có $f(\\pm 2)=3, f(\\pm 1)=0, f(0)=-1$ nên $f(A)=\\{-1,0,3\\}$. Giải $x^2-1\\in\\{0,3,8\\}\\iff x^2\\in\\{1,4,9\\}\\iff x\\in\\{\\pm 1,\\pm 2,\\pm 3\\}$. Phương trình $x^2-1=-2\\iff x^2=-1$ vô nghiệm nguyên nên $f^{-1}(\\{-2\\})=\\emptyset$.",
+        B: "Sai vì: Nghịch ảnh $f^{-1}(B) = \\{x \\in X \\mid f(x) \\in B\\}$ luôn xác định với mọi ánh xạ mà không đòi hỏi ánh xạ ngược $f^{-1}$ tồn tại.",
+        C: "Sai vì: Tập hợp không lặp lại các phần tử trùng nhau, và $f(1)=f(-1)=0$ nên $f$ không đơn ánh.",
+        D: "Sai vì: $f(x) = x^2 - 1 \\ge -1$ với mọi $x \\in \\mathbb{Z}$, nên các số nguyên nhỏ hơn $-1$ (như $-2$) không thuộc tập ảnh $\\operatorname{im} f$."
+      }
+    },
+    {
+      id: "c0_q02",
+      chapter: 0,
+      topic: "Hợp thành ánh xạ theo quy ước phải sang trái",
+      question: "Trên $\\mathbb{Z}$, xét hai ánh xạ $f(x) = x^2$ và $g(x) = x + 1$. Theo quy ước đọc hợp thành từ phải sang trái của Giáo trình, giá trị của $(g \\circ f)(2)$ và $(f \\circ g)(2)$ lần lượt là:",
+      options: {
+        A: "$(g \\circ f)(2) = 9$ và $(f \\circ g)(2) = 5$.",
+        B: "$(g \\circ f)(2) = 5$ và $(f \\circ g)(2) = 9$.",
+        C: "$(g \\circ f)(2) = (f \\circ g)(2) = 5$ vì hợp thành ánh xạ luôn giao hoán.",
+        D: "$(g \\circ f)(2) = 6$ và $(f \\circ g)(2) = 6$."
+      },
+      correct: "B",
+      explanations: {
+        A: "Sai vì: Đã áp dụng ngược quy ước (thực hiện ánh xạ bên trái trước thay vì bên phải trước).",
+        B: "Chính xác! Lời giải: Theo quy ước phải sang trái, $(g \\circ f)(2) = g(f(2)) = g(4) = 5$; còn $(f \\circ g)(2) = f(g(2)) = f(3) = 3^2 = 9$.",
+        C: "Sai vì: Hợp thành ánh xạ có tính kết hợp nhưng nói chung không giao hoán; ở đây $5 \\neq 9$.",
+        D: "Sai vì: $f(x)=x^2$ là phép bình phương chứ không phải nhân đôi."
+      }
+    },
+    {
+      id: "c0_q03",
+      chapter: 0,
+      topic: "Phép chia Euclid với số bị chia âm (Định nghĩa 0.2)",
+      question: "Khi chia số nguyên âm $a = -27$ cho $b = 4$ theo đúng quy ước phép chia Euclid $a = bq + r$ ($0 \\le r < b$), cặp thương và số dư $(q, r)$ duy nhất là:",
+      options: {
+        A: "$q = -6$ và $r = -3$.",
+        B: "$q = -6$ và $r = 3$.",
+        C: "$q = -7$ và $r = 1$.",
+        D: "$q = 7$ và $r = -1$."
+      },
+      correct: "C",
+      explanations: {
+        A: "Sai vì: Dù $-27 = 4(-6) + (-3)$, số dư $r = -3 < 0$ vi phạm điều kiện bắt buộc $0 \\le r < 4$.",
+        B: "Sai vì: $4(-6) + 3 = -21 \\neq -27$.",
+        C: "Chính xác! Lời giải: Để số dư không âm và nhỏ hơn $4$, ta lùi thương xuống $q = -7$, khi đó $-27 = 4 \\cdot (-7) + 1$ với $0 \\le 1 < 4$.",
+        D: "Sai vì: Thương $q=7$ làm $4\\cdot 7 + (-1) = 27 \\neq -27$ và số dư âm không hợp lệ."
+      }
+    },
+    {
+      id: "c0_q04",
+      chapter: 0,
+      topic: "Thuật toán Euclid và Đồng nhất thức Bézout (Định lý 0.3)",
+      question: "Áp dụng thuật toán Euclid cho hai số $252$ và $105$, ước chung lớn nhất $d = \\gcd(252, 105)$ và một cặp hệ số nguyên $(u, v)$ thỏa mãn $252u + 105v = d$ là:",
+      options: {
+        A: "$d = 21$ với $u = -2, v = 5$.",
+        B: "$d = 21$ với $u = 2, v = -5$.",
+        C: "$d = 7$ với $u = -2, v = 5$.",
+        D: "$d = 42$ với $u = 1, v = -2$."
+      },
+      correct: "A",
+      explanations: {
+        A: "Chính xác! Lời giải: Chia Euclid: $252 = 2\\cdot 105 + 42$ và $105 = 2\\cdot 42 + 21$, $42 = 2\\cdot 21 + 0 \\implies d = 21$. Truy ngược: $21 = 105 - 2(252 - 2\\cdot 105) = 252(-2) + 105(5)$.",
+        B: "Sai vì: Với $u = 2, v = -5$ thì $252(2) + 105(-5) = 504 - 525 = -21 \\neq 21$.",
+        C: "Sai vì: $\\gcd(252, 105) = 21$, không phải $7$.",
+        D: "Sai vì: $42$ là số dư ở bước đầu nhưng không phải ước của $105$."
+      }
+    },
+    {
+      id: "c0_q05",
+      chapter: 0,
+      topic: "Hàm phi Euler trên tập thặng dư chuẩn (Định nghĩa 0.4)",
+      question: "Trong tập thặng dư chuẩn $R_{12} = \\{0, 1, 2, \\dots, 11\\}$, tập hợp tất cả các phần tử nguyên tố cùng nhau với $12$ và giá trị $\\varphi(12)$ là:",
+      options: {
+        A: "$\\{1, 3, 5, 7, 9, 11\\}$ và $\\varphi(12) = 6$.",
+        B: "$\\{1, 5, 7, 11\\}$ và $\\varphi(12) = 4$.",
+        C: "$\\{0, 1, 5, 7, 11\\}$ và $\\varphi(12) = 5$.",
+        D: "$\\{2, 3, 4, 6\\}$ và $\\varphi(12) = 4$."
+      },
+      correct: "B",
+      explanations: {
+        A: "Sai vì: $3$ và $9$ chia hết cho $3$ nên $\\gcd(3,12)=\\gcd(9,12)=3 > 1$.",
+        B: "Chính xác! Lời giải: Loại các số chia hết cho $2$ hoặc $3$ trong $R_{12}$, chỉ còn $4$ phần tử $\\{1, 5, 7, 11\\}$ thỏa $\\gcd(a, 12) = 1$, do đó $\\varphi(12) = 4$.",
+        C: "Sai vì: $\\gcd(0, 12) = 12 \\neq 1$, nên $0$ không nguyên tố cùng nhau với $12$ (chỉ có quy ước biên $\\gcd(0,1)=1$ khi $n=1$).",
+        D: "Sai vì: $\\{2, 3, 4, 6\\}$ là các ước của $12$ chứ không nguyên tố cùng nhau với $12$."
+      }
+    },
+    {
+      id: "c0_q06",
+      chapter: 0,
+      topic: "Phản ví dụ quan hệ tương đương (Phản ví dụ 0.9)",
+      question: "Trên $\\mathbb{Z}$, xét quan hệ $a \\, R \\, b \\iff |a - b| \\le 1$. Khẳng định nào mô tả chính xác các tính chất của quan hệ $R$?",
+      options: {
+        A: "$R$ là một quan hệ tương đương và chia $\\mathbb{Z}$ thành các lớp rời nhau.",
+        B: "$R$ có tính phản xạ và bắc cầu nhưng không có tính đối xứng.",
+        C: "$R$ có tính phản xạ và đối xứng, nhưng vi phạm tính bắc cầu vì $0 \\, R \\, 1$ và $1 \\, R \\, 2$ mà $0 \\not R \\, 2$.",
+        D: "$R$ không có tính phản xạ vì $|a - a| = 0$."
+      },
+      correct: "C",
+      explanations: {
+        A: "Sai vì: $R$ không thỏa mãn tính bắc cầu nên không phải là quan hệ tương đương.",
+        B: "Sai vì: $|a - b| = |b - a|$ nên $R$ hoàn toàn đối xứng; tính chất bị gãy là bắc cầu.",
+        C: "Chính xác! Lời giải: $|a-a|=0\\le 1$ (phản xạ), $|a-b|=|b-a|$ (đối xứng). Nhưng $|0-1|=1\\le 1$ và $|1-2|=1\\le 1$ trong khi $|0-2|=2 > 1$, nên $R$ không bắc cầu.",
+        D: "Sai vì: $0 \\le 1$ là mệnh đề đúng nên mọi $a \\in \\mathbb{Z}$ đều thỏa $a \\, R \\, a$."
+      }
+    },
+    {
+      id: "c0_q07",
+      chapter: 0,
+      topic: "Ba điều kiện tương đương của lớp tương đương (Định lý 0.6 & Bài tập 0.16)",
+      question: "Cho $\\sim$ là một quan hệ tương đương trên tập $X$. Với mọi $x, y \\in X$, phát biểu nào sau đây là ĐÚNG về hai lớp tương đương $[x]$ và $[y]$?",
+      options: {
+        A: "Nếu $[x] \\cap [y] \\neq \\emptyset$ thì $[x] = [y]$ (hai lớp chỉ cần có chung 1 phần tử là trùng khít hoàn toàn).",
+        B: "Hai lớp $[x]$ và $[y]$ có thể giao nhau tại đúng 1 phần tử mà vẫn khác nhau.",
+        C: "$[x] = [y]$ khi và chỉ khi $x = y$.",
+        D: "Phần tử $x$ không thuộc lớp $[x]$."
+      },
+      correct: "A",
+      explanations: {
+        A: "Chính xác! Lời giải: Theo Định lý 0.6 và Bài tập 0.16, $[x] = [y] \\iff x \\sim y \\iff [x] \\cap [y] \\neq \\emptyset$. Nếu $z \\in [x] \\cap [y]$ thì $x \\sim z$ và $y \\sim z \\implies x \\sim y$ (nhờ đối xứng và bắc cầu), kéo theo $[x] = [y]$.",
+        B: "Sai vì: Các lớp tương đương tạo thành một phân hoạch nên hai lớp phân biệt bắt buộc phải rời nhau ($[x] \\cap [y] = \\emptyset$).",
+        C: "Sai vì: Hai đại diện khác nhau nhưng tương đương nhau ($x \\sim y, x \\neq y$) vẫn sinh ra cùng một lớp, ví dụ $[1]_3 = [4]_3$.",
+        D: "Sai vì: Nhờ tính phản xạ $x \\sim x$, mọi phần tử $x$ luôn thuộc chính lớp $[x]$ của nó."
+      }
+    },
+    {
+      id: "c0_q08",
+      chapter: 0,
+      topic: "Ánh xạ nhân môđulô và điều kiện khả nghịch (Bài tập 0.13)",
+      question: "Cho $m \\in \\mathbb{Z}, n \\ge 1$ và ánh xạ $T_m: \\mathbb{Z}/n\\mathbb{Z} \\to \\mathbb{Z}/n\\mathbb{Z}$ định bởi $T_m([a]_n) = [ma]_n$. Điều kiện cần và đủ để $T_m$ là một song ánh là:",
+      options: {
+        A: "$m$ là một số nguyên tố.",
+        B: "$\\gcd(m, n) = 1$.",
+        C: "$m$ là ước của $n$ ($m \\mid n$).",
+        D: "$m \\ge n$."
+      },
+      correct: "B",
+      explanations: {
+        A: "Sai vì: Chẳng hạn với $n=6, m=3$ là số nguyên tố nhưng $\\gcd(3,6)=3>1$, khi đó $T_3([2]_6)=[0]_6=T_3([0]_6)$ nên không đơn ánh.",
+        B: "Chính xác! Lời giải: Trên tập hữu hạn $\\mathbb{Z}/n\\mathbb{Z}$, $T_m$ đơn ánh $\\iff T_m$ toàn ánh $\\iff \\exists [a]_n: [ma]_n = [1]_n \\iff ma + kn = 1 \\iff \\gcd(m, n) = 1$ (theo Bézout).",
+        C: "Sai vì: Nếu $m \\mid n$ và $m > 1$ thì $T_m([n/m]_n) = [n]_n = [0]_n = T_m([0]_n)$, ánh xạ không đơn ánh.",
+        D: "Sai vì: Độ lớn của $m$ không quyết định tính song ánh; chỉ quan hệ nguyên tố cùng nhau $\\gcd(m,n)=1$ mới quyết định."
+      }
+    },
+    {
+      id: "c0_q09",
+      chapter: 0,
+      topic: "Phép toán hai biến thất bại trên tập thương (Phản ví dụ 0.16)",
+      question: "Xét quy tắc $\\Phi: (\\mathbb{Z}/4\\mathbb{Z}) \\times (\\mathbb{Z}/4\\mathbb{Z}) \\to \\mathbb{Z}/6\\mathbb{Z}$ cho bởi $\\Phi([a]_4, [b]_4) = [a + b]_6$. Vì sao $\\Phi$ KHÔNG xác định tốt?",
+      options: {
+        A: "Vì phép cộng số nguyên không có tính giao hoán.",
+        B: "Vì $([0]_4, [0]_4) = ([4]_4, [0]_4)$ trong miền xác định nhưng $\\Phi([0]_4, [0]_4) = [0]_6 \\neq [4]_6 = \\Phi([4]_4, [0]_4)$.",
+        C: "Vì $\\mathbb{Z}/6\\mathbb{Z}$ có nhiều phần tử hơn $\\mathbb{Z}/4\\mathbb{Z}$ nên không thể có bất kỳ ánh xạ nào giữa chúng.",
+        D: "Vì $4$ và $6$ đều là các số chẵn."
+      },
+      correct: "B",
+      explanations: {
+        A: "Sai vì: Phép cộng số nguyên luôn giao hoán; lỗi nằm ở việc giá trị lớp đầu ra phụ thuộc vào đại diện đầu vào.",
+        B: "Chính xác! Lời giải: Trong $\\mathbb{Z}/4\\mathbb{Z}$, $0$ và $4$ đại diện cho cùng một lớp ($[0]_4 = [4]_4$), nhưng khi thay vào công thức đầu ra modulo $6$ lại cho $[0]_6 \\neq [4]_6$. Vậy $\\Phi$ phụ thuộc đại diện và không xác định tốt.",
+        C: "Sai vì: Giữa hai tập bất kỳ khác rỗng luôn tồn tại ánh xạ (ví dụ ánh xạ hằng); lỗi ở đây là dùng trực tiếp đại diện mà không tương thích môđun.",
+        D: "Sai vì: Tính chẵn lẻ không phải nguyên nhân; nguyên nhân là $4 \\not\\equiv 0 \\pmod 6$."
+      }
+    },
+    {
+      id: "c0_q10",
+      chapter: 0,
+      topic: "Nhúng tập thương phân số vào trường số thực (Bài tập 0.20)",
+      question: "Trên $P = \\mathbb{Z} \\times (\\mathbb{Z} \\setminus \\{0\\})$ với quan hệ $(a, b) \\sim (c, d) \\iff ad = bc$, xét ánh xạ $j: P/\\sim \\;\\to \\mathbb{R}$ cho bởi $j([(a, b)]) = \\dfrac{a}{b}$. Khẳng định nào ĐÚNG?",
+      options: {
+        A: "$j$ không xác định tốt vì $[(1, 2)] = [(2, 4)]$ có các số nguyên khác nhau.",
+        B: "$j$ xác định tốt, là một đơn ánh và có tập ảnh $\\operatorname{im} j = \\mathbb{Q} \\subset \\mathbb{R}$.",
+        C: "$j$ là một toàn ánh lên toàn bộ trường số thực $\\mathbb{R}$.",
+        D: "$j$ xác định tốt nhưng không đơn ánh vì $\\dfrac{1}{2} = \\dfrac{2}{4}$."
+      },
+      correct: "B",
+      explanations: {
+        A: "Sai vì: Khi $(a,b)\\sim(a',b') \\iff ab'=ba'$, chia cho $bb'\\neq 0$ trong $\\mathbb{R}$ cho $a/b = a'/b'$, nên $j$ hoàn toàn độc lập với đại diện.",
+        B: "Chính xác! Lời giải: $ab'=ba' \\iff a/b=a'/b'$ trong $\\mathbb{R}$. Chiều thuận chứng minh $j$ xác định tốt; chiều ngược chứng minh $j([(a,b)])=j([(c,d)]) \\implies ad=bc \\implies [(a,b)]=[(c,d)]$ (đơn ánh), với ảnh đúng bằng $\\mathbb{Q}$.",
+        C: "Sai vì: Các số vô tỉ như $\\sqrt{2} \\in \\mathbb{R}$ không biểu diễn được dưới dạng $a/b$ với $a,b \\in \\mathbb{Z}$, nên $j$ không toàn ánh lên $\\mathbb{R}$.",
+        D: "Sai vì: Trong tập thương $P/\\sim$, hai cặp $(1,2)$ và $(2,4)$ nằm trong CÙNG một lớp tương đương $[(1,2)] = [(2,4)]$, nên không vi phạm tính đơn ánh."
+      }
+    }
+  ];
+
+  // ====================================================================
+  // NGÂN HÀNG CHƯƠNG 1 (40 CÂU: c1_q01 -> c1_q40)
+  // ====================================================================
   const questionsChapter1 = [
     {
       id: "c1_q01",
@@ -428,8 +627,8 @@
       },
       correct: "C",
       explanations: {
-        A: "Sai vì: $a*c=a+2c$ nói chung không bằng $a$; lũy thừa cũng cộng hằng số $c$ nur lần, không $n$ lần.",
-        B: "Sai vì: nghịch đảo $b$ phải thỏa $a+b+c=e=-c$, nên $b=-a-2c$, không $-a$ nói chung.",
+        A: "Sai vì: $a*c=a+2c$ nói chung không bằng $a$; lũy thừa cũng cộng hằng số $c$ chỉ $n-1$ lần, không phải $n$ lần.",
+        B: "Sai vì: nghịch đảo $b$ phải thỏa $a+b+c=e=-c$, nên $b=-a-2c$, không phải $-a$ nói chung.",
         C: "Chính xác! Lời giải: từ $a*e=a$ suy ra $e=-c$. Điều kiện $a*b=e$ cho $a+b+c=-c$, nên $b=-a-2c$. Quy nạp: $a^{*1}=a$; nếu $a^{*n}=na+(n-1)c$ thì $a^{*(n+1)}=a^{*n}*a=(n+1)a+nc$.",
         D: "Sai vì: đơn vị phải giải từ $a+e+c=a$, do đó $e=-c$, không nhất thiết bằng $0$."
       }
@@ -676,7 +875,7 @@
       correct: "A",
       explanations: {
         A: "Chính xác! Lời giải: giản ước trái làm $L_a$ đơn ánh; trên tập hữu hạn, đơn ánh kéo theo toàn ánh, nên $L_a(x)=e$ có nghiệm, tức $ax=e$. Từ $a(xa)=(ax)a=e a=a=a e$, giản ước trái cho $xa=e$. Mọi phần tử có nghịch đảo hai phía, vậy $M$ là nhóm.",
-        B: "Sai vì: vị nhóm hữu hạn có thể không là nhóm, chẳng hạn $(\\mathbb{N},+)$ vô hạn là ví dụ quen thuộc; hữu hạn tự nó không đảm bảo nghịch đảo.",
+        B: "Sai vì: vị nhóm hữu hạn có thể không là nhóm (chẳng hạn $\\mathbb{Z}/4\\mathbb{Z}$ với phép nhân); hữu hạn tự nó không đảm bảo nghịch đảo nếu thiếu luật giản ước.",
         C: "Sai vì: hữu hạn không làm phép toán giao hoán; giả thiết chỉ tạo song ánh tịnh tiến và nghịch đảo.",
         D: "Sai vì: luật giản ước trái là tính chất khử; cần kết hợp với tính hữu hạn để suy ra ánh xạ tịnh tiến toàn ánh."
       }
@@ -779,8 +978,608 @@
   ];
 
   // ====================================================================
+  // NGÂN HÀNG MỞ RỘNG CHƯƠNG 2 (10 CÂU: c2_q01 -> c2_q10)
+  // ====================================================================
+  const questionsChapter2 = [
+    {
+      id: "c2_q01",
+      chapter: 2,
+      topic: "Tiêu chuẩn nhóm con rút gọn dạng cộng (Định lý 2.2 & Bài tập 2.1)",
+      question: "Trong nhóm cộng $(\\mathbb{Z}, +)$, xét ba tập hợp con: $H_1 = 5\\mathbb{Z}$, $H_2 = \\mathbb{N} = \\{m \\in \\mathbb{Z} \\mid m \\ge 0\\}$, và $H_3 = 2\\mathbb{Z} + 1$. Tập nào là nhóm con của $(\\mathbb{Z}, +)$?",
+      options: {
+        A: "Cả $H_1$ và $H_2$ vì cả hai đều đóng đối với phép cộng.",
+        B: "Chỉ có $H_1 = 5\\mathbb{Z}$; tập $H_2$ vi phạm vì $2 - 5 = -3 \\notin \\mathbb{N}$, còn $H_3$ không chứa đơn vị $0$ và không đóng.",
+        C: "Cả ba tập đều là nhóm con của $(\\mathbb{Z}, +)$.",
+        D: "Chỉ có $H_2 = \\mathbb{N}$ vì nó chứa phần tử đơn vị $0$."
+      },
+      correct: "B",
+      explanations: {
+        A: "Sai vì: Tập vô hạn $H_2 = \\mathbb{N}$ tuy đóng với phép cộng nhưng không chứa số đối của các số nguyên dương ($-1 \\notin \\mathbb{N}$).",
+        B: "Chính xác! Lời giải: Với $5\\mathbb{Z}$, $0 \\in 5\\mathbb{Z}$ và $5k - 5l = 5(k-l) \\in 5\\mathbb{Z}$ nên $5\\mathbb{Z} \\le \\mathbb{Z}$. Với $\\mathbb{N}$, $2, 5 \\in \\mathbb{N}$ nhưng $2 - 5 = -3 \\notin \\mathbb{N}$. Với $2\\mathbb{Z}+1$, $0 \\notin 2\\mathbb{Z}+1$ và $3 - 1 = 2 \\notin 2\\mathbb{Z}+1$.",
+        C: "Sai vì: $H_2$ thiếu phần tử đối còn $H_3$ thiếu đơn vị $0$ và không đóng.",
+        D: "Sai vì: Chứa đơn vị $0$ và đóng với cộng trên tập vô hạn chưa đủ để làm nhóm con nếu thiếu phần tử đối."
+      }
+    },
+    {
+      id: "c2_q02",
+      chapter: 2,
+      topic: "Tiêu chuẩn nhóm con cho tập con hữu hạn (Định lý 2.3 & Bài tập 2.2)",
+      question: "Trong nhóm đối xứng $S_3$, xét ba tập con hữu hạn: $H = \\{e, (123), (132)\\}$, $K = \\{e, (12), (13)\\}$ và $L = \\{e, (12)\\}$. Khẳng định nào ĐÚNG?",
+      options: {
+        A: "Cả $H, K, L$ đều là nhóm con của $S_3$ vì mọi phần tử trong mỗi tập đều có nghịch đảo nằm trong tập đó.",
+        B: "$H$ và $L$ là nhóm con của $S_3$; còn $K$ không phải là nhóm con vì $(12)(13) = (132) \\notin K$.",
+        C: "Chỉ có $H$ là nhóm con, còn $L$ không phải là nhóm con vì chỉ có 2 phần tử.",
+        D: "Không tập nào là nhóm con vì $S_3$ không giao hoán."
+      },
+      correct: "B",
+      explanations: {
+        A: "Sai vì: Trong $K$, dù $(12)^{-1}=(12)\\in K$ và $(13)^{-1}=(13)\\in K$, tập $K$ không đóng dưới phép nhân: $(12)(13)=(132)\\notin K$.",
+        B: "Chính xác! Lời giải: Theo Định lý 2.3, tập con hữu hạn khác rỗng là nhóm con khi và chỉ khi nó đóng với phép nhân. $H = A_3$ và $L = \\langle(12)\\rangle$ đóng với phép nhân nên là nhóm con; còn $K$ thất bại vì $(12)(13) = (132) \\notin K$.",
+        C: "Sai vì: $(12)^2 = e \\in L$ nên $L$ đóng với phép nhân và là nhóm con cấp $2$ của $S_3$.",
+        D: "Sai vì: Một nhóm không giao hoán vẫn có các nhóm con (thậm chí các nhóm con cyclic $H$ và $L$ ở đây đều giao hoán)."
+      }
+    },
+    {
+      id: "c2_q03",
+      chapter: 2,
+      topic: "Giao và hợp của các nhóm con (Định lý 2.4 & Định lý 2.5)",
+      question: "Cho $H, K$ là hai nhóm con của nhóm $G$. Phát biểu nào sau đây mô tả đúng tính chất của giao $H \\cap K$ và hợp $H \\cup K$?",
+      options: {
+        A: "Cả $H \\cap K$ và $H \\cup K$ đều luôn là nhóm con của $G$.",
+        B: "$H \\cap K$ luôn là nhóm con của $G$; còn $H \\cup K$ là nhóm con của $G$ khi và chỉ khi $H \\subseteq K$ hoặc $K \\subseteq H$.",
+        C: "$H \\cup K$ luôn là nhóm con, còn $H \\cap K$ có thể rỗng nên không là nhóm con.",
+        D: "$H \\cup K$ là nhóm con khi và chỉ khi $H \\cap K = \\{e\\}$."
+      },
+      correct: "B",
+      explanations: {
+        A: "Sai vì: Hợp của hai nhóm con nói chung không đóng, ví dụ $2\\mathbb{Z} \\cup 3\\mathbb{Z}$ chứa $2$ và $3$ nhưng không chứa $2+3=5$.",
+        B: "Chính xác! Lời giải: Theo Định lý 2.4, giao của họ nhóm con bất kỳ luôn là nhóm con. Theo Định lý 2.5, $H \\cup K \\le G \\iff H \\subseteq K$ hoặc $K \\subseteq H$.",
+        C: "Sai vì: Mọi nhóm con đều chứa phần tử đơn vị $e$, nên $e \\in H \\cap K$ (giao không bao giờ rỗng).",
+        D: "Sai vì: Nếu $H \\cap K = \\{e\\}$ với $H, K$ khác $\\{e\\}$ thì tồn tại $h \\in H \\setminus K, k \\in K \\setminus H$ làm $hk \\notin H \\cup K$."
+      }
+    },
+    {
+      id: "c2_q04",
+      chapter: 2,
+      topic: "Nhóm con sinh bởi tập hợp (Định nghĩa 2.6)",
+      question: "Cho $S$ là một tập con của nhóm $G$. Nhóm con sinh bởi $S$, ký hiệu $\\langle S \\rangle$, được xác định tương đương bởi khẳng định nào sau đây?",
+      options: {
+        A: "Là giao của tất cả các nhóm con của $G$ chứa $S$, đồng thời là tập mọi tích hữu hạn các phần tử của $S$ và nghịch đảo của chúng (với quy ước $\\langle \\emptyset \\rangle = \\{e\\}$).",
+        B: "Là tập hợp chỉ gồm các lũy thừa dương $s^k$ ($k \\ge 1$) của một phần tử $s \\in S$.",
+        C: "Là hợp của tất cả các nhóm con chứa trong $S$.",
+        D: "Luôn bằng toàn bộ nhóm mẹ $G$ với mọi tập con $S \\neq \\emptyset$."
+      },
+      correct: "A",
+      explanations: {
+        A: "Chính xác! Lời giải: Theo Định nghĩa 2.6, $\\langle S \\rangle = \\bigcap_{S \\subseteq H \\le G} H$ là nhóm con nhỏ nhất chứa $S$, được mô tả từ dưới lên bởi $\\{x_1^{k_1}\\cdots x_m^{k_m} \\mid x_i \\in S, k_i \\in \\mathbb{Z}\\}$ và $\\langle \\emptyset \\rangle = \\{e\\}$.",
+        B: "Sai vì: Nếu chỉ lấy lũy thừa dương trên tập vô hạn (như $S=\\{1\\}$ trong $\\mathbb{Z}$) sẽ thiếu phần tử đơn vị $0$ và các phần tử nghịch đảo (số âm).",
+        C: "Sai vì: $\\langle S \\rangle$ là giao của các nhóm con chứa $S$, không phải hợp các nhóm con nằm trong $S$.",
+        D: "Sai vì: Chẳng hạn trong $\\mathbb{Z}$, $\\langle \\{2\\} \\rangle = 2\\mathbb{Z} \\neq \\mathbb{Z}$."
+      }
+    },
+    {
+      id: "c2_q05",
+      chapter: 2,
+      topic: "Cấp của phần tử và điều kiện lũy thừa bằng đơn vị (Định nghĩa 2.7)",
+      question: "Cho phần tử $a \\in G$ có cấp hữu hạn $\\operatorname{ord}(a) = n$. Với các số nguyên $r, s, k \\in \\mathbb{Z}$, khẳng định nào sau đây là ĐÚNG?",
+      options: {
+        A: "$a^k = e \\iff k \\mid n$, và $a^r = a^s \\iff r = s$.",
+        B: "$a^k = e \\iff n \\mid k$, và $a^r = a^s \\iff r \\equiv s \\pmod n$.",
+        C: "$\\operatorname{ord}(a) = 0$ nếu $a = e$.",
+        D: "Mọi ước của $k$ đều là bội của $n$."
+      },
+      correct: "B",
+      explanations: {
+        A: "Sai vì: Đã đảo ngược quan hệ chia hết ($n$ phải là ước của $k$), và đẳng thức $r=s$ chỉ là điều kiện cần khi $\\operatorname{ord}(a) = \\infty$.",
+        B: "Chính xác! Lời giải: Theo Định nghĩa 2.7, khi $\\operatorname{ord}(a) = n < \\infty$, phép chia Euclid $k = nq + r$ ($0 \\le r < n$) cho thấy $a^k = (a^n)^q a^r = a^r = e \\iff r = 0 \\iff n \\mid k$. Suy ra $a^r = a^s \\iff a^{r-s} = e \\iff r \\equiv s \\pmod n$.",
+        C: "Sai vì: Phần tử đơn vị $e$ là phần tử duy nhất có cấp bằng $1$ ($e^1 = e$); không có phần tử nào có cấp bằng $0$.",
+        D: "Sai vì: Điều kiện đúng là $k$ phải là bội của $n$ khi $a^k = e$."
+      }
+    },
+    {
+      id: "c2_q06",
+      chapter: 2,
+      topic: "Cấp phần tử và phần tử sinh trong Z/18Z (Bài tập 2.12)",
+      question: "Trong nhóm cộng cyclic $G = \\mathbb{Z}/18\\mathbb{Z}$, cấp của phần tử $[15]_{18}$, số lượng phần tử sinh của $G$, và nhóm con duy nhất cấp $6$ của $G$ lần lượt là:",
+      options: {
+        A: "$\\operatorname{ord}([15]) = 6$; có $\\varphi(18) = 6$ phần tử sinh; nhóm con duy nhất cấp $6$ là $\\langle [3]_{18} \\rangle$.",
+        B: "$\\operatorname{ord}([15]) = 3$; có $6$ phần tử sinh; nhóm con cấp $6$ là $\\langle [6]_{18} \\rangle$.",
+        C: "$\\operatorname{ord}([15]) = 15$; có $17$ phần tử sinh; nhóm con cấp $6$ là $\\langle [3]_{18} \\rangle$.",
+        D: "$\\operatorname{ord}([15]) = 6$; có $9$ phần tử sinh; nhóm con cấp $6$ là $\\langle [6]_{18} \\rangle$."
+      },
+      correct: "A",
+      explanations: {
+        A: "Chính xác! Lời giải: Theo Bài tập 2.12, $\\operatorname{ord}([15]_{18}) = 18/\\gcd(18,15) = 18/3 = 6$. Số phần tử sinh là $\\varphi(18) = 6$ (gồm $[1],[5],[7],[11],[13],[17]$). Nhóm con duy nhất cấp $d=6$ là $\\langle [18/6] \\rangle = \\langle [3] \\rangle$.",
+        B: "Sai vì: $3$ là $\\gcd(18,15)$ chứ không phải cấp của $[15]$; còn $\\langle [6]_{18} \\rangle = \\{[0],[6],[12]\\}$ chỉ có cấp $3$.",
+        C: "Sai vì: Cấp phần tử phải chia hết $18$, và chỉ các lớp nguyên tố cùng nhau với $18$ mới sinh ra nhóm.",
+        D: "Sai vì: $\\varphi(18) = 18(1-1/2)(1-1/3) = 6 \\neq 9$, và $\\langle [6] \\rangle$ có cấp $3$."
+      }
+    },
+    {
+      id: "c2_q07",
+      chapter: 2,
+      topic: "Định lý cơ bản về cấu trúc nhóm cyclic (Định lý 2.9)",
+      question: "Cho $G = \\langle a \\rangle$ là một nhóm cyclic hữu hạn cấp $n$. Khẳng định nào sau đây là SAI?",
+      options: {
+        A: "Mọi nhóm con của $G$ đều là nhóm cyclic.",
+        B: "Với mỗi ước dương $q \\mid n$, tồn tại duy nhất một nhóm con của $G$ có cấp bằng $q$, đó là $\\langle a^{n/q} \\rangle$.",
+        C: "Với mọi $k \\in \\mathbb{Z}$, cấp của phần tử $a^k$ được tính bởi $\\operatorname{ord}(a^k) = \\dfrac{n}{\\gcd(n, k)}$.",
+        D: "Với mỗi ước dương $q \\mid n$, nhóm con cấp $q$ của $G$ được sinh bởi phần tử $a^q$."
+      },
+      correct: "D",
+      explanations: {
+        A: "Sai vì đây là mệnh đề ĐÚNG theo khoản 1 Định lý 2.9 (mọi nhóm con của nhóm cyclic đều cyclic).",
+        B: "Sai vì đây là mệnh đề ĐÚNG theo khoản 3 Định lý 2.9.",
+        C: "Sai vì đây là mệnh đề ĐÚNG theo khoản 4 Định lý 2.9.",
+        D: "Chính xác! Lời giải: Đây là bẫy số mũ rất phổ biến: phần tử $a^q$ (với $q \\mid n$) có cấp là $n/\\gcd(n,q) = n/q$, nên $\\langle a^q \\rangle$ có cấp $n/q$ chứ không phải cấp $q$. Nhóm con cấp $q$ phải là $\\langle a^{n/q} \\rangle$."
+      }
+    },
+    {
+      id: "c2_q08",
+      chapter: 2,
+      topic: "ƯCLN và BCNN trên mạng lưới nhóm con cyclic (Mệnh đề 2.10)",
+      question: "Trong nhóm cyclic $G = \\langle a \\rangle$ có cấp $12$, xét hai nhóm con $H = \\langle a^4 \\rangle$ và $K = \\langle a^6 \\rangle$. Giao $H \\cap K$ và nhóm con sinh bởi hợp $\\langle H \\cup K \\rangle = \\langle a^4, a^6 \\rangle$ lần lượt là:",
+      options: {
+        A: "$H \\cap K = \\langle a^2 \\rangle$ và $\\langle a^4, a^6 \\rangle = \\langle a^{12} \\rangle = \\{e\\}$.",
+        B: "$H \\cap K = \\langle a^{12} \\rangle = \\{e\\}$ và $\\langle a^4, a^6 \\rangle = \\langle a^2 \\rangle$ (có cấp $6$).",
+        C: "$H \\cap K = \\langle a^4 \\rangle$ và $\\langle a^4, a^6 \\rangle = \\langle a^6 \\rangle$.",
+        D: "$H \\cap K = \\langle a^{24} \\rangle$ và $\\langle a^4, a^6 \\rangle = \\langle a^{10} \\rangle = G$."
+      },
+      correct: "B",
+      explanations: {
+        A: "Sai vì: Đã nhầm lẫn vị trí giữa $\\operatorname{lcm}(4,6)=12$ và $\\gcd(4,6)=2$.",
+        B: "Chính xác! Lời giải: Theo Mệnh đề 2.10, với $c, d \\mid 12$: $\\langle a^4 \\rangle \\cap \\langle a^6 \\rangle = \\langle a^{\\operatorname{lcm}(4,6)} \\rangle = \\langle a^{12} \\rangle = \\{e\\}$; còn $\\langle a^4, a^6 \\rangle = \\langle a^{\\gcd(4,6)} \\rangle = \\langle a^2 \\rangle$ có cấp $12/2 = 6$.",
+        C: "Sai vì: $4$ không chia hết $6$ và $6$ không chia hết $4$, nên hai nhóm con không chứa nhau.",
+        D: "Sai vì: $\\gcd(4,6)=2$ nên $\\langle a^4, a^6 \\rangle = \\langle a^2 \\rangle$ chỉ gồm các lũy thừa chẵn của $a$, không sinh được toàn bộ $G$."
+      }
+    },
+    {
+      id: "c2_q09",
+      chapter: 2,
+      topic: "Bẫy nhóm giao hoán nhưng không cyclic (Mục 2.8 - Phản ví dụ U(8))",
+      question: "Xét nhóm đơn vị $U(8) = \\{[1], [3], [5], [7]\\}$ với phép nhân modulo $8$. Vì sao $U(8)$ là phản ví dụ kinh điển bác bỏ mệnh đề 'Mọi nhóm Abel đều là nhóm cyclic'?",
+      options: {
+        A: "Vì phép nhân trên $U(8)$ không giao hoán.",
+        B: "Vì $U(8)$ là nhóm Abel cấp $4$, nhưng mọi phần tử khác đơn vị đều thỏa $x^2 = [1]$ (cấp $2$), không có phần tử nào cấp $4$ và có tới 3 nhóm con cấp $2$ khác nhau.",
+        C: "Vì $U(8)$ có cấp $8$ nhưng chỉ có 4 phần tử khả nghịch.",
+        D: "Vì $U(8)$ không có nhóm con nào cấp $2$."
+      },
+      correct: "B",
+      explanations: {
+        A: "Sai vì: Phép nhân modulo $8$ hoàn toàn giao hoán nên $U(8)$ là nhóm Abel.",
+        B: "Chính xác! Lời giải: Trong $U(8)$, $3^2 \\equiv 5^2 \\equiv 7^2 \\equiv 1 \\pmod 8$, nên $[3],[5],[7]$ đều có cấp $2$. Không có phần tử cấp $4$ để sinh toàn bộ $U(8)$, đồng thời có tới 3 nhóm con cấp $2$ là $\\langle[3]\\rangle, \\langle[5]\\rangle, \\langle[7]\\rangle$ (trái với tính duy nhất nhóm con cùng cấp của nhóm cyclic).",
+        C: "Sai vì: Cấp của $U(8)$ là $|U(8)| = \\varphi(8) = 4$, không phải $8$.",
+        D: "Sai vì: $U(8)$ có tới 3 nhóm con phân biệt cùng có cấp $2$."
+      }
+    },
+    {
+      id: "c2_q10",
+      chapter: 2,
+      topic: "Số nghiệm của phương trình x^m = e trong nhóm cyclic (Bài tập 2.32)",
+      question: "Cho $G = \\langle a \\rangle$ là nhóm cyclic cấp $n = 24$. Số nghiệm $x \\in G$ của phương trình $x^{18} = e$ là bao nhiêu, và tập nghiệm này có cấu trúc gì?",
+      options: {
+        A: "Có đúng $\\gcd(24, 18) = 6$ nghiệm, và chúng lập thành nhóm con duy nhất cấp $6$ là $\\langle a^4 \\rangle$.",
+        B: "Có đúng $18$ nghiệm vì phương trình có bậc $18$.",
+        C: "Có đúng $24/6 = 4$ nghiệm, lập thành nhóm con $\\langle a^6 \\rangle$.",
+        D: "Chỉ có duy nhất $1$ nghiệm là $x = e$."
+      },
+      correct: "A",
+      explanations: {
+        A: "Chính xác! Lời giải: Theo Bài tập 2.32, viết $x = a^k$ ($0 \\le k < 24$), ta có $a^{18k} = e \\iff 24 \\mid 18k \\iff 4 \\mid 3k \\iff 4 \\mid k$. Vậy $k \\in \\{0, 4, 8, 12, 16, 20\\}$ gồm đúng $\\gcd(24,18) = 6$ nghiệm, tạo thành nhóm con $\\langle a^4 \\rangle$ cấp $6$.",
+        B: "Sai vì: Trong nhóm cyclic cấp $24$, số nghiệm của $x^m = e$ là $\\gcd(24, m)$ chứ không phải $m$.",
+        C: "Sai vì: $4 = 24/\\gcd(24,18)$ là bước nhảy của số mũ $k$, còn số lượng nghiệm là $\\gcd(24,18) = 6$.",
+        D: "Sai vì: Mọi phần tử thuộc $\\langle a^4 \\rangle$ đều có cấp chia hết $6$ nên lũy thừa bậc $18$ đều bằng $e$."
+      }
+    }
+  ];
+
+  // ====================================================================
+  // NGÂN HÀNG MỞ RỘNG CHƯƠNG 3 (10 CÂU: c3_q01 -> c3_q10)
+  // ====================================================================
+  const questionsChapter3 = [
+    {
+      id: "c3_q01",
+      chapter: 3,
+      topic: "Định nghĩa lớp kề và bẫy lớp kề là nhóm con (Định nghĩa 3.1)",
+      question: "Cho $H$ là một nhóm con của nhóm $G$ và $g \\in G$. Khẳng định nào sau đây về lớp kề trái $gH = \\{gh \\mid h \\in H\\}$ là ĐÚNG?",
+      options: {
+        A: "Mọi lớp kề trái $gH$ đều là một nhóm con của $G$ với mọi $g \\in G$.",
+        B: "Lớp kề trái $gH$ là một nhóm con của $G$ khi và chỉ khi $g \\in H$ (tức là $gH = H$).",
+        C: "Lớp kề trái $gH$ luôn bằng lớp kề phải $Hg$ trong mọi nhóm $G$.",
+        D: "Số phần tử của $gH$ phụ thuộc vào việc chọn phần tử đại diện $g$."
+      },
+      correct: "B",
+      explanations: {
+        A: "Sai vì: Một nhóm con bắt buộc phải chứa phần tử đơn vị $e$. Nếu $g \\notin H$ thì $e \\notin gH$, nên $gH$ không thể là nhóm con.",
+        B: "Chính xác! Lời giải: Theo Nhận xét tại Định nghĩa 3.1, một nhóm con phải chứa đơn vị $e$. Ta có $e \\in gH \\iff \\exists h \\in H: gh = e \\iff g = h^{-1} \\in H \\iff gH = H$. Vậy $gH$ chỉ là nhóm con khi $g \\in H$.",
+        C: "Sai vì: Trong nhóm không giao hoán (như $S_3$ với $H=\\langle(12)\\rangle$), $(13)H \\neq H(13)$.",
+        D: "Sai vì: Theo Định lý 3.3, ánh xạ tịnh tiến $\\lambda_g: h \\mapsto gh$ là song ánh nên $|gH| = |H|$ với mọi $g \\in G$."
+      }
+    },
+    {
+      id: "c3_q02",
+      chapter: 3,
+      topic: "So sánh lớp kề trái và lớp kề phải trong S_3 (Bài tập 3.1)",
+      question: "Trong nhóm đối xứng $S_3$ (quy ước nhân hoán vị từ phải sang trái), xét nhóm con $H = \\langle (12) \\rangle = \\{e, (12)\\}$ và phần tử $g = (13)$. Lớp kề trái $(13)H$ và lớp kề phải $H(13)$ lần lượt là:",
+      options: {
+        A: "$(13)H = \\{(13), (123)\\}$ và $H(13) = \\{(13), (132)\\}$; hai lớp này khác nhau.",
+        B: "$(13)H = \\{(13), (132)\\}$ và $H(13) = \\{(13), (123)\\}$.",
+        C: "$(13)H = H(13) = \\{(13), (23)\\}$.",
+        D: "$(13)H = H(13) = \\{e, (13)\\}$."
+      },
+      correct: "A",
+      explanations: {
+        A: "Chính xác! Lời giải: Theo quy ước phải sang trái, $(13)(12) = (123)$ nên $(13)H = \\{(13)e, (13)(12)\\} = \\{(13), (123)\\}$. Ngược lại $(12)(13) = (132)$ nên $H(13) = \\{e(13), (12)(13)\\} = \\{(13), (132)\\}$. Hai tập hợp này khác nhau.",
+        B: "Sai vì: Đã nhân hoán vị theo thứ tự ngược (từ trái sang phải).",
+        C: "Sai vì: Tích của hai chuyển vị $(13)$ và $(12)$ là một chu trình độ dài $3$, không thể là chuyển vị $(23)$.",
+        D: "Sai vì: Vì $(13) \\notin H$, lớp kề $(13)H$ không thể chứa phần tử đơn vị $e$."
+      }
+    },
+    {
+      id: "c3_q03",
+      chapter: 3,
+      topic: "Chỉ số của nhóm con trong nhóm vô hạn (Định nghĩa 3.2)",
+      question: "Xét nhóm cộng các số nguyên $G = (\\mathbb{Z}, +)$ và nhóm con $H = 3\\mathbb{Z}$. Khẳng định nào sau đây là ĐÚNG về chỉ số $[\\mathbb{Z} : 3\\mathbb{Z}]$?",
+      options: {
+        A: "$[\\mathbb{Z} : 3\\mathbb{Z}] = \\infty$ vì cả $\\mathbb{Z}$ và $3\\mathbb{Z}$ đều có vô hạn phần tử.",
+        B: "$[\\mathbb{Z} : 3\\mathbb{Z}] = 3$, tương ứng với 3 lớp kề rời nhau là $3\\mathbb{Z}$, $1 + 3\\mathbb{Z}$ và $2 + 3\\mathbb{Z}$.",
+        C: "$[\\mathbb{Z} : 3\\mathbb{Z}] = 1$ vì $\\mathbb{Z}$ và $3\\mathbb{Z}$ có cùng lực lượng đếm được.",
+        D: "Không định nghĩa được chỉ số $[G : H]$ khi $G$ là nhóm vô hạn."
+      },
+      correct: "B",
+      explanations: {
+        A: "Sai vì: Chỉ số $[G : H]$ đếm số lượng các khối lớp kề phân biệt chứ không đếm số phần tử của nhóm mẹ.",
+        B: "Chính xác! Lời giải: Mọi số nguyên chia cho $3$ chỉ có số dư $0, 1, 2$, nên tập thương $\\mathbb{Z}/3\\mathbb{Z}$ gồm đúng 3 lớp kề rời nhau: $0+3\\mathbb{Z}, 1+3\\mathbb{Z}, 2+3\\mathbb{Z}$. Do đó $[\\mathbb{Z} : 3\\mathbb{Z}] = 3$.",
+        C: "Sai vì: Không được lấy tỷ số lực lượng kiểu vô hạn chia vô hạn; định nghĩa chỉ số là số lượng lớp kề trái phân biệt.",
+        D: "Sai vì: Định nghĩa 3.2 xác định $[G : H] = |G/H|$ cho mọi nhóm $G$, kể cả khi $G$ vô hạn."
+      }
+    },
+    {
+      id: "c3_q04",
+      chapter: 3,
+      topic: "Tiêu chuẩn hai lớp kề trùng nhau (Định lý 3.3 & Bài tập 3.2)",
+      question: "Cho $H \\le G$ và $a, b \\in G$. Trong ký hiệu nhân tổng quát, điều kiện cần và đủ để hai lớp kề trái trùng nhau ($aH = bH$) là gì? Áp dụng vào $G = \\mathbb{Z}/15\\mathbb{Z}$ với $H = \\langle [5]_{15} \\rangle$, cặp lớp kề nào trùng nhau?",
+      options: {
+        A: "$aH = bH \\iff a^{-1}b \\in H$; trong $\\mathbb{Z}/15\\mathbb{Z}$, $[11] + H = [1] + H$ vì $[11] - [1] = [10] \\in H$.",
+        B: "$aH = bH \\iff ab^{-1} \\in H$; trong $\\mathbb{Z}/15\\mathbb{Z}$, $[12] + H = [1] + H$.",
+        C: "$aH = bH \\iff a = b$; do đó $[11] + H \\neq [1] + H$.",
+        D: "$aH = bH \\iff ab \\in H$; trong $\\mathbb{Z}/15\\mathbb{Z}$, $[4] + H = [1] + H$."
+      },
+      correct: "A",
+      explanations: {
+        A: "Chính xác! Lời giải: Theo Định lý 3.3, $aH = bH \\iff b \\in aH \\iff a^{-1}b \\in H$ (dạng cộng: $a - b \\in H$). Trong $\\mathbb{Z}/15\\mathbb{Z}$ với $H = \\{[0],[5],[10]\\}$, ta có $[11] - [1] = [10] \\in H$ nên $[11] + H = [1] + H$.",
+        B: "Sai vì: Trong nhóm không giao hoán, điều kiện cho lớp kề trái là $a^{-1}b \\in H$ (không phải $ab^{-1} \\in H$); hơn nữa $[12]-[1]=[11]\\notin H$.",
+        C: "Sai vì: Một lớp kề có $|H|$ phần tử nên mọi phần tử trong lớp đều làm đại diện cho cùng lớp đó.",
+        D: "Sai vì: Phải xét phép nhân với nghịch đảo $a^{-1}b$ (hoặc hiệu $a-b$), không phải tích $ab$ (hay tổng $a+b$)."
+      }
+    },
+    {
+      id: "c3_q05",
+      chapter: 3,
+      topic: "Song ánh tịnh tiến và sự bảo toàn kích thước lớp kề (Định lý 3.3)",
+      question: "Vì sao mọi lớp kề trái $gH$ và lớp kề phải $Hg$ đều có cùng số phần tử với nhóm con $H$ ($|gH| = |Hg| = |H|$)?",
+      options: {
+        A: "Vì phép tịnh tiến trái $\\lambda_g: H \\to gH, h \\mapsto gh$ là một song ánh (đơn ánh nhờ luật giản ước trái, toàn ánh theo định nghĩa $gH$).",
+        B: "Vì mọi nhóm $G$ đều hữu hạn và giao hoán.",
+        C: "Vì $gH$ luôn là một nhóm đẳng cấu với $H$ qua đồng cấu $\\lambda_g$.",
+        D: "Vì các lớp kề có giao khác rỗng."
+      },
+      correct: "A",
+      explanations: {
+        A: "Chính xác! Lời giải: Theo Định lý 3.3, nếu $gh_1 = gh_2$ thì nhân trái với $g^{-1}$ cho $h_1 = h_2$ (đơn ánh); và mọi phần tử của $gH$ có dạng $gh$ với $h \\in H$ (toàn ánh). Do đó $\\lambda_g$ là song ánh, suy ra $|gH| = |H|$ (tương tự cho $Hg$).",
+        B: "Sai vì: Kết quả đúng cho cả nhóm vô hạn và nhóm không giao hoán.",
+        C: "Sai vì: Khi $g \\notin H$, $gH$ không phải là nhóm con và $\\lambda_g$ chỉ là song ánh tập hợp chứ không phải đồng cấu nhóm.",
+        D: "Sai vì: Các lớp kề phân biệt luôn đôi một rời nhau."
+      }
+    },
+    {
+      id: "c3_q06",
+      chapter: 3,
+      topic: "Định lý Lagrange và hệ quả trực tiếp (Định lý 3.4 & Hệ quả 3.5)",
+      question: "Cho $G$ là một nhóm hữu hạn có cấp $|G| = 35$. Theo Định lý Lagrange và các hệ quả, khẳng định nào sau đây KHÔNG THỂ xảy ra?",
+      options: {
+        A: "$G$ có một nhóm con cấp $5$.",
+        B: "$G$ có một phần tử cấp $7$.",
+        C: "$G$ có một nhóm con cấp $10$.",
+        D: "Với mọi $a \\in G$, ta luôn có $a^{35} = e$."
+      },
+      correct: "C",
+      explanations: {
+        A: "Sai vì: $5$ là ước của $35$ nên hoàn toàn phù hợp với Định lý Lagrange.",
+        B: "Sai vì: $7$ là ước của $35$ nên cấp phần tử bằng $7$ hoàn toàn hợp lệ.",
+        C: "Chính xác! Lời giải: Theo Định lý Lagrange, cấp của mọi nhóm con $H \\le G$ bắt buộc phải là ước của $|G| = 35$. Vì $10 \\nmid 35$, nhóm $G$ tuyệt đối không thể có nhóm con cấp $10$.",
+        D: "Sai vì: Theo Hệ quả 3.5, với mọi $a \\in G$ ta luôn có $a^{|G|} = a^{35} = e$."
+      }
+    },
+    {
+      id: "c3_q07",
+      chapter: 3,
+      topic: "Hệ quả số học Euler và điều kiện nguyên tố cùng nhau (Bài tập 3.9a)",
+      question: "Áp dụng Định lý Euler để tìm số dư của $3^{100}$ khi chia cho $35$, kết quả và điều kiện tiên quyết nào sau đây là ĐÚNG?",
+      options: {
+        A: "Vì $\\gcd(3, 35) = 1$ và $\\varphi(35) = 24$, ta có $3^{24} \\equiv 1 \\pmod{35} \\implies 3^{100} = (3^{24})^4 \\cdot 3^4 \\equiv 81 \\equiv 11 \\pmod{35}$.",
+        B: "Vì $\\varphi(35) = 34$, ta có $3^{34} \\equiv 1 \\pmod{35}$ và số dư là $9$.",
+        C: "Số dư là $1$ vì $100$ là số chẵn.",
+        D: "Có thể áp dụng $a^{\\varphi(35)} \\equiv 1 \\pmod{35}$ cho cả $a = 5$ và $a = 7$."
+      },
+      correct: "A",
+      explanations: {
+        A: "Chính xác! Lời giải: Ta có $\\varphi(35) = \\varphi(5)\\varphi(7) = 4 \\cdot 6 = 24$. Do $\\gcd(3,35)=1$, Định lý Euler cho $3^{24} \\equiv 1 \\pmod{35}$. Vì $100 = 24 \\cdot 4 + 4$, suy ra $3^{100} \\equiv 3^4 = 81 = 35 \\cdot 2 + 11 \\equiv 11 \\pmod{35}$.",
+        B: "Sai vì: $35 = 5 \\cdot 7$ là hợp số nên $\\varphi(35) = 24$, không phải $35 - 1 = 34$.",
+        C: "Sai vì: $24 \\nmid 100$ nên số dư không bằng $1$.",
+        D: "Sai vì: Định lý Euler bắt buộc $\\gcd(a, 35) = 1$ (tức $[a] \\in U(35)$); với $a=5$ hoặc $a=7$ thì $\\gcd(a,35)>1$ nên không áp dụng được."
+      }
+    },
+    {
+      id: "c3_q08",
+      chapter: 3,
+      topic: "Hệ quả Định lý Fermat nhỏ (Bài tập 3.9b)",
+      question: "Dùng Định lý Fermat nhỏ, số dư của lũy thừa $7^{222}$ khi chia cho số nguyên tố $13$ là:",
+      options: {
+        A: "$1$",
+        B: "$12$",
+        C: "$6$",
+        D: "$7$"
+      },
+      correct: "B",
+      explanations: {
+        A: "Sai vì: $222 = 12 \\cdot 18 + 6$, còn dư số mũ $6$ nên $7^{222} \\equiv 7^6 \\equiv 12 \\not\\equiv 1 \\pmod{13}$.",
+        B: "Chính xác! Lời giải: Vì $13$ nguyên tố và $13 \\nmid 7$, Fermat nhỏ cho $7^{12} \\equiv 1 \\pmod{13}$. Ta có $222 = 12 \\cdot 18 + 6 \\implies 7^{222} \\equiv 7^6 = (7^2)^3 = 49^3 \\equiv (-3)^3 = -27 \\equiv 12 \\pmod{13}$.",
+        C: "Sai vì: $6$ là số dư của số mũ $222$ khi chia cho $12$, không phải số dư của lũy thừa $7^{222}$ khi chia cho $13$.",
+        D: "Sai vì: $7^6 \\equiv 12 \\pmod{13}$, không đồng dư với $7$."
+      }
+    },
+    {
+      id: "c3_q09",
+      chapter: 3,
+      topic: "Chứng minh A_4 không có nhóm con cấp 6 (Mục 3.5 & Bài tập 3.12b)",
+      question: "Trong chứng minh nhóm thay phiên $A_4$ (cấp $12$) không có nhóm con nào cấp $6$, lập luận mấu chốt nào sau đây được sử dụng?",
+      options: {
+        A: "Nếu $H \\le A_4$ có cấp $6$ thì $[A_4 : H] = 2 \\implies H \\trianglelefteq A_4$ và $g^2 \\in H$ với mọi $g \\in A_4$; do mọi chu trình bậc 3 đều có dạng $g^2$ nên cả 8 chu trình bậc 3 cùng với $e$ đều thuộc $H$, làm $|H| \\ge 9 > 6$ (mâu thuẫn).",
+        B: "Vì $6$ không phải là ước của $12$ nên theo Lagrange không tồn tại $H$.",
+        C: "Vì $A_4$ là nhóm giao hoán nên chỉ có nhóm con cấp $2$ và cấp $3$.",
+        D: "Vì $A_4$ không chứa bất kỳ phần tử nào có cấp $2$ hoặc cấp $3$."
+      },
+      correct: "A",
+      explanations: {
+        A: "Chính xác! Lời giải: Giả sử $|H|=6 \\implies [A_4:H]=2 \\implies H \\trianglelefteq A_4$ và nhóm thương $A_4/H$ có cấp $2$. Khi đó với mọi chu trình 3-cycle $\\sigma = (ijk) \\in A_4$, ta có $\\sigma = (ikj)^2 \\in H$. Vì $A_4$ có đúng $8$ chu trình 3-cycle, cùng với $e$ buộc $|H| \\ge 9$, mâu thuẫn với $|H|=6$.",
+        B: "Sai vì: $6$ là ước của $12$; đây chính là phản ví dụ bác bỏ chiều đảo của Định lý Lagrange.",
+        C: "Sai vì: $A_4$ không phải là nhóm giao hoán, và nhóm giao hoán hữu hạn thì luôn có nhóm con ứng với mọi ước của cấp nhóm.",
+        D: "Sai vì: $A_4$ có $3$ phần tử cấp $2$ (tích hai chuyển vị rời nhau) và $8$ phần tử cấp $3$ (các 3-cycle)."
+      }
+    },
+    {
+      id: "c3_q10",
+      chapter: 3,
+      topic: "Nhóm con chỉ số 2 và cầu nối sang Chương 4 (Mệnh đề 3.6 & Mục 3.7)",
+      question: "Cho $H \\le G$ thỏa mãn $[G : H] = 2$. Khẳng định nào sau đây là ĐÚNG về các lớp kề của $H$?",
+      options: {
+        A: "Với mọi $g \\in G$, tập hợp lớp kề trái luôn trùng với tập hợp lớp kề phải ($gH = Hg$), vì nếu $g \\notin H$ thì cả $gH$ và $Hg$ đều bằng phần bù $G \\setminus H$.",
+        B: "Với mọi $g \\in G$ và mọi $h \\in H$, ta luôn có $gh = hg$ (mọi phần tử giao hoán từng đôi một).",
+        C: "Nhóm $G$ bắt buộc phải có đúng $2$ phần tử.",
+        D: "Phép nhân đại diện $(aH)(bH) = abH$ vẫn bị phụ thuộc đại diện và không xác định tốt."
+      },
+      correct: "A",
+      explanations: {
+        A: "Chính xác! Lời giải: Theo Mệnh đề 3.6, khi $[G:H]=2$, phân hoạch trái chỉ có 2 khối là $H$ và $G \\setminus H$; phân hoạch phải cũng chỉ có 2 khối là $H$ và $G \\setminus H$. Do đó với $g \\notin H$, $gH = G \\setminus H = Hg$.",
+        B: "Sai vì: $gH = Hg$ là đẳng thức giữa hai TẬP HỢP, không có nghĩa là $gh = hg$ với từng phần tử (ví dụ trong $S_3$, $(12)A_3 = A_3(12)$ nhưng $(12)(123) \\neq (123)(12)$).",
+        C: "Sai vì: $[G:H] = 2$ chỉ nói rằng có 2 lớp kề (ví dụ $[S_n : A_n] = 2$ hay $[\\mathbb{Z} : 2\\mathbb{Z}] = 2$), nhóm $G$ có thể lớn tùy ý hoặc vô hạn.",
+        D: "Sai vì: Vì $gH = Hg$ với mọi $g \\in G$, $H$ là nhóm con chuẩn tắc nên phép nhân lớp kề $(aH)(bH) = abH$ hoàn toàn xác định tốt."
+      }
+    }
+  ];
+
+  // ====================================================================
+  // NGÂN HÀNG MỞ RỘNG CHƯƠNG 4 (10 CÂU: c4_q01 -> c4_q10)
+  // ====================================================================
+  const questionsChapter4 = [
+    {
+      id: "c4_q01",
+      chapter: 4,
+      topic: "Sự thất bại khi nhân đại diện lớp kề không chuẩn tắc (Mục 4.1)",
+      question: "Trong $S_3$, xét nhóm con $H = \\langle (12) \\rangle = \\{e, (12)\\}$ và lớp kề trái $C_2 = (13)H = \\{(13), (123)\\}$. Khi thử nhân $C_2 \\cdot C_2$ bằng quy tắc nhân đại diện $(xH)(yH) = xyH$, hiện tượng gì xảy ra?",
+      options: {
+        A: "Chọn đại diện $(13)$ và $(13)$ cho lớp $(13)(13)H = eH$; nhưng chọn đại diện $(123)$ và $(13)$ trong cùng lớp $C_2$ lại cho $(123)(13)H = (23)H \\neq eH$. Phép nhân không xác định tốt!",
+        B: "Mọi cách chọn đại diện trong $C_2$ đều cho cùng kết quả là $eH$.",
+        C: "Phép nhân xác định tốt nhưng không có tính kết hợp.",
+        D: "Tích $(123)(13)$ không thuộc $S_3$."
+      },
+      correct: "A",
+      explanations: {
+        A: "Chính xác! Lời giải: Theo Mục 4.1, cả $(13)$ và $(123)$ đều thuộc $C_2$. Tuy nhiên $(13)(13) = e \\in eH$, còn $(123)(13) = (23) \\in (23)H \\neq eH$. Đổi đại diện làm thay đổi hẳn lớp kết quả nên phép nhân lớp không xác định tốt.",
+        B: "Sai vì: Cặp đại diện $((123), (13))$ cho tích $(23) \\notin eH$.",
+        C: "Sai vì: Quy tắc này đã thất bại ngay ở bước xác định tốt (well-definedness), chưa phải là một phép toán hai ngôi trên $S_3/H$.",
+        D: "Sai vì: $S_3$ đóng với phép nhân hoán vị, $(123)(13) = (23) \\in S_3$."
+      }
+    },
+    {
+      id: "c4_q02",
+      chapter: 4,
+      topic: "Phép liên hợp và nhóm con liên hợp trong S_3 (Định nghĩa 4.1 & Bài tập 4.1)",
+      question: "Trong nhóm $S_3$, cho $H = \\langle (12) \\rangle = \\{e, (12)\\}$ và $g = (123)$. Nhóm con liên hợp $gHg^{-1}$ và tập hợp tất cả các phần tử $x \\in S_3$ thỏa mãn $xHx^{-1} = H$ lần lượt là:",
+      options: {
+        A: "$gHg^{-1} = \\{e, (23)\\} \\neq H$; và chỉ có $x \\in \\{e, (12)\\} = H$ mới giữ nguyên $H$ qua phép liên hợp.",
+        B: "$gHg^{-1} = \\{e, (13)\\}$; và mọi $x \\in S_3$ đều thỏa $xHx^{-1} = H$.",
+        C: "$gHg^{-1} = H$; nên $H$ là nhóm con chuẩn tắc của $S_3$.",
+        D: "$gHg^{-1} = \\{e, (123)\\}$."
+      },
+      correct: "A",
+      explanations: {
+        A: "Chính xác! Lời giải: Theo công thức liên hợp chu trình, với $g=(123)$, ta có $g(12)g^{-1} = (g(1)\\;g(2)) = (23)$, nên $gHg^{-1} = \\{e, (23)\\} \\neq H$. Kiểm tra cả 6 phần tử của $S_3$ (Bài tập 4.1), chỉ có $e$ và $(12)$ giữ nguyên $H$.",
+        B: "Sai vì: $g(1)=2, g(2)=3$ nên $(123)(12)(132) = (23)$ chứ không phải $(13)$.",
+        C: "Sai vì: $gHg^{-1} = \\{e, (23)\\} \\neq H$, do đó $H$ không chuẩn tắc trong $S_3$.",
+        D: "Sai vì: Phép liên hợp bảo toàn cấp của phần tử; $(12)$ có cấp $2$ nên liên hợp của nó không thể là $(123)$ cấp $3$."
+      }
+    },
+    {
+      id: "c4_q03",
+      chapter: 4,
+      topic: "Ba tiêu chuẩn tương đương của tính chuẩn tắc (Định lý 4.3)",
+      question: "Cho $N \\le G$. Theo Định lý 4.3, ba điều kiện nào sau đây là hoàn toàn tương đương để $N$ là nhóm con chuẩn tắc của $G$ ($N \\trianglelefteq G$)?",
+      options: {
+        A: "(i) $gN = Ng$ với mọi $g \\in G$; (ii) $gNg^{-1} = N$ với mọi $g \\in G$; (iii) $gng^{-1} \\in N$ với mọi $g \\in G, n \\in N$.",
+        B: "(i) $gn = ng$ với mọi $g \\in G, n \\in N$; (ii) $N$ là nhóm Abel; (iii) $[G : N] = 2$.",
+        C: "(i) $gNg^{-1} \\subseteq N$ chỉ với một phần tử $g \\in G$ cố định; (ii) $N$ là nhóm cyclic.",
+        D: "(i) $gN \\cap Ng \\neq \\emptyset$; (ii) $|N|$ chia hết $|G|$."
+      },
+      correct: "A",
+      explanations: {
+        A: "Chính xác! Lời giải: Định lý 4.3 khẳng định sự tương đương giữa: trùng lớp kề trái/phải ($gN=Ng$), bất biến tập hợp qua liên hợp ($gNg^{-1}=N$), và tiêu chuẩn bao hàm một phía ($\\forall g\\in G, \\forall n\\in N, gng^{-1}\\in N$).",
+        B: "Sai vì: $gn=ng$ đòi hỏi phần tử thuộc tâm $Z(G)$ (mạnh hơn chuẩn tắc rất nhiều); ví dụ $A_3 \\trianglelefteq S_3$ nhưng $(12)(123) \\neq (123)(12)$.",
+        C: "Sai vì: Điều kiện $gng^{-1} \\in N$ phải đúng với MỌI $g \\in G$ thì mới dùng được cho cả $g^{-1}$ để suy ra đẳng thức $gNg^{-1} = N$.",
+        D: "Sai vì: $g = ge = eg \\in gN \\cap Ng$ nên giao của lớp trái và lớp phải cùng đại diện luôn khác rỗng với mọi nhóm con $N$, không đủ để $gN = Ng$."
+      }
+    },
+    {
+      id: "c4_q04",
+      chapter: 4,
+      topic: "Chứng minh SL_2(R) chuẩn tắc trong GL_2(R) (Mục 4.3)",
+      question: "Xét nhóm ma trận khả nghịch $G = \\mathrm{GL}_2(\\mathbb{R})$ và nhóm con $N = \\mathrm{SL}_2(\\mathbb{R}) = \\{A \\in G \\mid \\det A = 1\\}$. Vì sao $\\mathrm{SL}_2(\\mathbb{R}) \\trianglelefteq \\mathrm{GL}_2(\\mathbb{R})$?",
+      options: {
+        A: "Vì mọi ma trận trong $\\mathrm{SL}_2(\\mathbb{R})$ đều giao hoán với mọi ma trận trong $\\mathrm{GL}_2(\\mathbb{R})$.",
+        B: "Vì với mọi $g \\in \\mathrm{GL}_2(\\mathbb{R})$ và $n \\in \\mathrm{SL}_2(\\mathbb{R})$, ta có $\\det(gng^{-1}) = \\det(g)\\det(n)(\\det g)^{-1} = 1$, nên $gng^{-1} \\in \\mathrm{SL}_2(\\mathbb{R})$.",
+        C: "Vì chỉ số $[\\mathrm{GL}_2(\\mathbb{R}) : \\mathrm{SL}_2(\\mathbb{R})] = 2$.",
+        D: "Vì $\\mathrm{GL}_2(\\mathbb{R})$ là nhóm giao hoán."
+      },
+      correct: "B",
+      explanations: {
+        A: "Sai vì: Các ma trận định thức bằng $1$ nói chung không giao hoán với nhau và không giao hoán với ma trận trong $\\mathrm{GL}_2(\\mathbb{R})$.",
+        B: "Chính xác! Lời giải: Nhờ tính nhân của định thức trên trường giao hoán $\\mathbb{R}$, với mọi $g \\in \\mathrm{GL}_2(\\mathbb{R})$ và $n \\in \\mathrm{SL}_2(\\mathbb{R})$, $\\det(gng^{-1}) = \\det(g)\\cdot 1 \\cdot (\\det g)^{-1} = 1 \\implies gng^{-1} \\in \\mathrm{SL}_2(\\mathbb{R})$. Theo tiêu chuẩn một phía, $\\mathrm{SL}_2(\\mathbb{R}) \\trianglelefteq \\mathrm{GL}_2(\\mathbb{R})$.",
+        C: "Sai vì: Nhóm thương $\\mathrm{GL}_2(\\mathbb{R})/\\mathrm{SL}_2(\\mathbb{R}) \\cong \\mathbb{R}^\\times$ có vô hạn phần tử, không phải chỉ số $2$.",
+        D: "Sai vì: Phép nhân ma trận cấp $2$ không giao hoán."
+      }
+    },
+    {
+      id: "c4_q05",
+      chapter: 4,
+      topic: "Tính chuẩn tắc không có tính bắc cầu trong D_8 (Mục 4.4)",
+      question: "Trong nhóm đối xứng hình vuông $D_8 = \\langle r, s \\mid r^4 = s^2 = e, sr = r^{-1}s \\rangle$, xét chuỗi nhóm con $K = \\langle s \\rangle = \\{e, s\\} \\le H = \\langle s, r^2 \\rangle = \\{e, r^2, s, r^2s\\} \\le D_8$. Khẳng định nào ĐÚNG?",
+      options: {
+        A: "$K \\trianglelefteq H$ và $H \\trianglelefteq D_8$ (do đều có chỉ số $2$), nhưng $K \\not\\trianglelefteq D_8$ vì $rsr^{-1} = r^2s \\notin K$; điều này chứng tỏ quan hệ chuẩn tắc KHÔNG có tính bắc cầu.",
+        B: "Vì $K \\trianglelefteq H$ và $H \\trianglelefteq D_8$ nên theo tính bắc cầu ta có $K \\trianglelefteq D_8$.",
+        C: "$H$ không chuẩn tắc trong $D_8$ vì $D_8$ không giao hoán.",
+        D: "$K \\trianglelefteq D_8$ vì $s^2 = e$."
+      },
+      correct: "A",
+      explanations: {
+        A: "Chính xác! Lời giải: Ta có $[D_8 : H] = 8/4 = 2 \\implies H \\trianglelefteq D_8$, và $[H : K] = 4/2 = 2 \\implies K \\trianglelefteq H$. Nhưng khi liên hợp $s \\in K$ bởi $r \\in D_8$: $rsr^{-1} = r(r^{-1}s)^1$? Không, $sr = r^{-1}s \\implies sr^{-1} = rs \\implies rsr^{-1} = r^2s \\notin \\{e, s\\} = K$. Vậy $K \\not\\trianglelefteq D_8$!",
+        B: "Sai vì: Quan hệ chuẩn tắc $\\trianglelefteq$ không có tính bắc cầu; $K$ chỉ bất biến dưới liên hợp bởi các phần tử trong $H$, không bất biến dưới $r \\in D_8 \\setminus H$.",
+        C: "Sai vì: $[D_8 : H] = 2$ nên $H$ chắc chắn chuẩn tắc trong $D_8$.",
+        D: "Sai vì: Phần tử cấp $2$ không tự động sinh ra nhóm con chuẩn tắc (trừ khi nó nằm trong tâm $Z(G)$)."
+      }
+    },
+    {
+      id: "c4_q06",
+      chapter: 4,
+      topic: "Bốn cơ chế tự nhiên sinh ra nhóm con chuẩn tắc (Mệnh đề 4.4)",
+      question: "Trong các nhóm con sau đây, cặp nào mà nhóm con KHÔNG chuẩn tắc trong nhóm mẹ?",
+      options: {
+        A: "Nhóm thay phiên $A_n$ trong nhóm đối xứng $S_n$ ($n \\ge 2$).",
+        B: "Nhóm các phép quay $\\langle r \\rangle$ trong nhóm Dihedral $D_{2n}$ ($n \\ge 3$).",
+        C: "Nhóm con sinh bởi một phép lật $\\langle s \\rangle = \\{e, s\\}$ trong nhóm Dihedral $D_{2n}$ ($n \\ge 3$).",
+        D: "Tâm $Z(G)$ trong một nhóm $G$ bất kỳ."
+      },
+      correct: "C",
+      explanations: {
+        A: "Sai vì: $[S_n : A_n] = 2$ nên $A_n \\trianglelefteq S_n$ với mọi $n \\ge 2$.",
+        B: "Sai vì: $[D_{2n} : \\langle r \\rangle] = 2n/n = 2$ nên $\\langle r \\rangle \\trianglelefteq D_{2n}$.",
+        C: "Chính xác! Lời giải: Với $n \\ge 3$, ta có $rsr^{-1} = r^2s$. Vì $n \\ge 3$ nên $r^2 \\neq e$, suy ra $r^2s \\notin \\{e, s\\} = \\langle s \\rangle$. Do đó $\\langle s \\rangle$ không chuẩn tắc trong $D_{2n}$ (Bảng 4.8).",
+        D: "Sai vì: Với mọi $z \\in Z(G)$ và $g \\in G$, $gzg^{-1} = z \\in Z(G)$ nên $Z(G) \\trianglelefteq G$."
+      }
+    },
+    {
+      id: "c4_q07",
+      chapter: 4,
+      topic: "Định lý cấu trúc nhóm thương G/N (Định lý 4.5)",
+      question: "Cho $N \\trianglelefteq G$. Trong nhóm thương $G/N = \\{aN \\mid a \\in G\\}$ với phép nhân $(aN)(bN) = abN$, phần tử đơn vị, phần tử nghịch đảo của lớp $aN$, và điều kiện để $aN = N$ lần lượt là:",
+      options: {
+        A: "Đơn vị là $e$; nghịch đảo của $aN$ là $aN^{-1}$; và $aN = N \\iff a = e$.",
+        B: "Đơn vị là lớp $N = eN$; nghịch đảo của $aN$ là $(aN)^{-1} = a^{-1}N$; và $aN = N \\iff a \\in N$.",
+        C: "Đơn vị là lớp $G$; nghịch đảo của $aN$ là $Na^{-1}$; và $aN = N \\iff a \\notin N$.",
+        D: "Đơn vị là $\\{e\\}$; nghịch đảo của $aN$ là $a^{-1}N$; và mọi lớp đều có cấp bằng $|N|$."
+      },
+      correct: "B",
+      explanations: {
+        A: "Sai vì: Các phần tử của $G/N$ là các LỚP KỀ chứ không phải phần tử của $G$; và mọi $a \\in N$ đều cho $aN = N$, không chỉ riêng $a = e$.",
+        B: "Chính xác! Lời giải: Theo Định lý 4.5, đơn vị của nhóm thương $G/N$ là cả lớp kề $eN = N$; nghịch đảo của $aN$ là $a^{-1}N$ vì $(aN)(a^{-1}N) = aa^{-1}N = eN = N$; và một lớp trùng với lớp đơn vị $N$ khi và chỉ khi đại diện $a \\in N$.",
+        C: "Sai vì: Tập $G$ là nhóm mẹ chứ không phải một lớp kề trong $G/N$ (trừ khi $N=G$).",
+        D: "Sai vì: Đơn vị của $G/N$ là toàn bộ lớp $N$, không phải tập đơn tử $\\{e\\}$ (khi $N \\neq \\{e\\}$)."
+      }
+    },
+    {
+      id: "c4_q08",
+      chapter: 4,
+      topic: "Phép chiếu chính tắc pi_N (Định nghĩa 4.6)",
+      question: "Trong nhóm cộng $G = \\mathbb{Z}/12\\mathbb{Z}$, xét nhóm con chuẩn tắc $N = \\langle [4]_{12} \\rangle = \\{[0], [4], [8]\\}$ và phép chiếu chính tắc $\\pi_N: G \\to G/N$ cho bởi $\\pi_N([k]) = [k] + N$. Khẳng định nào ĐÚNG?",
+      options: {
+        A: "$\\pi_N$ là toàn ánh bảo toàn phép cộng, tập hạt nhân $\\ker\\pi_N = N = \\{[0], [4], [8]\\}$, và nhóm thương $G/N$ có cấp $12 / 3 = 4$.",
+        B: "Hạt nhân của $\\pi_N$ chỉ gồm duy nhất phần tử $\\{[0]\\}$ nên $\\pi_N$ là song ánh.",
+        C: "Nhóm thương $G/N$ có cấp bằng $3$.",
+        D: "$\\pi_N([2] + [3]) \\neq \\pi_N([2]) + \\pi_N([3])$."
+      },
+      correct: "A",
+      explanations: {
+        A: "Chính xác! Lời giải: Theo Định nghĩa 4.6 và Ví dụ Mục 4.6, $\\pi_N([x]+[y]) = ([x]+[y])+N = ([x]+N)+([y]+N) = \\pi_N([x])+\\pi_N([y])$. Các phần tử được gửi về lớp đơn vị $N$ của $G/N$ chính là $\\ker\\pi_N = \\{[k] \\in G \\mid [k]+N = N\\} = N = \\{[0],[4],[8]\\}$, và $|G/N| = 12/3 = 4$.",
+        B: "Sai vì: Đơn vị của nhóm thương là cả lớp $N$, nên mọi phần tử thuộc $N$ đều bị gửi về đơn vị của $G/N$.",
+        C: "Sai vì: $|N| = 3$ nên $|G/N| = |G|/|N| = 12/3 = 4$ (gồm 4 lớp $N, [1]+N, [2]+N, [3]+N$).",
+        D: "Sai vì: Phép chiếu chính tắc luôn bảo toàn phép toán của nhóm."
+      }
+    },
+    {
+      id: "c4_q09",
+      chapter: 4,
+      topic: "Cấp của phần tử trong nhóm thương",
+      question: "Trong nhóm thương $G/N = (\\mathbb{Z}/12\\mathbb{Z}) / \\langle [4]_{12} \\rangle$ (với $N = \\{[0], [4], [8]\\}$), cấp của lớp kề $C_1 = [1]_{12} + N$ và cấp của lớp kề $C_2 = [2]_{12} + N$ lần lượt là:",
+      options: {
+        A: "$\\operatorname{ord}(C_1) = 12$ và $\\operatorname{ord}(C_2) = 6$.",
+        B: "$\\operatorname{ord}(C_1) = 4$ và $\\operatorname{ord}(C_2) = 2$.",
+        C: "$\\operatorname{ord}(C_1) = 3$ và $\\operatorname{ord}(C_2) = 3$.",
+        D: "$\\operatorname{ord}(C_1) = 1$ và $\\operatorname{ord}(C_2) = 2$."
+      },
+      correct: "B",
+      explanations: {
+        A: "Sai vì: Đây là cấp của $[1]_{12}$ và $[2]_{12}$ trong nhóm mẹ $\\mathbb{Z}/12\\mathbb{Z}$, còn trong nhóm thương cấp $4$, cấp của lớp là số nguyên dương $m$ nhỏ nhất để $m[k] \\in N$.",
+        B: "Chính xác! Lời giải: Trong $G/N$, lớp đơn vị là $C_0 = N = \\{[0],[4],[8]\\}$. Với $C_1 = [1]+N$: $1[1], 2[1], 3[1] \\notin N$ và $4[1] = [4] \\in N \\implies \\operatorname{ord}(C_1) = 4$. Với $C_2 = [2]+N$: $[2] \\notin N$ nhưng $2[2] = [4] \\in N \\implies \\operatorname{ord}(C_2) = 2$.",
+        C: "Sai vì: Cấp của phần tử trong nhóm thương phải chia hết $|G/N| = 4$, nên không thể bằng $3$.",
+        D: "Sai vì: $[1]_{12} \\notin N$ nên $C_1 \\neq C_0$, cấp của $C_1$ không thể bằng $1$."
+      }
+    },
+    {
+      id: "c4_q10",
+      chapter: 4,
+      topic: "Định lý nhóm thương theo tâm G/Z(G) (Định lý 4.7 & Bài tập 4.22)",
+      question: "Cho $G$ là một nhóm và $Z(G)$ là tâm của $G$. Phát biểu nào sau đây là hệ quả ĐÚNG của Định lý 4.7 ('Nếu $G/Z(G)$ cyclic thì $G$ giao hoán')?",
+      options: {
+        A: "Nếu $G$ là một nhóm không giao hoán thì nhóm thương $G/Z(G)$ không bao giờ là nhóm cyclic (đặc biệt $|G/Z(G)|$ không thể là một số nguyên tố $p$).",
+        B: "Mọi nhóm thương $G/N$ của một nhóm không giao hoán $G$ đều không thể là nhóm cyclic.",
+        C: "Trong nhóm $S_3$, ta có $Z(S_3) = A_3$ nên $S_3/Z(S_3)$ là nhóm cyclic cấp $2$.",
+        D: "Nếu $G/Z(G)$ là nhóm cyclic thì $Z(G) = \\{e\\}$."
+      },
+      correct: "A",
+      explanations: {
+        A: "Chính xác! Lời giải: Lấy phản đảo của Định lý 4.7: vì $G/Z(G)$ cyclic $\\implies G$ Abel, nên nếu $G$ không Abel thì $G/Z(G)$ không thể cyclic. Do mọi nhóm cấp nguyên tố $p$ đều cyclic, $|G/Z(G)|$ của một nhóm phi Abel không bao giờ bằng $p$.",
+        B: "Sai vì: Định lý chỉ áp dụng riêng cho thương theo TÂM $G/Z(G)$. Với nhóm con chuẩn tắc khác tâm, thương vẫn có thể cyclic, ví dụ $S_3/A_3 \\cong \\mathbb{Z}/2\\mathbb{Z}$ là cyclic dù $S_3$ không Abel.",
+        C: "Sai vì: Tâm của $S_3$ là $Z(S_3) = \\{e\\}$ (chứ không phải $A_3$), nên $S_3/Z(S_3) \\cong S_3$ không cyclic.",
+        D: "Sai vì: Khi $G/Z(G)$ cyclic thì $G$ giao hoán, tức là $Z(G) = G$ và $|G/Z(G)| = 1$."
+      }
+    }
+  ];
+
+  // ====================================================================
   // 1. NGÂN HÀNG CÂU HỎI LÝ THUYẾT & BẪY PHẢN VÍ DỤ TINH TUYỂN (CHƯƠNG 0–9)
   // ====================================================================
+  const mapStructuredQuestions = (arr) => arr.map((item, index) => ({
+    id: item.id,
+    ch: item.chapter,
+    topic: item.topic,
+    level: index % 4 === 0 ? "recognition" : index % 4 === 3 ? "application" : "understanding",
+    q: item.question,
+    opts: Object.values(item.options),
+    ans: Object.keys(item.options).indexOf(item.correct),
+    exp: item.explanations[item.correct],
+    explanations: item.explanations
+  }));
+
   const CURATED_BANK = [
     // CHƯƠNG 0
     {
@@ -793,7 +1592,13 @@
         "Đơn ánh, toàn ánh và song ánh."
       ],
       ans: 0,
-      exp: "Theo Định nghĩa 0.4 trong Giáo trình: Quan hệ tương đương $\\sim$ trên $X$ phải thỏa mãn 3 tính chất: phản xạ ($x \\sim x$), đối xứng ($x \\sim y \\implies y \\sim x$) và bắc cầu ($x \\sim y, y \\sim z \\implies x \\sim z$)."
+      exp: "Theo Định nghĩa 0.5 trong Giáo trình: Quan hệ tương đương $\\sim$ trên $X$ phải thỏa mãn 3 tính chất: phản xạ ($x \\sim x$), đối xứng ($x \\sim y \\implies y \\sim x$) và bắc cầu ($x \\sim y, y \\sim z \\implies x \\sim z$).",
+      explanations: {
+        A: "Chính xác! Lời giải: Theo Định nghĩa 0.5, quan hệ tương đương $\\sim$ trên $X$ phải thỏa mãn đủ 3 tính chất: phản xạ ($x \\sim x$), đối xứng ($x \\sim y \\implies y \\sim x$) và bắc cầu ($x \\sim y, y \\sim z \\implies x \\sim z$).",
+        B: "Sai vì: Phản xứng ($x \\sim y, y \\sim x \\implies x = y$) là tính chất của quan hệ thứ tự, không phải quan hệ tương đương.",
+        C: "Sai vì: Giao hoán, kết hợp và đơn vị là tính chất của phép toán hai ngôi, không phải của quan hệ hai ngôi.",
+        D: "Sai vì: Đơn ánh, toàn ánh, song ánh là các tính chất của ánh xạ."
+      }
     },
     {
       ch: 0, level: "understanding",
@@ -805,7 +1610,13 @@
         "$T$ xác định tốt nhưng không bảo toàn phép cộng."
       ],
       ans: 0,
-      exp: "Trong $\\mathbb{Z}/3\\mathbb{Z}$, hai đại diện $1$ và $4$ thuộc cùng một lớp ($[1]_3 = [4]_3$), nhưng đầu ra lại rơi vào hai lớp khác nhau trong $\\mathbb{Z}/2\\mathbb{Z}$ ($[1]_2 \\neq [0]_2 = [4]_2$). Do đó công thức phụ thuộc vào đại diện và không xác định một ánh xạ."
+      exp: "Trong $\\mathbb{Z}/3\\mathbb{Z}$, hai đại diện $1$ và $4$ thuộc cùng một lớp ($[1]_3 = [4]_3$), nhưng đầu ra lại rơi vào hai lớp khác nhau trong $\\mathbb{Z}/2\\mathbb{Z}$ ($[1]_2 \\neq [0]_2 = [4]_2$). Do đó công thức phụ thuộc vào đại diện và không xác định một ánh xạ.",
+      explanations: {
+        A: "Chính xác! Lời giải: Trong $\\mathbb{Z}/3\\mathbb{Z}$, $[1]_3 = [4]_3$ là cùng một phần tử, nhưng $T([1]_3) = [1]_2 \\neq [0]_2 = T([4]_3)$, nên công thức phụ thuộc vào đại diện và không xác định tốt.",
+        B: "Sai vì: $T$ thậm chí chưa phải là một ánh xạ hợp lệ nên không thể là đồng cấu hay toàn cấu.",
+        C: "Sai vì: $\\gcd(3,2)=1$ làm cho $3 \\not\\mid 2$ và $2 \\not\\mid 3$, khiến việc giữ nguyên đại diện từ mod 3 sang mod 2 bị mâu thuẫn.",
+        D: "Sai vì: $T$ vi phạm ngay từ tính xác định tốt."
+      }
     },
     {
       ch: 0, level: "understanding",
@@ -817,28 +1628,36 @@
         "$\\{0\\}$"
       ],
       ans: 0,
-      exp: "Ta có $1 + (a * b) = (1 + a)(1 + b)$. Phần tử đơn vị là $e = 0$. Để $a * b = 0$, ta cần $(1+a)(1+b) = 1$. Vì $a, b \\in \\mathbb{Z}$ nên $1+a \\in \\{\\pm 1\\} \\iff a \\in \\{0, -2\\}$."
+      exp: "Ta có $1 + (a * b) = (1 + a)(1 + b)$. Phần tử đơn vị là $e = 0$. Để $a * b = 0$, ta cần $(1+a)(1+b) = 1$. Vì $a, b \\in \\mathbb{Z}$ nên $1+a \\in \\{\\pm 1\\} \\iff a \\in \\{0, -2\\}$.",
+      explanations: {
+        A: "Chính xác! Lời giải: Đơn vị là $e = 0$. Phương trình $a * b = 0 \\iff (1+a)(1+b) = 1$ trên $\\mathbb{Z}$ buộc $1+a \\in \\{1, -1\\} \\iff a \\in \\{0, -2\\}$.",
+        B: "Sai vì: Nghịch đảo $b = -a/(1+a)$ chỉ thuộc $\\mathbb{R}$ hoặc $\\mathbb{Q}$ khi $a \\neq -1$, còn trên tập số nguyên $\\mathbb{Z}$ thì chỉ có $a=0$ và $a=-2$ cho kết quả nguyên.",
+        C: "Sai vì: Với $a = 1$, $1 + a = 2$ không có nghịch đảo nhân nguyên; với $a = -1$, $1 + a = 0$ làm $(1+a)(1+b)=0 \\neq 1$.",
+        D: "Sai vì: Bỏ sót phần tử $a = -2$ (vì $(-2) * (-2) = -2 - 2 + 4 = 0$)."
+      }
     },
+    ...mapStructuredQuestions(questionsChapter0),
+
     // CHƯƠNG 1
     {
-  ch: 1,
-  level: "understanding",
-  q: "Trên tập hợp các số thực $\\mathbb{R}$, xét phép toán trung bình cộng $x * y = \\dfrac{x + y}{2}$. Cấu trúc $(\\mathbb{R}, *)$ vi phạm tiên đề nhóm nào đầu tiên?",
-  opts: [
-    "Tính đóng trên tập $\\mathbb{R}$.",
-    "Tính giao hoán.",
-    "Tính kết hợp (dù phép toán có tính giao hoán).",
-    "Chỉ thiếu phần tử nghịch đảo còn vẫn thỏa mãn tính kết hợp."
-  ],
-  ans: 2,
-  exp: "Phép toán $x * y = \\dfrac{x + y}{2}$ đóng và giao hoán trên $\\mathbb{R}$, nhưng KHÔNG kết hợp: $(0 * 0) * 4 = 2 \\neq 1 = 0 * (0 * 4)$. Đây là phản ví dụ kinh điển cho thấy tính giao hoán không kéo theo tính kết hợp.",
-  explanations: {
-    A: "với mọi $x, y \\in \\mathbb{R}$, trung bình cộng $\\dfrac{x + y}{2} \\in \\mathbb{R}$ nên phép toán $*$ hoàn toàn thỏa mãn tính đóng trên $\\mathbb{R}$.",
-    B: "với mọi $x, y \\in \\mathbb{R}$, ta luôn có $x * y = \\dfrac{x + y}{2} = \\dfrac{y + x}{2} = y * x$ nên phép toán $*$ thỏa mãn tính giao hoán.",
-    C: "Phép toán $x * y = \\dfrac{x + y}{2}$ đóng và giao hoán trên $\\mathbb{R}$, nhưng KHÔNG kết hợp vì $(x * y) * z = \\dfrac{x + y + 2z}{4} \\neq \\dfrac{2x + y + z}{4} = x * (y * z)$. Phản ví dụ cụ thể: $(0 * 0) * 4 = 2 \\neq 1 = 0 * (0 * 4)$. Đây là phản ví dụ kinh điển cho thấy tính giao hoán không kéo theo tính kết hợp.",
-    D: "phép toán $x * y = \\dfrac{x + y}{2}$ đã vi phạm ngay từ tiên đề kết hợp (và cũng không có phần tử đơn vị trên $\\mathbb{R}$), chứ không phải vẫn thỏa mãn tính kết hợp."
-  }
-},
+      ch: 1,
+      level: "understanding",
+      q: "Trên tập hợp các số thực $\\mathbb{R}$, xét phép toán trung bình cộng $x * y = \\dfrac{x + y}{2}$. Cấu trúc $(\\mathbb{R}, *)$ vi phạm tiên đề nhóm nào đầu tiên?",
+      opts: [
+        "Tính đóng trên tập $\\mathbb{R}$.",
+        "Tính giao hoán.",
+        "Tính kết hợp (dù phép toán có tính giao hoán).",
+        "Chỉ thiếu phần tử nghịch đảo còn vẫn thỏa mãn tính kết hợp."
+      ],
+      ans: 2,
+      exp: "Phép toán $x * y = \\dfrac{x + y}{2}$ đóng và giao hoán trên $\\mathbb{R}$, nhưng KHÔNG kết hợp: $(0 * 0) * 4 = 2 \\neq 1 = 0 * (0 * 4)$. Đây là phản ví dụ kinh điển cho thấy tính giao hoán không kéo theo tính kết hợp.",
+      explanations: {
+        A: "Sai vì: với mọi $x, y \\in \\mathbb{R}$, trung bình cộng $\\dfrac{x + y}{2} \\in \\mathbb{R}$ nên phép toán $*$ hoàn toàn thỏa mãn tính đóng trên $\\mathbb{R}$.",
+        B: "Sai vì: với mọi $x, y \\in \\mathbb{R}$, ta luôn có $x * y = \\dfrac{x + y}{2} = \\dfrac{y + x}{2} = y * x$ nên phép toán $*$ thỏa mãn tính giao hoán.",
+        C: "Chính xác! Lời giải: Phép toán $x * y = \\dfrac{x + y}{2}$ đóng và giao hoán trên $\\mathbb{R}$, nhưng KHÔNG kết hợp vì $(x * y) * z = \\dfrac{x + y + 2z}{4} \\neq \\dfrac{2x + y + z}{4} = x * (y * z)$. Phản ví dụ cụ thể: $(0 * 0) * 4 = 2 \\neq 1 = 0 * (0 * 4)$.",
+        D: "Sai vì: phép toán $x * y = \\dfrac{x + y}{2}$ đã vi phạm ngay từ tiên đề kết hợp (và cũng không có phần tử đơn vị trên $\\mathbb{R}$), chứ không phải vẫn thỏa mãn tính kết hợp."
+      }
+    },
     {
       ch: 1, level: "understanding",
       q: "Trong một nhóm $G$ bất kỳ (không mặc định giao hoán), với mọi $a, b \\in G$, phần tử nghịch đảo của tích $ab$ là:",
@@ -863,24 +1682,9 @@
       ans: 0,
       exp: "Vì $x^2 = e \\iff x = x^{-1}$ với mọi $x \\in G$, nên với mọi $a, b \\in G$ ta có $ab = (ab)^{-1} = b^{-1}a^{-1} = ba$. Lưu ý: $G$ chưa chắc cyclic (chẳng hạn nhóm Klein $V_4$ thỏa $x^2 = e$ nhưng không cyclic)."
     },
-    ...questionsChapter1.map((item, index) => ({
-      ch: item.chapter,
-      level: index % 4 === 0 ? "recognition" : index % 4 === 3 ? "application" : "understanding",
-      q: item.question,
-      opts: Object.values(item.options),
-      ans: Object.keys(item.options).indexOf(item.correct),
-      exp: item.explanations[item.correct],
-      explanations: item.explanations
-    })),
-    ...questionsChapter1_Part2.map((item, index) => ({
-      ch: item.chapter,
-      level: index % 4 === 0 ? "recognition" : index % 4 === 3 ? "application" : "understanding",
-      q: item.question,
-      opts: Object.values(item.options),
-      ans: Object.keys(item.options).indexOf(item.correct),
-      exp: item.explanations[item.correct],
-      explanations: item.explanations
-    })),
+    ...mapStructuredQuestions(questionsChapter1),
+    ...mapStructuredQuestions(questionsChapter1_Part2),
+
     // CHƯƠNG 2
     {
       ch: 2, level: "recognition",
@@ -906,6 +1710,8 @@
       ans: 0,
       exp: "Trong $(\\mathbb{Z}, +)$, $2\\mathbb{Z} \\cup 3\\mathbb{Z}$ không đóng với phép cộng vì $2 \\in 2\\mathbb{Z}, 3 \\in 3\\mathbb{Z}$ nhưng $2 + 3 = 5 \\notin 2\\mathbb{Z} \\cup 3\\mathbb{Z}$. Hợp của hai nhóm con chỉ là nhóm con khi tập này chứa tập kia."
     },
+    ...mapStructuredQuestions(questionsChapter2),
+
     // CHƯƠNG 3
     {
       ch: 3, level: "understanding",
@@ -917,7 +1723,7 @@
         "Nhóm Dihedral $D_8$ và nhóm Quaternion $Q_8$."
       ],
       ans: 0,
-      exp: "Theo Mục 3.7 và Bài tập 3.12 Giáo trình: $V_4$ có mọi phần tử khác $e$ đều cấp $2$ (bác bỏ việc tồn tại phần tử cấp $d \\mid |G|$); còn $A_4$ có cấp $12$ nhưng không có bất kỳ nhóm con nào cấp $6$ (bác bỏ việc tồn tại nhóm con cấp $d \\mid |G|$)."
+      exp: "Theo Mục 3.5 và Bài tập 3.12 Giáo trình: $V_4$ có mọi phần tử khác $e$ đều cấp $2$ (bác bỏ việc tồn tại phần tử cấp $d \\mid |G|$); còn $A_4$ có cấp $12$ nhưng không có bất kỳ nhóm con nào cấp $6$ (bác bỏ việc tồn tại nhóm con cấp $d \\mid |G|$)."
     },
     {
       ch: 3, level: "recognition",
@@ -931,6 +1737,8 @@
       ans: 0,
       exp: "Theo hệ quả Định lý Lagrange: với $a \\neq e$, $\\operatorname{ord}(a) > 1$ và $\\operatorname{ord}(a) \\mid p$ (nguyên tố) nên $\\operatorname{ord}(a) = p = |G|$, suy ra $G = \\langle a \\rangle$ là nhóm cyclic."
     },
+    ...mapStructuredQuestions(questionsChapter3),
+
     // CHƯƠNG 4
     {
       ch: 4, level: "understanding",
@@ -956,6 +1764,8 @@
       ans: 0,
       exp: "Nếu $G/Z(G) = \\langle aZ(G) \\rangle$ là cyclic thì mọi phần tử của $G$ đều có dạng $a^k z$ ($z \\in Z(G)$), dẫn đến hai phần tử bất kỳ đều giao hoán với nhau, tức $G$ giao hoán!"
     },
+    ...mapStructuredQuestions(questionsChapter4),
+
     // CHƯƠNG 5
     {
       ch: 5, level: "recognition",
@@ -1111,13 +1921,13 @@
       const b = randChoice([7, 9, 11, 12, 13, 15]);
       const qTrue = -randChoice([8, 9, 11, 12, 14]);
       const rTrue = randChoice([2, 3, 4, 5, b - 2]);
-      const a = b * qTrue + rTrue; // Số nguyên âm
+      const a = b * qTrue + rTrue;
       const qTrap = qTrue + 1;
-      const rTrap = a - b * qTrap; // Số dư âm (bẫy phổ biến!)
+      const rTrap = a - b * qTrap;
       return buildQuestionFromAnswer(
         {
           ch: 0, level: "application",
-          q: `Thực hiện phép chia Euclid của $a = ${a}$ cho $b = ${b}$ theo đúng quy ước $a = bq + r$ với $0 \\le r < ${b}$ (Mục 0.3.1). Cặp thương và số dư $(q, r)$ duy nhất là:`,
+          q: `Thực hiện phép chia Euclid của $a = ${a}$ cho $b = ${b}$ theo đúng quy ước $a = bq + r$ với $0 \\le r < ${b}$ (Mục 0.3). Cặp thương và số dư $(q, r)$ duy nhất là:`,
           exp: `Vì số dư $r$ bắt buộc thỏa mãn $0 \\le r < ${b}$, ta không được lấy $q = ${qTrap}, r = ${rTrap} < 0$. Phép biểu diễn đúng duy nhất là $${a} = ${b} \\cdot (${qTrue}) + ${rTrue}$, nên $(q, r) = (${qTrue}, ${rTrue})$.`
         },
         `$(q, r) = (${qTrue}, ${rTrue})$`,
@@ -1188,7 +1998,7 @@
         {
           ch: 1, level: "recognition",
           q: `Xét nhóm Dihedral $D_{${2 * n}}$ gồm tất cả các phép đối xứng của đa giác đều $${n}$ cạnh. Số phép quay và số phép đối xứng trục trong $D_{${2 * n}}$ lần lượt là:`,
-          exp: `Theo Mục 1.6.4 Giáo trình: Nhóm $D_{2n} = \\{e, r, \\dots, r^{n-1}, s, rs, \\dots, r^{n-1}s\\}$ có cấp $2n = ${2 * n}$, gồm đúng $${n}$ phép quay $r^k$ và $${n}$ phép đối xứng trục $r^ks$.`
+          exp: `Theo Mục 1.7 Giáo trình: Nhóm $D_{2n} = \\{e, r, \\dots, r^{n-1}, s, rs, \\dots, r^{n-1}s\\}$ có cấp $2n = ${2 * n}$, gồm đúng $${n}$ phép quay $r^k$ và $${n}$ phép đối xứng trục $r^ks$.`
         },
         `$${n}$ phép quay và $${n}$ phép đối xứng trục (tổng cấp là $${2 * n}$).`,
         [
@@ -1262,6 +2072,32 @@
         ]
       );
     },
+    // Ch.4: Cấp của nhóm thương (Z/nZ) / <[d]_n> và cấp của lớp kề
+    () => {
+      const configs = [
+        { n: 12, d: 4 },
+        { n: 15, d: 5 },
+        { n: 18, d: 6 },
+        { n: 20, d: 5 },
+        { n: 24, d: 6 }
+      ];
+      const { n, d } = randChoice(configs);
+      const subOrder = n / d;
+      const quotOrder = d;
+      return buildQuestionFromAnswer(
+        {
+          ch: 4, level: "application",
+          q: `Trong nhóm cộng $G = \\mathbb{Z}/${n}\\mathbb{Z}$, xét nhóm con chuẩn tắc $N = \\langle [${d}]_{${n}} \\rangle$. Cấp của nhóm con $|N|$, cấp của nhóm thương $|G/N|$ và phần tử đơn vị của nhóm thương $G/N$ lần lượt là:`,
+          exp: `Trong $\\mathbb{Z}/${n}\\mathbb{Z}$, phần tử $[${d}]_{${n}}$ có cấp $|N| = \\dfrac{${n}}{\\gcd(${n}, ${d})} = ${subOrder}$. Theo Định lý 4.5, cấp của nhóm thương là $|G/N| = [G : N] = \\dfrac{${n}}{${subOrder}} = ${quotOrder}$, và phần tử đơn vị của nhóm thương là toàn bộ lớp $N = \\langle [${d}]_{${n}} \\rangle$.`
+        },
+        `$|N| = ${subOrder}$, $|G/N| = ${quotOrder}$ và đơn vị của $G/N$ là lớp $N = \\langle [${d}]_{${n}} \\rangle$.`,
+        [
+          `$|N| = ${quotOrder}$, $|G/N| = ${subOrder}$ và đơn vị của $G/N$ là $[0]_{${n}}$.`,
+          `$|N| = ${subOrder}$, $|G/N| = ${quotOrder}$ và đơn vị của $G/N$ là phần tử $[0]_{${n}}$ chứ không phải lớp $N$.`,
+          `$|N| = ${n}$, $|G/N| = 1$ và đơn vị của $G/N$ là $G$.`
+        ]
+      );
+    },
     // Ch.4 & Ch.5: Nhận diện nhóm thương & Hạt nhân của đồng cấu φ: Z_m -> Z_n
     () => {
       const pairs = [
@@ -1271,7 +2107,6 @@
         { m: 12, n: 6, k: 3 }
       ];
       const { m, n, k } = randChoice(pairs);
-      // k*x ≡ 0 (mod n) <=> (n / gcd(n, k)) | x
       const step = n / gcd(n, k);
       const kerSize = m / step;
       const imSize = m / kerSize;
