@@ -5,18 +5,19 @@
    2. Tự động lưu vị trí đọc, Lịch sử đọc gần đây & Deep-link URL Hash
    3. Trang chủ Đọc sách (Reading Hub: Tiếp tục đọc, Thư viện chương, Đánh dấu)
    4. Sổ tay cá nhân bên phải (CRUD ghi chú, Đánh dấu ĐN/ĐL/VD, Tìm kiếm, JSON Backup)
+   5. [MỚI - Ý TƯỞNG 2] Bôi đen văn bản để Highlight (3 màu) & Trích dẫn nhanh vào Sổ tay (Bảo toàn LaTeX)
+   6. [MỚI - Ý TƯỞNG 3] Xuất Sổ tay Cá nhân & Đề thi Smart Exam ra tệp .tex chuẩn LaTeX (TeXstudio / Overleaf)
    ========================================================================== */
 (function initDigitalBookUpgrade() {
   "use strict";
-
   const STORAGE_KEYS = {
     SETTINGS: "ctds_db_reader_settings_v1",
     PROGRESS: "ctds_db_reading_progress_v1",
     HISTORY: "ctds_db_reading_history_v1",
     NOTES: "ctds_db_personal_notes_v1",
+    HIGHLIGHTS: "ctds_db_highlights_v1",
     LEGACY_BM: "ctds_bookmarks_v1"
   };
-
   // ---------------- TIỆN ÍCH AN TOÀN DỮ LIỆU & DEBOUNCE ----------------
   function debounce(fn, delay) {
     let timer = null;
@@ -25,7 +26,6 @@
       timer = setTimeout(() => fn.apply(this, args), delay);
     };
   }
-
   function safeStorageRead(key, fallback) {
     try {
       const raw = window.localStorage.getItem(key);
@@ -36,7 +36,6 @@
       return fallback;
     }
   }
-
   function safeStorageWrite(key, data) {
     try {
       const serialized = JSON.stringify(data);
@@ -47,7 +46,6 @@
       return false;
     }
   }
-
   function renderMathSafely(el) {
     if (!el || typeof window.renderMathInElement !== "function") return;
     try {
@@ -62,29 +60,36 @@
       });
     } catch (_) {}
   }
-
+  function downloadTextFile(content, filename, mimeType = "text/plain;charset=utf-8") {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
   // ---------------- 1. TRẠNG THÁI CÀI ĐẶT ĐỌC & KHỞI TẠO ----------------
   const defaultSettings = {
     fontSize: 18,
     lineHeight: 1.85,
-    colorMode: "light", // "light" | "dark"
+    colorMode: "light",
     focusMode: false,
     drawerOpen: false,
     hubCollapsed: false
   };
-
   let settings = Object.assign({}, defaultSettings, safeStorageRead(STORAGE_KEYS.SETTINGS, {}));
-  // Ràng buộc miền giá trị hợp lệ
   settings.fontSize = Math.min(22, Math.max(15, Number(settings.fontSize) || 18));
   settings.lineHeight = Math.min(2.15, Math.max(1.6, Number(settings.lineHeight) || 1.85));
   if (settings.colorMode !== "dark") settings.colorMode = "light";
-
   let notesData = safeStorageRead(STORAGE_KEYS.NOTES, []);
   if (!Array.isArray(notesData)) notesData = [];
-
+  let highlightsData = safeStorageRead(STORAGE_KEYS.HIGHLIGHTS, []);
+  if (!Array.isArray(highlightsData)) highlightsData = [];
   let readingHistory = safeStorageRead(STORAGE_KEYS.HISTORY, []);
   if (!Array.isArray(readingHistory)) readingHistory = [];
-
   let lastProgress = safeStorageRead(STORAGE_KEYS.PROGRESS, {
     partId: "part-0",
     chapterId: "tab-c0",
@@ -92,8 +97,6 @@
     title: "Chương 0: Công cụ Logic, Tập hợp & Ánh xạ",
     timestamp: Date.now()
   });
-
-  // Trạng thái đang soạn ghi chú trong Sổ tay
   let activeContext = {
     partId: "part-0",
     chapterId: "tab-c0",
@@ -104,7 +107,6 @@
   };
   let editingNoteId = null;
   let activeNbFilter = "all";
-
   // ---------------- 2. ĐỒNG BỘ ID ỔN ĐỊNH CHO CÁC KHỐI KIẾN THỨC ----------------
   function ensureStableIds() {
     document.querySelectorAll(".part-panel .chapter-content").forEach(ch => {
@@ -126,7 +128,6 @@
       });
     });
   }
-
   // ---------------- 3. ÁP DỤNG CÀI ĐẶT ĐỌC LÊN DOM ----------------
   function applyReaderSettings() {
     const root = document.documentElement;
@@ -134,25 +135,20 @@
     root.style.setProperty("--fs", `${settings.fontSize}px`);
     root.style.setProperty("--db-reading-lh", String(settings.lineHeight));
     root.setAttribute("data-book-mode", settings.colorMode);
-
     document.body.classList.toggle("db-focus-mode", Boolean(settings.focusMode));
     document.body.classList.toggle("db-drawer-open", Boolean(settings.drawerOpen));
-
     const drawer = document.getElementById("dbNotebookDrawer");
     if (drawer) drawer.hidden = !settings.drawerOpen;
-
     const btnDrawer = document.getElementById("dbBtnToggleDrawer");
     if (btnDrawer) {
       btnDrawer.setAttribute("aria-pressed", String(Boolean(settings.drawerOpen)));
       btnDrawer.classList.toggle("is-active", Boolean(settings.drawerOpen));
     }
-
     const btnFocus = document.getElementById("dbBtnFocusMode");
     if (btnFocus) {
       btnFocus.setAttribute("aria-pressed", String(Boolean(settings.focusMode)));
       btnFocus.classList.toggle("is-active", Boolean(settings.focusMode));
     }
-
     const btnColor = document.getElementById("dbBtnColorMode");
     if (btnColor) {
       const isDark = settings.colorMode === "dark";
@@ -161,29 +157,23 @@
         ? '🌙 <span class="db-btn-label">Tối</span>'
         : '☀️ <span class="db-btn-label">Sáng</span>';
     }
-
     const fsReadout = document.getElementById("dbFsReadout");
     if (fsReadout) fsReadout.textContent = `${settings.fontSize}px`;
-
     const lhReadout = document.getElementById("dbLhReadout");
     if (lhReadout) lhReadout.textContent = settings.lineHeight.toFixed(2);
   }
-
   function saveReaderSettings() {
     safeStorageWrite(STORAGE_KEYS.SETTINGS, settings);
   }
-
   // ---------------- 4. THANH CÔNG CỤ ĐỌC SÁCH GỌN TRÊN TOPBAR ----------------
   function injectReaderToolbar() {
     const actionsEl = document.querySelector(".topbar .actions");
     if (!actionsEl || document.getElementById("dbToolbarGroup")) return;
-
     const group = document.createElement("div");
     group.className = "db-toolbar-group";
     group.id = "dbToolbarGroup";
     group.setAttribute("role", "toolbar");
     group.setAttribute("aria-label", "Công cụ đọc sách Digital Book");
-
     group.innerHTML = `
       <button type="button" class="db-tool-btn" id="dbBtnTypo" aria-expanded="false" aria-controls="dbTypoPopover" title="Điều chỉnh cỡ chữ và giãn dòng">
         Aa <span class="db-btn-label">Cỡ chữ</span>
@@ -201,10 +191,7 @@
         <span class="db-badge-count" id="dbTotalNotesBadge">0</span>
       </button>
     `;
-
     actionsEl.prepend(group);
-
-    // Popover chỉnh cỡ chữ & giãn dòng
     const popover = document.createElement("div");
     popover.className = "db-typo-popover";
     popover.id = "dbTypoPopover";
@@ -226,12 +213,11 @@
           <button type="button" class="db-step-btn" id="dbLhInc" aria-label="Tăng giãn dòng">+</button>
         </div>
       </div>
-      <div class="db-typo-row" style="margin-top:8px; padding-top:8px; border-top:1px solid var(--db-border);">
+      <div class="db-typo-row" style="margin-top:8px; padding-top:8px; border-top:1px solid var(--line);">
         <button type="button" class="db-step-btn" id="dbTypoReset" style="width:100%;">Đặt lại mặc định (18px · 1.85)</button>
       </div>
     `;
     document.querySelector(".topbar")?.appendChild(popover);
-
     const btnTypo = document.getElementById("dbBtnTypo");
     btnTypo?.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -239,14 +225,12 @@
       popover.hidden = !willOpen;
       btnTypo.setAttribute("aria-expanded", String(willOpen));
     });
-
     document.addEventListener("click", (e) => {
       if (!popover.hidden && !popover.contains(e.target) && e.target !== btnTypo) {
         popover.hidden = true;
         btnTypo?.setAttribute("aria-expanded", "false");
       }
     });
-
     document.getElementById("dbFsDec")?.addEventListener("click", () => {
       settings.fontSize = Math.max(15, settings.fontSize - 1);
       applyReaderSettings();
@@ -273,19 +257,16 @@
       applyReaderSettings();
       saveReaderSettings();
     });
-
     document.getElementById("dbBtnColorMode")?.addEventListener("click", () => {
       settings.colorMode = settings.colorMode === "dark" ? "light" : "dark";
       applyReaderSettings();
       saveReaderSettings();
     });
-
     document.getElementById("dbBtnFocusMode")?.addEventListener("click", () => {
       settings.focusMode = !settings.focusMode;
       applyReaderSettings();
       saveReaderSettings();
     });
-
     document.getElementById("dbBtnToggleDrawer")?.addEventListener("click", () => {
       settings.drawerOpen = !settings.drawerOpen;
       applyReaderSettings();
@@ -293,18 +274,15 @@
       if (settings.drawerOpen) renderNotebookList();
     });
   }
-
   // ---------------- 5. TRANG CHỦ DIGITAL BOOK (READING HUB DASHBOARD) ----------------
   function injectReadingHub() {
     const studyWorkspace = document.getElementById("studyWorkspace");
     const container = studyWorkspace?.querySelector(".container");
     if (!studyWorkspace || !container || document.getElementById("dbHomeDashboard")) return;
-
     const hub = document.createElement("section");
     hub.className = "db-home-hub";
     hub.id = "dbHomeDashboard";
     hub.setAttribute("aria-label", "Bảng điều khiển Đọc sách & Sổ tay cá nhân");
-
     hub.innerHTML = `
       <div class="db-hub-shell ${settings.hubCollapsed ? "is-collapsed" : ""}" id="dbHubShell">
         <div class="db-hub-header">
@@ -312,19 +290,18 @@
             <span>📚</span>
             <div>
               <h2 class="db-hub-title">Không gian Đọc Học thuật &amp; Sổ tay Cá nhân</h2>
-              <span class="db-hub-subtitle">Tự động lưu vị trí đọc · Đánh dấu Định nghĩa, Định lý, Ví dụ · Sao lưu JSON</span>
+              <span class="db-hub-subtitle">Bôi đen văn bản để Tô sáng / Trích dẫn nhanh · Xuất Sổ tay &amp; Đề thi chuẩn LaTeX (.tex)</span>
             </div>
           </div>
-          <div style="display:flex; gap:8px; align-items:center;">
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+            <button type="button" class="db-tex-export-btn" id="dbHubExportTexBtn" title="Xuất toàn bộ Sổ tay & Đề cương ra file .tex cho TeXstudio / Overleaf">📄 Xuất Sổ tay (.tex)</button>
             <button type="button" class="db-step-btn" id="dbHubOpenNotesBtn">📓 Mở Sổ tay</button>
             <button type="button" class="db-step-btn" id="dbHubCollapseBtn" aria-expanded="${!settings.hubCollapsed}">
               ${settings.hubCollapsed ? "▼ Mở rộng Bảng đọc sách" : "▲ Thu gọn"}
             </button>
           </div>
         </div>
-
         <div class="db-hub-grid">
-          <!-- Cột 1: Tiếp tục đọc từ vị trí gần nhất -->
           <div class="db-hub-card">
             <div>
               <h4>📖 Tiếp tục đọc</h4>
@@ -333,20 +310,14 @@
             </div>
             <button type="button" class="db-primary-btn" id="dbContinueBtn">Đọc tiếp từ vị trí này →</button>
           </div>
-
-          <!-- Cột 2: Thư viện chương -->
           <div class="db-hub-card">
             <h4>🗂️ Thư viện chương</h4>
             <div class="db-chapter-chips" id="dbChapterChips"></div>
           </div>
-
-          <!-- Cột 3: Sổ tay & Kiến thức đã đánh dấu -->
           <div class="db-hub-card">
             <h4>🔖 Đã đánh dấu &amp; Ghi chú (<span id="dbHubNotesCount">0</span>)</h4>
             <ul class="db-mini-list" id="dbHubBookmarksList"></ul>
           </div>
-
-          <!-- Cột 4: Lịch sử đọc gần đây -->
           <div class="db-hub-card">
             <h4>🕒 Lịch sử đọc gần đây</h4>
             <ul class="db-mini-list" id="dbHubHistoryList"></ul>
@@ -354,9 +325,7 @@
         </div>
       </div>
     `;
-
     studyWorkspace.insertBefore(hub, container);
-
     document.getElementById("dbHubCollapseBtn")?.addEventListener("click", function () {
       const shell = document.getElementById("dbHubShell");
       if (!shell) return;
@@ -366,19 +335,19 @@
       this.textContent = settings.hubCollapsed ? "▼ Mở rộng Bảng đọc sách" : "▲ Thu gọn";
       saveReaderSettings();
     });
-
     document.getElementById("dbHubOpenNotesBtn")?.addEventListener("click", () => {
       settings.drawerOpen = true;
       applyReaderSettings();
       saveReaderSettings();
       renderNotebookList();
     });
-
+    document.getElementById("dbHubExportTexBtn")?.addEventListener("click", () => {
+      exportNotebookToLatex();
+    });
     document.getElementById("dbContinueBtn")?.addEventListener("click", () => {
       navigateToLocation(lastProgress.partId, lastProgress.chapterId, lastProgress.sectionId);
     });
   }
-
   function updateReadingHubUI() {
     const titleEl = document.getElementById("dbContinueTitle");
     const metaEl = document.getElementById("dbContinueMeta");
@@ -393,8 +362,6 @@
         ? `Mục: ${lastProgress.sectionTitle} ${timeStr ? "· " + timeStr : ""}`
         : `Đã lưu tự động ${timeStr ? "lúc " + timeStr : ""}`;
     }
-
-    // Render Thư viện chương
     const chipsContainer = document.getElementById("dbChapterChips");
     if (chipsContainer) {
       const allCh = [
@@ -420,21 +387,18 @@
         chipsContainer.appendChild(btn);
       });
     }
-
-    // Render Danh sách đánh dấu & ghi chú gần nhất trên Hub
     const bmList = document.getElementById("dbHubBookmarksList");
     const countEl = document.getElementById("dbHubNotesCount");
     const totalBadge = document.getElementById("dbTotalNotesBadge");
     if (countEl) countEl.textContent = String(notesData.length);
     if (totalBadge) totalBadge.textContent = String(notesData.length);
-
     if (bmList) {
       bmList.replaceChildren();
       if (notesData.length === 0) {
         const empty = document.createElement("li");
         empty.style.fontSize = "12px";
-        empty.style.color = "var(--db-text-muted)";
-        empty.textContent = "Chưa có mục đánh dấu. Bấm '📝 Ghi chú' hoặc '☆ Lưu ôn thi' trên bất kỳ định nghĩa/định lý nào.";
+        empty.style.color = "var(--mute)";
+        empty.textContent = "Chưa có mục đánh dấu. Bôi đen văn bản bất kỳ hoặc bấm '📝 Ghi chú' để lưu.";
         bmList.appendChild(empty);
       } else {
         notesData.slice(0, 4).forEach(n => {
@@ -444,7 +408,8 @@
           btn.className = "db-mini-item";
           btn.style.width = "100%";
           const span = document.createElement("span");
-          span.textContent = `${n.type === "bookmark" ? "🔖" : "📝"} ${n.title}`;
+          const icon = n.type === "bookmark" ? "🔖" : (n.blockType === "highlight" ? "🖍️" : "📝");
+          span.textContent = `${icon} ${n.title}`;
           btn.appendChild(span);
           btn.addEventListener("click", () => navigateToLocation(n.partId, n.chapterId, n.blockId || n.sectionId));
           li.appendChild(btn);
@@ -452,15 +417,13 @@
         });
       }
     }
-
-    // Render Lịch sử đọc gần đây
     const histList = document.getElementById("dbHubHistoryList");
     if (histList) {
       histList.replaceChildren();
       if (readingHistory.length === 0) {
         const empty = document.createElement("li");
         empty.style.fontSize = "12px";
-        empty.style.color = "var(--db-text-muted)";
+        empty.style.color = "var(--mute)";
         empty.textContent = "Lịch sử đọc sẽ tự động ghi nhận khi bạn chuyển chương/mục.";
         histList.appendChild(empty);
       } else {
@@ -480,42 +443,38 @@
       }
     }
   }
-
   // ---------------- 6. BẢNG SỔ TAY CÁ NHÂN BÊN PHẢI (RIGHT DRAWER) ----------------
   function injectNotebookDrawer() {
     const container = document.querySelector("#studyWorkspace > .container");
     if (!container || document.getElementById("dbNotebookDrawer")) return;
-
     const aside = document.createElement("aside");
     aside.className = "db-notebook-drawer";
     aside.id = "dbNotebookDrawer";
     aside.setAttribute("aria-label", "Sổ tay cá nhân");
     aside.hidden = !settings.drawerOpen;
-
     aside.innerHTML = `
       <div class="db-nb-header">
         <h3>📓 Sổ tay cá nhân</h3>
         <button type="button" class="db-nb-close" id="dbNbCloseBtn" aria-label="Đóng Sổ tay">×</button>
       </div>
-
       <div class="db-nb-controls">
-        <input type="search" class="db-nb-search" id="dbNbSearch" placeholder="Tìm trong ghi chú &amp; mục đánh dấu..." aria-label="Tìm kiếm ghi chú">
+        <input type="search" class="db-nb-search" id="dbNbSearch" placeholder="Tìm trong ghi chú, highlight &amp; đánh dấu..." aria-label="Tìm kiếm ghi chú">
         <div class="db-nb-tabs" role="tablist" aria-label="Lọc sổ tay">
           <button type="button" class="db-nb-tab is-active" data-nb-filter="all">Tất cả</button>
           <button type="button" class="db-nb-tab" data-nb-filter="note">📝 Ghi chú</button>
-          <button type="button" class="db-nb-tab" data-nb-filter="def">Định nghĩa</button>
-          <button type="button" class="db-nb-tab" data-nb-filter="thm">Định lý</button>
-          <button type="button" class="db-nb-tab" data-nb-filter="ex">Ví dụ/BT</button>
+          <button type="button" class="db-nb-tab" data-nb-filter="highlight">🖍️ Tô sáng</button>
+          <button type="button" class="db-nb-tab" data-nb-filter="def">ĐN</button>
+          <button type="button" class="db-nb-tab" data-nb-filter="thm">ĐL</button>
+          <button type="button" class="db-nb-tab" data-nb-filter="ex">VD/BT</button>
         </div>
       </div>
-
       <div class="db-nb-composer">
         <div class="db-nb-context-badge">
           <span id="dbNbContextLabel">📍 Đang gắn với: Chương 0</span>
           <button type="button" class="db-note-act-btn" id="dbNbResetContextBtn" title="Chuyển về ghi chú chung của chương hiện tại">Mặc định</button>
         </div>
         <input type="text" class="db-nb-input-title" id="dbNbTitleInput" placeholder="Tiêu đề ghi chú (tùy chọn)..." maxlength="140">
-        <textarea class="db-nb-textarea" id="dbNbBodyInput" placeholder="Nhập ghi chú cá nhân hoặc nhận xét toán học (hỗ trợ công thức $...$)..."></textarea>
+        <textarea class="db-nb-textarea" id="dbNbBodyInput" placeholder="Nhập ghi chú cá nhân hoặc bôi đen văn bản trên trang để trích dẫn nhanh (hỗ trợ $...$)..."></textarea>
         <div class="db-nb-composer-actions">
           <span class="db-nb-status" id="dbNbStatusMsg" aria-live="polite">Sẵn sàng lưu</span>
           <div style="display:flex; gap:6px;">
@@ -524,31 +483,26 @@
           </div>
         </div>
       </div>
-
       <div class="db-nb-list" id="dbNbList" role="region" aria-live="polite"></div>
-
       <div class="db-nb-footer">
-        <button type="button" class="db-note-act-btn" id="dbNbExportJsonBtn" title="Xuất toàn bộ Sổ tay ra file JSON">📤 Xuất JSON</button>
-        <button type="button" class="db-note-act-btn" id="dbNbImportJsonBtn" title="Nhập bản sao lưu JSON">📥 Nhập JSON</button>
+        <button type="button" class="db-tex-export-btn" id="dbNbExportTexBtn" title="Xuất toàn bộ Sổ tay & Đề cương ra tệp .tex chuẩn LaTeX (TeXstudio / Overleaf)">📄 Xuất .tex (LaTeX)</button>
+        <div style="display:flex; gap:5px;">
+          <button type="button" class="db-note-act-btn" id="dbNbExportJsonBtn" title="Xuất toàn bộ Sổ tay ra file JSON">📤 JSON</button>
+          <button type="button" class="db-note-act-btn" id="dbNbImportJsonBtn" title="Nhập bản sao lưu JSON">📥 Nhập</button>
+        </div>
         <input type="file" id="dbNbImportFileInput" accept=".json,application/json" hidden>
       </div>
     `;
-
     container.appendChild(aside);
-
     document.getElementById("dbNbCloseBtn")?.addEventListener("click", () => {
       settings.drawerOpen = false;
       applyReaderSettings();
       saveReaderSettings();
     });
-
-    // Tìm kiếm ghi chú có Debounce 200ms
     const searchInput = document.getElementById("dbNbSearch");
     searchInput?.addEventListener("input", debounce(() => {
       renderNotebookList();
     }, 200));
-
-    // Lọc theo tab loại kiến thức
     aside.querySelectorAll("[data-nb-filter]").forEach(btn => {
       btn.addEventListener("click", () => {
         activeNbFilter = btn.getAttribute("data-nb-filter") || "all";
@@ -556,7 +510,6 @@
         renderNotebookList();
       });
     });
-
     document.getElementById("dbNbResetContextBtn")?.addEventListener("click", () => {
       editingNoteId = null;
       syncCurrentChapterContext();
@@ -564,7 +517,6 @@
       if (cancelBtn) cancelBtn.hidden = true;
       document.getElementById("dbNbSaveBtn").textContent = "Lưu ghi chú";
     });
-
     document.getElementById("dbNbCancelEditBtn")?.addEventListener("click", () => {
       editingNoteId = null;
       document.getElementById("dbNbTitleInput").value = "";
@@ -573,25 +525,21 @@
       document.getElementById("dbNbSaveBtn").textContent = "Lưu ghi chú";
       setNbStatus("Đã hủy chỉnh sửa", "");
     });
-
     document.getElementById("dbNbSaveBtn")?.addEventListener("click", () => {
       saveNoteFromComposer();
     });
-
-    // Xuất & Nhập JSON
+    document.getElementById("dbNbExportTexBtn")?.addEventListener("click", exportNotebookToLatex);
     document.getElementById("dbNbExportJsonBtn")?.addEventListener("click", exportNotebookJSON);
     const fileInp = document.getElementById("dbNbImportFileInput");
     document.getElementById("dbNbImportJsonBtn")?.addEventListener("click", () => fileInp?.click());
     fileInp?.addEventListener("change", handleImportNotebookJSON);
   }
-
   function setNbStatus(msg, tone) {
     const el = document.getElementById("dbNbStatusMsg");
     if (!el) return;
     el.textContent = msg;
     el.className = "db-nb-status" + (tone ? ` is-${tone}` : "");
   }
-
   function syncCurrentChapterContext() {
     const activePart = document.querySelector(".part-panel.active");
     const activeCh = activePart?.querySelector(".chapter-content.active");
@@ -607,22 +555,18 @@
     const labelEl = document.getElementById("dbNbContextLabel");
     if (labelEl) labelEl.textContent = `📍 Gắn với: ${activeContext.blockLabel}`;
   }
-
   function saveNoteFromComposer() {
     const titleInp = document.getElementById("dbNbTitleInput");
     const bodyInp = document.getElementById("dbNbBodyInput");
     const rawTitle = (titleInp?.value || "").trim();
     const rawBody = (bodyInp?.value || "").trim();
-
     if (!rawBody) {
       setNbStatus("⚠️ Vui lòng nhập nội dung ghi chú!", "error");
       bodyInp?.focus();
       return;
     }
-
     const now = Date.now();
     const prevSnapshot = notesData.slice();
-
     if (editingNoteId) {
       const idx = notesData.findIndex(n => n.id === editingNoteId);
       if (idx !== -1) {
@@ -648,33 +592,27 @@
       };
       notesData.unshift(newNote);
     }
-
     const ok = safeStorageWrite(STORAGE_KEYS.NOTES, notesData);
     if (!ok) {
-      // Khôi phục lại dữ liệu nếu lưu thất bại (không báo lưu thành công giả)
       notesData = prevSnapshot;
       setNbStatus("❌ Lưu thất bại (Bộ nhớ trình duyệt đã đầy)!", "error");
       return;
     }
-
     editingNoteId = null;
     if (titleInp) titleInp.value = "";
     if (bodyInp) bodyInp.value = "";
     const cancelBtn = document.getElementById("dbNbCancelEditBtn");
     if (cancelBtn) cancelBtn.hidden = true;
     document.getElementById("dbNbSaveBtn").textContent = "Lưu ghi chú";
-
     setNbStatus("✓ Đã lưu vào Sổ tay", "saved");
     refreshCardNoteButtons();
     renderNotebookList();
     updateReadingHubUI();
   }
-
   // ---------------- 7. ĐỒNG BỘ ĐÁNH DẤU (BOOKMARKS) & NÚT GHI NHANH TRÊN THẺ ----------------
   function syncLegacyBookmarksIntoNotebook() {
     const legacyIds = safeStorageRead(STORAGE_KEYS.LEGACY_BM, []);
     if (!Array.isArray(legacyIds)) return;
-
     let changed = false;
     legacyIds.forEach(cardId => {
       const exists = notesData.some(n => n.type === "bookmark" && n.blockId === cardId);
@@ -698,32 +636,38 @@
         changed = true;
       }
     });
-
     if (changed) {
       safeStorageWrite(STORAGE_KEYS.NOTES, notesData);
     }
   }
-
   function extractBlockMetadata(el) {
+    if (!el) {
+      return {
+        partId: "part-0",
+        chapterId: "tab-c0",
+        sectionId: "",
+        blockType: "note",
+        title: "Giáo trình Cấu trúc Đại số",
+        snippet: ""
+      };
+    }
     const part = el.closest(".part-panel");
     const chapter = el.closest(".chapter-content");
     let prevSec = el.previousElementSibling;
     while (prevSec && !prevSec.matches("h3.subsection-title")) {
       prevSec = prevSec.previousElementSibling;
     }
-
     let blockType = "note";
     if (el.classList.contains("def")) blockType = "def";
     else if (el.classList.contains("thm") || el.classList.contains("cor")) blockType = "thm";
     else if (el.tagName.toLowerCase() === "details" || el.classList.contains("ex-study-card")) blockType = "ex";
-
     const label = el.querySelector(".card-header .label")?.textContent.trim()
       || el.querySelector(".ex-title-label")?.textContent.trim()
       || el.querySelector("summary")?.textContent.trim()
+      || prevSec?.textContent.trim()
       || "Khối kiến thức";
     const tag = el.querySelector(".card-header .tag")?.textContent.trim() || "";
     const title = tag ? `${label} — ${tag}` : label;
-
     const bodyNode = el.querySelector(".card-body")
       || el.querySelector(".ex-problem-statement")
       || el.querySelector(".ex-content")
@@ -734,8 +678,7 @@
       if (ann) k.replaceWith(document.createTextNode(` $${ann.textContent.trim()}$ `));
     });
     clone.querySelectorAll("button, .inner-tabs-nav, .inner-tab-pane").forEach(b => b.remove());
-    const snippet = clone.textContent.replace(/\s+/g, " ").trim().slice(0, 220);
-
+    const snippet = clone.textContent.replace(/\s+/g, " ").trim().slice(0, 240);
     return {
       partId: part?.id || "part-0",
       chapterId: chapter?.id || "tab-c0",
@@ -745,25 +688,21 @@
       snippet
     };
   }
-
   function decorateKnowledgeBlocks() {
     const blocks = document.querySelectorAll(
       "main.content .math-card.def:not(.cyclic-calculator), main.content .math-card.thm, main.content details.ex-card, #part-5 .ex-study-card"
     );
-
     blocks.forEach(block => {
       const header = block.querySelector(".card-header")
         || block.querySelector(".ex-header-bar")
         || block.querySelector("summary");
       if (!header || header.querySelector(".db-card-note-btn")) return;
-
       const noteBtn = document.createElement("button");
       noteBtn.type = "button";
       noteBtn.className = "db-card-note-btn";
       noteBtn.dataset.forBlock = block.id;
       noteBtn.textContent = "📝 Ghi chú";
       noteBtn.title = "Tạo ghi chú cá nhân gắn với mục kiến thức này";
-
       noteBtn.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -778,21 +717,16 @@
         };
         const labelEl = document.getElementById("dbNbContextLabel");
         if (labelEl) labelEl.textContent = `📍 Gắn với: ${meta.title.slice(0, 42)}`;
-
         settings.drawerOpen = true;
         applyReaderSettings();
         saveReaderSettings();
         renderNotebookList();
-
         const titleInp = document.getElementById("dbNbTitleInput");
         const bodyInp = document.getElementById("dbNbBodyInput");
         if (titleInp && !titleInp.value) titleInp.value = meta.title;
         bodyInp?.focus();
       });
-
       header.appendChild(noteBtn);
-
-      // Lắng nghe nút "☆ Lưu ôn thi" sẵn có để đồng bộ ngay vào Sổ tay
       const starBtn = header.querySelector(".bm-star-btn");
       if (starBtn && !starBtn.dataset.dbBound) {
         starBtn.dataset.dbBound = "1";
@@ -811,10 +745,8 @@
         });
       }
     });
-
     refreshCardNoteButtons();
   }
-
   function refreshCardNoteButtons() {
     const notedBlocks = new Set(notesData.filter(n => n.blockId).map(n => n.blockId));
     document.querySelectorAll(".db-card-note-btn").forEach(btn => {
@@ -824,16 +756,14 @@
       btn.textContent = has ? "📝 Đã có ghi chú" : "📝 Ghi chú";
     });
   }
-
   // ---------------- 8. RENDER DANH SÁCH GHI CHÚ TRONG SỔ TAY (CHỐNG XSS) ----------------
   function renderNotebookList() {
     const listEl = document.getElementById("dbNbList");
     if (!listEl) return;
-
     const query = (document.getElementById("dbNbSearch")?.value || "").trim().toLowerCase();
-
     const filtered = notesData.filter(item => {
       if (activeNbFilter === "note" && item.type !== "note") return false;
+      if (activeNbFilter === "highlight" && item.blockType !== "highlight" && item.type !== "highlight") return false;
       if (activeNbFilter === "def" && item.blockType !== "def") return false;
       if (activeNbFilter === "thm" && item.blockType !== "thm") return false;
       if (activeNbFilter === "ex" && item.blockType !== "ex") return false;
@@ -843,75 +773,63 @@
         (item.content || "").toLowerCase().includes(query)
       );
     });
-
     listEl.replaceChildren();
-
     if (filtered.length === 0) {
       const empty = document.createElement("div");
       empty.style.textAlign = "center";
       empty.style.padding = "28px 12px";
-      empty.style.color = "var(--db-text-muted)";
+      empty.style.color = "var(--mute)";
       empty.style.fontSize = "13px";
       empty.textContent = query
         ? "Không tìm thấy ghi chú nào khớp từ khóa."
-        : "Chưa có mục nào trong phân loại này. Hãy viết ghi chú ở khung trên hoặc bấm '📝 Ghi chú' tại bất kỳ Định nghĩa, Định lý, Ví dụ nào.";
+        : "Chưa có mục nào trong phân loại này. Bạn có thể bôi đen văn bản bất kỳ trên trang đọc để Tô sáng / Trích dẫn nhanh!";
       listEl.appendChild(empty);
       return;
     }
-
     const typeLabels = {
       def: "Định nghĩa",
       thm: "Định lý",
       ex: "Ví dụ / BT",
+      highlight: "Đoạn tô sáng",
       note: "Ghi chú"
     };
-
     filtered.forEach(item => {
       const card = document.createElement("article");
       card.className = "db-note-item";
       card.dataset.kind = item.blockType || "note";
-
       const metaRow = document.createElement("div");
       metaRow.className = "db-note-meta";
-
       const badge = document.createElement("span");
       badge.className = "db-note-tag";
-      badge.textContent = `${item.type === "bookmark" ? "🔖 " : "📝 "}${typeLabels[item.blockType] || "Ghi chú"}`;
-
+      const icon = item.type === "bookmark" ? "🔖 " : (item.blockType === "highlight" ? "🖍️ " : "📝 ");
+      badge.textContent = `${icon}${typeLabels[item.blockType] || "Ghi chú"}`;
       const dateSpan = document.createElement("span");
       dateSpan.textContent = item.updatedAt
         ? new Date(item.updatedAt).toLocaleDateString("vi-VN")
         : "";
-
       metaRow.append(badge, dateSpan);
-
       const titleH4 = document.createElement("h4");
       titleH4.className = "db-note-title";
       titleH4.textContent = item.title || "Ghi chú";
-
       const bodyDiv = document.createElement("div");
       bodyDiv.className = "db-note-body";
-      // Gán bằng textContent để chống XSS tuyệt đối, sau đó render KaTeX
       bodyDiv.textContent = item.content || "";
       renderMathSafely(bodyDiv);
-
       const actionsRow = document.createElement("div");
       actionsRow.className = "db-note-actions";
-
       const gotoBtn = document.createElement("button");
       gotoBtn.type = "button";
       gotoBtn.className = "db-note-act-btn";
-      gotoBtn.textContent = "↗ Đi tới kiến thức gốc";
+      gotoBtn.textContent = "↗ Đi tới gốc";
       gotoBtn.addEventListener("click", () => {
         navigateToLocation(item.partId, item.chapterId, item.blockId || item.sectionId);
       });
       actionsRow.appendChild(gotoBtn);
-
-      if (item.type === "note") {
+      if (item.type === "note" || item.type === "highlight") {
         const editBtn = document.createElement("button");
         editBtn.type = "button";
         editBtn.className = "db-note-act-btn";
-        editBtn.textContent = "Sửa";
+        editBtn.textContent = "Sửa / Ghi thêm";
         editBtn.addEventListener("click", () => {
           editingNoteId = item.id;
           document.getElementById("dbNbTitleInput").value = item.title || "";
@@ -922,7 +840,6 @@
         });
         actionsRow.appendChild(editBtn);
       }
-
       const delBtn = document.createElement("button");
       delBtn.type = "button";
       delBtn.className = "db-note-act-btn is-danger";
@@ -935,7 +852,10 @@
           setNbStatus("❌ Không thể xóa do lỗi lưu trữ!", "error");
           return;
         }
-        // Nếu là bookmark đồng bộ từ nút ngôi sao, cập nhật cả nút ngôi sao
+        // Nếu là highlight trên DOM, gỡ thẻ <mark> tương ứng
+        if (item.hlId) {
+          removeDomHighlightById(item.hlId);
+        }
         if (item.type === "bookmark" && item.blockId) {
           const legacy = safeStorageRead(STORAGE_KEYS.LEGACY_BM, []).filter(id => id !== item.blockId);
           safeStorageWrite(STORAGE_KEYS.LEGACY_BM, legacy);
@@ -951,35 +871,589 @@
         updateReadingHubUI();
       });
       actionsRow.appendChild(delBtn);
-
       card.append(metaRow, titleH4, bodyDiv, actionsRow);
       listEl.appendChild(card);
     });
   }
-
-  // ---------------- 9. XUẤT VÀ NHẬP BẢN SAO LƯU JSON AN TOÀN ----------------
+  // ---------------- 9. [Ý TƯỞNG 2] POPOVER BÔI ĐEN TÔ SÁNG & TRÍCH DẪN NHANH ----------------
+  let currentSelectionInfo = null;
+  function extractFragmentWithLatex(fragment) {
+    if (!fragment) return "";
+    const wrapper = document.createElement("div");
+    wrapper.appendChild(fragment.cloneNode(true));
+    wrapper.querySelectorAll(".katex-display, .katex").forEach(kEl => {
+      const ann = kEl.querySelector('annotation[encoding="application/x-tex"]');
+      if (ann) {
+        const isDisp = kEl.classList.contains("katex-display");
+        const tex = ann.textContent.trim();
+        kEl.replaceWith(document.createTextNode(isDisp ? ` $$${tex}$$ ` : ` $${tex}$ `));
+      }
+    });
+    wrapper.querySelectorAll("button, .db-card-note-btn, .bm-star-btn").forEach(el => el.remove());
+    return wrapper.textContent.replace(/\s+/g, " ").trim();
+  }
+  function applySafeRangeHighlight(range, color, hlId) {
+    try {
+      const startContainer = range.startContainer;
+      const endContainer = range.endContainer;
+      // Không bọc trực tiếp nếu điểm đầu/cuối nằm sâu bên trong cây DOM của .katex
+      const inKatex = (node) => {
+        const el = node.nodeType === 1 ? node : node.parentElement;
+        return Boolean(el && el.closest(".katex, .katex-display"));
+      };
+      if (!inKatex(startContainer) && !inKatex(endContainer) && startContainer === endContainer && startContainer.nodeType === 3) {
+        const mark = document.createElement("mark");
+        mark.className = "db-user-highlight";
+        mark.dataset.hlColor = color;
+        mark.dataset.hlId = hlId;
+        mark.title = "Bấm để xem trong Sổ tay cá nhân";
+        range.surroundContents(mark);
+        mark.addEventListener("click", (e) => {
+          e.stopPropagation();
+          settings.drawerOpen = true;
+          applyReaderSettings();
+          saveReaderSettings();
+          activeNbFilter = "highlight";
+          document.querySelectorAll("[data-nb-filter]").forEach(b => {
+            b.classList.toggle("is-active", b.getAttribute("data-nb-filter") === "highlight");
+          });
+          renderNotebookList();
+        });
+        return true;
+      }
+    } catch (_) {}
+    return false;
+  }
+  function removeDomHighlightById(hlId) {
+    document.querySelectorAll(`mark.db-user-highlight[data-hl-id="${hlId}"]`).forEach(mark => {
+      const parent = mark.parentNode;
+      if (!parent) return;
+      while (mark.firstChild) parent.insertBefore(mark.firstChild, mark);
+      parent.removeChild(mark);
+      parent.normalize();
+    });
+    highlightsData = highlightsData.filter(h => h.hlId !== hlId);
+    safeStorageWrite(STORAGE_KEYS.HIGHLIGHTS, highlightsData);
+  }
+  function restorePersistedHighlights() {
+    if (!Array.isArray(highlightsData) || !highlightsData.length) return;
+    highlightsData.forEach(h => {
+      if (!h.blockId || !h.rawText || h.rawText.length < 6) return;
+      const block = document.getElementById(h.blockId);
+      if (!block) return;
+      const walker = document.createTreeWalker(block, NodeFilter.SHOW_TEXT, null);
+      let node;
+      while ((node = walker.nextNode())) {
+        if (node.parentElement?.closest(".katex, .katex-display, mark.db-user-highlight, button")) continue;
+        const idx = node.nodeValue.indexOf(h.rawText);
+        if (idx !== -1) {
+          try {
+            const rng = document.createRange();
+            rng.setStart(node, idx);
+            rng.setEnd(node, idx + h.rawText.length);
+            applySafeRangeHighlight(rng, h.color || "yellow", h.hlId);
+            break;
+          } catch (_) {}
+        }
+      }
+    });
+  }
+  function setupSelectionPopover() {
+    if (document.getElementById("dbSelectionPopover")) return;
+    const pop = document.createElement("div");
+    pop.className = "db-selection-popover";
+    pop.id = "dbSelectionPopover";
+    pop.hidden = true;
+    pop.setAttribute("role", "toolbar");
+    pop.setAttribute("aria-label", "Công cụ tô sáng và trích dẫn nhanh");
+    pop.innerHTML = `
+      <button type="button" class="db-sel-btn" data-hl-tone="yellow" title="Tô sáng màu vàng & Lưu vào Sổ tay">
+        <span class="db-sel-dot yellow"></span> Tô vàng
+      </button>
+      <button type="button" class="db-sel-btn" data-hl-tone="green" title="Tô sáng màu xanh lá & Lưu vào Sổ tay">
+        <span class="db-sel-dot green"></span> Xanh
+      </button>
+      <button type="button" class="db-sel-btn" data-hl-tone="blue" title="Tô sáng màu xanh dương & Lưu vào Sổ tay">
+        <span class="db-sel-dot blue"></span> Lam
+      </button>
+      <span style="color:rgba(255,255,255,0.25);">|</span>
+      <button type="button" class="db-sel-btn" id="dbSelQuoteBtn" title="Trích dẫn đoạn bôi đen (kèm LaTeX) vào khung soạn Sổ tay">
+        📝 Trích vào Sổ tay
+      </button>
+      <button type="button" class="db-sel-btn" id="dbSelCopyLatexBtn" title="Chép đoạn văn bản kèm mã LaTeX">$ Chép LaTeX</button>
+    `;
+    document.body.appendChild(pop);
+    function hidePopover() {
+      pop.hidden = true;
+      currentSelectionInfo = null;
+    }
+    document.addEventListener("mouseup", (e) => {
+      if (pop.contains(e.target)) return;
+      setTimeout(() => {
+        const sel = window.getSelection();
+        if (!sel || sel.isCollapsed || sel.rangeCount === 0) {
+          hidePopover();
+          return;
+        }
+        const range = sel.getRangeAt(0);
+        const common = range.commonAncestorContainer;
+        const hostEl = common.nodeType === 1 ? common : common.parentElement;
+        const contentMain = document.querySelector("#studyWorkspace main.content");
+        if (!hostEl || !contentMain || !contentMain.contains(hostEl)) {
+          hidePopover();
+          return;
+        }
+        // Không hiện popover nếu đang bôi đen trong ô input/textarea
+        if (hostEl.closest("textarea, input, .db-notebook-drawer")) {
+          hidePopover();
+          return;
+        }
+        const rawPlain = sel.toString().trim();
+        if (rawPlain.length < 5) {
+          hidePopover();
+          return;
+        }
+        const latexQuote = extractFragmentWithLatex(range.cloneContents()) || rawPlain;
+        const blockEl = hostEl.closest(".math-card, details.ex-card, details.proof-block, .ex-study-card, .chapter-content");
+        const meta = extractBlockMetadata(blockEl);
+        const rect = range.getBoundingClientRect();
+        currentSelectionInfo = {
+          range: range.cloneRange(),
+          rawPlain,
+          latexQuote,
+          blockId: blockEl?.id || "",
+          meta
+        };
+        const top = Math.max(52, rect.top - 6);
+        const left = Math.min(window.innerWidth - 180, Math.max(180, rect.left + rect.width / 2));
+        pop.style.top = `${top}px`;
+        pop.style.left = `${left}px`;
+        pop.hidden = false;
+      }, 20);
+    });
+    // Xử lý 3 nút Tô sáng (Vàng / Xanh / Lam)
+    pop.querySelectorAll("[data-hl-tone]").forEach(btn => {
+      btn.addEventListener("mousedown", (e) => e.preventDefault());
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (!currentSelectionInfo) return;
+        const color = btn.getAttribute("data-hl-tone") || "yellow";
+        const { range, rawPlain, latexQuote, blockId, meta } = currentSelectionInfo;
+        const hlId = "db-hl-" + Date.now() + "-" + Math.random().toString(36).slice(2, 6);
+        applySafeRangeHighlight(range, color, hlId);
+        if (blockId && rawPlain.length < 300) {
+          highlightsData.push({
+            hlId,
+            blockId,
+            rawText: rawPlain,
+            color,
+            createdAt: Date.now()
+          });
+          safeStorageWrite(STORAGE_KEYS.HIGHLIGHTS, highlightsData);
+        }
+        const newHlNote = {
+          id: hlId,
+          hlId,
+          hlColor: color,
+          type: "highlight",
+          blockType: "highlight",
+          partId: meta.partId,
+          chapterId: meta.chapterId,
+          sectionId: meta.sectionId,
+          blockId: blockId,
+          title: `Trích dẫn: ${meta.title.slice(0, 65)}`,
+          content: `“${latexQuote}”`,
+          createdAt: Date.now(),
+          updatedAt: Date.now()
+        };
+        notesData.unshift(newHlNote);
+        safeStorageWrite(STORAGE_KEYS.NOTES, notesData);
+        refreshCardNoteButtons();
+        renderNotebookList();
+        updateReadingHubUI();
+        window.getSelection()?.removeAllRanges();
+        hidePopover();
+      });
+    });
+    // Nút "📝 Trích vào Sổ tay": mở ngăn kéo Sổ tay và điền sẵn đoạn trích có công thức LaTeX
+    const quoteBtn = document.getElementById("dbSelQuoteBtn");
+    quoteBtn?.addEventListener("mousedown", (e) => e.preventDefault());
+    quoteBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (!currentSelectionInfo) return;
+      const { latexQuote, blockId, meta } = currentSelectionInfo;
+      activeContext = {
+        partId: meta.partId,
+        chapterId: meta.chapterId,
+        sectionId: meta.sectionId,
+        blockId: blockId,
+        blockType: meta.blockType === "note" ? "highlight" : meta.blockType,
+        blockLabel: meta.title
+      };
+      const labelEl = document.getElementById("dbNbContextLabel");
+      if (labelEl) labelEl.textContent = `📍 Gắn với: ${meta.title.slice(0, 42)}`;
+      settings.drawerOpen = true;
+      applyReaderSettings();
+      saveReaderSettings();
+      renderNotebookList();
+      const titleInp = document.getElementById("dbNbTitleInput");
+      const bodyInp = document.getElementById("dbNbBodyInput");
+      if (titleInp) titleInp.value = `Ghi chú: ${meta.title.slice(0, 75)}`;
+      if (bodyInp) {
+        const prefix = bodyInp.value.trim() ? bodyInp.value.trim() + "\n\n" : "";
+        bodyInp.value = `${prefix}❝ ${latexQuote} ❞\n→ Nhận xét: `;
+        bodyInp.focus();
+        bodyInp.selectionStart = bodyInp.selectionEnd = bodyInp.value.length;
+      }
+      setNbStatus("✨ Đã chèn đoạn trích (bảo toàn LaTeX) vào khung soạn!", "saved");
+      window.getSelection()?.removeAllRanges();
+      hidePopover();
+    });
+    // Nút "$ Chép LaTeX"
+    const copyLatexBtn = document.getElementById("dbSelCopyLatexBtn");
+    copyLatexBtn?.addEventListener("mousedown", (e) => e.preventDefault());
+    copyLatexBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (!currentSelectionInfo) return;
+      const textToCopy = currentSelectionInfo.latexQuote;
+      navigator.clipboard?.writeText(textToCopy).then(() => {
+        const old = copyLatexBtn.textContent;
+        copyLatexBtn.textContent = "✓ Đã chép!";
+        setTimeout(() => {
+          copyLatexBtn.textContent = old;
+          hidePopover();
+        }, 900);
+      });
+    });
+    window.addEventListener("scroll", () => {
+      if (!pop.hidden) hidePopover();
+    }, { passive: true });
+  }
+  // ---------------- 10. [Ý TƯỞNG 3] BỘ CHUYỂN ĐỔI & XUẤT FILE .TEX CHUẨN LATEX ----------------
+  function escapeLatexOutsideMath(str) {
+    if (!str) return "";
+    // Tách chuỗi theo các cặp công thức $$...$$ hoặc $...$ để không làm hỏng ký hiệu toán bên trong
+    const tokens = String(str).split(/(\$\$[\s\S]*?\$\$|\$[^$\n]+?\$)/g);
+    return tokens.map((tok, i) => {
+      if (i % 2 === 1) return tok; // Giữ nguyên khối toán $...$ hoặc $$...$$
+      return tok
+        .replace(/\\/g, "\\textbackslash{}")
+        .replace(/([%&_{}#])/g, "\\$1")
+        .replace(/~/g, "\\textasciitilde{}")
+        .replace(/\^/g, "\\textasciicircum{}")
+        .replace(/❝|“/g, "``")
+        .replace(/❞|”/g, "''")
+        .replace(/→/g, "$\\rightarrow$")
+        .replace(/⇒/g, "$\\Rightarrow$")
+        .replace(/⇔/g, "$\\Leftrightarrow$")
+        .replace(/∀/g, "$\\forall$")
+        .replace(/∃/g, "$\\exists$")
+        .replace(/∈/g, "$\\in$")
+        .replace(/∉/g, "$\\notin$")
+        .replace(/⊆/g, "$\\subseteq$")
+        .replace(/≤/g, "$\\le$")
+        .replace(/⊴/g, "$\\trianglelefteq$")
+        .replace(/≅/g, "$\\cong$")
+        .replace(/≠/g, "$\\neq$")
+        .replace(/ℤ/g, "$\\mathbb{Z}$")
+        .replace(/ℚ/g, "$\\mathbb{Q}$")
+        .replace(/ℝ/g, "$\\mathbb{R}$")
+        .replace(/ℂ/g, "$\\mathbb{C}$")
+        .replace(/ℕ/g, "$\\mathbb{N}$")
+        .replace(/𝔽/g, "$\\mathbb{F}$")
+        .replace(/∎/g, "$\\blacksquare$");
+    }).join("");
+  }
+  function htmlStringToCleanLatex(htmlStr) {
+    if (!htmlStr) return "";
+    const temp = document.createElement("div");
+    temp.innerHTML = htmlStr;
+    // 1. Khôi phục công thức từ thẻ .katex nếu đã render
+    temp.querySelectorAll(".katex-display, .katex").forEach(kEl => {
+      const ann = kEl.querySelector('annotation[encoding="application/x-tex"]');
+      if (ann) {
+        const isDisp = kEl.classList.contains("katex-display");
+        kEl.replaceWith(document.createTextNode(isDisp ? `\n$$${ann.textContent.trim()}$$\n` : `$${ann.textContent.trim()}$`));
+      }
+    });
+    // 2. Xóa các nút điều khiển không thuộc nội dung toán
+    temp.querySelectorAll("button, input, select, .inner-tabs-nav, .db-card-note-btn, .bm-star-btn").forEach(el => el.remove());
+    // 3. Chuyển các thẻ định dạng HTML sang lệnh LaTeX
+    temp.querySelectorAll("b, strong").forEach(el => {
+      el.replaceWith(document.createTextNode(`BOLDSTART${el.textContent.trim()}BOLDEND`));
+    });
+    temp.querySelectorAll("i, em").forEach(el => {
+      el.replaceWith(document.createTextNode(`ITALICSTART${el.textContent.trim()}ITALICEND`));
+    });
+    temp.querySelectorAll("li").forEach(li => {
+      li.replaceWith(document.createTextNode(`\nITEMBULLET ${li.textContent.trim()}\n`));
+    });
+    temp.querySelectorAll("br").forEach(br => {
+      br.replaceWith(document.createTextNode("\n"));
+    });
+    temp.querySelectorAll("p, div, details").forEach(p => {
+      p.append(document.createTextNode("\n"));
+    });
+    let raw = temp.textContent.replace(/\n{3,}/g, "\n\n").trim();
+    let escaped = escapeLatexOutsideMath(raw);
+    escaped = escaped
+      .replace(/BOLDSTART([\s\S]*?)BOLDEND/g, "\\textbf{$1}")
+      .replace(/ITALICSTART([\s\S]*?)ITALICEND/g, "\\textit{$1}")
+      .replace(/ITEMBULLET\s+/g, "\\noindent $\\bullet$ ")
+      .replace(/\$\$([\s\S]*?)\$\$/g, "\n\\[\n$1\n\\]\n");
+    return escaped;
+  }
+  // 10A. Xuất Sổ tay Cá nhân & Đề cương Ôn tập ra file .tex chuẩn TeXstudio / Overleaf
+  function exportNotebookToLatex() {
+    const dateStr = new Date().toLocaleDateString("vi-VN");
+    let tex = `% ======================================================================
+% SỔ TAY HỌC THUẬT & ĐỀ CƯƠNG ÔN TẬP CẤU TRÚC ĐẠI SỐ
+% Biên dịch trực tiếp bằng pdflatex hoặc xelatex trên TeXstudio / Overleaf
+% Ngày xuất: ${dateStr}
+% ======================================================================
+\\documentclass[12pt,a4paper]{article}
+\\usepackage[utf8]{vietnam}
+\\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\\usepackage[margin=2cm]{geometry}
+\\usepackage{enumitem}
+\\usepackage[most]{tcolorbox}
+\\usepackage{hyperref}
+\\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!70!black,
+  urlcolor=blue!70!black
+}
+\\setlength{\\parindent}{0pt}
+\\setlength{\\parskip}{6pt}
+% Định nghĩa các môi trường học thuật chuẩn
+\\newtcolorbox{dinhnghia}[1][]{
+  colback=blue!4!white, colframe=blue!55!black,
+  fonttitle=\\bfseries, title={#1}, arc=2mm, boxrule=0.8pt
+}
+\\newtcolorbox{dinhly}[1][]{
+  colback=green!4!white, colframe=green!45!black,
+  fonttitle=\\bfseries, title={#1}, arc=2mm, boxrule=0.8pt
+}
+\\newtcolorbox{ghichu}[1][]{
+  colback=yellow!8!white, colframe=orange!65!black,
+  fonttitle=\\bfseries, title={#1}, arc=2mm, boxrule=0.8pt
+}
+\\title{\\textbf{SỔ TAY HỌC THUẬT \\& ĐỀ CƯƠNG CÁ NHÂN}\\\\[4pt]
+\\large Học phần: Cấu trúc Đại số (Theo giáo trình TS. Huỳnh Việt Khánh)}
+\\author{Trích xuất từ Hệ thống Digital Book}
+\\date{Ngày xuất: ${dateStr}}
+\\begin{document}
+\\maketitle
+\\tableofcontents
+\\vspace{1em}
+\\hrule
+\\vspace{1.2em}
+`;
+    // Phần 1: Ghi chú cá nhân & Các đoạn Tô sáng (Highlights)
+    const personalNotes = notesData.filter(n => n.type === "note" || n.type === "highlight");
+    tex += `\\section{Ghi chú Cá nhân \\& Đoạn Trích Dẫn Quan Trọng (${personalNotes.length} mục)}\n\n`;
+    if (personalNotes.length === 0) {
+      tex += `\\textit{Chưa có ghi chú cá nhân nào được tạo.}\n\n`;
+    } else {
+      personalNotes.forEach((n, idx) => {
+        const cleanTitle = escapeLatexOutsideMath(n.title || `Ghi chú ${idx + 1}`);
+        const cleanBody = escapeLatexOutsideMath(n.content || "").replace(/\n/g, "\\\\\n");
+        const kindLabel = n.blockType === "highlight" ? "Trích dẫn tô sáng" : "Ghi chú cá nhân";
+        tex += `\\begin{ghichu}[${idx + 1}. ${kindLabel}: ${cleanTitle}]\n${cleanBody}\n\\end{ghichu}\n\n`;
+      });
+    }
+    // Phần 2: Các Định nghĩa, Định lý & Bài tập đã đánh dấu
+    const bookmarkedItems = notesData.filter(n => n.type === "bookmark");
+    tex += `\\section{Các Định nghĩa, Định lý \\& Ví dụ Đã Đánh Dấu (${bookmarkedItems.length} mục)}\n\n`;
+    if (bookmarkedItems.length === 0) {
+      tex += `\\textit{Chưa có khối kiến thức nào được đánh dấu.}\n\n`;
+    } else {
+      bookmarkedItems.forEach((bm, idx) => {
+        const domEl = bm.blockId ? document.getElementById(bm.blockId) : null;
+        const envName = bm.blockType === "thm" ? "dinhly" : "dinhnghia";
+        const cleanTitle = escapeLatexOutsideMath(bm.title || `Mục ${idx + 1}`);
+        let bodyTex = "";
+        if (domEl) {
+          const bodyNode = domEl.querySelector(".card-body")
+            || domEl.querySelector(".ex-problem-statement")
+            || domEl.querySelector(".ex-content")
+            || domEl;
+          bodyTex = htmlStringToCleanLatex(bodyNode.innerHTML);
+        } else {
+          bodyTex = escapeLatexOutsideMath(bm.content || "");
+        }
+        tex += `\\begin{${envName}}[${idx + 1}. ${cleanTitle}]\n${bodyTex}\n\\end{${envName}}\n\n`;
+      });
+    }
+    // Phần 3: Vở nháp LaTeX ở các Bài tập tự luyện (#part-5)
+    const scratchItems = [];
+    document.querySelectorAll("#part-5 .ex-study-card").forEach(card => {
+      const note = safeStorageRead("ctds_scratch_" + card.id, null) || window.localStorage.getItem("ctds_scratch_" + card.id);
+      if (note && String(note).trim()) {
+        const title = card.querySelector(".ex-title-label")?.textContent.trim() || card.id;
+        const probHTML = card.querySelector(".ex-problem-statement")?.innerHTML || "";
+        scratchItems.push({ title, probHTML, note: String(note).trim() });
+      }
+    });
+    if (scratchItems.length > 0) {
+      tex += `\\section{Bài Giải Nháp Tự Luyện Trên Hệ Thống (${scratchItems.length} bài)}\n\n`;
+      scratchItems.forEach((sc, idx) => {
+        const cleanTitle = escapeLatexOutsideMath(sc.title);
+        const probTex = htmlStringToCleanLatex(sc.probHTML);
+        const userTex = escapeLatexOutsideMath(sc.note);
+        tex += `\\subsection*{Bài ${idx + 1}: ${cleanTitle}}\n`;
+        tex += `\\textbf{Đề bài:} ${probTex}\n\n`;
+        tex += `\\begin{ghichu}[Lời giải tự trình bày]\n${userTex}\n\\end{ghichu}\n\n`;
+      });
+    }
+    tex += `\\end{document}\n`;
+    downloadTextFile(tex, `So-Tay-Cau-Truc-Dai-So-${new Date().toISOString().slice(0, 10)}.tex`, "application/x-tex;charset=utf-8");
+    setNbStatus("✓ Đã tải tệp .tex chuẩn LaTeX!", "saved");
+  }
+  // 10B. Xuất Đề Thi Trắc Nghiệm Thông Minh (Smart Exam) ra file .tex chuẩn TeXstudio / Overleaf
+  function exportSmartExamToLatex() {
+    const exam = typeof window.getCurrentSmartExam === "function" ? window.getCurrentSmartExam() : null;
+    if (!exam || !Array.isArray(exam.questions) || !exam.questions.length) {
+      alert("Chưa có đề thi nào đang mở. Vui lòng bấm '🚀 Tạo Đề' trước khi xuất LaTeX!");
+      return;
+    }
+    const code = exam.code || "CTDS-01";
+    const totalQ = exam.questions.length;
+    const mins = exam.totalSeconds ? Math.round(exam.totalSeconds / 60) : 20;
+    const dateStr = new Date().toLocaleDateString("vi-VN");
+    let tex = `% ======================================================================
+% ĐỀ THI TRẮC NGHIỆM & ĐÁP ÁN CHI TIẾT - HỌC PHẦN: CẤU TRÚC ĐẠI SỐ
+% Mã đề: ${code} | Số câu: ${totalQ} câu | Thời gian: ${mins} phút
+% Biên dịch trực tiếp bằng pdflatex hoặc xelatex trên TeXstudio / Overleaf
+% ======================================================================
+\\documentclass[12pt,a4paper]{article}
+\\usepackage[utf8]{vietnam}
+\\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\\usepackage[margin=1.8cm]{geometry}
+\\usepackage{enumitem}
+\\usepackage{array,booktabs}
+\\usepackage[most]{tcolorbox}
+\\usepackage{hyperref}
+\\setlength{\\parindent}{0pt}
+\\setlength{\\parskip}{5pt}
+\\begin{document}
+% KHUNG TIÊU ĐỀ ĐỀ THI CHUẨN ĐẠI HỌC
+\\begin{center}
+  \\textbf{\\Large ĐỀ KIỂM TRA TRẮC NGHIỆM: CẤU TRÚC ĐẠI SỐ}\\\\[4pt]
+  \\textbf{Mã đề: ${code}} \\quad $\\bullet$ \\quad \\textbf{Số lượng: ${totalQ} câu} \\quad $\\bullet$ \\quad \\textbf{Thời gian: ${mins} phút}\\\\[6pt]
+  \\textit{(Biên soạn tự động từ Ngân hàng câu hỏi Giáo trình TS. Huỳnh Việt Khánh — Ngày: ${dateStr})}
+\\end{center}
+\\vspace{4pt}
+\\noindent\\fbox{\\parbox{\\dimexpr\\linewidth-2\\fboxsep-2\\fboxrule\\relax}{
+  \\textbf{Họ và tên sinh viên:} \\dotfill \\textbf{MSSV:} \\dotfill \\textbf{Điểm:} \\dots\\dots / 10
+}}
+\\vspace{10pt}
+\\section*{PHẦN I. NỘI DUNG ĐỀ THI}
+`;
+    exam.questions.forEach((qItem, idx) => {
+      const stemTex = htmlStringToCleanLatex(qItem.q);
+      tex += `\\vspace{6pt}\n\\noindent\\textbf{Câu ${idx + 1}.} ${stemTex}\n`;
+      tex += `\\begin{itemize}[leftmargin=1.8em, label={}, itemsep=3pt, topsep=4pt]\n`;
+      (qItem.opts || []).forEach((optStr, optIdx) => {
+        const letter = String.fromCharCode(65 + optIdx);
+        const optTex = htmlStringToCleanLatex(optStr);
+        tex += `  \\item \\textbf{${letter}.} ${optTex}\n`;
+      });
+      tex += `\\end{itemize}\n`;
+    });
+    // PHẦN II: BẢNG ĐÁP ÁN & LỜI GIẢI CHI TIẾT (SANG TRANG MỚI)
+    tex += `\n\\newpage\n\\section*{PHẦN II. BẢNG ĐÁP ÁN \\& HƯỚNG DẪN GIẢI CHI TIẾT (MÃ ĐỀ ${code})}\n\n`;
+    // Bảng đáp án nhanh
+    tex += `\\subsection*{1. Bảng đáp án nhanh}\n`;
+    const cols = 5;
+    tex += `\\begin{center}\n\\renewcommand{\\arraystretch}{1.35}\n\\begin{tabular}{|*{${cols}}{c|}}\n\\hline\n`;
+    for (let i = 0; i < totalQ; i++) {
+      const correctLetter = String.fromCharCode(65 + (exam.questions[i].ans || 0));
+      const userChosen = exam.answers && exam.answers[i] !== null && exam.answers[i] !== undefined
+        ? String.fromCharCode(65 + exam.answers[i])
+        : null;
+      const cellStr = userChosen
+        ? `\\textbf{Câu ${i + 1}:} \\textbf{${correctLetter}} (Chọn: ${userChosen})`
+        : `\\textbf{Câu ${i + 1}:} \\textbf{${correctLetter}}`;
+      tex += cellStr;
+      if ((i + 1) % cols === 0 || i === totalQ - 1) {
+        const rem = cols - ((i % cols) + 1);
+        if (i === totalQ - 1 && rem > 0 && (i + 1) % cols !== 0) {
+          tex += " & ".repeat(rem);
+        }
+        tex += ` \\\\ \\hline\n`;
+      } else {
+        tex += ` & `;
+      }
+    }
+    tex += `\\end{tabular}\n\\end{center}\n\\vspace{8pt}\n\n`;
+    // Lời giải chi tiết từng câu
+    tex += `\\subsection*{2. Phân tích \\& Lời giải chi tiết từng câu}\n\n`;
+    exam.questions.forEach((qItem, idx) => {
+      const correctLetter = String.fromCharCode(65 + (qItem.ans || 0));
+      const rawExp = qItem.explanations?.[correctLetter] || qItem.exp || "Áp dụng định nghĩa và định lý tương ứng trong giáo trình.";
+      const expTex = htmlStringToCleanLatex(rawExp);
+      tex += `\\noindent\\textbf{Câu ${idx + 1} (Đáp án đúng: ${correctLetter}).} ${expTex}\n\\vspace{6pt}\n\n`;
+    });
+    tex += `\\end{document}\n`;
+    downloadTextFile(tex, `De-Thi-Cau-Truc-Dai-So-${code}.tex`, "application/x-tex;charset=utf-8");
+  }
+  function injectLatexButtonsIntoLabAndExam() {
+    // 1. Thêm nút Xuất .tex vào Sổ tay Ôn thi trong Phòng LAB (#labPaneNotebook)
+    const nbExportMdBtn = document.getElementById("nbExportMdBtn");
+    if (nbExportMdBtn && !document.getElementById("nbExportTexLabBtn")) {
+      const btnTex = document.createElement("button");
+      btnTex.type = "button";
+      btnTex.className = "lab-btn primary";
+      btnTex.id = "nbExportTexLabBtn";
+      btnTex.innerHTML = "📄 Xuất Đề Cương (.tex LaTeX)";
+      btnTex.addEventListener("click", exportNotebookToLatex);
+      nbExportMdBtn.before(btnTex);
+    }
+    // 2. Thêm nút Xuất Đề Thi (.tex) vào Phòng thi thông minh (#smartBuilderCard)
+    const seGenBtn = document.getElementById("seGenerateBtn");
+    if (seGenBtn && !document.getElementById("seExportTexBtn")) {
+      const btnExamTex = document.createElement("button");
+      btnExamTex.type = "button";
+      btnExamTex.className = "lab-btn";
+      btnExamTex.id = "seExportTexBtn";
+      btnExamTex.style.borderColor = "var(--thm-color)";
+      btnExamTex.style.color = "var(--thm-color)";
+      btnExamTex.style.fontWeight = "800";
+      btnExamTex.innerHTML = "📄 Xuất Đề & Đáp Án (.tex LaTeX)";
+      btnExamTex.title = "Tải file mã nguồn .tex của đề thi hiện tại để biên dịch trên TeXstudio / Overleaf";
+      btnExamTex.addEventListener("click", exportSmartExamToLatex);
+      const footerWrap = seGenBtn.parentElement;
+      if (footerWrap) {
+        const btnGroup = document.createElement("div");
+        btnGroup.style.display = "flex";
+        btnGroup.style.gap = "10px";
+        btnGroup.style.flexWrap = "wrap";
+        btnGroup.style.alignItems = "center";
+        seGenBtn.replaceWith(btnGroup);
+        btnGroup.append(btnExamTex, seGenBtn);
+      }
+    }
+  }
+  // ---------------- 11. XUẤT VÀ NHẬP BẢN SAO LƯU JSON AN TOÀN ----------------
   function exportNotebookJSON() {
     const payload = {
-      schemaVersion: 1,
+      schemaVersion: 2,
       exportedAt: new Date().toISOString(),
       course: "Digital Book Academic Platform",
       settings,
       lastProgress,
       readingHistory,
+      highlights: highlightsData,
       notes: notesData
     };
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `So-Tay-Hoc-Thuat-Backup-${new Date().toISOString().slice(0, 10)}.json`;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
+    downloadTextFile(
+      JSON.stringify(payload, null, 2),
+      `So-Tay-Hoc-Thuat-Backup-${new Date().toISOString().slice(0, 10)}.json`,
+      "application/json;charset=utf-8"
+    );
     setNbStatus("✓ Đã xuất file sao lưu JSON", "saved");
   }
-
   function handleImportNotebookJSON(e) {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -995,8 +1469,10 @@
           .filter(n => n && typeof n === "object" && typeof n.content === "string")
           .map(n => ({
             id: String(n.id || "db-imp-" + Date.now() + Math.random().toString(36).slice(2, 5)),
-            type: n.type === "bookmark" ? "bookmark" : "note",
-            blockType: ["def", "thm", "ex", "note"].includes(n.blockType) ? n.blockType : "note",
+            hlId: n.hlId ? String(n.hlId) : undefined,
+            hlColor: n.hlColor ? String(n.hlColor) : undefined,
+            type: ["bookmark", "highlight", "note"].includes(n.type) ? n.type : "note",
+            blockType: ["def", "thm", "ex", "highlight", "note"].includes(n.blockType) ? n.blockType : "note",
             partId: String(n.partId || "part-0"),
             chapterId: String(n.chapterId || "tab-c0"),
             sectionId: String(n.sectionId || ""),
@@ -1006,11 +1482,9 @@
             createdAt: Number(n.createdAt) || Date.now(),
             updatedAt: Number(n.updatedAt) || Date.now()
           }));
-
         const mergedMap = new Map();
         [...sanitizedNotes, ...notesData].forEach(item => mergedMap.set(item.id, item));
         const mergedList = Array.from(mergedMap.values());
-
         if (!safeStorageWrite(STORAGE_KEYS.NOTES, mergedList)) {
           setNbStatus("❌ Lưu thất bại: Dữ liệu nhập vượt quá bộ nhớ trình duyệt!", "error");
           return;
@@ -1028,8 +1502,7 @@
     };
     reader.readAsText(file, "utf-8");
   }
-
-  // ---------------- 10. ĐIỀU HƯỚNG SÂU (DEEP-LINK) & TỰ ĐỘNG LƯU VỊ TRÍ ĐỌC ----------------
+  // ---------------- 12. ĐIỀU HƯỚNG SÂU (DEEP-LINK) & TỰ ĐỘNG LƯU VỊ TRÍ ĐỌC ----------------
   function navigateToLocation(partId, chapterId, targetElementId, updateHash = true) {
     if (typeof window.switchPart === "function" && partId) {
       window.switchPart(partId, false);
@@ -1037,7 +1510,6 @@
     if (typeof window.switchChapter === "function" && partId && chapterId) {
       window.switchChapter(partId, chapterId, false);
     }
-
     setTimeout(() => {
       if (targetElementId) {
         const targetEl = document.getElementById(targetElementId);
@@ -1045,7 +1517,6 @@
           const parentDetails = targetEl.closest("details");
           if (parentDetails) parentDetails.open = true;
           if (targetEl.tagName?.toLowerCase() === "details") targetEl.open = true;
-
           targetEl.scrollIntoView({ behavior: "smooth", block: "center" });
           targetEl.classList.remove("db-target-flash");
           void targetEl.offsetWidth;
@@ -1054,7 +1525,6 @@
       } else {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
-
       if (updateHash && partId && chapterId) {
         const hashStr = targetElementId
           ? `#${partId}/${chapterId}/${targetElementId}`
@@ -1066,16 +1536,13 @@
       recordReadingPosition(partId, chapterId, targetElementId);
     }, 120);
   }
-
   function recordReadingPosition(partId, chapterId, sectionId) {
     const activePart = document.getElementById(partId) || document.querySelector(".part-panel.active");
     const activeCh = document.getElementById(chapterId) || activePart?.querySelector(".chapter-content.active");
     if (!activePart || !activeCh) return;
-
     const fullTitle = activeCh.querySelector("h2.section-title")?.textContent.replace(/\s+/g, " ").trim() || "Chương học";
     const shortMatch = fullTitle.match(/^(Chương\s*\d+)/i);
     const chapterShort = shortMatch ? shortMatch[1] : fullTitle.slice(0, 18);
-
     let sectionTitle = "";
     if (sectionId) {
       const secEl = document.getElementById(sectionId);
@@ -1086,7 +1553,6 @@
           .slice(0, 55);
       }
     }
-
     lastProgress = {
       partId: activePart.id,
       chapterId: activeCh.id,
@@ -1096,8 +1562,6 @@
       timestamp: Date.now()
     };
     safeStorageWrite(STORAGE_KEYS.PROGRESS, lastProgress);
-
-    // Cập nhật lịch sử đọc (không trùng lặp mục liên tiếp)
     const histKey = `${activePart.id}:${activeCh.id}:${sectionId || ""}`;
     readingHistory = readingHistory.filter(h => h.key !== histKey);
     readingHistory.unshift({
@@ -1112,21 +1576,17 @@
     });
     if (readingHistory.length > 12) readingHistory.length = 12;
     safeStorageWrite(STORAGE_KEYS.HISTORY, readingHistory);
-
     syncCurrentChapterContext();
     updateReadingHubUI();
   }
-
   const debouncedScrollTracker = debounce(() => {
     if (document.body.getAttribute("data-app-mode") === "slides") return;
     const activePart = document.querySelector(".part-panel.active");
     const activeCh = activePart?.querySelector(".chapter-content.active");
     if (!activePart || !activeCh) return;
-
     const headings = Array.from(activeCh.querySelectorAll("h3.subsection-title"));
     let currentSecId = "";
     const threshold = 220;
-
     for (const h of headings) {
       const rect = h.getBoundingClientRect();
       if (rect.top <= threshold) {
@@ -1137,7 +1597,6 @@
     }
     recordReadingPosition(activePart.id, activeCh.id, currentSecId);
   }, 450);
-
   function restoreFromHashOrStorage() {
     const rawHash = (window.location.hash || "").replace(/^#/, "").trim();
     if (rawHash.includes("/")) {
@@ -1159,8 +1618,7 @@
     }
     updateReadingHubUI();
   }
-
-  // ---------------- 11. KHỞI CHẠY TOÀN BỘ HỆ THỐNG DIGITAL BOOK ----------------
+  // ---------------- 13. KHỞI CHẠY TOÀN BỘ HỆ THỐNG DIGITAL BOOK ----------------
   function bootstrapDigitalBook() {
     ensureStableIds();
     injectReaderToolbar();
@@ -1168,21 +1626,21 @@
     injectNotebookDrawer();
     syncLegacyBookmarksIntoNotebook();
     decorateKnowledgeBlocks();
+    setupSelectionPopover();
+    restorePersistedHighlights();
+    injectLatexButtonsIntoLabAndExam();
     applyReaderSettings();
     renderNotebookList();
     restoreFromHashOrStorage();
-
     window.addEventListener("scroll", debouncedScrollTracker, { passive: true });
-
-    // Theo dõi khi người dùng bấm chuyển Chương/Phần để cập nhật ngữ cảnh Sổ tay
     document.querySelector(".main-tabs-bar")?.addEventListener("click", () => {
       setTimeout(() => {
         const p = document.querySelector(".part-panel.active");
         const c = p?.querySelector(".chapter-content.active");
         if (p && c) recordReadingPosition(p.id, c.id, "");
+        injectLatexButtonsIntoLabAndExam();
       }, 80);
     });
-
     document.getElementById("subTabsContainer")?.addEventListener("click", () => {
       setTimeout(() => {
         const p = document.querySelector(".part-panel.active");
@@ -1191,7 +1649,6 @@
       }, 80);
     });
   }
-
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", bootstrapDigitalBook);
   } else {

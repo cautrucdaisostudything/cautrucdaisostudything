@@ -1,14 +1,12 @@
 /* ==========================================================================
    FILE: src/css/05-digital-book.css
    PHONG CÁCH: DIGITAL BOOK — ACADEMIC READING (LIGHT / DARK / FOCUS MODE)
-   Bảo toàn 100% quy tắc hiển thị KaTeX, Slides 16:9 và Phòng LAB
+   TÍCH HỢP:
+   - Hệ thống màu & Typography học thuật (680-780px)
+   - Thanh công cụ đọc sách, Trang chủ Reading Hub, Sổ tay cá nhân bên phải
+   - Popover Bôi đen Tô sáng (Highlight) & Trích dẫn nhanh (Medium/Kindle-style)
+   - Nút Xuất LaTeX (.tex) chuẩn TeXstudio / Overleaf cho Sổ tay & Phòng thi
    ========================================================================== */
-
-/* ==========================================================================
-   HỆ THỐNG BIẾN DIGITAL BOOK — TƯƠNG THÍCH ĐỒNG BỘ 4 MÙA & DARK MODE
-   ========================================================================== */
-
-/* 1. Mặc định: Chế độ Học tập chuẩn (Study / Digital Book Light) */
 :root,
 :root[data-theme="study"],
 :root[data-book-mode="light"] {
@@ -29,7 +27,11 @@
   --db-highlight-bg: rgba(49, 91, 150, 0.12);
   --db-shadow-soft: 0 2px 10px rgba(36, 51, 77, 0.04), 0 1px 3px rgba(36, 51, 77, 0.03);
   --db-shadow-drawer: -8px 0 28px rgba(36, 51, 77, 0.09);
-
+  /* Màu Highlight bôi đen văn bản */
+  --db-hl-yellow: rgba(250, 204, 21, 0.42);
+  --db-hl-green: rgba(52, 211, 153, 0.35);
+  --db-hl-blue: rgba(96, 165, 250, 0.32);
+  /* Biến điều khiển Typography & Khoảng cách động */
   --db-font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
   --db-font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --db-font-mono: "Fira Code", Consolas, monospace;
@@ -38,53 +40,29 @@
   --db-reading-max-width: 760px;
   --db-drawer-width: 360px;
 }
-
-/* 2. Khi người dùng chọn các Giao diện Mùa: Tự động kế thừa biến màu của mùa đó */
-:root[data-theme="spring"] {
-  --db-bg-main: var(--bg);
-  --db-surface: var(--paper);
-  --db-text-main: var(--ink);
-  --db-text-soft: var(--ink-soft);
-  --db-text-muted: var(--mute);
-  --db-accent: var(--brand);
-  --db-def-bg: var(--def-bg);
-  --db-border: var(--line);
-  --db-thm-bg: var(--thm-bg);
-  --db-thm-accent: var(--thm-color);
-  --db-ex-bg: var(--ex-bg);
+/* Đồng bộ biến nền tảng khi ở chế độ Học tập (Study / Digital Book) */
+:root[data-theme="study"] {
+  --bg: var(--db-bg-main);
+  --paper: var(--db-surface);
+  --ink: var(--db-text-main);
+  --ink-soft: var(--db-text-soft);
+  --mute: var(--db-text-muted);
+  --line: var(--db-border);
+  --brand: var(--db-accent);
+  --brand-strong: #1B375E;
+  --brand-soft: var(--db-def-bg);
+  --def-color: var(--db-accent);
+  --def-bg: var(--db-def-bg);
+  --def-border: #CBD6E6;
+  --def-accent: var(--db-accent);
+  --thm-color: var(--db-thm-accent);
+  --thm-bg: var(--db-thm-bg);
+  --thm-border: #C8DDD2;
+  --thm-accent: var(--db-thm-accent);
+  --eq-bg: #F5F2EB;
 }
-
-:root[data-theme="summer"] {
-  --db-bg-main: var(--bg);
-  --db-surface: var(--paper);
-  --db-text-main: var(--ink);
-  --db-text-soft: var(--ink-soft);
-  --db-text-muted: var(--mute);
-  --db-accent: var(--brand);
-  --db-def-bg: var(--def-bg);
-  --db-border: var(--line);
-  --db-thm-bg: var(--thm-bg);
-  --db-thm-accent: var(--thm-color);
-  --db-ex-bg: var(--ex-bg);
-}
-
-:root[data-theme="autumn"] {
-  --db-bg-main: var(--bg);
-  --db-surface: var(--paper);
-  --db-text-main: var(--ink);
-  --db-text-soft: var(--ink-soft);
-  --db-text-muted: var(--mute);
-  --db-accent: var(--brand);
-  --db-def-bg: var(--def-bg);
-  --db-border: var(--line);
-  --db-thm-bg: var(--thm-bg);
-  --db-thm-accent: var(--thm-color);
-  --db-ex-bg: var(--ex-bg);
-}
-
-/* 3. Chế độ Tối (khi bật nút Trăng hoặc khi ở Mùa Đông) */
-:root[data-book-mode="dark"],
-:root[data-theme="winter"] {
+/* Chế độ Tối (Dark Academic Reading Mode) */
+:root[data-book-mode="dark"] {
   color-scheme: dark;
   --db-bg-main: #131924;
   --db-surface: #1B2332;
@@ -103,57 +81,60 @@
   --db-highlight-bg: rgba(110, 161, 232, 0.18);
   --db-shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.28);
   --db-shadow-drawer: -10px 0 32px rgba(0, 0, 0, 0.45);
-
+  --db-hl-yellow: rgba(234, 179, 8, 0.35);
+  --db-hl-green: rgba(16, 185, 129, 0.32);
+  --db-hl-blue: rgba(59, 130, 246, 0.35);
   --bg: var(--db-bg-main);
   --paper: var(--db-surface);
   --ink: var(--db-text-main);
   --ink-soft: var(--db-text-soft);
   --mute: var(--db-text-muted);
   --line: var(--db-border);
+  --brand: var(--db-accent);
+  --brand-strong: #93C5FD;
+  --brand-soft: var(--db-def-bg);
+  --def-color: var(--db-accent);
   --def-bg: var(--db-def-bg);
+  --def-border: #334766;
+  --def-accent: var(--db-accent);
+  --thm-color: var(--db-thm-accent);
   --thm-bg: var(--db-thm-bg);
+  --thm-border: #2A473E;
+  --thm-accent: var(--db-thm-accent);
+  --cor-color: #F3C382;
+  --cor-bg: #2B251E;
+  --cor-border: #4A3D2C;
+  --ex-color: #67C7BC;
+  --ex-bg: #1B2C2E;
+  --ex-border: #2A474A;
+  --warn-color: #F88B9D;
+  --warn-bg: #301C23;
+  --warn-border: #542B37;
   --eq-bg: #161E2B;
 }
-
-/* 4. Khắc phục triệt để các thẻ có style inline nền trắng khi ở Chế độ Tối */
-:root[data-book-mode="dark"] main.content [style*="background: #ffffff"],
-:root[data-book-mode="dark"] main.content [style*="background:#ffffff"],
-:root[data-book-mode="dark"] main.content [style*="background: #fff;"],
-:root[data-book-mode="dark"] main.content [style*="background:#fff;"],
-:root[data-book-mode="dark"] main.content [style*="background: #faf8f2"],
-:root[data-book-mode="dark"] main.content [style*="background:#faf8f2"] {
-  background: var(--db-surface) !important;
-  color: var(--db-text-main) !important;
-  border-color: var(--db-border) !important;
-}
-
 /* ==========================================================================
    1. TYPOGRAPHY & VÙNG ĐỌC CHÍNH (680px - 780px)
    ========================================================================== */
 body[data-app-mode="study"] {
-  background-color: var(--db-bg-main);
-  color: var(--db-text-main);
+  background: var(--bg);
+  color: var(--ink);
   font-family: var(--db-font-serif);
   font-size: var(--db-reading-fs);
   line-height: var(--db-reading-lh);
 }
-
-/* Tiêu đề chương/mục dùng Serif học thuật, giao diện điều khiển dùng Sans-serif */
 main.content h2.section-title,
 main.content h3.subsection-title {
   font-family: var(--db-font-serif);
-  color: var(--db-text-main);
+  color: var(--ink);
   letter-spacing: -0.01em;
 }
-
 main.content h2.section-title {
   font-size: 1.65em;
   line-height: 1.3;
   padding-bottom: 12px;
-  border-bottom: 1px solid var(--db-border);
+  border-bottom: 1px solid var(--line);
   margin-bottom: 24px;
 }
-
 main.content h3.subsection-title {
   font-size: 1.26em;
   line-height: 1.4;
@@ -161,8 +142,6 @@ main.content h3.subsection-title {
   margin-bottom: 14px;
   scroll-margin-top: 136px;
 }
-
-/* Vùng đọc chính trên Desktop: đặt trong khung giấy trắng học thuật */
 #studyWorkspace > .container {
   max-width: 1420px;
   margin: 0 auto;
@@ -173,51 +152,42 @@ main.content h3.subsection-title {
   align-items: start;
   transition: grid-template-columns 0.25s ease;
 }
-
-/* Khi mở bảng Sổ tay bên phải trên màn hình rộng (>= 1280px) */
 body.db-drawer-open #studyWorkspace > .container {
   grid-template-columns: 260px minmax(0, 1fr) var(--db-drawer-width);
 }
-
 #studyWorkspace main.content {
-  background: var(--db-surface);
-  border: 1px solid var(--db-border);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  color: var(--ink);
   border-radius: 14px;
   padding: 36px 44px;
   box-shadow: var(--db-shadow-soft);
   width: 100%;
-  max-width: 860px; /* Bao gồm padding 2 bên (44px*2) => vùng chữ đúng 680-772px */
+  max-width: 860px;
   justify-self: center;
   font-size: var(--db-reading-fs);
   line-height: var(--db-reading-lh);
   transition: max-width 0.25s ease, padding 0.25s ease, background-color 0.2s ease;
 }
-
-/* Ngoại lệ cho Tab 4 (Bảng đối chiếu rộng) và Tab 5 (Phòng ôn luyện) để không bị bó hẹp */
 #studyWorkspace .container.practice-container main.content,
 #studyWorkspace main.content:has(#part-4.active) {
   max-width: 1020px;
 }
-
-/* Khối Định nghĩa, Định lý, Ví dụ theo chuẩn Digital Book */
 main.content .math-card {
   border-radius: 10px;
-  border: 1px solid var(--db-border);
+  border: 1px solid var(--line);
   margin: 20px 0;
-  background: var(--db-surface);
+  background: var(--paper);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-
 main.content .math-card.def {
-  background: var(--db-def-bg);
-  border-color: color-mix(in srgb, var(--db-accent) 28%, var(--db-border));
+  background: var(--def-bg);
+  border-color: var(--def-border);
 }
-
 main.content .math-card.thm {
-  background: var(--db-thm-bg);
-  border-color: color-mix(in srgb, var(--db-thm-accent) 28%, var(--db-border));
+  background: var(--thm-bg);
+  border-color: var(--thm-border);
 }
-
 main.content .math-card .card-body,
 main.content details.ex-card .ex-content,
 main.content details.proof-block .proof-content,
@@ -225,9 +195,8 @@ main.content .ex-study-card .ex-problem-statement {
   font-family: var(--db-font-serif);
   font-size: var(--db-reading-fs);
   line-height: var(--db-reading-lh);
-  color: var(--db-text-main);
+  color: var(--ink);
 }
-
 /* Bảo vệ tuyệt đối quy tắc render của KaTeX */
 .katex {
   font-size: 1.06em !important;
@@ -239,7 +208,6 @@ main.content .ex-study-card .ex-problem-statement {
   padding: 6px 0;
   margin: 0.85em 0 !important;
 }
-
 /* ==========================================================================
    2. CHẾ ĐỘ ĐỌC TẬP TRUNG (FOCUS READING MODE)
    ========================================================================== */
@@ -251,21 +219,17 @@ body.db-focus-mode #dbHomeDashboard,
 body.db-focus-mode #labFab {
   display: none !important;
 }
-
 body.db-focus-mode #studyWorkspace > .container {
   grid-template-columns: 1fr !important;
   max-width: 960px;
 }
-
 body.db-focus-mode nav.chapter-sidebar {
   display: none !important;
 }
-
 body.db-focus-mode #studyWorkspace main.content {
   max-width: 820px;
   padding: 44px 52px;
 }
-
 /* ==========================================================================
    3. THANH CÔNG CỤ ĐỌC SÁCH GỌN (READER TOOLBAR ON TOPBAR)
    ========================================================================== */
@@ -273,18 +237,17 @@ body.db-focus-mode #studyWorkspace main.content {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--db-bg-main);
-  border: 1px solid var(--db-border);
+  background: var(--bg);
+  border: 1px solid var(--line);
   border-radius: 10px;
   padding: 3px 6px;
   font-family: var(--db-font-sans);
 }
-
 .db-tool-btn {
   appearance: none;
   border: 1px solid transparent;
   background: transparent;
-  color: var(--db-text-main);
+  color: var(--ink);
   font-family: var(--db-font-sans);
   font-size: 12.5px;
   font-weight: 600;
@@ -297,26 +260,22 @@ body.db-focus-mode #studyWorkspace main.content {
   transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
   white-space: nowrap;
 }
-
 .db-tool-btn:hover {
-  background: var(--db-surface);
-  color: var(--db-accent);
-  border-color: var(--db-border);
+  background: var(--paper);
+  color: var(--brand);
+  border-color: var(--line);
 }
-
 .db-tool-btn[aria-pressed="true"],
 .db-tool-btn.is-active {
-  background: var(--db-accent);
+  background: var(--brand);
   color: #FFFFFF;
 }
-
 .db-tool-sep {
   width: 1px;
   height: 18px;
-  background: var(--db-border);
+  background: var(--line);
   margin: 0 2px;
 }
-
 .db-badge-count {
   display: inline-flex;
   align-items: center;
@@ -327,35 +286,30 @@ body.db-focus-mode #studyWorkspace main.content {
   border-radius: 999px;
   font-size: 11px;
   font-weight: 700;
-  background: var(--db-def-bg);
-  color: var(--db-accent);
+  background: var(--def-bg);
+  color: var(--brand);
 }
-
 .db-tool-btn.is-active .db-badge-count,
 .db-tool-btn[aria-pressed="true"] .db-badge-count {
   background: rgba(255, 255, 255, 0.22);
   color: #FFFFFF;
 }
-
-/* Popover điều chỉnh cỡ chữ & giãn dòng */
 .db-typo-popover {
   position: absolute;
   top: calc(100% + 8px);
   right: 16px;
   width: 280px;
-  background: var(--db-surface);
-  border: 1px solid var(--db-border);
+  background: var(--paper);
+  border: 1px solid var(--line);
   border-radius: 12px;
   padding: 14px 16px;
   box-shadow: 0 12px 32px rgba(36, 51, 77, 0.15);
   z-index: 250;
   font-family: var(--db-font-sans);
 }
-
 .db-typo-popover[hidden] {
   display: none !important;
 }
-
 .db-typo-row {
   display: flex;
   align-items: center;
@@ -363,39 +317,33 @@ body.db-focus-mode #studyWorkspace main.content {
   gap: 8px;
   margin-bottom: 12px;
 }
-
 .db-typo-row:last-child {
   margin-bottom: 0;
 }
-
 .db-typo-label {
   font-size: 12.5px;
   font-weight: 600;
-  color: var(--db-text-soft);
+  color: var(--ink-soft);
 }
-
 .db-typo-controls {
   display: inline-flex;
   align-items: center;
   gap: 6px;
 }
-
 .db-step-btn {
-  border: 1px solid var(--db-border);
-  background: var(--db-bg-main);
-  color: var(--db-text-main);
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
   border-radius: 6px;
   padding: 4px 10px;
   font-size: 12.5px;
   font-weight: 700;
   cursor: pointer;
 }
-
 .db-step-btn:hover {
-  border-color: var(--db-accent);
-  color: var(--db-accent);
+  border-color: var(--brand);
+  color: var(--brand);
 }
-
 /* ==========================================================================
    4. TRANG CHỦ DIGITAL BOOK (READING HUB DASHBOARD)
    ========================================================================== */
@@ -405,15 +353,13 @@ body.db-focus-mode #studyWorkspace main.content {
   padding: 0 24px;
   font-family: var(--db-font-sans);
 }
-
 .db-hub-shell {
-  background: var(--db-surface);
-  border: 1px solid var(--db-border);
+  background: var(--paper);
+  border: 1px solid var(--line);
   border-radius: 14px;
   padding: 18px 22px;
   box-shadow: var(--db-shadow-soft);
 }
-
 .db-hub-header {
   display: flex;
   align-items: center;
@@ -421,41 +367,35 @@ body.db-focus-mode #studyWorkspace main.content {
   gap: 12px;
   flex-wrap: wrap;
 }
-
 .db-hub-title-group {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-
 .db-hub-title {
   margin: 0;
   font-size: 15px;
   font-weight: 700;
-  color: var(--db-text-main);
+  color: var(--ink);
 }
-
 .db-hub-subtitle {
   font-size: 12.5px;
-  color: var(--db-text-muted);
+  color: var(--mute);
 }
-
 .db-hub-grid {
   display: grid;
   grid-template-columns: 1.25fr 1.5fr 1.1fr 1.1fr;
   gap: 16px;
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px solid var(--db-border);
+  border-top: 1px solid var(--line);
 }
-
 .db-hub-shell.is-collapsed .db-hub-grid {
   display: none;
 }
-
 .db-hub-card {
-  background: var(--db-bg-main);
-  border: 1px solid var(--db-border);
+  background: var(--bg);
+  border: 1px solid var(--line);
   border-radius: 10px;
   padding: 14px 16px;
   display: flex;
@@ -463,32 +403,28 @@ body.db-focus-mode #studyWorkspace main.content {
   justify-content: space-between;
   gap: 10px;
 }
-
 .db-hub-card h4 {
   margin: 0;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--db-accent);
+  color: var(--brand);
   font-weight: 700;
 }
-
 .db-continue-title {
   font-family: var(--db-font-serif);
   font-size: 16px;
   font-weight: 700;
-  color: var(--db-text-main);
+  color: var(--ink);
   line-height: 1.35;
 }
-
 .db-continue-meta {
   font-size: 12px;
-  color: var(--db-text-muted);
+  color: var(--mute);
 }
-
 .db-primary-btn {
-  border: 1px solid var(--db-accent);
-  background: var(--db-accent);
+  border: 1px solid var(--brand);
+  background: var(--brand);
   color: #FFFFFF;
   border-radius: 8px;
   padding: 7px 12px;
@@ -498,11 +434,9 @@ body.db-focus-mode #studyWorkspace main.content {
   text-align: center;
   transition: background-color 0.18s ease;
 }
-
 .db-primary-btn:hover {
-  background: var(--db-accent-hover);
+  filter: brightness(1.08);
 }
-
 .db-chapter-chips {
   display: flex;
   flex-wrap: wrap;
@@ -510,11 +444,10 @@ body.db-focus-mode #studyWorkspace main.content {
   max-height: 118px;
   overflow-y: auto;
 }
-
 .db-ch-chip {
-  border: 1px solid var(--db-border);
-  background: var(--db-surface);
-  color: var(--db-text-main);
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
   border-radius: 6px;
   padding: 4px 8px;
   font-size: 12px;
@@ -522,14 +455,12 @@ body.db-focus-mode #studyWorkspace main.content {
   cursor: pointer;
   transition: border-color 0.15s ease, color 0.15s ease;
 }
-
 .db-ch-chip:hover,
 .db-ch-chip.is-current {
-  border-color: var(--db-accent);
-  color: var(--db-accent);
-  background: var(--db-def-bg);
+  border-color: var(--brand);
+  color: var(--brand);
+  background: var(--def-bg);
 }
-
 .db-mini-list {
   list-style: none;
   margin: 0;
@@ -540,7 +471,6 @@ body.db-focus-mode #studyWorkspace main.content {
   max-height: 118px;
   overflow-y: auto;
 }
-
 .db-mini-item {
   display: flex;
   align-items: center;
@@ -549,24 +479,21 @@ body.db-focus-mode #studyWorkspace main.content {
   font-size: 12.5px;
   padding: 5px 8px;
   border-radius: 6px;
-  background: var(--db-surface);
-  border: 1px solid var(--db-border);
+  background: var(--paper);
+  border: 1px solid var(--line);
   cursor: pointer;
-  color: var(--db-text-main);
+  color: var(--ink);
   text-align: left;
 }
-
 .db-mini-item:hover {
-  border-color: var(--db-accent);
-  color: var(--db-accent);
+  border-color: var(--brand);
+  color: var(--brand);
 }
-
 .db-mini-item span {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
 /* ==========================================================================
    5. BẢNG SỔ TAY CÁ NHÂN BÊN PHẢI (COLLAPSIBLE RIGHT NOTEBOOK PANEL)
    ========================================================================== */
@@ -574,8 +501,8 @@ body.db-focus-mode #studyWorkspace main.content {
   position: sticky;
   top: calc(var(--topbar-height, 64px) + 16px);
   max-height: calc(100vh - var(--topbar-height, 64px) - 32px);
-  background: var(--db-surface);
-  border: 1px solid var(--db-border);
+  background: var(--paper);
+  border: 1px solid var(--line);
   border-radius: 14px;
   box-shadow: var(--db-shadow-soft);
   display: flex;
@@ -583,35 +510,31 @@ body.db-focus-mode #studyWorkspace main.content {
   overflow: hidden;
   font-family: var(--db-font-sans);
 }
-
 .db-notebook-drawer[hidden] {
   display: none !important;
 }
-
 .db-nb-header {
   padding: 14px 16px;
-  background: var(--db-bg-main);
-  border-bottom: 1px solid var(--db-border);
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
 }
-
 .db-nb-header h3 {
   margin: 0;
   font-size: 14.5px;
   font-weight: 700;
-  color: var(--db-text-main);
+  color: var(--ink);
   display: flex;
   align-items: center;
   gap: 6px;
 }
-
 .db-nb-close {
-  border: 1px solid var(--db-border);
-  background: var(--db-surface);
-  color: var(--db-text-soft);
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink-soft);
   width: 28px;
   height: 28px;
   border-radius: 7px;
@@ -619,132 +542,114 @@ body.db-focus-mode #studyWorkspace main.content {
   font-size: 16px;
   line-height: 1;
 }
-
 .db-nb-close:hover {
-  color: var(--db-accent);
-  border-color: var(--db-accent);
+  color: var(--brand);
+  border-color: var(--brand);
 }
-
-/* Thanh tìm kiếm & bộ lọc trong Sổ tay */
 .db-nb-controls {
   padding: 10px 14px;
-  border-bottom: 1px solid var(--db-border);
+  border-bottom: 1px solid var(--line);
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-
 .db-nb-search {
   width: 100%;
   padding: 7px 10px;
-  border: 1px solid var(--db-border);
+  border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--db-bg-main);
-  color: var(--db-text-main);
+  background: var(--bg);
+  color: var(--ink);
   font-size: 12.5px;
   font-family: var(--db-font-sans);
 }
-
 .db-nb-search:focus {
   outline: none;
-  border-color: var(--db-accent);
-  background: var(--db-surface);
+  border-color: var(--brand);
+  background: var(--paper);
 }
-
 .db-nb-tabs {
   display: flex;
   gap: 4px;
   flex-wrap: wrap;
 }
-
 .db-nb-tab {
   flex: 1;
-  border: 1px solid var(--db-border);
-  background: var(--db-bg-main);
-  color: var(--db-text-soft);
-  font-size: 11.5px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink-soft);
+  font-size: 11px;
   font-weight: 600;
-  padding: 5px 6px;
+  padding: 5px 4px;
   border-radius: 6px;
   cursor: pointer;
   text-align: center;
+  white-space: nowrap;
 }
-
 .db-nb-tab.is-active {
-  background: var(--db-accent);
+  background: var(--brand);
   color: #FFFFFF;
-  border-color: var(--db-accent);
+  border-color: var(--brand);
 }
-
-/* Form tạo/sửa ghi chú */
 .db-nb-composer {
   padding: 12px 14px;
-  background: color-mix(in srgb, var(--db-def-bg) 55%, var(--db-surface));
-  border-bottom: 1px solid var(--db-border);
+  background: color-mix(in srgb, var(--def-bg) 55%, var(--paper));
+  border-bottom: 1px solid var(--line);
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-
 .db-nb-context-badge {
   font-size: 11.5px;
-  color: var(--db-accent);
+  color: var(--brand);
   font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 6px;
 }
-
 .db-nb-input-title {
   width: 100%;
   padding: 6px 10px;
-  border: 1px solid var(--db-border);
+  border: 1px solid var(--line);
   border-radius: 7px;
   font-size: 12.5px;
   font-weight: 600;
-  background: var(--db-surface);
-  color: var(--db-text-main);
+  background: var(--paper);
+  color: var(--ink);
 }
-
 .db-nb-textarea {
   width: 100%;
   min-height: 74px;
   max-height: 160px;
   resize: vertical;
   padding: 8px 10px;
-  border: 1px solid var(--db-border);
+  border: 1px solid var(--line);
   border-radius: 7px;
   font-size: 13px;
   line-height: 1.5;
-  background: var(--db-surface);
-  color: var(--db-text-main);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--db-font-sans);
 }
-
 .db-nb-composer-actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
 }
-
 .db-nb-status {
   font-size: 11.5px;
-  color: var(--db-text-muted);
+  color: var(--mute);
 }
-
 .db-nb-status.is-error {
   color: #C92A2A;
   font-weight: 600;
 }
-
 .db-nb-status.is-saved {
-  color: var(--db-thm-accent);
+  color: var(--thm-color);
   font-weight: 600;
 }
-
-/* Danh sách ghi chú & đánh dấu */
 .db-nb-list {
   flex: 1;
   overflow-y: auto;
@@ -753,103 +658,113 @@ body.db-focus-mode #studyWorkspace main.content {
   flex-direction: column;
   gap: 10px;
 }
-
 .db-note-item {
-  border: 1px solid var(--db-border);
-  border-left: 3.5px solid var(--db-accent);
+  border: 1px solid var(--line);
+  border-left: 3.5px solid var(--brand);
   border-radius: 9px;
   padding: 10px 12px;
-  background: var(--db-bg-main);
+  background: var(--bg);
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-
 .db-note-item[data-kind="thm"] {
-  border-left-color: var(--db-thm-accent);
+  border-left-color: var(--thm-color);
 }
-
 .db-note-item[data-kind="ex"] {
   border-left-color: var(--db-ex-accent);
 }
-
+.db-note-item[data-kind="highlight"] {
+  border-left-color: #D97706;
+  background: color-mix(in srgb, var(--db-hl-yellow) 18%, var(--bg));
+}
 .db-note-meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 6px;
   font-size: 11px;
-  color: var(--db-text-muted);
+  color: var(--mute);
 }
-
 .db-note-tag {
   font-weight: 700;
-  color: var(--db-accent);
-  background: var(--db-def-bg);
+  color: var(--brand);
+  background: var(--def-bg);
   padding: 2px 6px;
   border-radius: 4px;
 }
-
 .db-note-title {
   font-size: 13px;
   font-weight: 700;
-  color: var(--db-text-main);
+  color: var(--ink);
   margin: 0;
 }
-
 .db-note-body {
   font-family: var(--db-font-serif);
   font-size: 13.5px;
   line-height: 1.6;
-  color: var(--db-text-main);
+  color: var(--ink);
   white-space: pre-wrap;
   word-break: break-word;
 }
-
 .db-note-actions {
   display: flex;
   align-items: center;
   gap: 6px;
   margin-top: 2px;
+  flex-wrap: wrap;
 }
-
 .db-note-act-btn {
-  border: 1px solid var(--db-border);
-  background: var(--db-surface);
-  color: var(--db-text-soft);
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink-soft);
   border-radius: 5px;
   padding: 3px 8px;
   font-size: 11.5px;
   font-weight: 600;
   cursor: pointer;
 }
-
 .db-note-act-btn:hover {
-  border-color: var(--db-accent);
-  color: var(--db-accent);
+  border-color: var(--brand);
+  color: var(--brand);
 }
-
 .db-note-act-btn.is-danger:hover {
   border-color: #C92A2A;
   color: #C92A2A;
 }
-
-/* Chân trang Sổ tay: Sao lưu & Khôi phục JSON */
+/* Chân trang Sổ tay: Sao lưu JSON & Xuất LaTeX (.tex) */
 .db-nb-footer {
   padding: 10px 14px;
-  border-top: 1px solid var(--db-border);
-  background: var(--db-bg-main);
+  border-top: 1px solid var(--line);
+  background: var(--bg);
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 6px;
 }
-
-/* Nút gắn ghi chú nhanh trên từng khối kiến thức (.math-card, details.ex-card) */
+.db-tex-export-btn {
+  border: 1px solid var(--thm-color);
+  background: var(--thm-bg);
+  color: var(--thm-color);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.18s ease;
+}
+.db-tex-export-btn:hover {
+  background: var(--thm-color);
+  color: #FFFFFF;
+}
 .db-card-note-btn {
-  border: 1px solid var(--db-border);
-  background: var(--db-surface);
-  color: var(--db-text-soft);
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink-soft);
   border-radius: 6px;
   padding: 2px 8px;
   font-family: var(--db-font-sans);
@@ -859,29 +774,105 @@ body.db-focus-mode #studyWorkspace main.content {
   margin-left: 6px;
   transition: all 0.18s ease;
 }
-
 .db-card-note-btn:hover,
 .db-card-note-btn.has-note {
-  border-color: var(--db-accent);
-  background: var(--db-def-bg);
-  color: var(--db-accent);
+  border-color: var(--brand);
+  background: var(--def-bg);
+  color: var(--brand);
 }
-
-/* Hiệu ứng highlight khi nhảy từ Sổ tay/Mục lục về khối kiến thức gốc */
 .db-target-flash {
   animation: dbTargetPulse 2.2s ease-out;
 }
-
 @keyframes dbTargetPulse {
   0% { box-shadow: 0 0 0 4px rgba(49, 91, 150, 0.42); }
   100% { box-shadow: 0 0 0 0 rgba(49, 91, 150, 0); }
 }
-
 /* ==========================================================================
-   6. RESPONSIVE CHO DESKTOP NHỎ, TABLET VÀ ĐIỆN THOẠI
+   6. POPOVER BÔI ĐEN TÔ SÁNG & TRÍCH DẪN NHANH (MEDIUM / KINDLE STYLE)
+   ========================================================================== */
+.db-selection-popover {
+  position: fixed;
+  z-index: 950;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 7px;
+  background: #1B2332;
+  color: #F8FAFC;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.35);
+  font-family: var(--db-font-sans);
+  transform: translate(-50%, -100%);
+  margin-top: -10px;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.db-selection-popover[hidden] {
+  display: none !important;
+}
+.db-selection-popover::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0;
+  border-style: solid;
+  border-color: #1B2332 transparent transparent;
+}
+.db-sel-btn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: #F8FAFC;
+  font-family: var(--db-font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.db-sel-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #FDE047;
+}
+.db-sel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+}
+.db-sel-dot.yellow { background: #FACC15; }
+.db-sel-dot.green  { background: #34D399; }
+.db-sel-dot.blue   { background: #60A5FA; }
+/* Vùng chữ được người dùng tô sáng trên trang đọc */
+mark.db-user-highlight {
+  background: var(--db-hl-yellow);
+  color: inherit;
+  padding: 1px 2px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: filter 0.15s ease, box-shadow 0.15s ease;
+}
+mark.db-user-highlight[data-hl-color="green"] {
+  background: var(--db-hl-green);
+}
+mark.db-user-highlight[data-hl-color="blue"] {
+  background: var(--db-hl-blue);
+}
+mark.db-user-highlight:hover {
+  filter: brightness(0.95);
+  box-shadow: 0 0 0 2px var(--brand);
+}
+/* ==========================================================================
+   7. RESPONSIVE & BẢN VÁ TƯƠNG THÍCH TOÀN HỆ THỐNG
    ========================================================================== */
 @media (max-width: 1279px) {
-  /* Trên màn hình < 1280px, bảng Sổ tay mở dưới dạng ngăn kéo trượt bên phải */
   body.db-drawer-open #studyWorkspace > .container {
     grid-template-columns: 250px minmax(0, 1fr);
   }
@@ -900,7 +891,6 @@ body.db-focus-mode #studyWorkspace main.content {
     grid-template-columns: 1fr 1fr;
   }
 }
-
 @media (max-width: 960px) {
   #studyWorkspace > .container,
   body.db-drawer-open #studyWorkspace > .container {
@@ -915,7 +905,6 @@ body.db-focus-mode #studyWorkspace main.content {
     padding: 0 14px;
   }
 }
-
 @media (max-width: 640px) {
   .db-hub-grid {
     grid-template-columns: 1fr;
@@ -927,12 +916,6 @@ body.db-focus-mode #studyWorkspace main.content {
     display: none;
   }
 }
-
-/* Vá lỗi tên class trên tablet/mobile */
-@media (max-width: 960px) {
-  .db-home-hub { padding: 0 14px; }
-}
-
 /* Đảm bảo Sổ tay luôn hiển thị dạng ngăn kéo nổi bên phải khi đang làm bài thi */
 .container.practice-container.is-review-mode .db-notebook-drawer {
   position: fixed !important;
@@ -945,7 +928,6 @@ body.db-focus-mode #studyWorkspace main.content {
   z-index: 300 !important;
   box-shadow: var(--db-shadow-drawer) !important;
 }
-
 /* Chống nền trắng inline khi bật Chế độ Tối (data-book-mode="dark") */
 :root[data-book-mode="dark"] main.content [style*="background: #ffffff"],
 :root[data-book-mode="dark"] main.content [style*="background:#ffffff"],
