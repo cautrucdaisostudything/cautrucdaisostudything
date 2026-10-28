@@ -4416,6 +4416,33 @@ body.db-focus-mode #studyWorkspace main.content {
   }
 }
 
+/* Vá lỗi tên class trên tablet/mobile */
+@media (max-width: 960px) {
+  .db-home-hub { padding: 0 14px; }
+}
+
+/* Đảm bảo Sổ tay luôn trượt nổi bên phải khi đang ở Phòng thi trắc nghiệm (is-review-mode) */
+.container.practice-container.is-review-mode .db-notebook-drawer {
+  position: fixed;
+  top: var(--topbar-height, 64px);
+  right: 0;
+  bottom: 0;
+  width: min(380px, 92vw);
+  max-height: none;
+  border-radius: 14px 0 0 14px;
+  z-index: 220;
+  box-shadow: var(--db-shadow-drawer);
+}
+
+/* Chống nền trắng inline khi bật Chế độ Tối (data-book-mode="dark") */
+:root[data-book-mode="dark"] main.content [style*="background: #ffffff"],
+:root[data-book-mode="dark"] main.content [style*="background:#ffffff"],
+:root[data-book-mode="dark"] main.content [style*="background: #fff;"] {
+  background: var(--db-surface) !important;
+  color: var(--db-text-main) !important;
+  border-color: var(--db-border-strong) !important;
+}
+
 </style>
 </head>
 <body data-app-mode="study">
