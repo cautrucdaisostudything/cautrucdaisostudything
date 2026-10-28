@@ -426,6 +426,7 @@ const curatedPool = CURATED_BANK.filter(item =>
       submitted: false,
       createdAt: new Date().toLocaleString("vi-VN")
     };
+    window.getCurrentSmartExam = () => currentExam;
 
     document.getElementById("seResultContainer").hidden = true;
     document.getElementById("seWorkspace").hidden = false;
