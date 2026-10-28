@@ -3511,10 +3511,14 @@ table.lab-cayley td.rc { outline: 2px solid var(--brand); outline-offset: -2px; 
    Bảo toàn 100% quy tắc hiển thị KaTeX, Slides 16:9 và Phòng LAB
    ========================================================================== */
 
+/* ==========================================================================
+   HỆ THỐNG BIẾN DIGITAL BOOK — TƯƠNG THÍCH ĐỒNG BỘ 4 MÙA & DARK MODE
+   ========================================================================== */
+
+/* 1. Mặc định: Chế độ Học tập chuẩn (Study / Digital Book Light) */
 :root,
 :root[data-theme="study"],
 :root[data-book-mode="light"] {
-  /* Bảng màu Digital Book — Academic Reading theo yêu cầu */
   --db-bg-main: #F7F5F0;
   --db-surface: #FFFFFF;
   --db-text-main: #24334D;
@@ -3533,7 +3537,6 @@ table.lab-cayley td.rc { outline: 2px solid var(--brand); outline-offset: -2px; 
   --db-shadow-soft: 0 2px 10px rgba(36, 51, 77, 0.04), 0 1px 3px rgba(36, 51, 77, 0.03);
   --db-shadow-drawer: -8px 0 28px rgba(36, 51, 77, 0.09);
 
-  /* Biến điều khiển Typography & Khoảng cách động */
   --db-font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
   --db-font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --db-font-mono: "Fira Code", Consolas, monospace;
@@ -3543,30 +3546,52 @@ table.lab-cayley td.rc { outline: 2px solid var(--brand); outline-offset: -2px; 
   --db-drawer-width: 360px;
 }
 
-/* Đồng bộ biến nền tảng khi ở chế độ Học tập (Study / Digital Book) */
-:root[data-theme="study"] {
-  --bg: var(--db-bg-main);
-  --paper: var(--db-surface);
-  --ink: var(--db-text-main);
-  --ink-soft: var(--db-text-soft);
-  --mute: var(--db-text-muted);
-  --line: var(--db-border);
-  --brand: var(--db-accent);
-  --brand-strong: #1B375E;
-  --brand-soft: var(--db-def-bg);
-  --def-color: var(--db-accent);
-  --def-bg: var(--db-def-bg);
-  --def-border: #CBD6E6;
-  --def-accent: var(--db-accent);
-  --thm-color: var(--db-thm-accent);
-  --thm-bg: var(--db-thm-bg);
-  --thm-border: #C8DDD2;
-  --thm-accent: var(--db-thm-accent);
-  --eq-bg: #F5F2EB;
+/* 2. Khi người dùng chọn các Giao diện Mùa: Tự động kế thừa biến màu của mùa đó */
+:root[data-theme="spring"] {
+  --db-bg-main: var(--bg);
+  --db-surface: var(--paper);
+  --db-text-main: var(--ink);
+  --db-text-soft: var(--ink-soft);
+  --db-text-muted: var(--mute);
+  --db-accent: var(--brand);
+  --db-def-bg: var(--def-bg);
+  --db-border: var(--line);
+  --db-thm-bg: var(--thm-bg);
+  --db-thm-accent: var(--thm-color);
+  --db-ex-bg: var(--ex-bg);
 }
 
-/* Chế độ Tối (Dark Academic Reading Mode) */
-:root[data-book-mode="dark"] {
+:root[data-theme="summer"] {
+  --db-bg-main: var(--bg);
+  --db-surface: var(--paper);
+  --db-text-main: var(--ink);
+  --db-text-soft: var(--ink-soft);
+  --db-text-muted: var(--mute);
+  --db-accent: var(--brand);
+  --db-def-bg: var(--def-bg);
+  --db-border: var(--line);
+  --db-thm-bg: var(--thm-bg);
+  --db-thm-accent: var(--thm-color);
+  --db-ex-bg: var(--ex-bg);
+}
+
+:root[data-theme="autumn"] {
+  --db-bg-main: var(--bg);
+  --db-surface: var(--paper);
+  --db-text-main: var(--ink);
+  --db-text-soft: var(--ink-soft);
+  --db-text-muted: var(--mute);
+  --db-accent: var(--brand);
+  --db-def-bg: var(--def-bg);
+  --db-border: var(--line);
+  --db-thm-bg: var(--thm-bg);
+  --db-thm-accent: var(--thm-color);
+  --db-ex-bg: var(--ex-bg);
+}
+
+/* 3. Chế độ Tối (khi bật nút Trăng hoặc khi ở Mùa Đông) */
+:root[data-book-mode="dark"],
+:root[data-theme="winter"] {
   color-scheme: dark;
   --db-bg-main: #131924;
   --db-surface: #1B2332;
@@ -3592,27 +3617,21 @@ table.lab-cayley td.rc { outline: 2px solid var(--brand); outline-offset: -2px; 
   --ink-soft: var(--db-text-soft);
   --mute: var(--db-text-muted);
   --line: var(--db-border);
-  --brand: var(--db-accent);
-  --brand-strong: #93C5FD;
-  --brand-soft: var(--db-def-bg);
-  --def-color: var(--db-accent);
   --def-bg: var(--db-def-bg);
-  --def-border: #334766;
-  --def-accent: var(--db-accent);
-  --thm-color: var(--db-thm-accent);
   --thm-bg: var(--db-thm-bg);
-  --thm-border: #2A473E;
-  --thm-accent: var(--db-thm-accent);
-  --cor-color: #F3C382;
-  --cor-bg: #2B251E;
-  --cor-border: #4A3D2C;
-  --ex-color: #67C7BC;
-  --ex-bg: #1B2C2E;
-  --ex-border: #2A474A;
-  --warn-color: #F88B9D;
-  --warn-bg: #301C23;
-  --warn-border: #542B37;
   --eq-bg: #161E2B;
+}
+
+/* 4. Khắc phục triệt để các thẻ có style inline nền trắng khi ở Chế độ Tối */
+:root[data-book-mode="dark"] main.content [style*="background: #ffffff"],
+:root[data-book-mode="dark"] main.content [style*="background:#ffffff"],
+:root[data-book-mode="dark"] main.content [style*="background: #fff;"],
+:root[data-book-mode="dark"] main.content [style*="background:#fff;"],
+:root[data-book-mode="dark"] main.content [style*="background: #faf8f2"],
+:root[data-book-mode="dark"] main.content [style*="background:#faf8f2"] {
+  background: var(--db-surface) !important;
+  color: var(--db-text-main) !important;
+  border-color: var(--db-border) !important;
 }
 
 /* ==========================================================================
@@ -4421,17 +4440,17 @@ body.db-focus-mode #studyWorkspace main.content {
   .db-home-hub { padding: 0 14px; }
 }
 
-/* Đảm bảo Sổ tay luôn trượt nổi bên phải khi đang ở Phòng thi trắc nghiệm (is-review-mode) */
+/* Đảm bảo Sổ tay luôn hiển thị dạng ngăn kéo nổi bên phải khi đang làm bài thi */
 .container.practice-container.is-review-mode .db-notebook-drawer {
-  position: fixed;
-  top: var(--topbar-height, 64px);
-  right: 0;
-  bottom: 0;
-  width: min(380px, 92vw);
-  max-height: none;
-  border-radius: 14px 0 0 14px;
-  z-index: 220;
-  box-shadow: var(--db-shadow-drawer);
+  position: fixed !important;
+  top: var(--topbar-height, 64px) !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: min(380px, 92vw) !important;
+  max-height: none !important;
+  border-radius: 14px 0 0 14px !important;
+  z-index: 300 !important;
+  box-shadow: var(--db-shadow-drawer) !important;
 }
 
 /* Chống nền trắng inline khi bật Chế độ Tối (data-book-mode="dark") */
