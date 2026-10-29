@@ -1813,4 +1813,238 @@ body[data-app-mode="slides"] .ctds-floating-dock {
   .db-sidebar-backdrop {
     display: none !important;
   }
+
+/* ==========================================================================
+   10. NÂNG CẤP KẾT HỢP Ý TƯỞNG 1 (CLEAN TOPBAR POPOVER) & Ý TƯỞNG 6 (HOMOMORPHISM LAB)
+   ========================================================================== */
+
+/* 10.1. Ẩn các nút rời rạc cũ trên Topbar vì đã được gom vào Popover "⚙️ Hiển thị" */
+.topbar .actions > #btnToggleAllEx,
+.topbar .actions > #btnTheme,
+.topbar .actions > #btnParticlesToggle {
+  display: none !important;
+}
+
+/* Thiết kế Popover "⚙️ Hiển thị & Giao diện" đa năng */
+.db-typo-popover {
+  width: 348px !important;
+  max-width: calc(100vw - 24px) !important;
+  padding: 16px 18px !important;
+  border-radius: 16px !important;
+  border: 1.5px solid var(--def-border, var(--line)) !important;
+  box-shadow: 0 20px 44px rgba(15, 23, 42, 0.22), 0 4px 12px rgba(15, 23, 42, 0.08) !important;
+  background: var(--paper) !important;
+  color: var(--ink) !important;
+}
+
+.db-pop-section-title {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--brand);
+  margin: 12px 0 8px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.db-pop-section-title:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.db-pop-mode-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.db-pop-toggle-card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 9px;
+  border: 1.5px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--db-font-sans);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+.db-pop-toggle-card:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+.db-pop-toggle-card[aria-pressed="true"],
+.db-pop-toggle-card.is-active {
+  background: var(--brand);
+  color: #ffffff;
+  border-color: var(--brand);
+}
+
+/* Lưới chọn 5 Chủ đề Giao diện (Học tập · Xuân · Hạ · Thu · Đông) */
+.db-season-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.db-season-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 7px 6px;
+  border-radius: 8px;
+  border: 1.5px solid var(--line);
+  background: var(--bg);
+  color: var(--ink-soft);
+  font-family: var(--db-font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  white-space: nowrap;
+}
+.db-season-chip.span-2 {
+  grid-column: span 2;
+}
+.db-season-chip:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+  transform: translateY(-1px);
+}
+.db-season-chip.is-active {
+  background: var(--brand-grad, var(--brand));
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.18);
+}
+
+.db-pop-action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.db-pop-full-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--db-font-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.db-pop-full-btn:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+  background: var(--def-bg);
+}
+.db-pop-full-btn .state-pill {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--brand);
+  border: 1px solid var(--def-border);
+}
+
+/* 10.2. Giao diện Công cụ Mô phỏng Đồng cấu & Định lý Đẳng cấu I (Ý tưởng 6) */
+.homo-controls-bar {
+  display: grid;
+  grid-template-columns: minmax(190px, 1.2fr) repeat(4, minmax(76px, 0.7fr)) auto;
+  gap: 10px;
+  align-items: end;
+  margin-bottom: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--eq-bg);
+  border: 1px solid var(--line);
+}
+@media (max-width: 860px) {
+  .homo-controls-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.homo-controls-bar label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+.homo-controls-bar select,
+.homo-controls-bar input {
+  min-height: 38px;
+  padding: 6px 10px;
+  border-radius: 9px;
+  border: 1.5px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 600;
+  width: 100%;
+}
+.homo-controls-bar select {
+  font-family: var(--font-ui);
+}
+
+.homo-fiber-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 8px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.homo-fiber-table th,
+.homo-fiber-table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: middle;
+}
+.homo-fiber-table th {
+  background: var(--def-bg);
+  color: var(--brand);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.homo-fiber-table tr:last-child td {
+  border-bottom: 0;
+}
+.homo-fiber-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--thm-bg);
+  color: var(--thm-color);
+  border: 1px solid var(--thm-border);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+}
 }
