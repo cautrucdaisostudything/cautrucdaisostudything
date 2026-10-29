@@ -31020,6 +31020,43 @@ function selectOption(optIdx) {
   }
   // ---------------- 4. THANH CÔNG CỤ ĐỌC SÁCH GỌN TRÊN TOPBAR ----------------
   function injectReaderToolbar() {
+    // ---------------- 4. THANH CÔNG CỤ ĐỌC SÁCH GỌN TRÊN TOPBAR (Ý TƯỞNG 1: CLEAN TOPBAR POPOVER) ----------------
+  const SEASON_META = {
+    study: { label: "📖 Giao diện: Học tập", eyebrow: "📖 WELCOME TO CTĐS" },
+    spring: { label: "🌸 Giao diện: Xuân", eyebrow: "🌸 MÙA XUÂN KHỞI SINH · WELCOME TO CTĐS" },
+    summer: { label: "🌊 Giao diện: Hạ", eyebrow: "🌊 MÙA HẠ ĐẠI DƯƠNG · WELCOME TO CTĐS" },
+    autumn: { label: "🍁 Giao diện: Thu", eyebrow: "🍁 MÙA THU LÁ PHONG · WELCOME TO CTĐS" },
+    winter: { label: "❄️ Giao diện: Đông", eyebrow: "❄️ MÙA ĐÔNG CỰC QUANG · WELCOME TO CTĐS" }
+  };
+
+  function applySeasonDirect(seasonKey) {
+    if (!SEASON_META[seasonKey]) seasonKey = "study";
+    settings.seasonTheme = seasonKey;
+    document.documentElement.setAttribute("data-theme", seasonKey);
+    const themeBtn = document.getElementById("btnTheme");
+    const seasonEyebrow = document.getElementById("seasonEyebrow");
+    if (themeBtn) themeBtn.textContent = SEASON_META[seasonKey].label;
+    if (seasonEyebrow) seasonEyebrow.textContent = SEASON_META[seasonKey].eyebrow;
+    applyReaderSettings();
+    saveReaderSettings();
+  }
+
+  function syncPopoverAuxiliaryStates() {
+    const fxBtn = document.getElementById("btnParticlesToggle");
+    const popFxState = document.getElementById("dbPopParticlesState");
+    if (fxBtn && popFxState) {
+      const isOn = fxBtn.getAttribute("aria-pressed") !== "false";
+      popFxState.textContent = isOn ? "Đang Bật" : "Đang Tắt";
+    }
+    const exBtn = document.getElementById("btnToggleAllEx");
+    const popExState = document.getElementById("dbPopExState");
+    if (exBtn && popExState) {
+      const isCollapsingNext = exBtn.textContent.includes("Thu gọn");
+      popExState.textContent = isCollapsingNext ? "Thu gọn tất cả" : "Mở rộng tất cả";
+    }
+  }
+
+  function injectReaderToolbar() {
     const actionsEl = document.querySelector(".topbar .actions");
     if (!actionsEl || document.getElementById("dbToolbarGroup")) return;
     const group = document.createElement("div");
@@ -31032,20 +31069,13 @@ function selectOption(optIdx) {
         ◧ <span class="db-btn-label">Mục lục</span>
       </button>
       <div class="db-tool-sep" aria-hidden="true"></div>
-      <button type="button" class="db-tool-btn" id="dbBtnTypo" aria-expanded="false" aria-controls="dbTypoPopover" title="Điều chỉnh cỡ chữ và giãn dòng">
-        Aa <span class="db-btn-label">Cỡ chữ</span>
-      </button>
-      <div class="db-tool-sep" aria-hidden="true"></div>
-      <button type="button" class="db-tool-btn" id="dbBtnColorMode" aria-pressed="false" title="Chuyển chế độ Sáng / Tối">
-        ☀️ <span class="db-btn-label">Sáng</span>
-      </button>
-      <button type="button" class="db-tool-btn" id="dbBtnFocusMode" aria-pressed="false" title="Chế độ đọc tập trung (ẩn banner và mục lục)">
-        🎯 <span class="db-btn-label">Tập trung</span>
-      </button>
-      <div class="db-tool-sep" aria-hidden="true"></div>
       <button type="button" class="db-tool-btn" id="dbBtnToggleDrawer" aria-pressed="false" aria-controls="dbNotebookDrawer" title="Mở/Đóng Sổ tay cá nhân và Dấu trang">
         📓 <span class="db-btn-label">Sổ tay</span>
         <span class="db-badge-count" id="dbTotalNotesBadge">0</span>
+      </button>
+      <div class="db-tool-sep" aria-hidden="true"></div>
+      <button type="button" class="db-tool-btn" id="dbBtnTypo" aria-expanded="false" aria-controls="dbTypoPopover" title="Mở bảng tuỳ chỉnh Hiển thị, Cỡ chữ, Giao diện 5 mùa & Hiệu ứng">
+        ⚙️ <span class="db-btn-label">Hiển thị</span>
       </button>
     `;
     actionsEl.prepend(group);
@@ -31053,7 +31083,12 @@ function selectOption(optIdx) {
     popover.className = "db-typo-popover";
     popover.id = "dbTypoPopover";
     popover.hidden = true;
+    popover.setAttribute("role", "dialog");
+    popover.setAttribute("aria-label", "Tuỳ chỉnh Hiển thị và Giao diện");
     popover.innerHTML = `
+      <div class="db-pop-section-title">
+        <span>🔤 1. Cỡ chữ &amp; Giãn dòng</span>
+      </div>
       <div class="db-typo-row">
         <span class="db-typo-label">Cỡ chữ đọc</span>
         <div class="db-typo-controls">
@@ -31070,22 +31105,67 @@ function selectOption(optIdx) {
           <button type="button" class="db-step-btn" id="dbLhInc" aria-label="Tăng giãn dòng">+</button>
         </div>
       </div>
-      <div class="db-typo-row" style="margin-top:8px; padding-top:8px; border-top:1px solid var(--line);">
-        <button type="button" class="db-step-btn" id="dbTypoReset" style="width:100%;">Đặt lại mặc định (18px · 1.85)</button>
+
+      <div class="db-pop-section-title">
+        <span>🌓 2. Chế độ Đọc &amp; Tập trung</span>
+      </div>
+      <div class="db-pop-mode-grid">
+        <button type="button" class="db-pop-toggle-card" id="dbBtnColorMode" aria-pressed="false" title="Chuyển đổi nền Sáng / Tối">
+          ☀️ Nền Sáng
+        </button>
+        <button type="button" class="db-pop-toggle-card" id="dbBtnFocusMode" aria-pressed="false" title="Ẩn các thanh phụ để đọc tập trung">
+          🎯 Tập trung
+        </button>
+      </div>
+
+      <div class="db-pop-section-title">
+        <span>🎨 3. Chủ đề Giao diện (Chọn 1 chạm)</span>
+      </div>
+      <div class="db-season-grid" id="dbSeasonGrid">
+        <button type="button" class="db-season-chip span-2 is-active" data-season-pick="study">📖 Học tập (E-Ink)</button>
+        <button type="button" class="db-season-chip" data-season-pick="spring">🌸 Xuân</button>
+        <button type="button" class="db-season-chip" data-season-pick="summer">🌊 Hạ</button>
+        <button type="button" class="db-season-chip" data-season-pick="autumn">🍁 Thu</button>
+        <button type="button" class="db-season-chip" data-season-pick="winter">❄️ Đông</button>
+      </div>
+
+      <div class="db-pop-section-title">
+        <span>✨ 4. Hiệu ứng &amp; Tiện ích Bài giảng</span>
+      </div>
+      <div class="db-pop-action-list">
+        <button type="button" class="db-pop-full-btn" id="dbPopoverParticlesBtn" title="Bật hoặc tắt hiệu ứng cánh hoa, lá phong, tuyết rơi theo mùa">
+          <span>✨ Hiệu ứng hạt theo mùa</span>
+          <span class="state-pill" id="dbPopParticlesState">Đang Bật</span>
+        </button>
+        <button type="button" class="db-pop-full-btn" id="dbPopoverToggleExBtn" title="Mở rộng hoặc thu gọn toàn bộ thẻ Ví dụ và Chứng minh">
+          <span>📂 Toàn bộ Ví dụ &amp; Chứng minh</span>
+          <span class="state-pill" id="dbPopExState">Thu gọn tất cả</span>
+        </button>
+        <button type="button" class="db-step-btn" id="dbTypoReset" style="width:100%; margin-top:2px;">
+          ↺ Đặt lại mặc định (18px · 1.85 · Học tập)
+        </button>
       </div>
     `;
     document.querySelector(".topbar")?.appendChild(popover);
+
+    if (settings.seasonTheme && SEASON_META[settings.seasonTheme]) {
+      applySeasonDirect(settings.seasonTheme);
+    }
+
     const btnTypo = document.getElementById("dbBtnTypo");
     btnTypo?.addEventListener("click", (e) => {
       e.stopPropagation();
       const willOpen = popover.hidden;
       popover.hidden = !willOpen;
       btnTypo.setAttribute("aria-expanded", String(willOpen));
+      btnTypo.classList.toggle("is-active", willOpen);
+      if (willOpen) syncPopoverAuxiliaryStates();
     });
     document.addEventListener("click", (e) => {
-      if (!popover.hidden && !popover.contains(e.target) && e.target !== btnTypo) {
+      if (!popover.hidden && !popover.contains(e.target) && !btnTypo?.contains(e.target)) {
         popover.hidden = true;
         btnTypo?.setAttribute("aria-expanded", "false");
+        btnTypo?.classList.remove("is-active");
       }
     });
     document.getElementById("dbFsDec")?.addEventListener("click", () => {
@@ -31111,8 +31191,8 @@ function selectOption(optIdx) {
     document.getElementById("dbTypoReset")?.addEventListener("click", () => {
       settings.fontSize = 18;
       settings.lineHeight = 1.85;
-      applyReaderSettings();
-      saveReaderSettings();
+      settings.colorMode = "light";
+      applySeasonDirect("study");
     });
     document.getElementById("dbBtnColorMode")?.addEventListener("click", () => {
       settings.colorMode = settings.colorMode === "dark" ? "light" : "dark";
@@ -31129,6 +31209,24 @@ function selectOption(optIdx) {
       applyReaderSettings();
       saveReaderSettings();
       if (settings.drawerOpen) renderNotebookList();
+    });
+
+    popover.querySelectorAll(".db-season-chip[data-season-pick]").forEach(chip => {
+      chip.addEventListener("click", () => {
+        const picked = chip.getAttribute("data-season-pick") || "study";
+        applySeasonDirect(picked);
+      });
+    });
+
+    document.getElementById("dbPopoverParticlesBtn")?.addEventListener("click", () => {
+      const fxBtn = document.getElementById("btnParticlesToggle");
+      if (fxBtn) fxBtn.click();
+      syncPopoverAuxiliaryStates();
+    });
+    document.getElementById("dbPopoverToggleExBtn")?.addEventListener("click", () => {
+      const exBtn = document.getElementById("btnToggleAllEx");
+      if (exBtn) exBtn.click();
+      syncPopoverAuxiliaryStates();
     });
   }
   // ---------------- 5. TRANG CHỦ DIGITAL BOOK (READING HUB DASHBOARD) ----------------
