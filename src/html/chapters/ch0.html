@@ -36,545 +36,91 @@
 <p>
 Các cấu trúc thương xuất hiện khi nhiều biểu diễn khác nhau được xem là cùng một đối tượng.
 Chương này xây dựng ngôn ngữ cần thiết để làm việc chính xác với ý tưởng ấy: ánh xạ, một số công cụ số học, quan hệ tương đương, tập thương, phép toán hai ngôi và tính xác định tốt.
-Mục đích không phải là ôn lại lý thuyết tập hợp hay số học một cách biệt lập, mà là chuẩn bị những lập luận sẽ được dùng cho nhóm thương, vành thương và trường các thương.
+Mục đích là chuẩn bị những lập luận sẽ được dùng cho nhóm thương, vành thương và trường các thương.
 </p>
 
-<!-- 0.1 ĐỘNG CƠ SƯ PHẠM -->
+<!-- ==================== BUỔI 2: NHÓM N01 — TẬP HỢP, ÁNH XẠ VÀ QUAN HỆ TƯƠNG ĐƯƠNG ==================== -->
+<div class="lp-unit-header" id="lp-u0-1">
+  <div class="lp-unit-title-wrap">
+    <span class="lp-unit-eyebrow">Buổi 2 · Phân công Nhóm N01 · Mục 0.1, 0.2, 0.4 · Nền tảng Tập thương</span>
+    <h4 class="lp-unit-title">Ánh xạ, Quan hệ tương đương, Phân hoạch & Đồng dư modulo $n$</h4>
+  </div>
+  <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u0-1" onclick="toggleLessonUnitDone(this, 'lp-u0-1')">
+    ⚪ Đánh dấu hoàn thành bài học
+  </button>
+</div>
 
-  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 0.1 · Tiết 1–2 ==================== -->
-  <div class="lp-unit-header" id="lp-u0-1">
-    <div class="lp-unit-title-wrap">
-      <span class="lp-unit-eyebrow">Bài 0.1 · Tiết 1–2 · Mục 0.1, 0.2, 0.4 · Nền tảng phân hoạch</span>
-      <h4 class="lp-unit-title">Ánh xạ, Quan hệ tương đương & Tập thương</h4>
-    </div>
-    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u0-1" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u0-1')">
-      ⚪ Đánh dấu đã học xong
-    </button>
-  </div>
-<h3 class="subsection-title">0.1. Một đối tượng, nhiều cách biểu diễn</h3>
-  <div class="lp-step-bar">
-    <span class="lp-step-pill s1">Bước 1 · Khởi động & Động cơ</span>
-    <span class="lp-step-goal">Tại sao cần đồng nhất nhiều biểu diễn thành một đối tượng?</span>
-  </div>
-<p>
-Trên mặt đồng hồ mười hai giờ, các số $5$, $17$ và $-7$ cùng chỉ một vị trí của kim giờ. Nếu chỉ quan tâm đến vị trí của kim giờ, ta muốn xem các số nguyên sai khác nhau một bội của $12$ là những biểu diễn của cùng một đối tượng. Phép cộng vẫn có ý nghĩa sau sự đồng nhất này: thay $5$ bởi $17$ và thay $8$ bởi $-4$ không làm thay đổi vị trí được biểu diễn bởi tổng. Quả thật,
-$$5 + 8 = 13, \qquad 17 + (-4) = 13.$$
-Nhưng một vài phép tính trùng nhau chưa phải là chứng minh. Ta phải biết rằng <i>mọi cách thay đại diện đều cho cùng một vị trí kết quả</i>.
-</p>
-<p>
-Số hữu tỉ đặt ra cùng vấn đề dưới một hình thức khác. Các cặp số nguyên $(1, 2)$, $(2, 4)$ và $(-3, -6)$ đều biểu diễn số $\frac{1}{2}$. Khi cộng hai phân số, ta thường viết:
-$$\frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}, \quad b, d \neq 0.$$
-Công thức này dùng trực tiếp bốn số được chọn làm đại diện. Vì thế, trước khi coi vế phải là tổng của hai số hữu tỉ, ta phải chứng minh rằng việc thay $(a, b)$ và $(c, d)$ bởi các cặp tương đương không làm thay đổi số hữu tỉ nhận được.
-</p>
-
-<!-- 0.2 TẬP HỢP VÀ ÁNH XẠ -->
-<h3 class="subsection-title">0.2. Tập hợp và Ánh xạ</h3>
-  <div class="lp-step-bar">
-    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
-    <span class="lp-step-goal">Định nghĩa Ánh xạ, Ảnh, Nghịch ảnh & Quy ước hợp thành phải sang trái</span>
-  </div>
+<!-- TẦNG 1: LÝ THUYẾT BÁO CÁO CỐT LÕI (N01) -->
 <div class="math-card def" data-type="def">
-<div class="card-header">
-<span class="label">📘 ĐỊNH NGHĨA 0.1</span>
-<span class="tag">Ánh xạ, Ảnh và Nghịch ảnh</span>
-</div>
-<div class="card-body">
-<p>
-Cho hai tập hợp $X$ và $Y$. Một <b>ánh xạ</b> $f: X \to Y$ là một quy tắc đặt tương ứng mỗi phần tử $x \in X$ với duy nhất một phần tử $f(x) \in Y$. Tập $X$ gọi là <i>miền xác định</i>, $Y$ gọi là <i>đối miền</i>.
-</p>
-<ul class="bullet-list">
-<li><b>Ảnh của tập con:</b> Với $A \subseteq X$, đặt $f(A) = \{f(x) \in Y \mid x \in A\} \subseteq Y$. Tập $\operatorname{im} f = f(X)$ gọi là <i>tập ảnh</i> của $f$.</li>
-<li><b>Nghịch ảnh của tập con:</b> Với $B \subseteq Y$, đặt $f^{-1}(B) = \{x \in X \mid f(x) \in B\} \subseteq X$. Nghịch ảnh luôn tồn tại với mọi tập con $B$ của đối miền mà <i>không đòi hỏi $f$ phải khả nghịch</i>.</li>
-<li><b>Hợp thành ánh xạ:</b> Cho $f: X \to Y$ và $g: Y \to Z$. Ánh xạ hợp thành $g \circ f: X \to Z$ được xác định bởi $(g \circ f)(x) = g(f(x))$. Theo quy ước của giáo trình, ta <b>đọc hợp thành từ phải sang trái</b>: thực hiện $f$ trước, rồi mới thực hiện $g$.</li>
-<li><b>Ánh xạ đồng nhất:</b> $\operatorname{id}_X: X \to X$ thỏa mãn $\operatorname{id}_X(x) = x$ với mọi $x \in X$.</li>
-</ul>
-<div class="corollary-box">
-<b>Đơn ánh, Toàn ánh và Song ánh:</b>
-<br>• $f$ là <i>đơn ánh</i> nếu $f(x) = f(x') \implies x = x'$.
-<br>• $f$ là <i>toàn ánh</i> nếu $f(X) = Y$ (mọi $y \in Y$ đều có nghịch ảnh khác rỗng).
-<br>• $f$ là <i>song ánh</i> nếu nó vừa là đơn ánh vừa là toàn ánh.
-</div>
-
-<details class="ex-card" style="margin-top: 1rem;" open>
-  <summary>Ví dụ</summary>
-  <div class="ex-content">
+  <div class="card-header">
+    <span class="label">📘 LÝ THUYẾT BÁO CÁO (N01)</span>
+    <span class="tag">Ánh xạ & Quan hệ tương đương</span>
+  </div>
+  <div class="card-body">
     <p>
-      Xét hai ánh xạ trên tập số nguyên $f: \mathbb{Z} \to \mathbb{Z}$ cho bởi $f(x) = x^2$ và $g: \mathbb{Z} \to \mathbb{Z}$ cho bởi $g(x) = x + 1$.
+      <b>1. Ánh xạ & Quy ước hợp thành:</b> Cho $f: X \to Y$. Ảnh $f(A) = \{f(x) \mid x \in A\}$. Nghịch ảnh $f^{-1}(B) = \{x \in X \mid f(x) \in B\}$ luôn xác định với mọi tập con $B \subseteq Y$. 
+      Quy ước giáo trình: Hợp thành $(g \circ f)(x) = g(f(x))$ luôn đọc từ <b>phải sang trái</b>.
     </p>
     <p>
-      • <b>Ảnh của tập con:</b> Với $A = \{-2, 0, 2, 3\} \subseteq \mathbb{Z}$, ta tính $f(-2) = 4$, $f(0) = 0$, $f(2) = 4$, $f(3) = 9$. Gom các giá trị phân biệt, ta được $f(A) = \{0, 4, 9\}$.<br>
-      • <b>Nghịch ảnh của tập con:</b> Với $B = \{4, 9\} \subseteq \mathbb{Z}$, ta giải $x^2 \in \{4, 9\}$ trên $\mathbb{Z}$ và thu được $f^{-1}(B) = \{-3, -2, 2, 3\}$. Với tập $C = \{-5\}$, vì phương trình $x^2 = -5$ vô nghiệm trên $\mathbb{Z}$ nên $f^{-1}(\{-5\}) = \emptyset$. (Lưu ý: $f$ không đơn ánh vì $f(-2) = f(2) = 4$, và không toàn ánh vì $-5 \notin \operatorname{im} f$, nhưng nghịch ảnh $f^{-1}(B)$ vẫn luôn xác định).<br>
-      • <b>Hợp thành từ phải sang trái:</b> Tại $x = 2$, ánh xạ $(g \circ f)(2)$ thực hiện $f$ trước rồi đến $g$:
-      $$(g \circ f)(2) = g(f(2)) = g(4) = 4 + 1 = 5.$$
-      Ngược lại, ánh xạ $(f \circ g)(2)$ thực hiện $g$ trước rồi đến $f$:
-      $$(f \circ g)(2) = f(g(2)) = f(3) = 3^2 = 9 \neq 5.$$
+      <b>2. Quan hệ tương đương & Phân hoạch:</b> Quan hệ $\sim$ trên $X$ thỏa mãn: Phản xạ ($x \sim x$), Đối xứng ($x \sim y \implies y \sim x$), Bắc cầu ($x \sim y, y \sim z \implies x \sim z$). 
+      Lớp tương đương $[x] = \{y \in X \mid x \sim y\}$. Các lớp tạo thành một phân hoạch của $X$:
+      $$[x] = [y] \iff x \sim y \iff [x] \cap [y] \neq \emptyset.$$
     </p>
   </div>
-</details>
-</div>
 </div>
 
-<!-- 0.3 CÔNG CỤ SỐ HỌC TỐI THIỂU -->
-
-<div class="lp-practice-bridge">
-  <div class="lp-bridge-label">🎯 <span>Chốt Bài 0.1: Vận dụng Ánh xạ, Ảnh và Nghịch ảnh</span></div>
-  <div class="lp-bridge-actions">
-    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(0, 'ex-0-1')">✍️ Giải Bài tập 0.1 (Ánh xạ)</button>
-    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(0)">📐 Mẫu CM 2 tập bằng nhau</button>
-    <button type="button" class="lp-bridge-btn quiz" onclick="startChapterQuickExam(0)">⚡ Trắc nghiệm Chương 0</button>
+<!-- TẦNG 2: VÍ DỤ TAM DIỆN -->
+<div class="math-card" style="border-left: 4px solid var(--primary, #6366f1); margin-top: 1rem;">
+  <div class="card-header">
+    <span class="label">💡 HỆ THỐNG VÍ DỤ TAM DIỆN</span>
+    <span class="tag">Chuẩn · Biên · Phản ví dụ</span>
+  </div>
+  <div class="card-body">
+    <ul class="bullet-list">
+      <li><b>Ví dụ chuẩn:</b> Quan hệ đồng dư modulo 3 trên $\mathbb{Z}$: chia $\mathbb{Z}$ thành 3 lớp rời nhau $[0], [1], [2]$.</li>
+      <li><b>Trường hợp biên:</b> $n = 1$, tập thương $\mathbb{Z}/1\mathbb{Z} = \{[0]_1\} = \{\mathbb{Z}\}$ chỉ gồm đúng 1 phần tử.</li>
+      <li><b>Phản ví dụ kinh điển (Phản ví dụ 0.9):</b> Quan hệ $|a - b| \le 1$ trên $\mathbb{Z}$ phản xạ và đối xứng nhưng <i>vi phạm bắc cầu</i> ($0 \sim 1, 1 \sim 2$ nhưng $|0-2|=2 > 1 \implies 0 \not\sim 2$). Không tạo thành phân hoạch!</li>
+    </ul>
   </div>
 </div>
 
-  
-  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 0.2 · Tiết 3–4 ==================== -->
-  <div class="lp-unit-header" id="lp-u0-2">
-    <div class="lp-unit-title-wrap">
-      <span class="lp-unit-eyebrow">Bài 0.2 · Tiết 3–4 · Mục 0.3, 0.4 · Thuật toán số học & Z/nZ</span>
-      <h4 class="lp-unit-title">Công cụ Số học: Chia Euclid, Bézout & Lớp đồng dư</h4>
-    </div>
-    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u0-2" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u0-2')">
-      ⚪ Đánh dấu đã học xong
-    </button>
+<!-- TẦNG 3: BÀI TẬP MẪU CHUẨN 3 BƯỚC (THEO PHÂN CÔNG EXCEL CỦA THẦY) -->
+<div class="math-card thm" style="margin-top: 1rem;">
+  <div class="card-header">
+    <span class="label">✍️ BÀI TẬP PHÂN CÔNG (1.0 ĐIỂM)</span>
+    <span class="tag">Bài tập VT1, VT2, VT3 của N01</span>
   </div>
-<h3 class="subsection-title">0.3. Công cụ số học tối thiểu: Chia hết, Euclid & Bézout</h3>
-  <div class="lp-step-bar">
-    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
-    <span class="lp-step-goal">Phép chia Euclid, ƯCLN, Đồng nhất thức Bézout & Hàm Euler</span>
-  </div>
-<div class="math-card def" data-type="def">
-<div class="card-header">
-<span class="label">📘 ĐỊNH NGHĨA 0.2</span>
-<span class="tag">Tính chia hết và Phép chia Euclid</span>
-</div>
-<div class="card-body">
-<p>
-Với $a, b \in \mathbb{Z}$, ta nói $a$ là ước của $b$, hay $b$ chia hết cho $a$, ký hiệu $a \mid b$, nếu tồn tại $k \in \mathbb{Z}$ sao cho $b = ak$. Mọi số nguyên là ước của $0$, còn $0$ chỉ là ước của $0$. Nếu $a \mid b$ và $a \mid c$, thì với mọi $r, s \in \mathbb{Z}$, ta có $a \mid (rb + sc)$.
-</p>
-<p>
-<b>Phép chia Euclid:</b> Cho $a, b \in \mathbb{Z}$ với số chia $b > 0$. Khi đó tồn tại duy nhất cặp số nguyên $q, r$ sao cho:
-$$a = bq + r, \quad 0 \le r < b$$
-$q$ gọi là <i>thương</i> và $r$ gọi là <i>số dư</i>.
-</p>
-
-<details class="ex-card" style="margin-top: 1rem;" open>
-  <summary>Ví dụ</summary>
-  <div class="ex-content">
-    <p>
-      • <b>Tính chia hết:</b> Ta có $-4 \mid 12$ vì tồn tại $k = -3 \in \mathbb{Z}$ sao cho $12 = (-4) \cdot (-3)$. Đồng thời, từ $4 \mid 12$ và $4 \mid 20$, suy ra $4 \mid (3 \cdot 12 - 2 \cdot 20) = -4$.<br>
-      • <b>Phép chia Euclid với $a = -27$ và $b = 4$:</b><br>
-      Nếu viết $-27 = 4 \cdot (-6) + (-3)$ thì số dư $r = -3 < 0$ vi phạm điều kiện chuẩn $0 \le r < 4$. Để số dư không âm, ta phải lùi thương xuống một đơn vị thành $q = -7$:
-      $$-27 = 4 \cdot (-7) + 1, \quad \text{với } 0 \le 1 < 4.$$
-      Vậy cặp thương và số dư duy nhất là $q = -7$ và $r = 1$.
+  <div class="card-body">
+    <p><b>Bài tập VT1:</b> Xét $f: \mathbb{Z} \to \mathbb{Z}, f(x) = 2x + 1$.
+      <br>• <i>Dữ kiện & Phương pháp:</i> Kiểm tra $f(a)=f(b) \implies a=b$ (đơn ánh) và giải $2x+1=y$ trên $\mathbb{Z}$ (toàn ánh).
+      <br>• <i>Lời giải:</i> $2a+1=2b+1 \implies a=b$ ($f$ đơn ánh). Phương trình $2x+1=0 \implies x = -1/2 \notin \mathbb{Z}$ ($f$ không toàn ánh). Ảnh $\operatorname{im} f = 2\mathbb{Z} + 1$ (tập số lẻ). Ánh xạ ngược trên ảnh: $f^{-1}(y) = (y-1)/2$.
+    </p>
+    <hr style="border:0; border-top:1px dashed var(--line); margin: 10px 0;">
+    <p><b>Bài tập VT2:</b> Trên $\mathbb{Z}$, đặt $a \sim b \iff 5 \mid (a - b)$.
+      <br>• <i>Lời giải:</i> $a - a = 0 = 5 \cdot 0$ (phản xạ); $a - b = 5k \implies b - a = 5(-k)$ (đối xứng); $a - b = 5k, b - c = 5m \implies a - c = 5(k+m)$ (bắc cầu). Tập thương $\mathbb{Z}/{\sim} = \{[0], [1], [2], [3], [4]\} = \mathbb{Z}/5\mathbb{Z}$.
+    </p>
+    <hr style="border:0; border-top:1px dashed var(--line); margin: 10px 0;">
+    <p><b>Bài tập VT3:</b> Phân hoạch $\mathbb{Z}_{12}$ theo quan hệ $x \sim y \iff \gcd(x, 12) = \gcd(y, 12)$.
+      <br>• <i>Lời giải:</i> Các ước dương của 12 là $\{1, 2, 3, 4, 6, 12\}$. Tập thương $\mathbb{Z}_{12}/{\sim}$ gồm đúng 6 lớp rời nhau: $\{1, 5, 7, 11\}$ ($\gcd = 1$); $\{2, 10\}$ ($\gcd = 2$); $\{3, 9\}$ ($\gcd = 3$); $\{4, 8\}$ ($\gcd = 4$); $\{6\}$ ($\gcd = 6$); $\{0\}$ ($\gcd = 12$).
     </p>
   </div>
-</details>
-</div>
 </div>
 
-<div class="math-card thm" data-type="thm">
-<div class="card-header">
-<span class="label">🏛️ ĐỊNH LÝ 0.3</span>
-<span class="tag">Thuật toán Euclid và Đồng nhất thức Bézout</span>
-</div>
-<div class="card-body">
-<p>
-Ước chung lớn nhất $\gcd(a, b)$ là số nguyên không âm lớn nhất là ước của cả $a$ và $b$, với quy ước trường hợp biên $\gcd(0, 0) = 0$.
-</p>
-<p>
-Với mọi $a, b \in \mathbb{Z}$, luôn tồn tại các hệ số nguyên $u, v \in \mathbb{Z}$ sao cho:
-$$\gcd(a, b) = ua + vb$$
-Cặp $(u, v)$ được xác định bằng cách thực hiện thuật toán chia Euclid liên tiếp rồi truy ngược.
-</p>
-<div class="corollary-box">
-<b>Tiêu chuẩn nguyên tố cùng nhau:</b> $\gcd(a, b) = 1 \iff \exists u, v \in \mathbb{Z}: ua + vb = 1$.
-</div>
-
-<details class="ex-card" style="margin-top: 1rem;" open>
-  <summary>Ví dụ</summary>
-  <div class="ex-content">
-    <p>
-      Tìm $\gcd(252, 105)$ và xác định các hệ số nguyên $u, v$ trong đồng nhất thức Bézout:
-    </p>
-    <p>
-      • <b>Bước 1 (Chia Euclid liên tiếp):</b>
-      $$\begin{aligned}
-      252 &= 2 \cdot 105 + 42 \\
-      105 &= 2 \cdot 42 + 21 \\
-      42 &= 2 \cdot 21 + 0
-      \end{aligned}$$
-      Số dư khác $0$ cuối cùng là $21$, suy ra $\gcd(252, 105) = 21$.<br>
-      • <b>Bước 2 (Truy ngược tìm đẳng thức Bézout):</b> Từ dòng thứ hai và thứ nhất, ta thế ngược phần dư $42 = 252 - 2 \cdot 105$:
-      $$\begin{aligned}
-      21 &= 105 - 2 \cdot 42 \\
-      &= 105 - 2 \cdot (252 - 2 \cdot 105) \\
-      &= 252 \cdot (-2) + 105 \cdot 5.
-      \end{aligned}$$
-      Vậy ta thu được đẳng thức Bézout: $21 = 252 \cdot (-2) + 105 \cdot 5$ (ứng với $u = -2$ và $v = 5$).
-    </p>
-  </div>
-</details>
-</div>
-</div>
-
-<div class="math-card def" data-type="def">
-<div class="card-header">
-<span class="label">📘 ĐỊNH NGHĨA 0.4</span>
-<span class="tag">Hàm phi Euler (Euler's Totient)</span>
-</div>
-<div class="card-body">
-<p>
-Với $n \ge 1$, đặt tập thặng dư chuẩn $R_n = \{0, 1, \dots, n-1\}$. Hàm phi của Euler $\varphi(n)$ là số các phần tử trong $R_n$ nguyên tố cùng nhau với $n$:
-$$\varphi(n) = |\{a \in R_n \mid \gcd(a, n) = 1\}|$$
-Quy ước biên: $R_1 = \{0\}$ và $\gcd(0, 1) = 1$, do đó $\varphi(1) = 1$.
-</p>
-
-<details class="ex-card" style="margin-top: 1rem;" open>
-  <summary>Ví dụ</summary>
-  <div class="ex-content">
-    <p>
-      Tính tường minh $\varphi(12)$ bằng cách kiểm tra từng phần tử trong tập thặng dư chuẩn $R_{12} = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11\}$:
-    </p>
-    <p>
-      • Các số có ước chung lớn hơn $1$ với $12$ (tức chia hết cho $2$ hoặc chia hết cho $3$) là: $0, 2, 3, 4, 6, 8, 9, 10$.<br>
-      • Các số nguyên tố cùng nhau với $12$ ($\gcd(a, 12) = 1$) còn lại đúng $4$ phần tử:
-      $$\{a \in R_{12} \mid \gcd(a, 12) = 1\} = \{1, 5, 7, 11\}.$$
-      Vậy $\varphi(12) = 4$.
-    </p>
-  </div>
-</details>
-</div>
-</div>
-
-<!-- 0.4 QUAN HỆ TƯƠNG ĐƯƠNG VÀ TẬP THƯƠNG -->
-
-<div class="lp-algo-card">
-  <div class="lp-algo-head">
-    <strong>⚡ Thuật toán 3 bước thực chiến: Tìm hệ số Bézout & Nghịch đảo modulo n</strong>
-    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(2)">📐 Xem Mẫu CM Quan hệ tương đương</button>
-  </div>
-  <ol class="lp-algo-steps">
-    <li><b>Bước 1 (Chia Euclid xuôi):</b> Thực hiện phép chia $a = bq + r$ ($0 \le r < b$) liên tiếp cho tới khi số dư khác $0$ cuối cùng là $d = \gcd(a, b)$.</li>
-    <li><b>Bước 2 (Truy ngược Bézout):</b> Biểu diễn $d$ từ dòng kế cuối, thế dần các số dư từ dưới lên theo hai biến gốc $a, b$ để được $ua + vb = d$.</li>
-    <li><b>Bước 3 (Kết luận lớp tương đương):</b> Nếu $\gcd(a, n) = 1$, từ $ua + vn = 1$ lấy modulo $n$ suy ra $[u]_n = [a]_n^{-1}$ trong $U(n)$.</li>
-  </ol>
-</div>
-
-  <h3 class="subsection-title">0.4. Quan hệ tương đương và Tập thương</h3>
-  <div class="lp-step-bar">
-    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
-    <span class="lp-step-goal">Ba tiên đề Quan hệ tương đương & Định lý Phân hoạch Tập thương</span>
-  </div>
-<div class="math-card def" data-type="def">
-<div class="card-header">
-<span class="label">📘 ĐỊNH NGHĨA 0.5</span>
-<span class="tag">Quan hệ tương đương và Tập thương</span>
-</div>
-<div class="card-body">
-<p>
-Một quan hệ trên tập $X$ là một tập con của $X \times X$. Ta viết $x \sim y$ thay cho $(x, y) \in \; \sim$. Quan hệ $\sim$ là một <b>quan hệ tương đương</b> nếu với mọi $x, y, z \in X$:
-</p>
-<ul class="bullet-list">
-<li><b>Phản xạ:</b> $x \sim x$;</li>
-<li><b>Đối xứng:</b> Nếu $x \sim y$ thì $y \sim x$;</li>
-<li><b>Bắc cầu:</b> Nếu $x \sim y$ và $y \sim z$ thì $x \sim z$.</li>
-</ul>
-<p>
-Với mỗi $x \in X$, tập hợp $[x] = \{y \in X \mid x \sim y\}$ được gọi là <b>lớp tương đương</b> của $x$. Phần tử $x$ gọi là một <i>đại diện</i> của lớp. Tập hợp tất cả các lớp tương đương được gọi là <b>tập thương</b>, ký hiệu:
-$$X/\sim \;=\; \{[x] \mid x \in X\}$$
-</p>
-
-<details class="ex-card" style="margin-top: 1rem;" open>
-  <summary>Ví dụ</summary>
-  <div class="ex-content">
-    <p>
-      Trên tập số nguyên $X = \mathbb{Z}$, xét quan hệ đồng dư modulo $3$ định bởi: $x \sim y \iff 3 \mid (x - y)$.
-    </p>
-    <p>
-      • <b>Kiểm tra quan hệ tương đương:</b> Với mọi $x, y, z \in \mathbb{Z}$, ta có $x - x = 0 = 3 \cdot 0$ (phản xạ); nếu $x - y = 3k$ thì $y - x = 3(-k)$ (đối xứng); nếu $x - y = 3k$ và $y - z = 3m$ thì $x - z = (x - y) + (y - z) = 3(k + m)$ (bắc cầu).<br>
-      • <b>Các lớp tương đương:</b> Mọi số nguyên khi chia cho $3$ chỉ có số dư là $0, 1$ hoặc $2$, nên có đúng $3$ lớp tương đương phân biệt:
-      $$\begin{aligned}
-      [0] &= \{3k \mid k \in \mathbb{Z}\} = \{\dots, -6, -3, 0, 3, 6, \dots\}, \\
-      [1] &= \{3k + 1 \mid k \in \mathbb{Z}\} = \{\dots, -5, -2, 1, 4, 7, \dots\}, \\
-      [2] &= \{3k + 2 \mid k \in \mathbb{Z}\} = \{\dots, -4, -1, 2, 5, 8, \dots\}.
-      \end{aligned}$$
-      • <b>Tập thương:</b> Tập thương $\mathbb{Z}/\sim$ (ký hiệu là $\mathbb{Z}/3\mathbb{Z}$) là tập hợp có đúng $3$ phần tử: $\mathbb{Z}/3\mathbb{Z} = \{[0], [1], [2]\}$. Trong đó $[1] = [4] = [-2]$ là nhiều cách chọn đại diện khác nhau của cùng một lớp.
-    </p>
-  </div>
-</details>
-</div>
-</div>
-
-<div class="math-card thm" data-type="thm">
-<div class="card-header">
-<span class="label">🏛️ ĐỊNH LÝ 0.6</span>
-<span class="tag">Quan hệ tương đương và Phân hoạch</span>
-</div>
-<div class="card-body">
-<p>
-(a) Các lớp của một quan hệ tương đương trên $X$ tạo thành một <b>phân hoạch</b> của $X$ (các lớp khác nhau thì đôi một rời nhau và hợp của chúng bằng $X$). Cụ thể:
-$$[x] = [y] \iff x \sim y \iff [x] \cap [y] \neq \emptyset$$
-(b) Ngược lại, mỗi phân hoạch $\mathcal{P}$ của $X$ sinh ra duy nhất một quan hệ tương đương $\sim_{\mathcal{P}}$ định bởi: $x \sim_{\mathcal{P}} y \iff x, y$ cùng thuộc một khối của $\mathcal{P}$.
-</p>
-
-<details class="ex-card" style="margin-top: 1rem;" open>
-  <summary>Ví dụ</summary>
-  <div class="ex-content">
-    <p>
-      Xét tập hữu hạn $X = \{1, 2, 3, 4, 5, 6\}$ cùng quan hệ tương đương "cùng số dư khi chia cho $3$" ($x \sim y \iff 3 \mid (x - y)$):
-    </p>
-    <p>
-      • <b>Từ quan hệ tương đương sang phân hoạch:</b> Các lớp tương đương chia tập $X$ thành $3$ khối con khác rỗng, đôi một rời nhau:
-      $$[1] = [4] = \{1, 4\}, \qquad [2] = [5] = \{2, 5\}, \qquad [3] = [6] = \{3, 6\}.$$
-      Ta thấy $[1] \cap [2] = \emptyset$, $[2] \cap [3] = \emptyset$, $[1] \cap [3] = \emptyset$, và hợp của ba khối phủ kín tập $X$: $\{1, 4\} \cup \{2, 5\} \cup \{3, 6\} = X$.<br>
-      • <b>Từ phân hoạch sang quan hệ tương đương:</b> Ngược lại, nếu cho trước phân hoạch $\mathcal{P} = \{\{1, 3, 5\}, \{2, 4, 6\}\}$ trên $X$, thì quan hệ $\sim_{\mathcal{P}}$ (cùng thuộc một khối) chính là quan hệ "cùng tính chẵn lẻ" ($x \sim_{\mathcal{P}} y \iff 2 \mid (x - y)$).
-    </p>
-  </div>
-</details>
-</div>
-</div>
-
-<details class="ex-card" data-type="ex">
-<summary>⚠️ Phản ví dụ 0.9: Phản xạ và Đối xứng chưa đủ kéo theo Bắc cầu</summary>
-<div class="ex-content">
-<p>
-Trên $\mathbb{Z}$, đặt $a \, R \, b \iff |a - b| \le 1$.
-<br>• Phản xạ đúng vì $|a - a| = 0 \le 1$.
-<br>• Đối xứng đúng vì $|a - b| = |b - a|$.
-<br>• Tuy nhiên tính bắc cầu không thỏa mãn: Ta có $0 \, R \, 1$ (do $|0 - 1| = 1 \le 1$) và $1 \, R \, 2$ (do $|1 - 2| = 1 \le 1$), nhưng $0$ không quan hệ với $2$ vì $|0 - 2| = 2 > 1$.
-<br>Do đó $R$ không phải là quan hệ tương đương và không thể tạo thành phân hoạch.
-</p>
-</div>
-</details>
-
-<!-- 0.5 PHÉP TOÁN HAI NGÔI -->
-
-<div class="lp-practice-bridge">
-  <div class="lp-bridge-label">🎯 <span>Chốt Bài 0.2: Thực hành Euclid – Bézout & Phân hoạch lớp tương đương</span></div>
-  <div class="lp-bridge-actions">
-    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(0, 'ex-0-4')">✍️ Giải Bài tập 0.4 (Bézout)</button>
-    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(0, 'ex-0-16')">✍️ Giải Bài tập 0.16 (Lớp tương đương)</button>
-    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(2)">📐 Mẫu CM Quan hệ tương đương</button>
-  </div>
-</div>
-
-  
-  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 0.3 · Tiết 5–6 ==================== -->
-  <div class="lp-unit-header" id="lp-u0-3">
-    <div class="lp-unit-title-wrap">
-      <span class="lp-unit-eyebrow">Bài 0.3 · Tiết 5–6 · Mục 0.5, 0.6, 0.7, 0.8 · Kiểm định tập thương</span>
-      <h4 class="lp-unit-title">Phép toán hai ngôi, Tính xác định tốt & Mẫu chứng minh</h4>
-    </div>
-    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u0-3" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u0-3')">
-      ⚪ Đánh dấu đã học xong
-    </button>
-  </div>
-<h3 class="subsection-title">0.5. Phép toán hai ngôi</h3>
-  <div class="lp-step-bar">
-    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
-    <span class="lp-step-goal">Phép toán hai ngôi: Tính đóng, Kết hợp, Đơn vị & Nghịch đảo</span>
-  </div>
-<div class="math-card def" data-type="def">
-<div class="card-header">
-<span class="label">📘 ĐỊNH NGHĨA 0.7</span>
-<span class="tag">Phép toán hai ngôi và Các luật cơ bản</span>
-</div>
-<div class="card-body">
-<p>
-Một <b>phép toán hai ngôi</b> trên tập hợp $X$ là một ánh xạ $* : X \times X \to X$, ảnh của cặp $(a, b)$ được ký hiệu là $a * b$.
-Điều kiện đối miền bằng $X$ yêu cầu $a * b \in X$ với mọi $a, b \in X$; ta gọi đây là <b>tính đóng</b> của $X$ đối với phép toán.
-</p>
-<ul class="bullet-list">
-<li><b>Tính kết hợp:</b> $(a * b) * c = a * (b * c)$ với mọi $a, b, c \in X$.</li>
-<li><b>Tính giao hoán:</b> $a * b = b * a$ với mọi $a, b \in X$.</li>
-<li><b>Phần tử đơn vị:</b> Phần tử $e \in X$ thỏa mãn $e * a = a * e = a$ với mọi $a \in X$. Phần tử đơn vị là <i>duy nhất</i> nếu tồn tại.</li>
-<li><b>Phần tử nghịch đảo:</b> Nếu đã có đơn vị $e$, phần tử $b$ là nghịch đảo của $a$ nếu $a * b = b * a = e$. Nếu phép toán có tính kết hợp, nghịch đảo của một phần tử là <i>duy nhất</i> nếu tồn tại.</li>
-</ul>
-
-<details class="ex-card" style="margin-top: 1rem;" open>
-  <summary>Ví dụ</summary>
-  <div class="ex-content">
-    <p>
-      Xét tập hợp các số hữu tỉ khác không $X = \mathbb{Q} \setminus \{0\}$ với phép nhân thông thường $a * b = a \cdot b$:
-    </p>
-    <p>
-      • <b>Tính đóng:</b> Tích của hai số hữu tỉ khác $0$ luôn là một số hữu tỉ khác $0$ (chẳng hạn $\frac{2}{3} \cdot \left(-\frac{5}{7}\right) = -\frac{10}{21} \in X$), nên phép nhân là phép toán hai ngôi trên $X$.<br>
-      • <b>Tính kết hợp và giao hoán:</b> Phép nhân phân số thỏa mãn cả tính kết hợp $\left(\frac{1}{2} \cdot \frac{2}{3}\right) \cdot \frac{3}{5} = \frac{1}{2} \cdot \left(\frac{2}{3} \cdot \frac{3}{5}\right) = \frac{1}{5}$ và tính giao hoán $\frac{2}{3} \cdot \frac{4}{5} = \frac{4}{5} \cdot \frac{2}{3} = \frac{8}{15}$.<br>
-      • <b>Phần tử đơn vị và nghịch đảo:</b> Phần tử đơn vị duy nhất là $e = 1 \in X$. Mọi phần tử $a = \frac{p}{q} \in X$ ($p, q \in \mathbb{Z} \setminus \{0\}$) đều có phần tử nghịch đảo duy nhất là $a^{-1} = \frac{q}{p} \in X$ (ví dụ nghịch đảo của $-\frac{3}{4}$ là $-\frac{4}{3}$ vì $\left(-\frac{3}{4}\right) \cdot \left(-\frac{4}{3}\right) = 1$).
-    </p>
-  </div>
-</details>
-</div>
-</div>
-
-<details class="ex-card" data-type="ex">
-<summary>⚠️ Phản ví dụ 0.11: Đóng không kéo theo Kết hợp</summary>
-<div class="ex-content">
-<p>
-Phép trừ là một phép toán hai ngôi đóng trên $\mathbb{Z}$. Tuy nhiên:
-$$(3 - 2) - 1 = 0 \quad \neq \quad 3 - (2 - 1) = 2$$
-Do đó phép trừ không có tính kết hợp. Nó cũng không giao hoán ($3 - 2 \neq 2 - 3$). Số $0$ chỉ là đơn vị bên phải ($a - 0 = a$) chứ không phải đơn vị hai phía.
-</p>
-</div>
-</details>
-
-<!-- 0.6 TÍNH XÁC ĐỊNH TỐT -->
-<h3 class="subsection-title">0.6. Tính xác định tốt trên Tập thương</h3>
-  <div class="lp-step-bar">
-    <span class="lp-step-pill s3">Bước 3 · Thuật toán & Kiểm định</span>
-    <span class="lp-step-goal">Tiêu chuẩn Xác định tốt (Well-defined) & Phản ví dụ phụ thuộc đại diện</span>
-  </div>
-<div class="math-card thm" data-type="thm">
-<div class="card-header">
-<span class="label">🏛️ ĐỊNH LÝ 0.14</span>
-<span class="tag">Tiêu chuẩn Xác định tốt (Well-definedness)</span>
-</div>
-<div class="card-body">
-<p>
-Cho quan hệ tương đương $\sim$ trên $X$ và một ánh xạ $F: X \times X \to X$. Công thức cảm sinh trên tập thương:
-$$[x] * [y] = [F(x, y)]$$
-là <b>xác định tốt</b> (well-defined) khi và chỉ khi giá trị lớp ở vế phải không phụ thuộc vào đại diện được chọn. Nghĩa là:
-$$\forall x, x', y, y' \in X, \quad \left( x \sim x' \text{ và } y \sim y' \right) \implies F(x, y) \sim F(x', y')$$
-</p>
-<div class="corollary-box">
-<b>Mô hình chuẩn $\mathbb{Z}/n\mathbb{Z}$:</b>
-Phép cộng $[a]_n + [b]_n = [a + b]_n$ và phép nhân $[a]_n [b]_n = [ab]_n$ đều xác định tốt vì nếu $a \equiv a' \pmod n$ và $b \equiv b' \pmod n$, thì:
-$$(a + b) \equiv (a' + b') \pmod n \quad \text{và} \quad ab \equiv a'b' \pmod n \text{}.$$
-</div>
-
-<details class="ex-card" style="margin-top: 1rem;" open>
-  <summary>Ví dụ</summary>
-  <div class="ex-content">
-    <p>
-      Minh họa tính xác định tốt của phép cộng và phép nhân trên tập thương $\mathbb{Z}/5\mathbb{Z}$ khi thay đổi các phần tử đại diện:
-    </p>
-    <p>
-      Xét hai lớp $[2]_5$ và $[3]_5$ trong $\mathbb{Z}/5\mathbb{Z}$. Ta có thể chọn các đại diện khác nhau cho hai lớp này:
-      $$[2]_5 = [7]_5 = [-3]_5 \quad (\text{vì } 2 \equiv 7 \equiv -3 \pmod 5),$$
-      $$[3]_5 = [13]_5 = [-2]_5 \quad (\text{vì } 3 \equiv 13 \equiv -2 \pmod 5).$$
-      • <b>Với phép cộng lớp:</b> Dùng cặp đại diện $(2, 3)$ ta được $[2 + 3]_5 = [5]_5 = [0]_5$. Nếu thay bằng cặp đại diện $(7, 13)$ ta được $[7 + 13]_5 = [20]_5 = [0]_5$; hoặc dùng cặp $(-3, -2)$ ta cũng được $[-3 + (-2)]_5 = [-5]_5 = [0]_5$.<br>
-      • <b>Với phép nhân lớp:</b> Dùng cặp đại diện $(2, 3)$ ta được $[2 \cdot 3]_5 = [6]_5 = [1]_5$. Nếu thay bằng cặp đại diện $(7, -2)$ ta được $[7 \cdot (-2)]_5 = [-14]_5 = [1]_5$ (do $-14 - 1 = -15$ chia hết cho $5$).<br>
-      Dù chọn bất kỳ đại diện nào trong lớp đầu vào, lớp kết quả ở đầu ra vẫn hoàn toàn không đổi!
-    </p>
-  </div>
-</details>
-</div>
-</div>
-
-<details class="ex-card" data-type="ex">
-<summary>⚠️ Phản ví dụ 0.16: Các công thức thất bại do phụ thuộc đại diện</summary>
-<div class="ex-content">
-<p>
-<b>1. Ánh xạ một biến:</b> Xét $T: \mathbb{Z}/3\mathbb{Z} \to \mathbb{Z}/2\mathbb{Z}$ định bởi $T([a]_3) = [a]_2$.
-<br>Ta có $[1]_3 = [4]_3$ ở miền xác định, nhưng ở đối miền:
-$$T([1]_3) = [1]_2 \quad \neq \quad T([4]_3) = [4]_2 = [0]_2$$
-Cùng một đầu vào cho hai kết quả khác nhau, do đó $T$ <b>không xác định tốt</b>!
-</p>
-<p>
-<b>2. Phép toán hai biến:</b> Xét $\Phi: (\mathbb{Z}/4\mathbb{Z}) \times (\mathbb{Z}/4\mathbb{Z}) \to \mathbb{Z}/6\mathbb{Z}$ định bởi $\Phi([a]_4, [b]_4) = [a + b]_6$.
-<br>Hai cặp $([0]_4, [0]_4)$ và $([4]_4, [0]_4)$ là cùng một đầu vào, nhưng:
-$$\Phi([0]_4, [0]_4) = [0]_6 \quad \neq \quad \Phi([4]_4, [0]_4) = [4]_6$$
-Sự không tương thích giữa các môđun làm công thức hoàn toàn vô nghĩa trên các lớp.
-</p>
-</div>
-</details>
-
-<!-- 0.7 MẪU CHỨNG MINH VÀ PHẢN VÍ DỤ -->
-
-<div class="lp-algo-card">
-  <div class="lp-algo-head">
-    <strong>⚡ Thuật toán 3 bước thực chiến: Kiểm tra phép toán / ánh xạ trên tập thương xác định tốt</strong>
-    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(1)">📐 Mở Khuôn mẫu Xác định tốt (#2)</button>
-  </div>
-  <ol class="lp-algo-steps">
-    <li><b>Bước 1 (Giả sử đổi đại diện):</b> Lấy hai đại diện bất kỳ của cùng lớp đầu vào: $[x] = [x']$ và $[y] = [y']$.</li>
-    <li><b>Bước 2 (Chuyển về điều kiện phần tử):</b> Khai thác định nghĩa quan hệ tương đương $x \sim x'$ và $y \sim y'$ (ví dụ $n \mid (x-x')$).</li>
-    <li><b>Bước 3 (Kiểm định đầu ra):</b> Chứng minh $F(x, y) \sim F(x', y')$, suy ra $[F(x, y)] = [F(x', y')]$ (độc lập đại diện).</li>
-  </ol>
-</div>
-
-  <h3 class="subsection-title">0.7. Mẫu chứng minh và Cách xây dựng phản ví dụ</h3>
-  <div class="lp-step-bar">
-    <span class="lp-step-pill s4">Bước 4 · Phương pháp & Bẫy sai lầm</span>
-    <span class="lp-step-goal">Bốn khuôn mẫu chứng minh chuẩn mực & Bốn lỗi suy luận kinh điển</span>
-  </div>
-<div class="math-card" style="border-color:var(--thm-border); background:var(--paper);">
-<div class="card-header" style="background:var(--thm-bg); color:var(--thm-color);">
-<span class="label">📐 BỐN KHUÔN MẪU CHỨNG MINH CHUẨN MỰC</span>
-</div>
-<div class="card-body">
-<ul class="bullet-list">
-<li><b>Chứng minh hai tập bằng nhau $A = B$:</b> Thiết lập hai phép bao hàm $A \subseteq B$ (lấy $x \in A$ tùy ý suy ra $x \in B$) và $B \subseteq A$. Không ngầm định đẳng thức đang cần chứng minh.</li>
-<li><b>Chứng minh ánh xạ trên lớp xác định tốt:</b> Giả sử có hai đại diện $x \sim x'$ (và $y \sim y'$) của cùng một đầu vào, chứng minh giá trị tương ứng ở đối miền bằng nhau. Phải hoàn thành bước này trước khi xét đến tính đơn ánh, toàn ánh hay bảo toàn phép toán.</li>
-<li><b>Kiểm tra quan hệ tương đương:</b> Chứng minh riêng rẽ cả ba tính chất phản xạ, đối xứng, bắc cầu theo đúng các lượng từ. Để bác bỏ tính bắc cầu, phải chỉ ra bộ ba $x, y, z$ sao cho $x \sim y, y \sim z$ nhưng $x \not\sim z$.</li>
-<li><b>Bác bỏ một mệnh đề phổ quát:</b> Một phản ví dụ phải thỏa mãn toàn bộ giả thiết nhưng làm sai kết luận. Phải đối chiếu chính xác với lượng từ cần phủ định.</li>
-</ul>
-<div class="corollary-box">
-<b>⚠️ Bốn lỗi suy luận thường gặp nhất:</b>
-<br>1. Đồng nhất ảnh của hàm $f(X)$ với toàn bộ đối miền $Y$.
-<br>2. Coi nghịch ảnh $f^{-1}(B)$ là hàm ngược (nghịch ảnh tồn tại với mọi ánh xạ).
-<br>3. Dùng lớp tương đương như một phần tử thông thường mà quên tính phụ thuộc đại diện.
-<br>4. Kiểm tra các tính chất kết hợp, giao hoán trước khi kiểm tra tính đóng của phép toán.
-</div>
-</div>
-</div>
-
-<!-- 0.8 TÓM TẮT & THUẬT NGỮ CHÍNH -->
-<h3 class="subsection-title">0.8. Tóm tắt và Thuật ngữ chính</h3>
-  <div class="lp-step-bar">
-    <span class="lp-step-pill s5">Bước 5 · Chốt & Hệ thống hóa</span>
-    <span class="lp-step-goal">Bảng tóm tắt thuật ngữ song ngữ Chương 0</span>
-  </div>
-<div class="table-wrapper">
-<table class="compare-table">
-<thead>
-<tr>
-<th style="width:25%;">Thuật ngữ tiếng Việt</th>
-<th style="width:25%;">Thuật ngữ tiếng Anh</th>
-<th style="width:50%;">Ý nghĩa cốt lõi</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><b>Phép toán hai ngôi</b></td>
-<td>Binary operation</td>
-<td>Ánh xạ $X \times X \to X$, tiên quyết là tính đóng.</td>
-</tr>
-<tr>
-<td><b>Quan hệ tương đương</b></td>
-<td>Equivalence relation</td>
-<td>Quan hệ thỏa mãn phản xạ, đối xứng, bắc cầu.</td>
-</tr>
-<tr>
-<td><b>Lớp tương đương & Tập thương</b></td>
-<td>Equivalence class & Quotient set</td>
-<td>$[x] = \{y \mid x \sim y\}$; tập thương $X/\sim$ là tập các lớp.</td>
-</tr>
-<tr>
-<td><b>Xác định tốt</b></td>
-<td>Well-defined</td>
-<td>Quy tắc trên các lớp không phụ thuộc vào đại diện được chọn.</td>
-</tr>
-<tr>
-<td><b>Đồng nhất thức Bézout</b></td>
-<td>Bézout's identity</td>
-<td>$\gcd(a, b) = ua + vb$, tìm được nhờ thuật toán Euclid.</td>
-</tr>
-<tr>
-<td><b>Hàm phi Euler</b></td>
-<td>Euler phi function</td>
-<td>$\varphi(n)$: số lớp thặng dư nguyên tố cùng nhau với $n$.</td>
-</tr>
-</tbody>
-</table>
+<!-- TẦNG 4: HỘP PHẢN BIỆN CHÉO (N01 HỎI N02 - BUỔI 3) -->
+<div class="corollary-box" style="margin-top: 1rem; background: rgba(245, 158, 11, 0.08); border-left: 4px solid #f59e0b;">
+  <b>🎯 GÓC PHẢN BIỆN: N01 CHẤT VẤN N02 (LẤY TRỌN 0.6 ĐIỂM)</b>
+  <p style="margin-top: 0.5rem;">
+    <b>Câu hỏi chất vấn N02 (Chủ đề Phép toán hai ngôi, nửa nhóm, vị nhóm, nhóm):</b> 
+    <br>1. <i>"Trên $\mathbb{R}$, phép toán trung bình cộng $x * y = (x+y)/2$ có tính giao hoán. Nhóm bạn hãy chứng minh phép toán này có kết hợp không, hay đưa ra phản ví dụ cụ thể?"</i>
+    <br>2. <i>"Vì sao $(\mathbb{N}, +)$ và $(\mathbb{Z}, \cdot)$ đều là vị nhóm có đơn vị nhưng không phải là nhóm?"</i>
+    <br><b>Kịch bản tự vệ của N01:</b> Nếu bị hỏi về tính xác định tốt, khẳng định ngay: Đổi đại diện $[a] = [a']$ mà đầu ra không đổi thì công thức mới xác định tốt!
+  </p>
 </div>
 
 <div class="lp-practice-bridge">
-  <div class="lp-bridge-label">🎯 <span>Hoàn tất Chương 0: Thực hành Xác định tốt & Phép toán hai ngôi</span></div>
+  <div class="lp-bridge-label"> <span>Hoàn tất Chương 0: Thực hành Xác định tốt & Phép toán hai ngôi</span></div>
   <div class="lp-bridge-actions">
-    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(0, 'ex-0-13')">✍️ Bài 0.13 (Xác định tốt)</button>
-    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(0, 'ex-0-18')">✍️ Bài 0.18 (Phép toán *)</button>
-    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(0, 'ex-0-20')">✍️ Bài 0.20 (Nhúng phân số)</button>
-    <button type="button" class="lp-bridge-btn quiz" onclick="startChapterQuickExam(0)">🚀 Làm Đề Kiểm Tra Chương 0</button>
+    <button type="button" class="lp-bridge-btn quiz" onclick="startChapterQuickExam(0)"> Làm Đề Kiểm Tra Chương 0</button>
   </div>
 </div>
 </div>
