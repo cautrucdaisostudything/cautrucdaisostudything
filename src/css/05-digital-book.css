@@ -1813,7 +1813,7 @@ body[data-app-mode="slides"] .ctds-floating-dock {
   .db-sidebar-backdrop {
     display: none !important;
   }
-
+}
 /* ==========================================================================
    10. NÂNG CẤP KẾT HỢP Ý TƯỞNG 1 (CLEAN TOPBAR POPOVER) & Ý TƯỞNG 6 (HOMOMORPHISM LAB)
    ========================================================================== */
@@ -2046,5 +2046,4 @@ body[data-app-mode="slides"] .ctds-floating-dock {
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 800;
-}
 }
