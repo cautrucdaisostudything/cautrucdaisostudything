@@ -639,6 +639,7 @@
 
       labBody.appendChild(panePerm);
       labBody.appendChild(paneNotebook);
+      labBody.appendChild(paneHomo);
 
       // Đồng bộ chuyển Tab cho toàn bộ 6 Tab trong Phòng LAB
       const allTabs = labTabsBar.querySelectorAll("[data-lab-tab]");
@@ -651,6 +652,7 @@
           });
           if (target === "perm") runPermutationCalculator();
           if (target === "notebook") renderNotebookPane();
+          if (target === "homo") runHomomorphismSimulator();
         });
       });
 
@@ -833,6 +835,84 @@
             </div>
           </div>
         `;
+      }
+
+      function runHomomorphismSimulator() {
+        const nInp = document.getElementById("homoLabN");
+        const mInp = document.getElementById("homoLabM");
+        const kInp = document.getElementById("homoLabK");
+        const outVerdict = document.getElementById("homoLabVerdict");
+        const outResults = document.getElementById("homoLabResults");
+
+        if (!outVerdict || !outResults) return;
+
+        const n = parseInt(nInp ? nInp.value : "6", 10);
+        const m = parseInt(mInp ? mInp.value : "3", 10);
+        const k = parseInt(kInp ? kInp.value : "2", 10);
+
+        if (isNaN(n) || isNaN(m) || isNaN(k) || n <= 0 || m <= 0) {
+          outVerdict.innerHTML = `<span style="color:var(--color-danger, #ef4444)">Vui lòng nhập tham số cấp nhóm hợp lệ ($n, m > 0$).</span>`;
+          return;
+        }
+
+        // Ánh xạ f(x) = (k * x) mod m
+        const f = (x) => ((k * (x % n)) % m + m) % m;
+
+        // Kiểm tra điều kiện đồng cấu: f((a + b) mod n) == (f(a) + f(b)) mod m
+        let isHomomorphism = true;
+        let counterExample = null;
+
+        for (let a = 0; a < n; a++) {
+          for (let b = 0; b < n; b++) {
+            const left = f((a + b) % n);
+            const right = (f(a) + f(b)) % m;
+            if (left !== right) {
+              isHomomorphism = false;
+              counterExample = { a, b, left, right };
+              break;
+            }
+          }
+          if (!isHomomorphism) break;
+        }
+
+        // Tìm Ker(f) và Im(f)
+        const ker = [];
+        const imSet = new Set();
+        for (let x = 0; x < n; x++) {
+          const fx = f(x);
+          imSet.add(fx);
+          if (fx === 0) ker.push(x);
+        }
+        const im = Array.from(imSet).sort((a, b) => a - b);
+
+        if (isHomomorphism) {
+          outVerdict.innerHTML = `<span class="badge" style="background:#10b981; color:#fff; padding:4px 8px; border-radius:4px;">✓ Là Đồng Cấu Nhóm</span> Ánh xạ $f: \\mathbb{Z}_{${n}} \\to \\mathbb{Z}_{${m}}$ bảo toàn phép cộng nhóm.`;
+        } else {
+          outVerdict.innerHTML = `<span class="badge" style="background:#ef4444; color:#fff; padding:4px 8px; border-radius:4px;">✗ Không Phải Đồng Cấu</span> Phản ví dụ: $a=${counterExample.a}, b=${counterExample.b} \\implies f(${counterExample.a}+${counterExample.b}) \\neq f(${counterExample.a}) + f(${counterExample.b})$.`;
+        }
+
+        outResults.innerHTML = `
+          <div class="perm-card">
+            <h4>Hạt nhân $\\ker(f)$</h4>
+            <p><b>|Ker| = ${ker.length}</b></p>
+            <div>\\{ ${ker.join(", ")} \\}</div>
+          </div>
+          <div class="perm-card">
+            <h4>Ảnh $\\mathrm{Im}(f)$</h4>
+            <p><b>|Im| = ${im.length}</b></p>
+            <div>\\{ ${im.join(", ")} \\}</div>
+          </div>
+          <div class="perm-card">
+            <h4>Kiểm chứng đẳng cấu</h4>
+            <p>$|\\mathbb{Z}_{${n}}| / |\\ker(f)| = ${n / ker.length}$</p>
+            <div>${n / ker.length === im.length ? "✓ Khớp $|\\mathrm{Im}(f)|$" : "Không khớp"}</div>
+          </div>
+        `;
+
+        // Render lại công thức toán MathJax / KaTeX nếu có
+        if (window.MathJax && window.MathJax.typesetPromise) {
+          window.MathJax.typesetPromise([outVerdict, outResults]);
+        }
       }
 
       document.getElementById("permLabCalcBtn")?.addEventListener("click", runPermutationCalculator);
