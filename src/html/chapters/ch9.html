@@ -1,6 +1,37 @@
 <!-- ======================================================== -->
 <div class="chapter-content active" id="tab-c9">
   <h2 class="section-title">Chương 9. Trường Con và Trường Các Thương</h2>
+
+  <!-- ==================== BẢNG KẾ HOẠCH BÀI HỌC (LESSON PLAN META-BANNER) ==================== -->
+  <div class="lp-meta-banner" id="lp-banner-c9">
+    <div class="lp-meta-top">
+      <div class="lp-meta-badges">
+        <span class="lp-badge">📅 Tuần 15 · 3.0 Tiết (1.5 LT + 1.5 BT)</span>
+        <span class="lp-badge clo">🎯 Chuẩn đầu ra: CLO6 · Trường con, Trường nguyên tố & Trường các thương Frac(R)</span>
+        <span class="lp-badge weight">⚖️ Trọng tâm: Tiêu chuẩn trường con, Dựng Frac(R) & Tính chất phổ dụng</span>
+      </div>
+      <span class="lp-progress-pill">Tiến độ bài học: 0/3 bài</span>
+    </div>
+    <p class="lp-objectives"><strong>Mục tiêu bài học:</strong> Vận dụng tiêu chuẩn trường con rút gọn ($1_K \in F,\; x-y \in F,\; xy^{-1} \in F$) và phân loại trường con nguyên tố theo đặc số ($\mathbb{Q}$ hoặc $\mathbb{F}_p$); nắm vững quy trình dựng trường các thương $\operatorname{Frac}(R)$ từ miền nguyên $R$ (hiểu rõ tại sao ước của $0$ làm gãy tính bắc cầu); áp dụng Tính chất phổ dụng để nhận diện $\operatorname{Frac}(\mathbb{Z}[i]) \cong \mathbb{Q}(i)$, $\operatorname{Frac}(\mathbb{Z}[\sqrt{2}]) \cong \mathbb{Q}(\sqrt{2})$ và phân biệt bản chất giữa $R/I$ với $\operatorname{Frac}(R)$.</p>
+    <div class="lp-unit-nav" role="navigation" aria-label="Lộ trình bài học Chương 9">
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u9-1')">
+        <span class="u-code">Bài 9.1 · Tiết 43</span>
+        <span class="u-name">Tiêu chuẩn Trường con Rút gọn & Phân loại Trường con Nguyên tố</span>
+        <span class="u-sub">Mục 9.1, 9.2 · Kiểm định trên ℚ(i), ℚ(√2) & Trường nguyên tố ℚ / 𝔽_p</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u9-2')">
+        <span class="u-code">Bài 9.2 · Tiết 44</span>
+        <span class="u-name">Phép dựng Trường các thương Frac(R) & Vai trò Sống còn của Miền nguyên</span>
+        <span class="u-sub">Mục 9.3 · Quan hệ nhân chéo ad = bc & Phản ví dụ gãy bắc cầu trên ℤ/6ℤ</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u9-3')">
+        <span class="u-code">Bài 9.3 · Tiết 45</span>
+        <span class="u-name">Tính chất Phổ dụng, Nhận diện Frac(R) & Tổng kết Mạch Khái niệm Toàn Khóa</span>
+        <span class="u-sub">Mục 9.4, 9.5, 9.6 · Nhận diện ℚ(i), ℚ(√2), F(x) & Đối chiếu R/I vs Frac(R)</span>
+      </button>
+    </div>
+  </div>
+
   
   <p class="welcome-copy">
     Trong một miền nguyên bất kỳ (như vành số nguyên $\mathbb{Z}$ hay vành đa thức $F[x]$), 
@@ -11,7 +42,22 @@
   </p>
 
   <!-- 9.1 ĐỘNG CƠ SƯ PHẠM: TỪ BẾ TẮC PHÉP CHIA ĐẾN PHÉP MỞ RỘNG TRƯỜNG -->
-  <h3 class="subsection-title">9.1. Khởi Nguồn Sư Phạm: Từ Sự Bế Tắc Của Phép Chia Đến Tư Tưởng Mở Rộng Trường</h3>
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 9.1 · Tiết 43 ==================== -->
+  <div class="lp-unit-header" id="lp-u9-1">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 9.1 · Tiết 43 · Mục 9.1, 9.2 · Kiểm định trên ℚ(i), ℚ(√2) & Trường nguyên tố ℚ / 𝔽_p</span>
+      <h4 class="lp-unit-title">Tiêu chuẩn Trường con Rút gọn & Phân loại Trường con Nguyên tố</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u9-1" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u9-1')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">9.1. Khởi Nguồn Sư Phạm: Từ Sự Bế Tắc Của Phép Chia Đến Tư Tưởng Mở Rộng Trường</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s1">Bước 1 · Khởi động & Động cơ</span>
+    <span class="lp-step-goal">Từ sự bế tắc của phép chia trong ℤ đến tư tưởng mở rộng miền nguyên thành trường</span>
+  </div>
   <p>
     Trong lịch sử phát triển của toán học, con người xuất phát từ tập số tự nhiên $\mathbb{N}$, mở rộng thành vành số nguyên $\mathbb{Z}$ để phép trừ luôn thực hiện được. 
     Tuy nhiên, trong $\mathbb{Z}$, phương trình $2x = 1$ hoàn toàn vô nghiệm vì $2$ không có nghịch đảo nhân. 
@@ -30,6 +76,10 @@
 
   <!-- 9.2 TIÊU CHUẨN TRƯỜNG CON & TRƯỜNG CON NGUYÊN TỐ -->
   <h3 class="subsection-title">9.2. Tiêu Chuẩn Trường Con và Cấu Trúc Trường Con Nguyên Tố</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết & Tiêu chuẩn</span>
+    <span class="lp-step-goal">Tiêu chuẩn trường con rút gọn & Phân loại trường con nguyên tố theo đặc số (ℚ và 𝔽_p)</span>
+  </div>
   
   <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
     <div class="card-header">
@@ -136,7 +186,43 @@
   </div>
 
   <!-- 9.3 PHÉP DỰNG HÌNH THỨC TRƯỜNG CÁC THƯƠNG -->
-  <h3 class="subsection-title">9.3. Phép Dựng Hình Thức Trường Các Thương <span>$\operatorname{Frac}(R)$</span> Trên Miền Nguyên</h3>
+  
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Chứng minh F là trường con của trường K</strong>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Kiểm tra đơn vị chung):</b> Chỉ ra $0_K, 1_K \in F$ (đảm bảo $|F| \ge 2$ và cùng đơn vị với trường mẹ).</li>
+    <li><b>Bước 2 (Kiểm tra đóng với phép trừ):</b> Lấy tùy ý $x, y \in F$, biến đổi chứng minh $x - y \in F$.</li>
+    <li><b>Bước 3 (Kiểm tra nghịch đảo / phép chia):</b> Với mọi $y \in F \setminus \{0_K\}$, trục căn thức / nhân liên hợp chứng minh $y^{-1} \in F$ và $xy^{-1} \in F$.</li>
+  </ol>
+</div>
+
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 9.1: Thực hành phân loại Trường con & Số hữu tỉ Gauss ℚ(i)</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(9, 'ex-9-1')">✍️ Giải Bài 9.1 (Phân loại ℚ, ℝ, ℂ, ℤ, 2ℤ)</button>
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(9, 'ex-9-2')">✍️ Giải Bài 9.2 (Trường con ℚ(i) & Nghịch đảo phức)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 9.2 · Tiết 44 ==================== -->
+  <div class="lp-unit-header" id="lp-u9-2">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 9.2 · Tiết 44 · Mục 9.3 · Quan hệ nhân chéo ad = bc & Phản ví dụ gãy bắc cầu trên ℤ/6ℤ</span>
+      <h4 class="lp-unit-title">Phép dựng Trường các thương Frac(R) & Vai trò Sống còn của Miền nguyên</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u9-2" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u9-2')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">9.3. Phép Dựng Hình Thức Trường Các Thương <span>$\operatorname{Frac}(R)$</span> Trên Miền Nguyên</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Phép dựng & Phản ví dụ</span>
+    <span class="lp-step-goal">Phép dựng hình thức Frac(R) qua quan hệ ad = bc & Sự thất bại khi có ước của 0</span>
+  </div>
   <p>
     Cho $R$ là một miền nguyên bất kỳ. Ta xây dựng trường các thương qua hai bước hình thức chặt chẽ:
   </p>
@@ -232,7 +318,30 @@
   </div>
 
   <!-- 9.4 TÍNH CHẤT PHỔ DỤNG VÀ BA NHẬN DIỆN KINH ĐIỂN -->
-  <h3 class="subsection-title">9.4. Tính Chất Phổ Dụng và Ba Nhận Diện Trường Kinh Điển</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 9.2: Tại sao phép dựng phân số sụp đổ khi có ước của không?</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(9, 'ex-9-5')">✍️ Giải Bài 9.5 (Phản ví dụ gãy bắc cầu trên ℤ/6ℤ)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 9.3 · Tiết 45 ==================== -->
+  <div class="lp-unit-header" id="lp-u9-3">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 9.3 · Tiết 45 · Mục 9.4, 9.5, 9.6 · Nhận diện ℚ(i), ℚ(√2), F(x) & Đối chiếu R/I vs Frac(R)</span>
+      <h4 class="lp-unit-title">Tính chất Phổ dụng, Nhận diện Frac(R) & Tổng kết Mạch Khái niệm Toàn Khóa</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u9-3" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u9-3')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">9.4. Tính Chất Phổ Dụng và Ba Nhận Diện Trường Kinh Điển</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Định lý Trọng tâm & Ứng dụng</span>
+    <span class="lp-step-goal">Tính chất phổ dụng của Frac(R) & Ba nhận diện kinh điển: ℚ, F(x), ℚ(i)</span>
+  </div>
   
   <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
     <div class="card-header">
@@ -294,7 +403,23 @@
   </div>
 
   <!-- 9.5 ĐỐI CHIẾU BẢN CHẤT: VÀNH THƯƠNG VS TRƯỜNG THƯƠNG -->
+  
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Nhận diện Frac(R) ≅ K bằng Tính chất Phổ dụng</strong>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Kiểm tra miền nguyên & Trường đích):</b> Xác nhận $R$ là miền nguyên nằm trong trường $K$ (với đơn cấu nhúng $i : R \hookrightarrow K$).</li>
+    <li><b>Bước 2 (Thác triển qua Tính chất phổ dụng):</b> Theo Định lý 9.5, tồn tại duy nhất đơn cấu trường $\tilde{i} : \operatorname{Frac}(R) \to K$ cho bởi $\tilde{i}(a/b) = ab^{-1}$.</li>
+    <li><b>Bước 3 (Chứng minh toàn ánh bằng quy đồng):</b> Biểu diễn phần tử bất kỳ của $K$ về dạng thương $\dfrac{x}{y}$ với $x, y \in R, y \neq 0$ để suy ra $\tilde{i}$ là đẳng cấu!</li>
+  </ol>
+</div>
+
   <h3 class="subsection-title">9.5. Phân Biệt Bản Chất Sâu Sắc: Vành Thương <span>$R/I$</span> vs. Trường Các Thương <span>$\operatorname{Frac}(R)$</span></h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s4">Bước 4 · Đối chiếu Bản chất</span>
+    <span class="lp-step-goal">Phân biệt cơ chế 'Thu gọn' của Vành thương R/I với 'Mở rộng' của Frac(R)</span>
+  </div>
   <p>
     Hai cấu trúc này đều dùng từ "thương" trong tên gọi, nhưng phản ánh hai cơ chế toán học <b>hoàn toàn đối lập nhau</b>:
   </p>
@@ -349,6 +474,10 @@
 
   <!-- 9.6 MẠCH KHÁI NIỆM TOÀN GIÁO TRÌNH -->
   <h3 class="subsection-title">9.6. Mạch Khái Niệm Xuyên Suốt Toàn Bộ Giáo Trình Đại Số</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s5">Bước 5 · Chốt & Tổng kết Toàn khóa</span>
+    <span class="lp-step-goal">Bản đồ tiến hóa xuyên suốt 4 trụ cột của Giáo trình Cấu trúc Đại số</span>
+  </div>
   <p>
     Toàn bộ cuốn giáo trình của tác giả TS. Huỳnh Việt Khánh được tổ chức quanh một câu hỏi logic duy nhất: 
     <i>Dữ liệu nào phải được bảo toàn khi ta chuyển dịch từ một cấu trúc đại số này sang một cấu trúc đại số khác?</i>
@@ -372,5 +501,13 @@
     </div>
   </div>
 
+
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Hoàn tất Chương 9 & Trọn vẹn Giáo trình Cấu trúc Đại số!</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(9, 'ex-9-15')">✍️ Giải Bài 9.15 (Nhận diện Frac(ℤ[√2]) ≅ ℚ(√2))</button>
+    <button type="button" class="lp-bridge-btn quiz" onclick="startChapterQuickExam(9)">🚀 Làm Đề Kiểm Tra Chương 9</button>
+  </div>
+</div>
 </div>
 <!-- ==================== HẾT CHƯƠNG 9 HOÀN CHỈNH ==================== -->

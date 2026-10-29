@@ -1,6 +1,37 @@
 <!-- ======================================================== -->
 <div class="chapter-content active" id="tab-c6">
   <h2 class="section-title">Chương 6. Cấu Trúc Vành, Miền Nguyên và Trường</h2>
+
+  <!-- ==================== BẢNG KẾ HOẠCH BÀI HỌC (LESSON PLAN META-BANNER) ==================== -->
+  <div class="lp-meta-banner" id="lp-banner-c6">
+    <div class="lp-meta-top">
+      <div class="lp-meta-badges">
+        <span class="lp-badge">📅 Tuần 12 · 4.5 Tiết (2.5 LT + 2 BT)</span>
+        <span class="lp-badge clo">🎯 Chuẩn đầu ra: CLO4, CLO5 · Cấu trúc Vành, Miền nguyên & Trường</span>
+        <span class="lp-badge weight">⚖️ Trọng tâm: U(R), Ước của 0, Miền nguyên & Vành con đơn vị riêng</span>
+      </div>
+      <span class="lp-progress-pill">Tiến độ bài học: 0/3 bài</span>
+    </div>
+    <p class="lp-objectives"><strong>Mục tiêu bài học:</strong> Nắm vững hệ tiên đề Vành $(R, +, \cdot)$ và quy ước của giáo trình (không mặc định giao hoán, không mặc định có $1_R$); phân biệt rành mạch phần tử khả nghịch $U(R)$ với ước của không và chứng minh sự rời nhau giữa chúng; phân loại sơ đồ Miền nguyên – Vành chia – Trường (cùng định lý miền nguyên hữu hạn là trường) và kiểm tra tiêu chuẩn vành con (chú ý hiện tượng đơn vị riêng $1_S \neq 1_R$).</p>
+    <div class="lp-unit-nav" role="navigation" aria-label="Lộ trình bài học Chương 6">
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u6-1')">
+        <span class="u-code">Bài 6.1 · Tiết 34</span>
+        <span class="u-name">Tiên đề Cấu trúc Vành, Quy ước Đơn vị & Quy tắc Tính toán</span>
+        <span class="u-sub">Mục 6.1, 6.2, 6.3 · Nhóm cộng Abel + Nửa nhóm nhân + Phân phối</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u6-2')">
+        <span class="u-code">Bài 6.2 · Tiết 35</span>
+        <span class="u-name">Phần tử Khả nghịch U(R), Ước của Không & Thang bậc Miền nguyên – Trường</span>
+        <span class="u-sub">Mục 6.4, 6.5 · Phân hoạch phần tử khác 0 & Định lý miền nguyên hữu hạn</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u6-3')">
+        <span class="u-code">Bài 6.3 · Tiết 36</span>
+        <span class="u-name">Tiêu chuẩn Vành con, Hiện tượng Đơn vị Riêng & Tổng hợp Mô hình</span>
+        <span class="u-sub">Mục 6.6, 6.7 · Kiểm định x - y ∈ S, xy ∈ S & Bẫy đơn vị 1_S ≠ 1_R</span>
+      </button>
+    </div>
+  </div>
+
   
   <p class="welcome-copy">
     Khái niệm nhóm chỉ khảo sát một phép toán hai ngôi đơn lẻ. 
@@ -11,7 +42,22 @@
   </p>
 
   <!-- 6.1 ĐỘNG CƠ SƯ PHẠM -->
-  <h3 class="subsection-title">6.1. Khởi Nguồn Sư Phạm: Từ Một Phép Toán Đến Hệ Thống Hai Phép Toán</h3>
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 6.1 · Tiết 34 ==================== -->
+  <div class="lp-unit-header" id="lp-u6-1">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 6.1 · Tiết 34 · Mục 6.1, 6.2, 6.3 · Nhóm cộng Abel + Nửa nhóm nhân + Phân phối</span>
+      <h4 class="lp-unit-title">Tiên đề Cấu trúc Vành, Quy ước Đơn vị & Quy tắc Tính toán</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u6-1" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u6-1')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">6.1. Khởi Nguồn Sư Phạm: Từ Một Phép Toán Đến Hệ Thống Hai Phép Toán</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s1">Bước 1 · Khởi động & Động cơ</span>
+    <span class="lp-step-goal">Từ cấu trúc một phép toán đến sự phối hợp Cộng – Nhân qua luật phân phối</span>
+  </div>
   <p>
     Xét các hệ thống số học quen thuộc $\mathbb{Z}, \mathbb{Q}, \mathbb{R}$. Chúng đều sở hữu hai phép toán cộng ($+$) và nhân ($\cdot$). 
     Nếu xét riêng rẽ:
@@ -27,6 +73,10 @@
 
   <!-- 6.2 ĐỊNH NGHĨA VÀNH & QUY ƯỚC GIÁO TRÌNH -->
   <h3 class="subsection-title">6.2. Tiên Đề Cấu Trúc Vành và Các Quy Ước Chuẩn Mực</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Ba cụm tiên đề Vành (R, +, ·) & Quy ước không mặc định giao hoán hay có 1</span>
+  </div>
   
   <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
     <div class="card-header">
@@ -75,6 +125,10 @@
 
   <!-- 6.3 HỆ QUẢ TÍNH TOÁN ĐẦU TIÊN -->
   <h3 class="subsection-title">6.3. Các Hệ Quả Tính Toán Nền Tảng Trong Một Vành</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Quy tắc Tính toán</span>
+    <span class="lp-step-goal">Nhân với 0_R, Quy tắc dấu & Cảnh báo khai triển (a - b)² khi không giao hoán</span>
+  </div>
   <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
     <div class="card-header">
       <span class="label">🏛️ ĐỊNH LÝ 6.2</span>
@@ -121,7 +175,30 @@
   </div>
 
   <!-- 6.4 PHẦN TỬ KHẢ NGHỊCH VÀ ƯỚC CỦA KHÔNG -->
-  <h3 class="subsection-title">6.4. Phần Tử Khả Nghịch, Nhóm Các Đơn Vị và Ước Của Không</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 6.1: Nhận diện Tiên đề Vành & Quy tắc dấu</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(6, 'ex-6-1')">✍️ Giải Bài 6.1 (Phân loại ℤ, 2ℤ, ℤ/6ℤ, M₂(ℝ))</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 6.2 · Tiết 35 ==================== -->
+  <div class="lp-unit-header" id="lp-u6-2">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 6.2 · Tiết 35 · Mục 6.4, 6.5 · Phân hoạch phần tử khác 0 & Định lý miền nguyên hữu hạn</span>
+      <h4 class="lp-unit-title">Phần tử Khả nghịch U(R), Ước của Không & Thang bậc Miền nguyên – Trường</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u6-2" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u6-2')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">6.4. Phần Tử Khả Nghịch, Nhóm Các Đơn Vị và Ước Của Không</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Phần tử khả nghịch U(R), Ước của không trái/phải & Tính rời nhau</span>
+  </div>
   <p>
     Trong một vành có đơn vị $1_R \neq 0_R$, các phần tử khác không được chia thành các lớp hành vi đại số rất khác nhau:
   </p>
@@ -208,7 +285,23 @@
   </div>
 
   <!-- 6.5 NẤC THANG CẤU TRÚC: MIỀN NGUYÊN, VÀNH CHIA, TRƯỜNG -->
+  
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Phân loại phần tử trong Vành có đơn vị R (Đặc biệt ℤ/nℤ)</strong>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Tách phần tử không):</b> Xác định $0_R$ (trong $\mathbb{Z}/n\mathbb{Z}$ là $[0]_n$). Lưu ý: $0_R$ <i>không</i> được gọi là ước của không.</li>
+    <li><b>Bước 2 (Tìm nhóm đơn vị khả nghịch $U(R)$):</b> Giải $uv = vu = 1_R$. Trong $\mathbb{Z}/n\mathbb{Z}$, $[a]_n \in U(\mathbb{Z}/n\mathbb{Z}) \iff \gcd(a, n) = 1$ (có $\varphi(n)$ phần tử, tìm nghịch đảo bằng Bézout).</li>
+    <li><b>Bước 3 (Tìm ước của không):</b> Tìm $a \neq 0_R$ sao cho $\exists b \neq 0_R: ab = 0_R$ (hoặc $ba = 0_R$). Trong $\mathbb{Z}/n\mathbb{Z}$, đó là mọi lớp $[a]_n \neq [0]_n$ có $\gcd(a, n) > 1$.</li>
+  </ol>
+</div>
+
   <h3 class="subsection-title">6.5. Thang Bậc Cấu Trúc: Miền Nguyên, Vành Chia và Trường</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Phân tầng Cấu trúc</span>
+    <span class="lp-step-goal">Miền nguyên, Vành chia, Trường & Định lý miền nguyên hữu hạn là trường</span>
+  </div>
   <p>
     Dựa trên tính giao hoán, sự tồn tại của đơn vị và sự vắng mặt của ước của không, ta có các lớp cấu trúc đặc sắc:
   </p>
@@ -356,7 +449,31 @@
   </details>
 
   <!-- 6.6 VÀNH CON & SỰ SAI KHÁC ĐƠN VỊ -->
-  <h3 class="subsection-title">6.6. Tiêu Chuẩn Vành Con và Hiện Tượng Đơn Vị Riêng</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 6.2: Thực hành tìm U(R), Ước của 0 & 4 Phản ví dụ Vành</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(6, 'ex-6-3')">✍️ Giải Bài 6.3 (Khả nghịch & Ước của 0 trong ℤ/12ℤ)</button>
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(6, 'ex-6-19')">✍️ Giải Bài 6.19 (4 Phản ví dụ sơ đồ Vành)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 6.3 · Tiết 36 ==================== -->
+  <div class="lp-unit-header" id="lp-u6-3">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 6.3 · Tiết 36 · Mục 6.6, 6.7 · Kiểm định x - y ∈ S, xy ∈ S & Bẫy đơn vị 1_S ≠ 1_R</span>
+      <h4 class="lp-unit-title">Tiêu chuẩn Vành con, Hiện tượng Đơn vị Riêng & Tổng hợp Mô hình</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u6-3" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u6-3')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">6.6. Tiêu Chuẩn Vành Con và Hiện Tượng Đơn Vị Riêng</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Tiêu chuẩn & Bẫy sai lầm</span>
+    <span class="lp-step-goal">Tiêu chuẩn vành con (x - y ∈ S, xy ∈ S) & Hiện tượng đơn vị riêng 1_S ≠ 1_R</span>
+  </div>
   
   <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
     <div class="card-header">
@@ -406,7 +523,24 @@
   </details>
 
   <!-- 6.7 BẢNG TỔNG HỢP KIỂM ĐỊNH CÁC VÀNH KINH ĐIỂN -->
+  
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Chứng minh S là vành con của R & Khảo sát đơn vị</strong>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(6)">📐 Mở Khuôn mẫu Vành con (#7)</button>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Kiểm tra khác rỗng):</b> Chỉ ra $0_R \in S$ để khẳng định $S \neq \emptyset$.</li>
+    <li><b>Bước 2 (Kiểm tra đóng với trừ và nhân):</b> Lấy tùy ý $x, y \in S$, chứng minh $x - y \in S$ và $xy \in S$. Kết luận $S$ là vành con của $R$.</li>
+    <li><b>Bước 3 (Khảo sát đơn vị của $S$):</b> Giải $e \cdot x = x \cdot e = x, \forall x \in S$ để xem $S$ không có đơn vị, có đơn vị riêng $1_S \neq 1_R$, hay cùng đơn vị $1_R$.</li>
+  </ol>
+</div>
+
   <h3 class="subsection-title">6.7. Bảng Tổng Hợp Kiểm Định Toàn Diện Các Vành Chuẩn Mực</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s5">Bước 5 · Chốt & Hệ thống hóa</span>
+    <span class="lp-step-goal">Bảng tổng hợp kiểm định toàn diện các vành chuẩn mực</span>
+  </div>
   <div class="table-wrapper">
     <table class="compare-table">
       <thead>
@@ -479,5 +613,14 @@
       </tbody>
     </table>
   </div>
+
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Hoàn tất Chương 6: Thực hành Vành con & Kiểm tra nhanh</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(6, 'ex-6-8')">✍️ Giải Bài 6.8 (Vành con ℝE₁₁ & Đơn vị riêng)</button>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(6)">📐 Mẫu CM Vành con (#7)</button>
+    <button type="button" class="lp-bridge-btn quiz" onclick="startChapterQuickExam(6)">🚀 Làm Đề Kiểm Tra Chương 6</button>
+  </div>
+</div>
 </div>
 <!-- ==================== HẾT CHƯƠNG 6 HOÀN CHỈNH ==================== -->

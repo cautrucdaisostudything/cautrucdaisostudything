@@ -1,6 +1,37 @@
 <!-- ======================================================== -->
 <div class="chapter-content" id="tab-c7">
   <h2 class="section-title">Chương 7. Iđêan và Vành Thương</h2>
+
+  <!-- ==================== BẢNG KẾ HOẠCH BÀI HỌC (LESSON PLAN META-BANNER) ==================== -->
+  <div class="lp-meta-banner" id="lp-banner-c7">
+    <div class="lp-meta-top">
+      <div class="lp-meta-badges">
+        <span class="lp-badge">📅 Tuần 13 · 4.5 Tiết (2.5 LT + 2 BT)</span>
+        <span class="lp-badge clo">🎯 Chuẩn đầu ra: CLO5 · Iđêan, Vành thương, Iđêan nguyên tố & Cực đại</span>
+        <span class="lp-badge weight">⚖️ Trọng tâm: Tính hấp thụ RI ⊆ I, Đặc trưng R/I miền nguyên / trường</span>
+      </div>
+      <span class="lp-progress-pill">Tiến độ bài học: 0/3 bài</span>
+    </div>
+    <p class="lp-objectives"><strong>Mục tiêu bài học:</strong> Giải thích được tại sao vành con không đủ để nhân lớp kề xác định tốt mà cần tính hấp thụ của Iđêan ($rx, xr \in I$); phân biệt iđêan trái, phải, hai phía, iđêan chính $(a)$ và chứng minh trường chỉ có 2 iđêan tầm thường; làm chủ định lý đặc trưng thương: $R/I$ là miền nguyên $\iff I$ nguyên tố, $R/I$ là trường $\iff I$ cực đại (và dựng trường $\mathbb{C} \cong \mathbb{R}[x]/(x^2+1)$).</p>
+    <div class="lp-unit-nav" role="navigation" aria-label="Lộ trình bài học Chương 7">
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u7-1')">
+        <span class="u-code">Bài 7.1 · Tiết 37</span>
+        <span class="u-name">Động cơ Hấp thụ Phép nhân, Tiêu chuẩn Iđêan & Iđêan Chính</span>
+        <span class="u-sub">Mục 7.1, 7.2, 7.3 · Iđêan trái/phải/hai phía, Iđêan chứa đơn vị & PID</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u7-2')">
+        <span class="u-code">Bài 7.2 · Tiết 38</span>
+        <span class="u-name">Cấu trúc Vành thương R/I, Iđêan Nguyên tố & Iđêan Cực đại</span>
+        <span class="u-sub">Mục 7.4, 7.5 · Định lý R/I là miền nguyên ⇔ I nguyên tố; R/I là trường ⇔ I cực đại</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u7-3')">
+        <span class="u-code">Bài 7.3 · Tiết 39</span>
+        <span class="u-name">Bẫy Ngộ nhận Nguyên tố – Cực đại & Mô hình Dựng Trường ℂ ≅ ℝ[x]/(x²+1)</span>
+        <span class="u-sub">Mục 7.6, 7.7, 7.8 · Phản ví dụ I = (0) trong ℤ & Khai sinh số phức ℂ</span>
+      </button>
+    </div>
+  </div>
+
   
   <p class="welcome-copy">
     Trong lý thuyết nhóm, không phải nhóm con nào cũng tạo được nhóm thương mà cần đến tính chuẩn tắc. 
@@ -10,7 +41,22 @@
   </p>
 
   <!-- 7.1 ĐỘNG CƠ SƯ PHẠM: TẠI SAO VÀNH CON THẤT BẠI KHI TẠO THƯƠNG? -->
-  <h3 class="subsection-title">7.1. Khởi Nguồn Sư Phạm: Tại Sao Vành Con Thất Bại Khi Tạo Cấu Trúc Thương?</h3>
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 7.1 · Tiết 37 ==================== -->
+  <div class="lp-unit-header" id="lp-u7-1">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 7.1 · Tiết 37 · Mục 7.1, 7.2, 7.3 · Iđêan trái/phải/hai phía, Iđêan chứa đơn vị & PID</span>
+      <h4 class="lp-unit-title">Động cơ Hấp thụ Phép nhân, Tiêu chuẩn Iđêan & Iđêan Chính</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u7-1" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u7-1')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">7.1. Khởi Nguồn Sư Phạm: Tại Sao Vành Con Thất Bại Khi Tạo Cấu Trúc Thương?</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s1">Bước 1 · Khởi động & Động cơ</span>
+    <span class="lp-step-goal">Sự sụp đổ của phép nhân đại diện trên ℚ/ℤ và nhu cầu hấp thụ phép nhân</span>
+  </div>
   <p>
     Cho $R$ là một vành và $S$ là một vành con của $R$. 
     Vì $(R, +)$ là một nhóm Abel, nên nhóm con cộng $(S, +)$ tự động là một nhóm con chuẩn tắc của $(R, +)$. 
@@ -52,6 +98,10 @@
 
   <!-- 7.2 ĐỊNH NGHĨA IĐÊAN & TIÊU CHUẨN KIỂM TRA -->
   <h3 class="subsection-title">7.2. Định Nghĩa Iđêan và Tiêu Chuẩn Kiểm Tra Hai Phía</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết & Tiêu chuẩn</span>
+    <span class="lp-step-goal">Định nghĩa Iđêan trái, phải, hai phía, Tiêu chuẩn rút gọn & Iđêan của trường</span>
+  </div>
   
   <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
     <div class="card-header">
@@ -148,7 +198,24 @@
   </div>
 
   <!-- 7.3 IĐÊAN CHÍNH VÀ VÀNH IĐÊAN CHÍNH -->
+  
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Chứng minh I là iđêan hai phía của vành R (I ⊴ R)</strong>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(7)">📐 Mở Khuôn mẫu Iđêan (#8)</button>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Nhóm con cộng):</b> Chỉ ra $0_R \in I$ ($I \neq \emptyset$) và với mọi $x, y \in I$, chứng minh hiệu $x - y \in I$.</li>
+    <li><b>Bước 2 (Hấp thụ phép nhân từ toàn bộ vành mẹ R):</b> Lấy tùy ý $r \in R$ (thuộc cả vành mẹ) và $x \in I$, chứng minh $rx \in I$ (iđêan trái) và $xr \in I$ (iđêan phải).</li>
+    <li><b>Bước 3 (Kiểm tra triệt tiêu toàn vành):</b> Nếu phát hiện $1_R \in I$ hoặc $I \cap U(R) \neq \emptyset$, kết luận ngay $I = R$!</li>
+  </ol>
+</div>
+
   <h3 class="subsection-title">7.3. Iđêan Sinh Bởi Một Tập Hợp và Iđêan Chính</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Iđêan chính (a) = aR và Vành iđêan chính (PID: ℤ và F[x])</span>
+  </div>
   <p>
     Tương tự như nhóm con sinh, giao của một họ các iđêan luôn là một iđêan. 
     Từ đó ta xây dựng iđêan nhỏ nhất sinh bởi một tập con $X \subseteq R$.
@@ -186,7 +253,32 @@
   </div>
 
   <!-- 7.4 PHÉP DỰNG VÀNH THƯƠNG -->
-  <h3 class="subsection-title">7.4. Phép Dựng Cấu Trúc Vành Thương $R/I$ và Phép Chiếu Chính Tắc</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 7.1: Thực hành Iđêan một phía, hai phía & Iđêan chứa phần tử khả nghịch</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(7, 'ex-7-1')">✍️ Bài 7.1 (Tại sao ℚ/ℤ thất bại?)</button>
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(7, 'ex-7-3')">✍️ Bài 7.3 (Iđêan trái vs phải trong M₂(ℝ))</button>
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(7, 'ex-7-11')">✍️ Bài 7.11 (Iđêan của Trường)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 7.2 · Tiết 38 ==================== -->
+  <div class="lp-unit-header" id="lp-u7-2">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 7.2 · Tiết 38 · Mục 7.4, 7.5 · Định lý R/I là miền nguyên ⇔ I nguyên tố; R/I là trường ⇔ I cực đại</span>
+      <h4 class="lp-unit-title">Cấu trúc Vành thương R/I, Iđêan Nguyên tố & Iđêan Cực đại</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u7-2" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u7-2')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">7.4. Phép Dựng Cấu Trúc Vành Thương $R/I$ và Phép Chiếu Chính Tắc</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Phép dựng Vành thương R/I và Phép chiếu chính tắc π_I : R → R/I</span>
+  </div>
   <p>
     Khi $I$ là một iđêan hai phía, cả phép cộng lớp lẫn phép nhân lớp đều xác định tốt, biến tập các lớp kề thành một vành mới:
   </p>
@@ -295,6 +387,10 @@
 
   <!-- 7.5 IĐÊAN NGUYÊN TỐ VÀ IĐÊAN CỰC ĐẠI -->
   <h3 class="subsection-title">7.5. Iđêan Nguyên Tố và Iđêan Cực Đại: Linh Hồn Phân Loại Cấu Trúc Thương</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Định lý Trọng tâm</span>
+    <span class="lp-step-goal">Iđêan nguyên tố, Iđêan cực đại & Định lý đặc trưng thương (Miền nguyên / Trường)</span>
+  </div>
   <p>
     Vành thương $R/I$ nhận được có phẩm chất đại số như thế nào? Khi nào nó là một miền nguyên? Khi nào nó trở thành một trường? 
     Câu trả lời được giải mã trọn vẹn thông qua hai lớp iđêan đặc biệt sau (xét trên vành giao hoán có đơn vị $1_R \neq 0_R$):
@@ -399,7 +495,31 @@
   </details>
 
   <!-- 7.6 BỘ BẪY NGỘ NHẬN & PHẢN VÍ DỤ SƯ PHẠM -->
-  <h3 class="subsection-title">7.6. Bộ Bẫy Ngộ Nhận & Phản Ví Dụ Sư Phạm Kinh Điển</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 7.2: Phân loại Iđêan nguyên tố & cực đại qua Vành thương</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(7, 'ex-7-15')">✍️ Giải Bài 7.15 (Iđêan nguyên tố & cực đại trong ℤ)</button>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(8)">📐 Mẫu CM Vành thương & Iđêan (#9)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 7.3 · Tiết 39 ==================== -->
+  <div class="lp-unit-header" id="lp-u7-3">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 7.3 · Tiết 39 · Mục 7.6, 7.7, 7.8 · Phản ví dụ I = (0) trong ℤ & Khai sinh số phức ℂ</span>
+      <h4 class="lp-unit-title">Bẫy Ngộ nhận Nguyên tố – Cực đại & Mô hình Dựng Trường ℂ ≅ ℝ[x]/(x²+1)</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u7-3" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u7-3')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">7.6. Bộ Bẫy Ngộ Nhận & Phản Ví Dụ Sư Phạm Kinh Điển</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s4">Bước 4 · Phản ví dụ & Bẫy sai lầm</span>
+    <span class="lp-step-goal">Bẫy 'Nguyên tố suy ra Cực đại' (Phản ví dụ (0) ⊂ ℤ và (x) ⊂ ℝ[x,y])</span>
+  </div>
 
   <details class="ex-card counter" data-type="ex" open style="margin-bottom: 1.2rem;">
     <summary>⚠️ Bẫy 1: "Iđêan nguyên tố thì chắc chắn cực đại?" $\implies$ HOÀN TOÀN SAI!</summary>
@@ -433,6 +553,10 @@
 
   <!-- 7.7 MÔ HÌNH DỰNG TRƯỜNG THỰC CHIẾN -->
   <h3 class="subsection-title">7.7. Mô Hình Dựng Trường Thực Chiến: Dựng Trường Số Phức $\mathbb{C}$ Từ $\mathbb{R}[x]$</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Mô hình Thực chiến</span>
+    <span class="lp-step-goal">Dựng trường số phức ℂ từ vành thương đa thức ℝ[x]/(x² + 1)</span>
+  </div>
   <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
     <div class="card-header">
       <span class="label">🏛️ VÍ DỤ KINH ĐIỂN</span>
@@ -472,6 +596,10 @@
 
   <!-- 7.8 BẢNG TỔNG HỢP SO SÁNH IĐÊAN VÀ CẤU TRÚC THƯƠNG TRONG Z -->
   <h3 class="subsection-title">7.8. Bảng Tổng Hợp Khảo Sát Iđêan và Cấu Trúc Thương Trong $\mathbb{Z}$</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s5">Bước 5 · Chốt & Hệ thống hóa</span>
+    <span class="lp-step-goal">Bảng tổng hợp phân loại mọi iđêan nℤ và vành thương ℤ/nℤ</span>
+  </div>
   <p style="font-size:0.95rem; color:var(--text-muted);">
     Trong vành số nguyên $\mathbb{Z}$, mọi iđêan đều có dạng $n\mathbb{Z}$ ($n \ge 0$). Bảng sau khảo sát trọn vẹn các trạng thái phân loại theo $n$:
   </p>
@@ -524,5 +652,13 @@
       </tbody>
     </table>
   </div>
+
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Hoàn tất Chương 7: Tổng kết Iđêan – Vành thương & Kiểm tra nhanh</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(7, 'ex-7-15')">✍️ Xem lại phản ví dụ (0) trong ℤ</button>
+    <button type="button" class="lp-bridge-btn quiz" onclick="startChapterQuickExam(7)">🚀 Làm Đề Kiểm Tra Chương 7</button>
+  </div>
+</div>
 </div>
 <!-- ==================== HẾT CHƯƠNG 7 HOÀN CHỈNH ==================== -->

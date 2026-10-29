@@ -1,6 +1,37 @@
 <!-- ======================================================== -->
 <div class="chapter-content" id="tab-c8">
   <h2 class="section-title">Chương 8. Đồng Cấu Vành và Đặc Số</h2>
+
+  <!-- ==================== BẢNG KẾ HOẠCH BÀI HỌC (LESSON PLAN META-BANNER) ==================== -->
+  <div class="lp-meta-banner" id="lp-banner-c8">
+    <div class="lp-meta-top">
+      <div class="lp-meta-badges">
+        <span class="lp-badge">📅 Tuần 14 · 4.5 Tiết (2.5 LT + 2 BT)</span>
+        <span class="lp-badge clo">🎯 Chuẩn đầu ra: CLO5 · Đồng cấu Vành, Định lý Đẳng cấu & Đặc số char(R)</span>
+        <span class="lp-badge weight">⚖️ Trọng tâm: R/ker(f) ≅ im(f), Bẫy f(1_R) ≠ 1_S & Đặc số miền nguyên</span>
+      </div>
+      <span class="lp-progress-pill">Tiến độ bài học: 0/3 bài</span>
+    </div>
+    <p class="lp-objectives"><strong>Mục tiêu bài học:</strong> Kiểm tra được đồng cấu vành (giữ cả cộng lẫn nhân) và lưu ý ranh giới bảo toàn đơn vị ($f(1_R)$ không mặc định bằng $1_S$); vận dụng thành thạo Phương pháp 3 bước nhận diện vành thương qua Định lý Đẳng cấu I (đặc biệt phép thế đa thức $\operatorname{ev}_a$); tính được đặc số $\operatorname{char}(R)$ và chứng minh đặc số của miền nguyên/trường chỉ có thể là $0$ hoặc số nguyên tố $p$.</p>
+    <div class="lp-unit-nav" role="navigation" aria-label="Lộ trình bài học Chương 8">
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u8-1')">
+        <span class="u-code">Bài 8.1 · Tiết 40</span>
+        <span class="u-name">Đồng cấu Vành, Ranh giới Bảo toàn Đơn vị, Hạt nhân & Tập ảnh</span>
+        <span class="u-sub">Mục 8.1, 8.2, 8.3 · Bẫy f(1_R) ≠ 1_S, ker(f) ⊴ R & Tiêu chuẩn đơn cấu</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u8-2')">
+        <span class="u-code">Bài 8.2 · Tiết 41</span>
+        <span class="u-name">Bộ 4 Định lý Đẳng cấu Vành, Phương pháp 3 bước & Phép thế Đa thức</span>
+        <span class="u-sub">Mục 8.4, 8.6 · Nhận diện R/I ≅ S & Chứng minh F[x]/(x - a) ≅ F</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u8-3')">
+        <span class="u-code">Bài 8.3 · Tiết 42</span>
+        <span class="u-name">Đặc số của Vành char(R), Đặc số Miền nguyên & Đối chiếu Nhóm – Vành</span>
+        <span class="u-sub">Mục 8.5, 8.6, 8.7 · Chứng minh char(R) ∈ {0, p} & Bảng song hành Nhóm – Vành</span>
+      </button>
+    </div>
+  </div>
+
   
   <p class="welcome-copy">
     Đồng cấu vành là các ánh xạ bảo toàn đồng thời cả phép cộng và phép nhân. 
@@ -11,7 +42,22 @@
   </p>
 
   <!-- 8.1 ĐỘNG CƠ SƯ PHẠM: BẢO TOÀN ĐỒNG THỜI HAI PHÉP TOÁN -->
-  <h3 class="subsection-title">8.1. Khởi Nguồn Sư Phạm: Ánh Xạ Giữ Hai Phép Toán và Sự Kế Thừa Cấu Trúc</h3>
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 8.1 · Tiết 40 ==================== -->
+  <div class="lp-unit-header" id="lp-u8-1">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 8.1 · Tiết 40 · Mục 8.1, 8.2, 8.3 · Bẫy f(1_R) ≠ 1_S, ker(f) ⊴ R & Tiêu chuẩn đơn cấu</span>
+      <h4 class="lp-unit-title">Đồng cấu Vành, Ranh giới Bảo toàn Đơn vị, Hạt nhân & Tập ảnh</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u8-1" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u8-1')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">8.1. Khởi Nguồn Sư Phạm: Ánh Xạ Giữ Hai Phép Toán và Sự Kế Thừa Cấu Trúc</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s1">Bước 1 · Khởi động & Động cơ</span>
+    <span class="lp-step-goal">Ánh xạ tôn trọng đồng thời cả cấu trúc nhóm cộng lẫn nửa nhóm nhân</span>
+  </div>
   <p>
     Trong lý thuyết nhóm, đồng cấu chỉ cần bảo toàn một phép toán duy nhất. Nhưng với một vành, ánh xạ phải tôn trọng <b>đồng thời cả phép cộng và phép nhân</b>:
   </p>
@@ -25,6 +71,10 @@
 
   <!-- 8.2 ĐỊNH NGHĨA ĐỒNG CẤU VÀNH & VẤN ĐỀ ĐƠN VỊ -->
   <h3 class="subsection-title">8.2. Định Nghĩa Đồng Cấu Vành và Ranh Giới Bảo Toàn Đơn Vị</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết & Bẫy đơn vị</span>
+    <span class="lp-step-goal">Định nghĩa Đồng cấu vành, Phân loại & Phản ví dụ đồng cấu không giữ đơn vị</span>
+  </div>
   
   <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
     <div class="card-header">
@@ -106,6 +156,10 @@
 
   <!-- 8.3 HẠT NHÂN VÀ TẬP ẢNH -->
   <h3 class="subsection-title">8.3. Hạt Nhân, Tập Ảnh và Tiêu Chuẩn Đơn Cấu Vành</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Hạt nhân ker(f) ⊴ R là iđêan hai phía, Tập ảnh im(f) & Tiêu chuẩn đơn cấu</span>
+  </div>
   
   <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
     <div class="card-header">
@@ -174,7 +228,31 @@
   </details>
 
   <!-- 8.4 BỐN ĐỊNH LÝ ĐẲNG CẤU VÀNH -->
-  <h3 class="subsection-title">8.4. Bộ Bốn Định Lý Đẳng Cấu Vành và Phương Pháp 3 Bước Thực Chiến</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 8.1: Thực hành Phép chiếu chính tắc & Bẫy không giữ đơn vị</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(8, 'ex-8-1')">✍️ Giải Bài 8.1 (Phép chiếu ρ_n : ℤ → ℤ/nℤ)</button>
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(8, 'ex-8-4')">✍️ Giải Bài 8.4 (Đơn cấu δ(k) = kE₁₁ không giữ đơn vị)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 8.2 · Tiết 41 ==================== -->
+  <div class="lp-unit-header" id="lp-u8-2">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 8.2 · Tiết 41 · Mục 8.4, 8.6 · Nhận diện R/I ≅ S & Chứng minh F[x]/(x - a) ≅ F</span>
+      <h4 class="lp-unit-title">Bộ 4 Định lý Đẳng cấu Vành, Phương pháp 3 bước & Phép thế Đa thức</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u8-2" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u8-2')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">8.4. Bộ Bốn Định Lý Đẳng Cấu Vành và Phương Pháp 3 Bước Thực Chiến</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Định lý Trọng tâm & Thuật toán</span>
+    <span class="lp-step-goal">Bộ 4 Định lý Đẳng cấu Vành & Quy trình 3 bước nhận diện vành thương</span>
+  </div>
   <p>
     Vì hạt nhân $\ker f$ luôn là một iđêan hai phía của $R$, ta luôn tạo được vành thương $\dfrac{R}{\ker f}$. 
     Định lý đẳng cấu thứ nhất khẳng định vành thương này phản chiếu hoàn hảo cấu trúc của tập ảnh:
@@ -258,7 +336,44 @@
   </div>
 
   <!-- 8.5 ĐẶC SỐ CỦA VÀNH -->
-  <h3 class="subsection-title">8.5. Đặc Số Của Vành $\operatorname{char}(R)$ và Phẩm Chất Đại Số</h3>
+  
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Nhận diện Vành thương R/I ≅ S & Kết luận I nguyên tố / cực đại</strong>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(8)">📐 Mở Khuôn mẫu Đẳng cấu Vành (#9)</button>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Dựng đồng cấu vành):</b> Chọn ánh xạ tự nhiên $f : R \to S$ (như phép thế $\operatorname{ev}_a(P) = P(a)$) và kiểm tra $f(x+y)=f(x)+f(y),\; f(xy)=f(x)f(y)$.</li>
+    <li><b>Bước 2 (Chứng minh toàn ánh & Giải hạt nhân):</b> Chỉ ra $\operatorname{im} f = S$ và giải $f(r) = 0_S$ để chứng minh $\ker f = I$.</li>
+    <li><b>Bước 3 (Kết luận kép):</b> Áp dụng Định lý Đẳng cấu I suy ra $R/I \cong S$. Nếu $S$ là miền nguyên $\implies I$ nguyên tố; nếu $S$ là trường $\implies I$ cực đại!</li>
+  </ol>
+</div>
+
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 8.2: Vận dụng Phép thế đa thức & Định lý Đẳng cấu I</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(8, 'ex-8-10')">✍️ Giải Bài 8.10 (Chứng minh F[x]/(x - a) ≅ F)</button>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(8)">📐 Mẫu CM Vành thương (#9)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 8.3 · Tiết 42 ==================== -->
+  <div class="lp-unit-header" id="lp-u8-3">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 8.3 · Tiết 42 · Mục 8.5, 8.6, 8.7 · Chứng minh char(R) ∈ {0, p} & Bảng song hành Nhóm – Vành</span>
+      <h4 class="lp-unit-title">Đặc số của Vành char(R), Đặc số Miền nguyên & Đối chiếu Nhóm – Vành</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u8-3" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u8-3')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">8.5. Đặc Số Của Vành $\operatorname{char}(R)$ và Phẩm Chất Đại Số</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Đặc số của vành char(R) & Định lý đặc số của miền nguyên / trường là 0 hoặc p</span>
+  </div>
   <p>
     Đặc số là một đại lượng hoàn toàn thuộc về nhóm cộng của vành, đo lường số lần cộng phần tử đơn vị lại với chính nó để triệt tiêu về $0$:
   </p>
@@ -332,6 +447,10 @@
 
   <!-- 8.6 VÍ DỤ KINH ĐIỂN: PHÉP THẾ ĐA THỨC -->
   <h3 class="subsection-title">8.6. Bài Toán Mẫu Mực: Phép Thế Đa Thức Nhận Diện $F[x]/(x - a) \cong F$</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Bài toán Mẫu mực</span>
+    <span class="lp-step-goal">Phép thế đa thức ev_a và chứng minh F[x]/(x - a) ≅ F</span>
+  </div>
   <div class="math-card thm" data-type="thm" style="margin-bottom: 1.5rem;">
     <div class="card-header">
       <span class="label">🏛️ BÀI TẬP 8.10 GIÁO TRÌNH</span>
@@ -366,6 +485,10 @@
 
   <!-- 8.7 BẢNG ĐỐI CHIẾU SONG HÀNH TOÀN DIỆN -->
   <h3 class="subsection-title">8.7. Bảng Đối Chiếu Song Hành Toàn Diện: Lý Thuyết Nhóm vs. Lý Thuyết Vành</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s5">Bước 5 · Chốt & Hệ thống hóa</span>
+    <span class="lp-step-goal">Bảng đối chiếu song hành toàn diện giữa Lý thuyết Nhóm và Lý thuyết Vành</span>
+  </div>
   <p style="font-size:0.95rem; color:var(--text-muted);">
     Mọi cấu trúc cốt lõi trong Lý thuyết Vành đều là sự phát triển song song hoàn hảo từ Lý thuyết Nhóm:
   </p>
@@ -433,5 +556,13 @@
       </tbody>
     </table>
   </div>
+
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Hoàn tất Chương 8 (Trọn vẹn Phần II - Lý thuyết Vành)</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(8, 'ex-8-24')">✍️ Giải Bài 8.24 (Chứng minh char(R) ∈ {0, p})</button>
+    <button type="button" class="lp-bridge-btn quiz" onclick="startChapterQuickExam(8)">🚀 Làm Đề Kiểm Tra Chương 8</button>
+  </div>
+</div>
 </div>
 <!-- ==================== HẾT CHƯƠNG 8 HOÀN CHỈNH ==================== -->

@@ -1656,12 +1656,27 @@
   }
 })();
 
+
 /* ==========================================================================
-   14. ENGINE ĐIỀU HƯỚNG BÀI HỌC CHUẨN KẾ HOẠCH & CẦU NỐI THỰC HÀNH (LESSON PLAN)
+   14. ENGINE ĐIỀU HƯỚNG BÀI HỌC CHUẨN KẾ HOẠCH & LỘ TRÌNH 15 TUẦN (LESSON PLAN)
    ========================================================================== */
 (function initLessonPlanEngine() {
   "use strict";
   const LP_DONE_KEY = "ctds_lesson_units_done_v1";
+
+  const COURSE_MODULES = [
+    { part: "part-0", ch: "tab-c0", week: "Tuần 1–2", title: "Ch.0 · Công cụ", units: ["lp-u0-1", "lp-u0-2", "lp-u0-3"] },
+    { part: "part-1", ch: "tab-c1", week: "Tuần 3–4", title: "Ch.1 · Nhóm", units: ["lp-u1-1", "lp-u1-2", "lp-u1-3"] },
+    { part: "part-1", ch: "tab-c2", week: "Tuần 5–6", title: "Ch.2 · Nhóm con", units: ["lp-u2-1", "lp-u2-2", "lp-u2-3"] },
+    { part: "part-1", ch: "tab-c3", week: "Tuần 7–8", title: "Ch.3 · Lagrange", units: ["lp-u3-1", "lp-u3-2", "lp-u3-3"] },
+    { part: "part-1", ch: "tab-c4", week: "Tuần 8–9", title: "Ch.4 · Nhóm thương", units: ["lp-u4-1", "lp-u4-2", "lp-u4-3"] },
+    { part: "part-1", ch: "tab-c5", week: "Tuần 10–11", title: "Ch.5 · Đồng cấu", units: ["lp-u5-1", "lp-u5-2", "lp-u5-3"] },
+    { part: "part-2", ch: "tab-c6", week: "Tuần 12", title: "Ch.6 · Vành", units: ["lp-u6-1", "lp-u6-2", "lp-u6-3"] },
+    { part: "part-2", ch: "tab-c7", week: "Tuần 13", title: "Ch.7 · Iđêan", units: ["lp-u7-1", "lp-u7-2", "lp-u7-3"] },
+    { part: "part-2", ch: "tab-c8", week: "Tuần 14", title: "Ch.8 · ĐC Vành", units: ["lp-u8-1", "lp-u8-2", "lp-u8-3"] },
+    { part: "part-3", ch: "tab-c9", week: "Tuần 15A", title: "Ch.9 · Trường", units: ["lp-u9-1", "lp-u9-2", "lp-u9-3"] },
+    { part: "part-4", ch: "tab-compare", week: "Tuần 15B", title: "Đối chiếu & Ôn thi", units: ["lp-ucomp-1", "lp-ucomp-2"] }
+  ];
 
   function getDoneUnits() {
     try {
@@ -1679,7 +1694,27 @@
     } catch (_) {}
   }
 
+  function injectCourseRoadmapIntoHub() {
+    const hubShell = document.getElementById("dbHubShell");
+    if (!hubShell || document.getElementById("dbCourseRoadmapBar")) return;
+    const roadmapDiv = document.createElement("div");
+    roadmapDiv.className = "lp-hub-roadmap";
+    roadmapDiv.id = "dbCourseRoadmapBar";
+    roadmapDiv.innerHTML = `
+      <div class="lp-roadmap-head">
+        <span class="lp-roadmap-title">🗓️ Lộ trình Kế hoạch Học tập 15 Tuần (45 Tiết · 32 Bài học &amp; Chuyên đề)</span>
+        <div class="lp-roadmap-bar-wrap">
+          <div class="lp-roadmap-bar"><span id="lpGlobalProgressFill"></span></div>
+          <span class="lp-roadmap-pct" id="lpGlobalProgressText">0 / 32 bài (0%)</span>
+        </div>
+      </div>
+      <div class="lp-week-grid" id="lpWeekGrid"></div>
+    `;
+    hubShell.appendChild(roadmapDiv);
+  }
+
   function syncAllUnitProgressUI() {
+    injectCourseRoadmapIntoHub();
     const doneSet = getDoneUnits();
     document.querySelectorAll(".lp-unit-done-btn[data-unit-id]").forEach(btn => {
       const uid = btn.getAttribute("data-unit-id");
@@ -1689,7 +1724,7 @@
       btn.innerHTML = isDone ? "✅ Đã hoàn thành bài học" : "⚪ Đánh dấu đã học xong";
     });
 
-    document.querySelectorAll(".chapter-content[id^='tab-c']").forEach(chEl => {
+    document.querySelectorAll(".chapter-content[id^='tab-']").forEach(chEl => {
       const unitBtns = chEl.querySelectorAll(".lp-unit-done-btn[data-unit-id]");
       if (!unitBtns.length) return;
       let doneCount = 0;
@@ -1701,6 +1736,45 @@
         pill.textContent = `Tiến độ bài học: ${doneCount}/${unitBtns.length} bài`;
       }
     });
+
+    // Cập nhật thanh lộ trình 15 tuần trên Reading Hub
+    const weekGrid = document.getElementById("lpWeekGrid");
+    let totalUnits = 0;
+    let totalDone = 0;
+    if (weekGrid) {
+      weekGrid.replaceChildren();
+      COURSE_MODULES.forEach(m => {
+        const doneInMod = m.units.filter(u => doneSet.has(u)).length;
+        totalUnits += m.units.length;
+        totalDone += doneInMod;
+        const isComp = doneInMod === m.units.length;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "lp-week-card" + (isComp ? " is-complete" : "");
+        btn.innerHTML = `
+          <div class="w-top">
+            <span>${m.week}</span>
+            <span>${isComp ? "✅" : `${doneInMod}/${m.units.length}`}</span>
+          </div>
+          <div class="w-label">${m.title}</div>
+        `;
+        btn.addEventListener("click", () => {
+          if (typeof window.switchPart === "function") window.switchPart(m.part, false);
+          if (typeof window.switchChapter === "function") window.switchChapter(m.part, m.ch, true);
+        });
+        weekGrid.appendChild(btn);
+      });
+    } else {
+      COURSE_MODULES.forEach(m => {
+        totalUnits += m.units.length;
+        totalDone += m.units.filter(u => doneSet.has(u)).length;
+      });
+    }
+    const pct = totalUnits ? Math.round((totalDone / totalUnits) * 100) : 0;
+    const fillEl = document.getElementById("lpGlobalProgressFill");
+    const txtEl = document.getElementById("lpGlobalProgressText");
+    if (fillEl) fillEl.style.width = `${pct}%`;
+    if (txtEl) txtEl.textContent = `${totalDone} / ${totalUnits} bài (${pct}%)`;
   }
 
   window.toggleLessonUnitDone = function(btn, unitId) {
@@ -1785,8 +1859,8 @@
   };
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", syncAllUnitProgressUI);
+    document.addEventListener("DOMContentLoaded", () => setTimeout(syncAllUnitProgressUI, 60));
   } else {
-    syncAllUnitProgressUI();
+    setTimeout(syncAllUnitProgressUI, 60);
   }
 })();

@@ -4740,6 +4740,108 @@ mark.db-user-highlight:hover {
   color: #FFFFFF;
 }
 
+/* Thanh Lộ trình 15 Tuần trên Reading Hub */
+.lp-hub-roadmap {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line, #E4DED3);
+}
+.db-hub-shell.is-collapsed .lp-hub-roadmap {
+  display: none;
+}
+.lp-roadmap-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.lp-roadmap-title {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--brand, #315B96);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.lp-roadmap-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  max-width: 360px;
+}
+.lp-roadmap-bar {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--bg, #F7F5F0);
+  border: 1px solid var(--line, #E4DED3);
+  overflow: hidden;
+}
+.lp-roadmap-bar > span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--brand, #315B96), var(--thm-color, #256046));
+  transition: width 0.3s ease;
+}
+.lp-roadmap-pct {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--thm-color, #256046);
+  white-space: nowrap;
+}
+.lp-week-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+  gap: 8px;
+}
+.lp-week-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--bg, #F7F5F0);
+  border: 1px solid var(--line, #E4DED3);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--db-font-sans, var(--font-ui));
+  transition: all 0.16s ease;
+}
+.lp-week-card:hover {
+  border-color: var(--brand, #315B96);
+  background: var(--paper, #FFFFFF);
+  transform: translateY(-1px);
+}
+.lp-week-card.is-complete {
+  border-color: var(--thm-border, #C8DDD2);
+  background: var(--thm-bg, #F2F6F3);
+}
+.lp-week-card .w-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--brand, #315B96);
+}
+.lp-week-card.is-complete .w-top {
+  color: var(--thm-color, #256046);
+}
+.lp-week-card .w-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink, #24334D);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 </style>
 </head>
 <body data-app-mode="study">
@@ -8739,6 +8841,37 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 <!-- ======================================================== -->
 <div class="chapter-content active" id="tab-c6">
   <h2 class="section-title">Chương 6. Cấu Trúc Vành, Miền Nguyên và Trường</h2>
+
+  <!-- ==================== BẢNG KẾ HOẠCH BÀI HỌC (LESSON PLAN META-BANNER) ==================== -->
+  <div class="lp-meta-banner" id="lp-banner-c6">
+    <div class="lp-meta-top">
+      <div class="lp-meta-badges">
+        <span class="lp-badge">📅 Tuần 12 · 4.5 Tiết (2.5 LT + 2 BT)</span>
+        <span class="lp-badge clo">🎯 Chuẩn đầu ra: CLO4, CLO5 · Cấu trúc Vành, Miền nguyên & Trường</span>
+        <span class="lp-badge weight">⚖️ Trọng tâm: U(R), Ước của 0, Miền nguyên & Vành con đơn vị riêng</span>
+      </div>
+      <span class="lp-progress-pill">Tiến độ bài học: 0/3 bài</span>
+    </div>
+    <p class="lp-objectives"><strong>Mục tiêu bài học:</strong> Nắm vững hệ tiên đề Vành $(R, +, \cdot)$ và quy ước của giáo trình (không mặc định giao hoán, không mặc định có $1_R$); phân biệt rành mạch phần tử khả nghịch $U(R)$ với ước của không và chứng minh sự rời nhau giữa chúng; phân loại sơ đồ Miền nguyên – Vành chia – Trường (cùng định lý miền nguyên hữu hạn là trường) và kiểm tra tiêu chuẩn vành con (chú ý hiện tượng đơn vị riêng $1_S \neq 1_R$).</p>
+    <div class="lp-unit-nav" role="navigation" aria-label="Lộ trình bài học Chương 6">
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u6-1')">
+        <span class="u-code">Bài 6.1 · Tiết 34</span>
+        <span class="u-name">Tiên đề Cấu trúc Vành, Quy ước Đơn vị & Quy tắc Tính toán</span>
+        <span class="u-sub">Mục 6.1, 6.2, 6.3 · Nhóm cộng Abel + Nửa nhóm nhân + Phân phối</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u6-2')">
+        <span class="u-code">Bài 6.2 · Tiết 35</span>
+        <span class="u-name">Phần tử Khả nghịch U(R), Ước của Không & Thang bậc Miền nguyên – Trường</span>
+        <span class="u-sub">Mục 6.4, 6.5 · Phân hoạch phần tử khác 0 & Định lý miền nguyên hữu hạn</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u6-3')">
+        <span class="u-code">Bài 6.3 · Tiết 36</span>
+        <span class="u-name">Tiêu chuẩn Vành con, Hiện tượng Đơn vị Riêng & Tổng hợp Mô hình</span>
+        <span class="u-sub">Mục 6.6, 6.7 · Kiểm định x - y ∈ S, xy ∈ S & Bẫy đơn vị 1_S ≠ 1_R</span>
+      </button>
+    </div>
+  </div>
+
   
   <p class="welcome-copy">
     Khái niệm nhóm chỉ khảo sát một phép toán hai ngôi đơn lẻ. 
@@ -8749,7 +8882,22 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
   </p>
 
   <!-- 6.1 ĐỘNG CƠ SƯ PHẠM -->
-  <h3 class="subsection-title">6.1. Khởi Nguồn Sư Phạm: Từ Một Phép Toán Đến Hệ Thống Hai Phép Toán</h3>
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 6.1 · Tiết 34 ==================== -->
+  <div class="lp-unit-header" id="lp-u6-1">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 6.1 · Tiết 34 · Mục 6.1, 6.2, 6.3 · Nhóm cộng Abel + Nửa nhóm nhân + Phân phối</span>
+      <h4 class="lp-unit-title">Tiên đề Cấu trúc Vành, Quy ước Đơn vị & Quy tắc Tính toán</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u6-1" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u6-1')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">6.1. Khởi Nguồn Sư Phạm: Từ Một Phép Toán Đến Hệ Thống Hai Phép Toán</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s1">Bước 1 · Khởi động & Động cơ</span>
+    <span class="lp-step-goal">Từ cấu trúc một phép toán đến sự phối hợp Cộng – Nhân qua luật phân phối</span>
+  </div>
   <p>
     Xét các hệ thống số học quen thuộc $\mathbb{Z}, \mathbb{Q}, \mathbb{R}$. Chúng đều sở hữu hai phép toán cộng ($+$) và nhân ($\cdot$). 
     Nếu xét riêng rẽ:
@@ -8765,6 +8913,10 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 
   <!-- 6.2 ĐỊNH NGHĨA VÀNH & QUY ƯỚC GIÁO TRÌNH -->
   <h3 class="subsection-title">6.2. Tiên Đề Cấu Trúc Vành và Các Quy Ước Chuẩn Mực</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Ba cụm tiên đề Vành (R, +, ·) & Quy ước không mặc định giao hoán hay có 1</span>
+  </div>
   
   <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
     <div class="card-header">
@@ -8813,6 +8965,10 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 
   <!-- 6.3 HỆ QUẢ TÍNH TOÁN ĐẦU TIÊN -->
   <h3 class="subsection-title">6.3. Các Hệ Quả Tính Toán Nền Tảng Trong Một Vành</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Quy tắc Tính toán</span>
+    <span class="lp-step-goal">Nhân với 0_R, Quy tắc dấu & Cảnh báo khai triển (a - b)² khi không giao hoán</span>
+  </div>
   <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
     <div class="card-header">
       <span class="label">🏛️ ĐỊNH LÝ 6.2</span>
@@ -8859,7 +9015,30 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
   </div>
 
   <!-- 6.4 PHẦN TỬ KHẢ NGHỊCH VÀ ƯỚC CỦA KHÔNG -->
-  <h3 class="subsection-title">6.4. Phần Tử Khả Nghịch, Nhóm Các Đơn Vị và Ước Của Không</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 6.1: Nhận diện Tiên đề Vành & Quy tắc dấu</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(6, 'ex-6-1')">✍️ Giải Bài 6.1 (Phân loại ℤ, 2ℤ, ℤ/6ℤ, M₂(ℝ))</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 6.2 · Tiết 35 ==================== -->
+  <div class="lp-unit-header" id="lp-u6-2">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 6.2 · Tiết 35 · Mục 6.4, 6.5 · Phân hoạch phần tử khác 0 & Định lý miền nguyên hữu hạn</span>
+      <h4 class="lp-unit-title">Phần tử Khả nghịch U(R), Ước của Không & Thang bậc Miền nguyên – Trường</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u6-2" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u6-2')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">6.4. Phần Tử Khả Nghịch, Nhóm Các Đơn Vị và Ước Của Không</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Phần tử khả nghịch U(R), Ước của không trái/phải & Tính rời nhau</span>
+  </div>
   <p>
     Trong một vành có đơn vị $1_R \neq 0_R$, các phần tử khác không được chia thành các lớp hành vi đại số rất khác nhau:
   </p>
@@ -8946,7 +9125,23 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
   </div>
 
   <!-- 6.5 NẤC THANG CẤU TRÚC: MIỀN NGUYÊN, VÀNH CHIA, TRƯỜNG -->
+  
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Phân loại phần tử trong Vành có đơn vị R (Đặc biệt ℤ/nℤ)</strong>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Tách phần tử không):</b> Xác định $0_R$ (trong $\mathbb{Z}/n\mathbb{Z}$ là $[0]_n$). Lưu ý: $0_R$ <i>không</i> được gọi là ước của không.</li>
+    <li><b>Bước 2 (Tìm nhóm đơn vị khả nghịch $U(R)$):</b> Giải $uv = vu = 1_R$. Trong $\mathbb{Z}/n\mathbb{Z}$, $[a]_n \in U(\mathbb{Z}/n\mathbb{Z}) \iff \gcd(a, n) = 1$ (có $\varphi(n)$ phần tử, tìm nghịch đảo bằng Bézout).</li>
+    <li><b>Bước 3 (Tìm ước của không):</b> Tìm $a \neq 0_R$ sao cho $\exists b \neq 0_R: ab = 0_R$ (hoặc $ba = 0_R$). Trong $\mathbb{Z}/n\mathbb{Z}$, đó là mọi lớp $[a]_n \neq [0]_n$ có $\gcd(a, n) > 1$.</li>
+  </ol>
+</div>
+
   <h3 class="subsection-title">6.5. Thang Bậc Cấu Trúc: Miền Nguyên, Vành Chia và Trường</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Phân tầng Cấu trúc</span>
+    <span class="lp-step-goal">Miền nguyên, Vành chia, Trường & Định lý miền nguyên hữu hạn là trường</span>
+  </div>
   <p>
     Dựa trên tính giao hoán, sự tồn tại của đơn vị và sự vắng mặt của ước của không, ta có các lớp cấu trúc đặc sắc:
   </p>
@@ -9094,7 +9289,31 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
   </details>
 
   <!-- 6.6 VÀNH CON & SỰ SAI KHÁC ĐƠN VỊ -->
-  <h3 class="subsection-title">6.6. Tiêu Chuẩn Vành Con và Hiện Tượng Đơn Vị Riêng</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 6.2: Thực hành tìm U(R), Ước của 0 & 4 Phản ví dụ Vành</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(6, 'ex-6-3')">✍️ Giải Bài 6.3 (Khả nghịch & Ước của 0 trong ℤ/12ℤ)</button>
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(6, 'ex-6-19')">✍️ Giải Bài 6.19 (4 Phản ví dụ sơ đồ Vành)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 6.3 · Tiết 36 ==================== -->
+  <div class="lp-unit-header" id="lp-u6-3">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 6.3 · Tiết 36 · Mục 6.6, 6.7 · Kiểm định x - y ∈ S, xy ∈ S & Bẫy đơn vị 1_S ≠ 1_R</span>
+      <h4 class="lp-unit-title">Tiêu chuẩn Vành con, Hiện tượng Đơn vị Riêng & Tổng hợp Mô hình</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u6-3" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u6-3')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">6.6. Tiêu Chuẩn Vành Con và Hiện Tượng Đơn Vị Riêng</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Tiêu chuẩn & Bẫy sai lầm</span>
+    <span class="lp-step-goal">Tiêu chuẩn vành con (x - y ∈ S, xy ∈ S) & Hiện tượng đơn vị riêng 1_S ≠ 1_R</span>
+  </div>
   
   <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
     <div class="card-header">
@@ -9144,7 +9363,24 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
   </details>
 
   <!-- 6.7 BẢNG TỔNG HỢP KIỂM ĐỊNH CÁC VÀNH KINH ĐIỂN -->
+  
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Chứng minh S là vành con của R & Khảo sát đơn vị</strong>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(6)">📐 Mở Khuôn mẫu Vành con (#7)</button>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Kiểm tra khác rỗng):</b> Chỉ ra $0_R \in S$ để khẳng định $S \neq \emptyset$.</li>
+    <li><b>Bước 2 (Kiểm tra đóng với trừ và nhân):</b> Lấy tùy ý $x, y \in S$, chứng minh $x - y \in S$ và $xy \in S$. Kết luận $S$ là vành con của $R$.</li>
+    <li><b>Bước 3 (Khảo sát đơn vị của $S$):</b> Giải $e \cdot x = x \cdot e = x, \forall x \in S$ để xem $S$ không có đơn vị, có đơn vị riêng $1_S \neq 1_R$, hay cùng đơn vị $1_R$.</li>
+  </ol>
+</div>
+
   <h3 class="subsection-title">6.7. Bảng Tổng Hợp Kiểm Định Toàn Diện Các Vành Chuẩn Mực</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s5">Bước 5 · Chốt & Hệ thống hóa</span>
+    <span class="lp-step-goal">Bảng tổng hợp kiểm định toàn diện các vành chuẩn mực</span>
+  </div>
   <div class="table-wrapper">
     <table class="compare-table">
       <thead>
@@ -9217,6 +9453,15 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
       </tbody>
     </table>
   </div>
+
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Hoàn tất Chương 6: Thực hành Vành con & Kiểm tra nhanh</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(6, 'ex-6-8')">✍️ Giải Bài 6.8 (Vành con ℝE₁₁ & Đơn vị riêng)</button>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(6)">📐 Mẫu CM Vành con (#7)</button>
+    <button type="button" class="lp-bridge-btn quiz" onclick="startChapterQuickExam(6)">🚀 Làm Đề Kiểm Tra Chương 6</button>
+  </div>
+</div>
 </div>
 <!-- ==================== HẾT CHƯƠNG 6 HOÀN CHỈNH ==================== -->
 
@@ -9224,6 +9469,37 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 <!-- ======================================================== -->
 <div class="chapter-content" id="tab-c7">
   <h2 class="section-title">Chương 7. Iđêan và Vành Thương</h2>
+
+  <!-- ==================== BẢNG KẾ HOẠCH BÀI HỌC (LESSON PLAN META-BANNER) ==================== -->
+  <div class="lp-meta-banner" id="lp-banner-c7">
+    <div class="lp-meta-top">
+      <div class="lp-meta-badges">
+        <span class="lp-badge">📅 Tuần 13 · 4.5 Tiết (2.5 LT + 2 BT)</span>
+        <span class="lp-badge clo">🎯 Chuẩn đầu ra: CLO5 · Iđêan, Vành thương, Iđêan nguyên tố & Cực đại</span>
+        <span class="lp-badge weight">⚖️ Trọng tâm: Tính hấp thụ RI ⊆ I, Đặc trưng R/I miền nguyên / trường</span>
+      </div>
+      <span class="lp-progress-pill">Tiến độ bài học: 0/3 bài</span>
+    </div>
+    <p class="lp-objectives"><strong>Mục tiêu bài học:</strong> Giải thích được tại sao vành con không đủ để nhân lớp kề xác định tốt mà cần tính hấp thụ của Iđêan ($rx, xr \in I$); phân biệt iđêan trái, phải, hai phía, iđêan chính $(a)$ và chứng minh trường chỉ có 2 iđêan tầm thường; làm chủ định lý đặc trưng thương: $R/I$ là miền nguyên $\iff I$ nguyên tố, $R/I$ là trường $\iff I$ cực đại (và dựng trường $\mathbb{C} \cong \mathbb{R}[x]/(x^2+1)$).</p>
+    <div class="lp-unit-nav" role="navigation" aria-label="Lộ trình bài học Chương 7">
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u7-1')">
+        <span class="u-code">Bài 7.1 · Tiết 37</span>
+        <span class="u-name">Động cơ Hấp thụ Phép nhân, Tiêu chuẩn Iđêan & Iđêan Chính</span>
+        <span class="u-sub">Mục 7.1, 7.2, 7.3 · Iđêan trái/phải/hai phía, Iđêan chứa đơn vị & PID</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u7-2')">
+        <span class="u-code">Bài 7.2 · Tiết 38</span>
+        <span class="u-name">Cấu trúc Vành thương R/I, Iđêan Nguyên tố & Iđêan Cực đại</span>
+        <span class="u-sub">Mục 7.4, 7.5 · Định lý R/I là miền nguyên ⇔ I nguyên tố; R/I là trường ⇔ I cực đại</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u7-3')">
+        <span class="u-code">Bài 7.3 · Tiết 39</span>
+        <span class="u-name">Bẫy Ngộ nhận Nguyên tố – Cực đại & Mô hình Dựng Trường ℂ ≅ ℝ[x]/(x²+1)</span>
+        <span class="u-sub">Mục 7.6, 7.7, 7.8 · Phản ví dụ I = (0) trong ℤ & Khai sinh số phức ℂ</span>
+      </button>
+    </div>
+  </div>
+
   
   <p class="welcome-copy">
     Trong lý thuyết nhóm, không phải nhóm con nào cũng tạo được nhóm thương mà cần đến tính chuẩn tắc. 
@@ -9233,7 +9509,22 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
   </p>
 
   <!-- 7.1 ĐỘNG CƠ SƯ PHẠM: TẠI SAO VÀNH CON THẤT BẠI KHI TẠO THƯƠNG? -->
-  <h3 class="subsection-title">7.1. Khởi Nguồn Sư Phạm: Tại Sao Vành Con Thất Bại Khi Tạo Cấu Trúc Thương?</h3>
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 7.1 · Tiết 37 ==================== -->
+  <div class="lp-unit-header" id="lp-u7-1">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 7.1 · Tiết 37 · Mục 7.1, 7.2, 7.3 · Iđêan trái/phải/hai phía, Iđêan chứa đơn vị & PID</span>
+      <h4 class="lp-unit-title">Động cơ Hấp thụ Phép nhân, Tiêu chuẩn Iđêan & Iđêan Chính</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u7-1" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u7-1')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">7.1. Khởi Nguồn Sư Phạm: Tại Sao Vành Con Thất Bại Khi Tạo Cấu Trúc Thương?</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s1">Bước 1 · Khởi động & Động cơ</span>
+    <span class="lp-step-goal">Sự sụp đổ của phép nhân đại diện trên ℚ/ℤ và nhu cầu hấp thụ phép nhân</span>
+  </div>
   <p>
     Cho $R$ là một vành và $S$ là một vành con của $R$. 
     Vì $(R, +)$ là một nhóm Abel, nên nhóm con cộng $(S, +)$ tự động là một nhóm con chuẩn tắc của $(R, +)$. 
@@ -9275,6 +9566,10 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 
   <!-- 7.2 ĐỊNH NGHĨA IĐÊAN & TIÊU CHUẨN KIỂM TRA -->
   <h3 class="subsection-title">7.2. Định Nghĩa Iđêan và Tiêu Chuẩn Kiểm Tra Hai Phía</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết & Tiêu chuẩn</span>
+    <span class="lp-step-goal">Định nghĩa Iđêan trái, phải, hai phía, Tiêu chuẩn rút gọn & Iđêan của trường</span>
+  </div>
   
   <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
     <div class="card-header">
@@ -9371,7 +9666,24 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
   </div>
 
   <!-- 7.3 IĐÊAN CHÍNH VÀ VÀNH IĐÊAN CHÍNH -->
+  
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Chứng minh I là iđêan hai phía của vành R (I ⊴ R)</strong>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(7)">📐 Mở Khuôn mẫu Iđêan (#8)</button>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Nhóm con cộng):</b> Chỉ ra $0_R \in I$ ($I \neq \emptyset$) và với mọi $x, y \in I$, chứng minh hiệu $x - y \in I$.</li>
+    <li><b>Bước 2 (Hấp thụ phép nhân từ toàn bộ vành mẹ R):</b> Lấy tùy ý $r \in R$ (thuộc cả vành mẹ) và $x \in I$, chứng minh $rx \in I$ (iđêan trái) và $xr \in I$ (iđêan phải).</li>
+    <li><b>Bước 3 (Kiểm tra triệt tiêu toàn vành):</b> Nếu phát hiện $1_R \in I$ hoặc $I \cap U(R) \neq \emptyset$, kết luận ngay $I = R$!</li>
+  </ol>
+</div>
+
   <h3 class="subsection-title">7.3. Iđêan Sinh Bởi Một Tập Hợp và Iđêan Chính</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Iđêan chính (a) = aR và Vành iđêan chính (PID: ℤ và F[x])</span>
+  </div>
   <p>
     Tương tự như nhóm con sinh, giao của một họ các iđêan luôn là một iđêan. 
     Từ đó ta xây dựng iđêan nhỏ nhất sinh bởi một tập con $X \subseteq R$.
@@ -9409,7 +9721,32 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
   </div>
 
   <!-- 7.4 PHÉP DỰNG VÀNH THƯƠNG -->
-  <h3 class="subsection-title">7.4. Phép Dựng Cấu Trúc Vành Thương $R/I$ và Phép Chiếu Chính Tắc</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 7.1: Thực hành Iđêan một phía, hai phía & Iđêan chứa phần tử khả nghịch</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(7, 'ex-7-1')">✍️ Bài 7.1 (Tại sao ℚ/ℤ thất bại?)</button>
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(7, 'ex-7-3')">✍️ Bài 7.3 (Iđêan trái vs phải trong M₂(ℝ))</button>
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(7, 'ex-7-11')">✍️ Bài 7.11 (Iđêan của Trường)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 7.2 · Tiết 38 ==================== -->
+  <div class="lp-unit-header" id="lp-u7-2">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 7.2 · Tiết 38 · Mục 7.4, 7.5 · Định lý R/I là miền nguyên ⇔ I nguyên tố; R/I là trường ⇔ I cực đại</span>
+      <h4 class="lp-unit-title">Cấu trúc Vành thương R/I, Iđêan Nguyên tố & Iđêan Cực đại</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u7-2" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u7-2')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">7.4. Phép Dựng Cấu Trúc Vành Thương $R/I$ và Phép Chiếu Chính Tắc</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Phép dựng Vành thương R/I và Phép chiếu chính tắc π_I : R → R/I</span>
+  </div>
   <p>
     Khi $I$ là một iđêan hai phía, cả phép cộng lớp lẫn phép nhân lớp đều xác định tốt, biến tập các lớp kề thành một vành mới:
   </p>
@@ -9518,6 +9855,10 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 
   <!-- 7.5 IĐÊAN NGUYÊN TỐ VÀ IĐÊAN CỰC ĐẠI -->
   <h3 class="subsection-title">7.5. Iđêan Nguyên Tố và Iđêan Cực Đại: Linh Hồn Phân Loại Cấu Trúc Thương</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Định lý Trọng tâm</span>
+    <span class="lp-step-goal">Iđêan nguyên tố, Iđêan cực đại & Định lý đặc trưng thương (Miền nguyên / Trường)</span>
+  </div>
   <p>
     Vành thương $R/I$ nhận được có phẩm chất đại số như thế nào? Khi nào nó là một miền nguyên? Khi nào nó trở thành một trường? 
     Câu trả lời được giải mã trọn vẹn thông qua hai lớp iđêan đặc biệt sau (xét trên vành giao hoán có đơn vị $1_R \neq 0_R$):
@@ -9622,7 +9963,31 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
   </details>
 
   <!-- 7.6 BỘ BẪY NGỘ NHẬN & PHẢN VÍ DỤ SƯ PHẠM -->
-  <h3 class="subsection-title">7.6. Bộ Bẫy Ngộ Nhận & Phản Ví Dụ Sư Phạm Kinh Điển</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 7.2: Phân loại Iđêan nguyên tố & cực đại qua Vành thương</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(7, 'ex-7-15')">✍️ Giải Bài 7.15 (Iđêan nguyên tố & cực đại trong ℤ)</button>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(8)">📐 Mẫu CM Vành thương & Iđêan (#9)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 7.3 · Tiết 39 ==================== -->
+  <div class="lp-unit-header" id="lp-u7-3">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 7.3 · Tiết 39 · Mục 7.6, 7.7, 7.8 · Phản ví dụ I = (0) trong ℤ & Khai sinh số phức ℂ</span>
+      <h4 class="lp-unit-title">Bẫy Ngộ nhận Nguyên tố – Cực đại & Mô hình Dựng Trường ℂ ≅ ℝ[x]/(x²+1)</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u7-3" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u7-3')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">7.6. Bộ Bẫy Ngộ Nhận & Phản Ví Dụ Sư Phạm Kinh Điển</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s4">Bước 4 · Phản ví dụ & Bẫy sai lầm</span>
+    <span class="lp-step-goal">Bẫy 'Nguyên tố suy ra Cực đại' (Phản ví dụ (0) ⊂ ℤ và (x) ⊂ ℝ[x,y])</span>
+  </div>
 
   <details class="ex-card counter" data-type="ex" open style="margin-bottom: 1.2rem;">
     <summary>⚠️ Bẫy 1: "Iđêan nguyên tố thì chắc chắn cực đại?" $\implies$ HOÀN TOÀN SAI!</summary>
@@ -9656,6 +10021,10 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 
   <!-- 7.7 MÔ HÌNH DỰNG TRƯỜNG THỰC CHIẾN -->
   <h3 class="subsection-title">7.7. Mô Hình Dựng Trường Thực Chiến: Dựng Trường Số Phức $\mathbb{C}$ Từ $\mathbb{R}[x]$</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Mô hình Thực chiến</span>
+    <span class="lp-step-goal">Dựng trường số phức ℂ từ vành thương đa thức ℝ[x]/(x² + 1)</span>
+  </div>
   <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
     <div class="card-header">
       <span class="label">🏛️ VÍ DỤ KINH ĐIỂN</span>
@@ -9695,6 +10064,10 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 
   <!-- 7.8 BẢNG TỔNG HỢP SO SÁNH IĐÊAN VÀ CẤU TRÚC THƯƠNG TRONG Z -->
   <h3 class="subsection-title">7.8. Bảng Tổng Hợp Khảo Sát Iđêan và Cấu Trúc Thương Trong $\mathbb{Z}$</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s5">Bước 5 · Chốt & Hệ thống hóa</span>
+    <span class="lp-step-goal">Bảng tổng hợp phân loại mọi iđêan nℤ và vành thương ℤ/nℤ</span>
+  </div>
   <p style="font-size:0.95rem; color:var(--text-muted);">
     Trong vành số nguyên $\mathbb{Z}$, mọi iđêan đều có dạng $n\mathbb{Z}$ ($n \ge 0$). Bảng sau khảo sát trọn vẹn các trạng thái phân loại theo $n$:
   </p>
@@ -9747,6 +10120,14 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
       </tbody>
     </table>
   </div>
+
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Hoàn tất Chương 7: Tổng kết Iđêan – Vành thương & Kiểm tra nhanh</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(7, 'ex-7-15')">✍️ Xem lại phản ví dụ (0) trong ℤ</button>
+    <button type="button" class="lp-bridge-btn quiz" onclick="startChapterQuickExam(7)">🚀 Làm Đề Kiểm Tra Chương 7</button>
+  </div>
+</div>
 </div>
 <!-- ==================== HẾT CHƯƠNG 7 HOÀN CHỈNH ==================== -->
 
@@ -9754,6 +10135,37 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 <!-- ======================================================== -->
 <div class="chapter-content" id="tab-c8">
   <h2 class="section-title">Chương 8. Đồng Cấu Vành và Đặc Số</h2>
+
+  <!-- ==================== BẢNG KẾ HOẠCH BÀI HỌC (LESSON PLAN META-BANNER) ==================== -->
+  <div class="lp-meta-banner" id="lp-banner-c8">
+    <div class="lp-meta-top">
+      <div class="lp-meta-badges">
+        <span class="lp-badge">📅 Tuần 14 · 4.5 Tiết (2.5 LT + 2 BT)</span>
+        <span class="lp-badge clo">🎯 Chuẩn đầu ra: CLO5 · Đồng cấu Vành, Định lý Đẳng cấu & Đặc số char(R)</span>
+        <span class="lp-badge weight">⚖️ Trọng tâm: R/ker(f) ≅ im(f), Bẫy f(1_R) ≠ 1_S & Đặc số miền nguyên</span>
+      </div>
+      <span class="lp-progress-pill">Tiến độ bài học: 0/3 bài</span>
+    </div>
+    <p class="lp-objectives"><strong>Mục tiêu bài học:</strong> Kiểm tra được đồng cấu vành (giữ cả cộng lẫn nhân) và lưu ý ranh giới bảo toàn đơn vị ($f(1_R)$ không mặc định bằng $1_S$); vận dụng thành thạo Phương pháp 3 bước nhận diện vành thương qua Định lý Đẳng cấu I (đặc biệt phép thế đa thức $\operatorname{ev}_a$); tính được đặc số $\operatorname{char}(R)$ và chứng minh đặc số của miền nguyên/trường chỉ có thể là $0$ hoặc số nguyên tố $p$.</p>
+    <div class="lp-unit-nav" role="navigation" aria-label="Lộ trình bài học Chương 8">
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u8-1')">
+        <span class="u-code">Bài 8.1 · Tiết 40</span>
+        <span class="u-name">Đồng cấu Vành, Ranh giới Bảo toàn Đơn vị, Hạt nhân & Tập ảnh</span>
+        <span class="u-sub">Mục 8.1, 8.2, 8.3 · Bẫy f(1_R) ≠ 1_S, ker(f) ⊴ R & Tiêu chuẩn đơn cấu</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u8-2')">
+        <span class="u-code">Bài 8.2 · Tiết 41</span>
+        <span class="u-name">Bộ 4 Định lý Đẳng cấu Vành, Phương pháp 3 bước & Phép thế Đa thức</span>
+        <span class="u-sub">Mục 8.4, 8.6 · Nhận diện R/I ≅ S & Chứng minh F[x]/(x - a) ≅ F</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u8-3')">
+        <span class="u-code">Bài 8.3 · Tiết 42</span>
+        <span class="u-name">Đặc số của Vành char(R), Đặc số Miền nguyên & Đối chiếu Nhóm – Vành</span>
+        <span class="u-sub">Mục 8.5, 8.6, 8.7 · Chứng minh char(R) ∈ {0, p} & Bảng song hành Nhóm – Vành</span>
+      </button>
+    </div>
+  </div>
+
   
   <p class="welcome-copy">
     Đồng cấu vành là các ánh xạ bảo toàn đồng thời cả phép cộng và phép nhân. 
@@ -9764,7 +10176,22 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
   </p>
 
   <!-- 8.1 ĐỘNG CƠ SƯ PHẠM: BẢO TOÀN ĐỒNG THỜI HAI PHÉP TOÁN -->
-  <h3 class="subsection-title">8.1. Khởi Nguồn Sư Phạm: Ánh Xạ Giữ Hai Phép Toán và Sự Kế Thừa Cấu Trúc</h3>
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 8.1 · Tiết 40 ==================== -->
+  <div class="lp-unit-header" id="lp-u8-1">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 8.1 · Tiết 40 · Mục 8.1, 8.2, 8.3 · Bẫy f(1_R) ≠ 1_S, ker(f) ⊴ R & Tiêu chuẩn đơn cấu</span>
+      <h4 class="lp-unit-title">Đồng cấu Vành, Ranh giới Bảo toàn Đơn vị, Hạt nhân & Tập ảnh</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u8-1" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u8-1')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">8.1. Khởi Nguồn Sư Phạm: Ánh Xạ Giữ Hai Phép Toán và Sự Kế Thừa Cấu Trúc</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s1">Bước 1 · Khởi động & Động cơ</span>
+    <span class="lp-step-goal">Ánh xạ tôn trọng đồng thời cả cấu trúc nhóm cộng lẫn nửa nhóm nhân</span>
+  </div>
   <p>
     Trong lý thuyết nhóm, đồng cấu chỉ cần bảo toàn một phép toán duy nhất. Nhưng với một vành, ánh xạ phải tôn trọng <b>đồng thời cả phép cộng và phép nhân</b>:
   </p>
@@ -9778,6 +10205,10 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 
   <!-- 8.2 ĐỊNH NGHĨA ĐỒNG CẤU VÀNH & VẤN ĐỀ ĐƠN VỊ -->
   <h3 class="subsection-title">8.2. Định Nghĩa Đồng Cấu Vành và Ranh Giới Bảo Toàn Đơn Vị</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết & Bẫy đơn vị</span>
+    <span class="lp-step-goal">Định nghĩa Đồng cấu vành, Phân loại & Phản ví dụ đồng cấu không giữ đơn vị</span>
+  </div>
   
   <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
     <div class="card-header">
@@ -9859,6 +10290,10 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 
   <!-- 8.3 HẠT NHÂN VÀ TẬP ẢNH -->
   <h3 class="subsection-title">8.3. Hạt Nhân, Tập Ảnh và Tiêu Chuẩn Đơn Cấu Vành</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Hạt nhân ker(f) ⊴ R là iđêan hai phía, Tập ảnh im(f) & Tiêu chuẩn đơn cấu</span>
+  </div>
   
   <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
     <div class="card-header">
@@ -9927,7 +10362,31 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
   </details>
 
   <!-- 8.4 BỐN ĐỊNH LÝ ĐẲNG CẤU VÀNH -->
-  <h3 class="subsection-title">8.4. Bộ Bốn Định Lý Đẳng Cấu Vành và Phương Pháp 3 Bước Thực Chiến</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 8.1: Thực hành Phép chiếu chính tắc & Bẫy không giữ đơn vị</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(8, 'ex-8-1')">✍️ Giải Bài 8.1 (Phép chiếu ρ_n : ℤ → ℤ/nℤ)</button>
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(8, 'ex-8-4')">✍️ Giải Bài 8.4 (Đơn cấu δ(k) = kE₁₁ không giữ đơn vị)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 8.2 · Tiết 41 ==================== -->
+  <div class="lp-unit-header" id="lp-u8-2">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 8.2 · Tiết 41 · Mục 8.4, 8.6 · Nhận diện R/I ≅ S & Chứng minh F[x]/(x - a) ≅ F</span>
+      <h4 class="lp-unit-title">Bộ 4 Định lý Đẳng cấu Vành, Phương pháp 3 bước & Phép thế Đa thức</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u8-2" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u8-2')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">8.4. Bộ Bốn Định Lý Đẳng Cấu Vành và Phương Pháp 3 Bước Thực Chiến</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Định lý Trọng tâm & Thuật toán</span>
+    <span class="lp-step-goal">Bộ 4 Định lý Đẳng cấu Vành & Quy trình 3 bước nhận diện vành thương</span>
+  </div>
   <p>
     Vì hạt nhân $\ker f$ luôn là một iđêan hai phía của $R$, ta luôn tạo được vành thương $\dfrac{R}{\ker f}$. 
     Định lý đẳng cấu thứ nhất khẳng định vành thương này phản chiếu hoàn hảo cấu trúc của tập ảnh:
@@ -10011,7 +10470,44 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
   </div>
 
   <!-- 8.5 ĐẶC SỐ CỦA VÀNH -->
-  <h3 class="subsection-title">8.5. Đặc Số Của Vành $\operatorname{char}(R)$ và Phẩm Chất Đại Số</h3>
+  
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Nhận diện Vành thương R/I ≅ S & Kết luận I nguyên tố / cực đại</strong>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(8)">📐 Mở Khuôn mẫu Đẳng cấu Vành (#9)</button>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Dựng đồng cấu vành):</b> Chọn ánh xạ tự nhiên $f : R \to S$ (như phép thế $\operatorname{ev}_a(P) = P(a)$) và kiểm tra $f(x+y)=f(x)+f(y),\; f(xy)=f(x)f(y)$.</li>
+    <li><b>Bước 2 (Chứng minh toàn ánh & Giải hạt nhân):</b> Chỉ ra $\operatorname{im} f = S$ và giải $f(r) = 0_S$ để chứng minh $\ker f = I$.</li>
+    <li><b>Bước 3 (Kết luận kép):</b> Áp dụng Định lý Đẳng cấu I suy ra $R/I \cong S$. Nếu $S$ là miền nguyên $\implies I$ nguyên tố; nếu $S$ là trường $\implies I$ cực đại!</li>
+  </ol>
+</div>
+
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 8.2: Vận dụng Phép thế đa thức & Định lý Đẳng cấu I</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(8, 'ex-8-10')">✍️ Giải Bài 8.10 (Chứng minh F[x]/(x - a) ≅ F)</button>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(8)">📐 Mẫu CM Vành thương (#9)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 8.3 · Tiết 42 ==================== -->
+  <div class="lp-unit-header" id="lp-u8-3">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 8.3 · Tiết 42 · Mục 8.5, 8.6, 8.7 · Chứng minh char(R) ∈ {0, p} & Bảng song hành Nhóm – Vành</span>
+      <h4 class="lp-unit-title">Đặc số của Vành char(R), Đặc số Miền nguyên & Đối chiếu Nhóm – Vành</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u8-3" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u8-3')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">8.5. Đặc Số Của Vành $\operatorname{char}(R)$ và Phẩm Chất Đại Số</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Đặc số của vành char(R) & Định lý đặc số của miền nguyên / trường là 0 hoặc p</span>
+  </div>
   <p>
     Đặc số là một đại lượng hoàn toàn thuộc về nhóm cộng của vành, đo lường số lần cộng phần tử đơn vị lại với chính nó để triệt tiêu về $0$:
   </p>
@@ -10085,6 +10581,10 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 
   <!-- 8.6 VÍ DỤ KINH ĐIỂN: PHÉP THẾ ĐA THỨC -->
   <h3 class="subsection-title">8.6. Bài Toán Mẫu Mực: Phép Thế Đa Thức Nhận Diện $F[x]/(x - a) \cong F$</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Bài toán Mẫu mực</span>
+    <span class="lp-step-goal">Phép thế đa thức ev_a và chứng minh F[x]/(x - a) ≅ F</span>
+  </div>
   <div class="math-card thm" data-type="thm" style="margin-bottom: 1.5rem;">
     <div class="card-header">
       <span class="label">🏛️ BÀI TẬP 8.10 GIÁO TRÌNH</span>
@@ -10119,6 +10619,10 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 
   <!-- 8.7 BẢNG ĐỐI CHIẾU SONG HÀNH TOÀN DIỆN -->
   <h3 class="subsection-title">8.7. Bảng Đối Chiếu Song Hành Toàn Diện: Lý Thuyết Nhóm vs. Lý Thuyết Vành</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s5">Bước 5 · Chốt & Hệ thống hóa</span>
+    <span class="lp-step-goal">Bảng đối chiếu song hành toàn diện giữa Lý thuyết Nhóm và Lý thuyết Vành</span>
+  </div>
   <p style="font-size:0.95rem; color:var(--text-muted);">
     Mọi cấu trúc cốt lõi trong Lý thuyết Vành đều là sự phát triển song song hoàn hảo từ Lý thuyết Nhóm:
   </p>
@@ -10186,6 +10690,14 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
       </tbody>
     </table>
   </div>
+
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Hoàn tất Chương 8 (Trọn vẹn Phần II - Lý thuyết Vành)</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(8, 'ex-8-24')">✍️ Giải Bài 8.24 (Chứng minh char(R) ∈ {0, p})</button>
+    <button type="button" class="lp-bridge-btn quiz" onclick="startChapterQuickExam(8)">🚀 Làm Đề Kiểm Tra Chương 8</button>
+  </div>
+</div>
 </div>
 <!-- ==================== HẾT CHƯƠNG 8 HOÀN CHỈNH ==================== -->
 
@@ -10197,6 +10709,37 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 <!-- ======================================================== -->
 <div class="chapter-content active" id="tab-c9">
   <h2 class="section-title">Chương 9. Trường Con và Trường Các Thương</h2>
+
+  <!-- ==================== BẢNG KẾ HOẠCH BÀI HỌC (LESSON PLAN META-BANNER) ==================== -->
+  <div class="lp-meta-banner" id="lp-banner-c9">
+    <div class="lp-meta-top">
+      <div class="lp-meta-badges">
+        <span class="lp-badge">📅 Tuần 15 · 3.0 Tiết (1.5 LT + 1.5 BT)</span>
+        <span class="lp-badge clo">🎯 Chuẩn đầu ra: CLO6 · Trường con, Trường nguyên tố & Trường các thương Frac(R)</span>
+        <span class="lp-badge weight">⚖️ Trọng tâm: Tiêu chuẩn trường con, Dựng Frac(R) & Tính chất phổ dụng</span>
+      </div>
+      <span class="lp-progress-pill">Tiến độ bài học: 0/3 bài</span>
+    </div>
+    <p class="lp-objectives"><strong>Mục tiêu bài học:</strong> Vận dụng tiêu chuẩn trường con rút gọn ($1_K \in F,\; x-y \in F,\; xy^{-1} \in F$) và phân loại trường con nguyên tố theo đặc số ($\mathbb{Q}$ hoặc $\mathbb{F}_p$); nắm vững quy trình dựng trường các thương $\operatorname{Frac}(R)$ từ miền nguyên $R$ (hiểu rõ tại sao ước của $0$ làm gãy tính bắc cầu); áp dụng Tính chất phổ dụng để nhận diện $\operatorname{Frac}(\mathbb{Z}[i]) \cong \mathbb{Q}(i)$, $\operatorname{Frac}(\mathbb{Z}[\sqrt{2}]) \cong \mathbb{Q}(\sqrt{2})$ và phân biệt bản chất giữa $R/I$ với $\operatorname{Frac}(R)$.</p>
+    <div class="lp-unit-nav" role="navigation" aria-label="Lộ trình bài học Chương 9">
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u9-1')">
+        <span class="u-code">Bài 9.1 · Tiết 43</span>
+        <span class="u-name">Tiêu chuẩn Trường con Rút gọn & Phân loại Trường con Nguyên tố</span>
+        <span class="u-sub">Mục 9.1, 9.2 · Kiểm định trên ℚ(i), ℚ(√2) & Trường nguyên tố ℚ / 𝔽_p</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u9-2')">
+        <span class="u-code">Bài 9.2 · Tiết 44</span>
+        <span class="u-name">Phép dựng Trường các thương Frac(R) & Vai trò Sống còn của Miền nguyên</span>
+        <span class="u-sub">Mục 9.3 · Quan hệ nhân chéo ad = bc & Phản ví dụ gãy bắc cầu trên ℤ/6ℤ</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u9-3')">
+        <span class="u-code">Bài 9.3 · Tiết 45</span>
+        <span class="u-name">Tính chất Phổ dụng, Nhận diện Frac(R) & Tổng kết Mạch Khái niệm Toàn Khóa</span>
+        <span class="u-sub">Mục 9.4, 9.5, 9.6 · Nhận diện ℚ(i), ℚ(√2), F(x) & Đối chiếu R/I vs Frac(R)</span>
+      </button>
+    </div>
+  </div>
+
   
   <p class="welcome-copy">
     Trong một miền nguyên bất kỳ (như vành số nguyên $\mathbb{Z}$ hay vành đa thức $F[x]$), 
@@ -10207,7 +10750,22 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
   </p>
 
   <!-- 9.1 ĐỘNG CƠ SƯ PHẠM: TỪ BẾ TẮC PHÉP CHIA ĐẾN PHÉP MỞ RỘNG TRƯỜNG -->
-  <h3 class="subsection-title">9.1. Khởi Nguồn Sư Phạm: Từ Sự Bế Tắc Của Phép Chia Đến Tư Tưởng Mở Rộng Trường</h3>
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 9.1 · Tiết 43 ==================== -->
+  <div class="lp-unit-header" id="lp-u9-1">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 9.1 · Tiết 43 · Mục 9.1, 9.2 · Kiểm định trên ℚ(i), ℚ(√2) & Trường nguyên tố ℚ / 𝔽_p</span>
+      <h4 class="lp-unit-title">Tiêu chuẩn Trường con Rút gọn & Phân loại Trường con Nguyên tố</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u9-1" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u9-1')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">9.1. Khởi Nguồn Sư Phạm: Từ Sự Bế Tắc Của Phép Chia Đến Tư Tưởng Mở Rộng Trường</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s1">Bước 1 · Khởi động & Động cơ</span>
+    <span class="lp-step-goal">Từ sự bế tắc của phép chia trong ℤ đến tư tưởng mở rộng miền nguyên thành trường</span>
+  </div>
   <p>
     Trong lịch sử phát triển của toán học, con người xuất phát từ tập số tự nhiên $\mathbb{N}$, mở rộng thành vành số nguyên $\mathbb{Z}$ để phép trừ luôn thực hiện được. 
     Tuy nhiên, trong $\mathbb{Z}$, phương trình $2x = 1$ hoàn toàn vô nghiệm vì $2$ không có nghịch đảo nhân. 
@@ -10226,6 +10784,10 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 
   <!-- 9.2 TIÊU CHUẨN TRƯỜNG CON & TRƯỜNG CON NGUYÊN TỐ -->
   <h3 class="subsection-title">9.2. Tiêu Chuẩn Trường Con và Cấu Trúc Trường Con Nguyên Tố</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết & Tiêu chuẩn</span>
+    <span class="lp-step-goal">Tiêu chuẩn trường con rút gọn & Phân loại trường con nguyên tố theo đặc số (ℚ và 𝔽_p)</span>
+  </div>
   
   <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
     <div class="card-header">
@@ -10332,7 +10894,43 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
   </div>
 
   <!-- 9.3 PHÉP DỰNG HÌNH THỨC TRƯỜNG CÁC THƯƠNG -->
-  <h3 class="subsection-title">9.3. Phép Dựng Hình Thức Trường Các Thương <span>$\operatorname{Frac}(R)$</span> Trên Miền Nguyên</h3>
+  
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Chứng minh F là trường con của trường K</strong>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Kiểm tra đơn vị chung):</b> Chỉ ra $0_K, 1_K \in F$ (đảm bảo $|F| \ge 2$ và cùng đơn vị với trường mẹ).</li>
+    <li><b>Bước 2 (Kiểm tra đóng với phép trừ):</b> Lấy tùy ý $x, y \in F$, biến đổi chứng minh $x - y \in F$.</li>
+    <li><b>Bước 3 (Kiểm tra nghịch đảo / phép chia):</b> Với mọi $y \in F \setminus \{0_K\}$, trục căn thức / nhân liên hợp chứng minh $y^{-1} \in F$ và $xy^{-1} \in F$.</li>
+  </ol>
+</div>
+
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 9.1: Thực hành phân loại Trường con & Số hữu tỉ Gauss ℚ(i)</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(9, 'ex-9-1')">✍️ Giải Bài 9.1 (Phân loại ℚ, ℝ, ℂ, ℤ, 2ℤ)</button>
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(9, 'ex-9-2')">✍️ Giải Bài 9.2 (Trường con ℚ(i) & Nghịch đảo phức)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 9.2 · Tiết 44 ==================== -->
+  <div class="lp-unit-header" id="lp-u9-2">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 9.2 · Tiết 44 · Mục 9.3 · Quan hệ nhân chéo ad = bc & Phản ví dụ gãy bắc cầu trên ℤ/6ℤ</span>
+      <h4 class="lp-unit-title">Phép dựng Trường các thương Frac(R) & Vai trò Sống còn của Miền nguyên</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u9-2" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u9-2')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">9.3. Phép Dựng Hình Thức Trường Các Thương <span>$\operatorname{Frac}(R)$</span> Trên Miền Nguyên</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Phép dựng & Phản ví dụ</span>
+    <span class="lp-step-goal">Phép dựng hình thức Frac(R) qua quan hệ ad = bc & Sự thất bại khi có ước của 0</span>
+  </div>
   <p>
     Cho $R$ là một miền nguyên bất kỳ. Ta xây dựng trường các thương qua hai bước hình thức chặt chẽ:
   </p>
@@ -10428,7 +11026,30 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
   </div>
 
   <!-- 9.4 TÍNH CHẤT PHỔ DỤNG VÀ BA NHẬN DIỆN KINH ĐIỂN -->
-  <h3 class="subsection-title">9.4. Tính Chất Phổ Dụng và Ba Nhận Diện Trường Kinh Điển</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 9.2: Tại sao phép dựng phân số sụp đổ khi có ước của không?</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(9, 'ex-9-5')">✍️ Giải Bài 9.5 (Phản ví dụ gãy bắc cầu trên ℤ/6ℤ)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 9.3 · Tiết 45 ==================== -->
+  <div class="lp-unit-header" id="lp-u9-3">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 9.3 · Tiết 45 · Mục 9.4, 9.5, 9.6 · Nhận diện ℚ(i), ℚ(√2), F(x) & Đối chiếu R/I vs Frac(R)</span>
+      <h4 class="lp-unit-title">Tính chất Phổ dụng, Nhận diện Frac(R) & Tổng kết Mạch Khái niệm Toàn Khóa</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u9-3" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u9-3')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">9.4. Tính Chất Phổ Dụng và Ba Nhận Diện Trường Kinh Điển</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Định lý Trọng tâm & Ứng dụng</span>
+    <span class="lp-step-goal">Tính chất phổ dụng của Frac(R) & Ba nhận diện kinh điển: ℚ, F(x), ℚ(i)</span>
+  </div>
   
   <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
     <div class="card-header">
@@ -10490,7 +11111,23 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
   </div>
 
   <!-- 9.5 ĐỐI CHIẾU BẢN CHẤT: VÀNH THƯƠNG VS TRƯỜNG THƯƠNG -->
+  
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Nhận diện Frac(R) ≅ K bằng Tính chất Phổ dụng</strong>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Kiểm tra miền nguyên & Trường đích):</b> Xác nhận $R$ là miền nguyên nằm trong trường $K$ (với đơn cấu nhúng $i : R \hookrightarrow K$).</li>
+    <li><b>Bước 2 (Thác triển qua Tính chất phổ dụng):</b> Theo Định lý 9.5, tồn tại duy nhất đơn cấu trường $\tilde{i} : \operatorname{Frac}(R) \to K$ cho bởi $\tilde{i}(a/b) = ab^{-1}$.</li>
+    <li><b>Bước 3 (Chứng minh toàn ánh bằng quy đồng):</b> Biểu diễn phần tử bất kỳ của $K$ về dạng thương $\dfrac{x}{y}$ với $x, y \in R, y \neq 0$ để suy ra $\tilde{i}$ là đẳng cấu!</li>
+  </ol>
+</div>
+
   <h3 class="subsection-title">9.5. Phân Biệt Bản Chất Sâu Sắc: Vành Thương <span>$R/I$</span> vs. Trường Các Thương <span>$\operatorname{Frac}(R)$</span></h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s4">Bước 4 · Đối chiếu Bản chất</span>
+    <span class="lp-step-goal">Phân biệt cơ chế 'Thu gọn' của Vành thương R/I với 'Mở rộng' của Frac(R)</span>
+  </div>
   <p>
     Hai cấu trúc này đều dùng từ "thương" trong tên gọi, nhưng phản ánh hai cơ chế toán học <b>hoàn toàn đối lập nhau</b>:
   </p>
@@ -10545,6 +11182,10 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 
   <!-- 9.6 MẠCH KHÁI NIỆM TOÀN GIÁO TRÌNH -->
   <h3 class="subsection-title">9.6. Mạch Khái Niệm Xuyên Suốt Toàn Bộ Giáo Trình Đại Số</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s5">Bước 5 · Chốt & Tổng kết Toàn khóa</span>
+    <span class="lp-step-goal">Bản đồ tiến hóa xuyên suốt 4 trụ cột của Giáo trình Cấu trúc Đại số</span>
+  </div>
   <p>
     Toàn bộ cuốn giáo trình của tác giả TS. Huỳnh Việt Khánh được tổ chức quanh một câu hỏi logic duy nhất: 
     <i>Dữ liệu nào phải được bảo toàn khi ta chuyển dịch từ một cấu trúc đại số này sang một cấu trúc đại số khác?</i>
@@ -10568,6 +11209,14 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
     </div>
   </div>
 
+
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Hoàn tất Chương 9 & Trọn vẹn Giáo trình Cấu trúc Đại số!</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(9, 'ex-9-15')">✍️ Giải Bài 9.15 (Nhận diện Frac(ℤ[√2]) ≅ ℚ(√2))</button>
+    <button type="button" class="lp-bridge-btn quiz" onclick="startChapterQuickExam(9)">🚀 Làm Đề Kiểm Tra Chương 9</button>
+  </div>
+</div>
 </div>
 <!-- ==================== HẾT CHƯƠNG 9 HOÀN CHỈNH ==================== -->
 
@@ -10578,6 +11227,32 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
       
 <div class="chapter-content active" id="tab-compare">
     <h2 class="section-title">Đối Chiếu Song Hành & Cẩm Nang Tra Cứu Đại Số</h2>
+
+    <!-- ==================== BẢNG KẾ HOẠCH TỔNG KẾT & ĐỐI CHIẾU ==================== -->
+    <div class="lp-meta-banner" id="lp-banner-compare">
+      <div class="lp-meta-top">
+        <div class="lp-meta-badges">
+          <span class="lp-badge">📅 Tuần 15 · Tổng kết & Đối chiếu Toàn khóa (45 Tiết)</span>
+          <span class="lp-badge clo">🎯 Chuẩn đầu ra: CLO1 → CLO6 · Hệ thống hóa Nhóm – Vành – Trường</span>
+          <span class="lp-badge weight">⚖️ Trọng tâm: 10 Khuôn mẫu Chứng minh, 8 Bẫy kinh điển & Từ điển Song ngữ</span>
+        </div>
+        <span class="lp-progress-pill">Tiến độ bài học: 0/2 bài</span>
+      </div>
+      <p class="lp-objectives"><strong>Mục tiêu tổng kết:</strong> Nhìn xuyên suốt bức tranh tương đồng cấu trúc giữa Nhóm ($G, H \le G, N \trianglelefteq G, G/N$), Vành ($R, S \subseteq R, I \trianglelefteq R, R/I$) và Trường ($K, F \subseteq K, \operatorname{Frac}(R)$); làm chủ 10 khuôn mẫu trình bày chứng minh tự luận chuẩn mực, nhận diện tức thì 8 bẫy phản ví dụ kinh điển và tra cứu nhanh toàn bộ hệ thống ký hiệu – thuật ngữ song ngữ Việt–Anh.</p>
+      <div class="lp-unit-nav" role="navigation" aria-label="Lộ trình tổng kết & đối chiếu">
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-ucomp-1')">
+        <span class="u-code">Chuyên đề ĐC.1</span>
+        <span class="u-name">Đối chiếu Song hành Nhóm – Vành – Trường & Cây Tiến hóa Cấu trúc</span>
+        <span class="u-sub">Mục 1, 2 · 10 tiêu chí song hành & Hành trình từ ℕ* đến ℚ</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-ucomp-2')">
+        <span class="u-code">Chuyên đề ĐC.2</span>
+        <span class="u-name">Từ điển Thuật ngữ Song ngữ, 8 Bẫy Kinh điển & Các Họ Mô hình Chuẩn</span>
+        <span class="u-sub">Mục 3, 4, 5 · Master Trap Checklist & Tổng ôn thi kết thúc học phần</span>
+      </button>
+      </div>
+    </div>
+
     
     <p class="welcome-copy">
       Đại số trừu tượng không phải là tập hợp các định nghĩa rời rạc, mà là một hệ thống phát triển logic có tính kế thừa sâu sắc. 
@@ -10587,7 +11262,22 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
     </p>
 
     <!-- MỤC 1: BẢNG ĐỐI CHIẾU SONG HÀNH 3 TRỤ CỘT -->
-    <h3 class="subsection-title">1. Bảng Đối Chiếu Song Hành Toàn Diện: Nhóm vs. Vành vs. Trường</h3>
+    
+    <!-- ==================== PHÂN TÁCH CHUYÊN ĐỀ: Chuyên đề ĐC.1 ==================== -->
+    <div class="lp-unit-header" id="lp-ucomp-1">
+      <div class="lp-unit-title-wrap">
+        <span class="lp-unit-eyebrow">Chuyên đề ĐC.1 · Mục 1, 2 · 10 tiêu chí song hành & Hành trình từ ℕ* đến ℚ</span>
+        <h4 class="lp-unit-title">Đối chiếu Song hành Nhóm – Vành – Trường & Cây Tiến hóa Cấu trúc</h4>
+      </div>
+      <button type="button" class="lp-unit-done-btn" data-unit-id="lp-ucomp-1" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-ucomp-1')">
+        ⚪ Đánh dấu đã học xong
+      </button>
+    </div>
+<h3 class="subsection-title">1. Bảng Đối Chiếu Song Hành Toàn Diện: Nhóm vs. Vành vs. Trường</h3>
+    <div class="lp-step-bar">
+      <span class="lp-step-pill s2">Bước 1 · Đối chiếu Cấu trúc</span>
+      <span class="lp-step-goal">So sánh 10 phương diện cốt lõi giữa Lý thuyết Nhóm, Vành và Trường</span>
+    </div>
     <p style="font-size:0.95rem; color:var(--text-muted);">
       Bảng đối chiếu 10 phương diện cấu trúc nền tảng, làm rõ sự tương đồng hoàn hảo giữa các cấp độ đại số:
     </p>
@@ -10669,6 +11359,10 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 
     <!-- MỤC 2: SƠ ĐỒ CÂY TIẾN HÓA CẤU TRÚC ĐẠI SỐ & MINH HỌA THỰC CHIẾN -->
     <h3 class="subsection-title">2. Sơ Đồ Cây Tiến Hóa Toàn Diện & Minh Họa Thực Chiến</h3>
+    <div class="lp-step-bar">
+      <span class="lp-step-pill s1">Bước 2 · Trực quan hóa Tiến hóa</span>
+      <span class="lp-step-goal">Sơ đồ cây phân cấp tiên đề và hành trình mở rộng tập số ℕ* → ℕ → ℤ → ℚ</span>
+    </div>
     
     <div style="background: var(--eq-bg, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 14px; padding: 24px; margin: 1.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
       <div style="text-align: center; font-size: 1.15rem; font-weight: 700; color: var(--thm-color, #1e3a8a); margin-bottom: 1.2rem; display: flex; align-items: center; justify-content: center; gap: 8px;">
@@ -10804,7 +11498,31 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
     </div>
 
     <!-- MỤC 3: BẢNG TRA CỨU THUẬT NGỮ SONG NGỮ & KÝ HIỆU CHUẨN MỰC -->
-    <h3 class="subsection-title">3. Bảng Tra Cứu Ký Hiệu & Thuật Ngữ Chuẩn Mực (Bilingual Glossary)</h3>
+    
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Chuyên đề ĐC.1: Rà soát Khuôn mẫu Chứng minh Đại số</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(5)">📐 Mẫu Đẳng cấu Nhóm (#6)</button>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(8)">📐 Mẫu Đẳng cấu Vành (#9)</button>
+  </div>
+</div>
+
+    
+    <!-- ==================== PHÂN TÁCH CHUYÊN ĐỀ: Chuyên đề ĐC.2 ==================== -->
+    <div class="lp-unit-header" id="lp-ucomp-2">
+      <div class="lp-unit-title-wrap">
+        <span class="lp-unit-eyebrow">Chuyên đề ĐC.2 · Mục 3, 4, 5 · Master Trap Checklist & Tổng ôn thi kết thúc học phần</span>
+        <h4 class="lp-unit-title">Từ điển Thuật ngữ Song ngữ, 8 Bẫy Kinh điển & Các Họ Mô hình Chuẩn</h4>
+      </div>
+      <button type="button" class="lp-unit-done-btn" data-unit-id="lp-ucomp-2" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-ucomp-2')">
+        ⚪ Đánh dấu đã học xong
+      </button>
+    </div>
+<h3 class="subsection-title">3. Bảng Tra Cứu Ký Hiệu & Thuật Ngữ Chuẩn Mực (Bilingual Glossary)</h3>
+    <div class="lp-step-bar">
+      <span class="lp-step-pill s3">Bước 3 · Chuẩn hóa Ngôn ngữ</span>
+      <span class="lp-step-goal">Bảng tra cứu ký hiệu và thuật ngữ chuẩn mực Việt – Anh toàn khóa</span>
+    </div>
     <p style="font-size:0.95rem; color:var(--text-muted);">
       Thuật ngữ tiếng Việt đối chiếu tiếng Anh gốc và lưu ý các dị bản lịch sử theo quy ước của TS. Huỳnh Việt Khánh:
     </p>
@@ -10922,6 +11640,10 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 
     <!-- MỤC 4: BẢN ĐỒ BẪY SAI LẦM KINH ĐIỂN -->
     <h3 class="subsection-title">4. Bản Đồ Bẫy Ngộ Nhận & Các Phản Ví Dụ Kinh Điển (Master Trap Checklist)</h3>
+    <div class="lp-step-bar">
+      <span class="lp-step-pill s4">Bước 4 · Phòng chống Mất điểm</span>
+      <span class="lp-step-goal">Danh sách kiểm tra 8 bẫy ngộ nhận và phản ví dụ kinh điển trong đề thi</span>
+    </div>
     <p style="font-size:0.95rem; color:var(--text-muted);">
       Hệ thống 8 bẫy tư duy đại số phổ biến nhất trong các kỳ thi học phần Cấu trúc Đại số:
     </p>
@@ -10986,6 +11708,10 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 
     <!-- MỤC 5: BẢNG TRA CỨU CÁC HỌ MÔ HÌNH CHUẨN MỰC -->
     <h3 class="subsection-title">5. Bảng Tra Cứu Các Họ Mô Hình Chuẩn Mực Trong Toàn Bộ Giáo Trình</h3>
+    <div class="lp-step-bar">
+      <span class="lp-step-pill s5">Bước 5 · Tổng hợp Mô hình</span>
+      <span class="lp-step-goal">Bảng tra cứu nhanh 9 họ mô hình chuẩn mực xuyên suốt giáo trình</span>
+    </div>
     <div class="table-wrapper">
       <table class="compare-table">
         <thead>
@@ -11065,6 +11791,15 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
       </table>
     </div>
 
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Sẵn sàng Bước vào Kỳ thi Kết thúc Học phần Cấu trúc Đại số!</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(9)">📐 Mẫu Phản ví dụ (#10)</button>
+    <button type="button" class="lp-bridge-btn" onclick="document.querySelector('[data-lab-open=\'flash\']')?.click()">🃏 Ôn Thẻ Ghi Nhớ (Flashcards)</button>
+    <button type="button" class="lp-bridge-btn quiz" onclick="if(window.switchPart) window.switchPart('part-5', true); setTimeout(()=>document.getElementById('practiceTabReview')?.click(), 120);">🚀 Mở Phòng Thi Tổng Hợp (Ch.0–9)</button>
+  </div>
+</div>
   </div> <!-- Đóng tab-compare -->
 
     </div>
@@ -30828,12 +31563,27 @@ function selectOption(optIdx) {
   }
 })();
 
+
 /* ==========================================================================
-   14. ENGINE ĐIỀU HƯỚNG BÀI HỌC CHUẨN KẾ HOẠCH & CẦU NỐI THỰC HÀNH (LESSON PLAN)
+   14. ENGINE ĐIỀU HƯỚNG BÀI HỌC CHUẨN KẾ HOẠCH & LỘ TRÌNH 15 TUẦN (LESSON PLAN)
    ========================================================================== */
 (function initLessonPlanEngine() {
   "use strict";
   const LP_DONE_KEY = "ctds_lesson_units_done_v1";
+
+  const COURSE_MODULES = [
+    { part: "part-0", ch: "tab-c0", week: "Tuần 1–2", title: "Ch.0 · Công cụ", units: ["lp-u0-1", "lp-u0-2", "lp-u0-3"] },
+    { part: "part-1", ch: "tab-c1", week: "Tuần 3–4", title: "Ch.1 · Nhóm", units: ["lp-u1-1", "lp-u1-2", "lp-u1-3"] },
+    { part: "part-1", ch: "tab-c2", week: "Tuần 5–6", title: "Ch.2 · Nhóm con", units: ["lp-u2-1", "lp-u2-2", "lp-u2-3"] },
+    { part: "part-1", ch: "tab-c3", week: "Tuần 7–8", title: "Ch.3 · Lagrange", units: ["lp-u3-1", "lp-u3-2", "lp-u3-3"] },
+    { part: "part-1", ch: "tab-c4", week: "Tuần 8–9", title: "Ch.4 · Nhóm thương", units: ["lp-u4-1", "lp-u4-2", "lp-u4-3"] },
+    { part: "part-1", ch: "tab-c5", week: "Tuần 10–11", title: "Ch.5 · Đồng cấu", units: ["lp-u5-1", "lp-u5-2", "lp-u5-3"] },
+    { part: "part-2", ch: "tab-c6", week: "Tuần 12", title: "Ch.6 · Vành", units: ["lp-u6-1", "lp-u6-2", "lp-u6-3"] },
+    { part: "part-2", ch: "tab-c7", week: "Tuần 13", title: "Ch.7 · Iđêan", units: ["lp-u7-1", "lp-u7-2", "lp-u7-3"] },
+    { part: "part-2", ch: "tab-c8", week: "Tuần 14", title: "Ch.8 · ĐC Vành", units: ["lp-u8-1", "lp-u8-2", "lp-u8-3"] },
+    { part: "part-3", ch: "tab-c9", week: "Tuần 15A", title: "Ch.9 · Trường", units: ["lp-u9-1", "lp-u9-2", "lp-u9-3"] },
+    { part: "part-4", ch: "tab-compare", week: "Tuần 15B", title: "Đối chiếu & Ôn thi", units: ["lp-ucomp-1", "lp-ucomp-2"] }
+  ];
 
   function getDoneUnits() {
     try {
@@ -30851,7 +31601,27 @@ function selectOption(optIdx) {
     } catch (_) {}
   }
 
+  function injectCourseRoadmapIntoHub() {
+    const hubShell = document.getElementById("dbHubShell");
+    if (!hubShell || document.getElementById("dbCourseRoadmapBar")) return;
+    const roadmapDiv = document.createElement("div");
+    roadmapDiv.className = "lp-hub-roadmap";
+    roadmapDiv.id = "dbCourseRoadmapBar";
+    roadmapDiv.innerHTML = `
+      <div class="lp-roadmap-head">
+        <span class="lp-roadmap-title">🗓️ Lộ trình Kế hoạch Học tập 15 Tuần (45 Tiết · 32 Bài học &amp; Chuyên đề)</span>
+        <div class="lp-roadmap-bar-wrap">
+          <div class="lp-roadmap-bar"><span id="lpGlobalProgressFill"></span></div>
+          <span class="lp-roadmap-pct" id="lpGlobalProgressText">0 / 32 bài (0%)</span>
+        </div>
+      </div>
+      <div class="lp-week-grid" id="lpWeekGrid"></div>
+    `;
+    hubShell.appendChild(roadmapDiv);
+  }
+
   function syncAllUnitProgressUI() {
+    injectCourseRoadmapIntoHub();
     const doneSet = getDoneUnits();
     document.querySelectorAll(".lp-unit-done-btn[data-unit-id]").forEach(btn => {
       const uid = btn.getAttribute("data-unit-id");
@@ -30861,7 +31631,7 @@ function selectOption(optIdx) {
       btn.innerHTML = isDone ? "✅ Đã hoàn thành bài học" : "⚪ Đánh dấu đã học xong";
     });
 
-    document.querySelectorAll(".chapter-content[id^='tab-c']").forEach(chEl => {
+    document.querySelectorAll(".chapter-content[id^='tab-']").forEach(chEl => {
       const unitBtns = chEl.querySelectorAll(".lp-unit-done-btn[data-unit-id]");
       if (!unitBtns.length) return;
       let doneCount = 0;
@@ -30873,6 +31643,45 @@ function selectOption(optIdx) {
         pill.textContent = `Tiến độ bài học: ${doneCount}/${unitBtns.length} bài`;
       }
     });
+
+    // Cập nhật thanh lộ trình 15 tuần trên Reading Hub
+    const weekGrid = document.getElementById("lpWeekGrid");
+    let totalUnits = 0;
+    let totalDone = 0;
+    if (weekGrid) {
+      weekGrid.replaceChildren();
+      COURSE_MODULES.forEach(m => {
+        const doneInMod = m.units.filter(u => doneSet.has(u)).length;
+        totalUnits += m.units.length;
+        totalDone += doneInMod;
+        const isComp = doneInMod === m.units.length;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "lp-week-card" + (isComp ? " is-complete" : "");
+        btn.innerHTML = `
+          <div class="w-top">
+            <span>${m.week}</span>
+            <span>${isComp ? "✅" : `${doneInMod}/${m.units.length}`}</span>
+          </div>
+          <div class="w-label">${m.title}</div>
+        `;
+        btn.addEventListener("click", () => {
+          if (typeof window.switchPart === "function") window.switchPart(m.part, false);
+          if (typeof window.switchChapter === "function") window.switchChapter(m.part, m.ch, true);
+        });
+        weekGrid.appendChild(btn);
+      });
+    } else {
+      COURSE_MODULES.forEach(m => {
+        totalUnits += m.units.length;
+        totalDone += m.units.filter(u => doneSet.has(u)).length;
+      });
+    }
+    const pct = totalUnits ? Math.round((totalDone / totalUnits) * 100) : 0;
+    const fillEl = document.getElementById("lpGlobalProgressFill");
+    const txtEl = document.getElementById("lpGlobalProgressText");
+    if (fillEl) fillEl.style.width = `${pct}%`;
+    if (txtEl) txtEl.textContent = `${totalDone} / ${totalUnits} bài (${pct}%)`;
   }
 
   window.toggleLessonUnitDone = function(btn, unitId) {
@@ -30957,9 +31766,9 @@ function selectOption(optIdx) {
   };
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", syncAllUnitProgressUI);
+    document.addEventListener("DOMContentLoaded", () => setTimeout(syncAllUnitProgressUI, 60));
   } else {
-    syncAllUnitProgressUI();
+    setTimeout(syncAllUnitProgressUI, 60);
   }
 })();
 

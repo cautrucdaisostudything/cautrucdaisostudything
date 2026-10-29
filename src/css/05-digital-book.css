@@ -1232,3 +1232,105 @@ mark.db-user-highlight:hover {
   background: var(--thm-color, #256046);
   color: #FFFFFF;
 }
+
+/* Thanh Lộ trình 15 Tuần trên Reading Hub */
+.lp-hub-roadmap {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line, #E4DED3);
+}
+.db-hub-shell.is-collapsed .lp-hub-roadmap {
+  display: none;
+}
+.lp-roadmap-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.lp-roadmap-title {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--brand, #315B96);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.lp-roadmap-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  max-width: 360px;
+}
+.lp-roadmap-bar {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--bg, #F7F5F0);
+  border: 1px solid var(--line, #E4DED3);
+  overflow: hidden;
+}
+.lp-roadmap-bar > span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--brand, #315B96), var(--thm-color, #256046));
+  transition: width 0.3s ease;
+}
+.lp-roadmap-pct {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--thm-color, #256046);
+  white-space: nowrap;
+}
+.lp-week-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+  gap: 8px;
+}
+.lp-week-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--bg, #F7F5F0);
+  border: 1px solid var(--line, #E4DED3);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--db-font-sans, var(--font-ui));
+  transition: all 0.16s ease;
+}
+.lp-week-card:hover {
+  border-color: var(--brand, #315B96);
+  background: var(--paper, #FFFFFF);
+  transform: translateY(-1px);
+}
+.lp-week-card.is-complete {
+  border-color: var(--thm-border, #C8DDD2);
+  background: var(--thm-bg, #F2F6F3);
+}
+.lp-week-card .w-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--brand, #315B96);
+}
+.lp-week-card.is-complete .w-top {
+  color: var(--thm-color, #256046);
+}
+.lp-week-card .w-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink, #24334D);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
