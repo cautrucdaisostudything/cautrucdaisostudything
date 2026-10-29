@@ -1334,3 +1334,483 @@ mark.db-user-highlight:hover {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+
+/* ==========================================================================
+   9. NÂNG CẤP BỐ CỤC KẾT HỢP Ý TƯỞNG 2 & Ý TƯỞNG 4:
+      - Ý TƯỞNG 2: 3-COLUMN DIGITAL BOOK & SIDEBAR CÂY THƯ MỤC ĐA TẦNG (ACCORDION)
+      - Ý TƯỞNG 4: FLOATING ACTION DOCK ĐA NĂNG Ở CẠNH DƯỚI MÀN HÌNH
+   ========================================================================== */
+
+/* 9.1. Tinh gọn các thanh ngang & Gom về Bố cục 3 Cột chuẩn GitBook */
+:root {
+  --mode-bar-height: 48px;
+}
+
+.mode-switch {
+  min-height: 48px !important;
+}
+.mode-btn {
+  min-height: 48px !important;
+  padding: 6px 16px !important;
+}
+.mode-btn .mode-icon {
+  font-size: 18px !important;
+}
+.mode-copy strong {
+  font-size: 13.5px !important;
+}
+
+/* Ẩn thanh Tab ngang cũ (.main-tabs-bar) và các nút nổi rời rạc (#topBtn, #labFab) */
+.main-tabs-bar,
+#topBtn,
+#labFab {
+  display: none !important;
+}
+
+/* Mặc định ẩn Banner chào mừng & Bảng đọc sách lớn để ưu tiên 100% không gian cho 3 cột;
+   Chỉ hiển thị khi người dùng bấm nút "🏠 Lộ trình / Bảng đọc sách" (body.db-overview-open) */
+body:not(.db-overview-open) .welcome-banner,
+body:not(.db-overview-open) #dbHomeDashboard {
+  display: none !important;
+}
+body.db-overview-open .welcome-banner {
+  margin: 16px auto 12px !important;
+  padding: 26px 34px !important;
+}
+
+/* 9.2. Hệ thống Lưới 3 Cột Độc lập (Left Tree - Center Reader - Right Notebook) */
+#studyWorkspace > .container,
+#studyWorkspace > .container.practice-container,
+#studyWorkspace > .container.practice-container.is-review-mode {
+  max-width: 1460px !important;
+  margin: 0 auto !important;
+  display: grid !important;
+  grid-template-columns: 288px minmax(0, 1fr) !important;
+  gap: 26px !important;
+  padding: 20px 24px 96px !important;
+  align-items: start !important;
+  transition: grid-template-columns 0.25s ease, gap 0.25s ease !important;
+}
+
+/* Khi mở đồng thời Cột Trái (Mục lục) + Cột Giữa (Bài đọc) + Cột Phải (Sổ tay) */
+body.db-drawer-open:not(.db-sidebar-collapsed) #studyWorkspace > .container,
+body.db-drawer-open:not(.db-sidebar-collapsed) #studyWorkspace > .container.practice-container,
+body.db-drawer-open:not(.db-sidebar-collapsed) #studyWorkspace > .container.practice-container.is-review-mode {
+  grid-template-columns: 272px minmax(0, 1fr) var(--db-drawer-width) !important;
+  gap: 20px !important;
+}
+
+/* Khi thu gọn Cột Trái (body.db-sidebar-collapsed) trên Desktop */
+body.db-sidebar-collapsed:not(.db-drawer-open) #studyWorkspace > .container,
+body.db-sidebar-collapsed:not(.db-drawer-open) #studyWorkspace > .container.practice-container,
+body.db-sidebar-collapsed:not(.db-drawer-open) #studyWorkspace > .container.practice-container.is-review-mode {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+body.db-sidebar-collapsed.db-drawer-open #studyWorkspace > .container,
+body.db-sidebar-collapsed.db-drawer-open #studyWorkspace > .container.practice-container,
+body.db-sidebar-collapsed.db-drawer-open #studyWorkspace > .container.practice-container.is-review-mode {
+  grid-template-columns: minmax(0, 1fr) var(--db-drawer-width) !important;
+}
+body.db-sidebar-collapsed:not(.db-sidebar-drawer-open) nav.chapter-sidebar {
+  display: none !important;
+}
+
+/* Giữ Cột Trái khả dụng ngay cả trong Phòng thi thông minh (trừ khi người dùng chủ động thu gọn) */
+.container.practice-container.is-review-mode > .chapter-sidebar {
+  display: flex !important;
+}
+body.db-sidebar-collapsed:not(.db-sidebar-drawer-open) .container.practice-container.is-review-mode > .chapter-sidebar {
+  display: none !important;
+}
+
+/* 9.3. Thiết kế Cột Trái: Cây Thư Mục Đa Tầng (Accordion Tree Sidebar) */
+nav.chapter-sidebar {
+  position: sticky !important;
+  top: calc(var(--topbar-height, 64px) + var(--mode-bar-height, 48px) + 14px) !important;
+  max-height: calc(100vh - var(--topbar-height, 64px) - var(--mode-bar-height, 48px) - 28px) !important;
+  background: var(--paper) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 14px !important;
+  padding: 14px 12px !important;
+  box-shadow: var(--db-shadow-soft) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+}
+
+.sidebar-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 2px 4px 8px;
+  border-bottom: 1px solid var(--line);
+}
+.sidebar-header-row .sidebar-title {
+  margin: 0 !important;
+  font-size: 11.5px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.06em !important;
+  color: var(--brand) !important;
+}
+.sidebar-collapse-btn {
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink-soft);
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.16s ease;
+}
+.sidebar-collapse-btn:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+  background: var(--def-bg);
+}
+
+/* Nút bật/tắt Bảng Đọc sách & Lộ trình 15 tuần ngay đầu Sidebar */
+.sidebar-overview-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 11px;
+  border-radius: 10px;
+  border: 1px dashed var(--def-border);
+  background: color-mix(in srgb, var(--def-bg) 55%, var(--paper));
+  color: var(--brand);
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.18s ease;
+}
+.sidebar-overview-btn:hover,
+.sidebar-overview-btn.is-active {
+  border-style: solid;
+  border-color: var(--brand);
+  background: var(--def-bg);
+}
+.sidebar-overview-btn .ov-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sidebar-overview-btn .ov-badge {
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--brand);
+  border: 1px solid var(--def-border);
+}
+.sidebar-overview-btn.is-active .ov-badge {
+  background: var(--brand);
+  color: #ffffff;
+  border-color: var(--brand);
+}
+
+/* Cây thư mục Accordion 6 Phần lớn */
+.sidebar-accordion-tree {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+}
+.tree-part-group {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--bg) 45%, var(--paper));
+  overflow: hidden;
+  transition: border-color 0.18s ease, background-color 0.18s ease;
+}
+.tree-part-group.is-active-part {
+  border-color: var(--def-border);
+  background: var(--paper);
+}
+.tree-part-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 10px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.tree-part-header:hover {
+  background: var(--def-bg);
+  color: var(--brand);
+}
+.tree-part-group.is-active-part > .tree-part-header {
+  background: color-mix(in srgb, var(--def-bg) 70%, var(--paper));
+  color: var(--brand);
+}
+.tree-part-icon {
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.tree-part-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tree-part-count {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--mute);
+  border: 1px solid var(--line);
+}
+.tree-part-chevron {
+  font-size: 11px;
+  color: var(--mute);
+  transition: transform 0.2s ease;
+}
+.tree-part-group:not(.is-expanded) .tree-part-chevron {
+  transform: rotate(-90deg);
+}
+.tree-part-children {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 6px 8px;
+  border-top: 1px solid var(--line);
+}
+.tree-part-group:not(.is-expanded) .tree-part-children {
+  display: none !important;
+}
+.tree-part-children .sub-tab-btn {
+  font-size: 12.5px !important;
+  padding: 7px 10px !important;
+  border-radius: 8px !important;
+  margin: 1px 0 !important;
+}
+.tree-review-btn {
+  background: color-mix(in srgb, var(--thm-bg) 65%, var(--paper)) !important;
+  color: var(--thm-color) !important;
+  border: 1px dashed var(--thm-border) !important;
+  font-weight: 800 !important;
+  justify-content: flex-start !important;
+  gap: 6px !important;
+}
+.tree-review-btn:hover,
+.tree-review-btn.active {
+  background: var(--thm-color) !important;
+  color: #ffffff !important;
+  border-style: solid !important;
+}
+
+/* 9.4. Ngăn kéo Mục lục Nổi (Slide-over TOC Drawer) khi ở Focus Mode hoặc Mobile */
+.db-sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  z-index: 325;
+}
+.db-sidebar-backdrop[hidden] {
+  display: none !important;
+}
+
+body.db-sidebar-drawer-open nav.chapter-sidebar {
+  display: flex !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  width: min(320px, 88vw) !important;
+  max-height: 100dvh !important;
+  border-radius: 0 16px 16px 0 !important;
+  z-index: 330 !important;
+  box-shadow: 12px 0 36px rgba(15, 23, 42, 0.28) !important;
+  padding: 18px 14px 90px !important;
+}
+
+@media (max-width: 960px) {
+  #studyWorkspace > .container,
+  body.db-drawer-open #studyWorkspace > .container {
+    grid-template-columns: 1fr !important;
+    padding: 14px 12px 92px !important;
+  }
+  body:not(.db-sidebar-drawer-open) nav.chapter-sidebar {
+    display: none !important;
+  }
+  #subTabsContainer {
+    white-space: normal !important;
+  }
+  .chapter-nav-item {
+    max-width: none !important;
+  }
+}
+
+/* 9.5. Thanh "Floating Action Dock" Đa năng ở Cạnh dưới (Ý tưởng 4) */
+.ctds-floating-dock {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 340;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1.5px solid var(--def-border);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18), 0 2px 8px rgba(15, 23, 42, 0.08);
+  font-family: var(--font-ui);
+  max-width: calc(100vw - 20px);
+  transition: transform 0.22s ease, opacity 0.22s ease, padding 0.2s ease;
+}
+
+body[data-app-mode="slides"] .ctds-floating-dock {
+  display: none !important;
+}
+
+.dock-items-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.dock-items-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.ctds-floating-dock.is-minimized {
+  left: auto;
+  right: 18px;
+  transform: none;
+  padding: 5px;
+}
+.ctds-floating-dock.is-minimized .dock-items-wrap {
+  display: none !important;
+}
+
+.dock-btn {
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 7px 13px;
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  position: relative;
+  transition: all 0.16s ease;
+}
+.dock-btn:hover {
+  background: var(--def-bg);
+  color: var(--brand);
+  transform: translateY(-1px);
+}
+.dock-btn.is-active {
+  background: var(--brand);
+  color: #ffffff;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--brand) 35%, transparent);
+}
+.dock-btn.is-focus-exit {
+  background: var(--thm-color) !important;
+  color: #ffffff !important;
+}
+.dock-btn .dock-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+.dock-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 800;
+  background: var(--def-bg);
+  color: var(--brand);
+}
+.dock-btn.is-active .dock-badge {
+  background: rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+}
+.dock-top-btn {
+  background: var(--eq-bg);
+  border-color: var(--line);
+}
+.dock-top-btn[hidden] {
+  display: none !important;
+}
+.dock-min-btn {
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--mute);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+.dock-min-btn:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+@media (max-width: 680px) {
+  .dock-btn {
+    padding: 8px 10px;
+  }
+  .dock-btn .dock-label {
+    display: none;
+  }
+  .dock-btn.is-focus-exit .dock-label {
+    display: inline;
+    font-size: 11.5px;
+  }
+}
+
+@media print {
+  .ctds-floating-dock,
+  .db-sidebar-backdrop {
+    display: none !important;
+  }
+}

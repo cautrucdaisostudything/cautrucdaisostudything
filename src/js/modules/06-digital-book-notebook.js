@@ -78,7 +78,10 @@
     colorMode: "light",
     focusMode: false,
     drawerOpen: false,
-    hubCollapsed: false
+    hubCollapsed: false,
+    sidebarCollapsed: false,
+    overviewOpen: false,
+    dockMinimized: false
   };
   let settings = Object.assign({}, defaultSettings, safeStorageRead(STORAGE_KEYS.SETTINGS, {}));
   settings.fontSize = Math.min(22, Math.max(15, Number(settings.fontSize) || 18));
@@ -161,6 +164,68 @@
     if (fsReadout) fsReadout.textContent = `${settings.fontSize}px`;
     const lhReadout = document.getElementById("dbLhReadout");
     if (lhReadout) lhReadout.textContent = settings.lineHeight.toFixed(2);
+
+    // Đồng bộ trạng thái 3 Cột (Ý tưởng 2) & Thanh Floating Action Dock (Ý tưởng 4)
+    document.body.classList.toggle("db-sidebar-collapsed", Boolean(settings.sidebarCollapsed));
+    document.body.classList.toggle("db-overview-open", Boolean(settings.overviewOpen));
+
+    const isMobileOrFocus = Boolean(settings.focusMode) || window.matchMedia("(max-width: 960px)").matches;
+    const isSidebarVisible = isMobileOrFocus
+      ? document.body.classList.contains("db-sidebar-drawer-open")
+      : !settings.sidebarCollapsed;
+
+    const btnTopSidebar = document.getElementById("dbBtnToggleSidebar");
+    if (btnTopSidebar) {
+      btnTopSidebar.setAttribute("aria-pressed", String(isSidebarVisible));
+      btnTopSidebar.classList.toggle("is-active", isSidebarVisible);
+    }
+
+    const btnSidebarOv = document.getElementById("btnSidebarOverview");
+    const ovStateBadge = document.getElementById("sidebarOverviewState");
+    if (btnSidebarOv) {
+      btnSidebarOv.setAttribute("aria-pressed", String(Boolean(settings.overviewOpen)));
+      btnSidebarOv.classList.toggle("is-active", Boolean(settings.overviewOpen));
+    }
+    if (ovStateBadge) {
+      ovStateBadge.textContent = settings.overviewOpen ? "Đang mở" : "Mở";
+    }
+
+    // Đồng bộ các nút trên Floating Action Dock
+    const dock = document.getElementById("ctdsFloatingDock");
+    if (dock) {
+      dock.classList.toggle("is-minimized", Boolean(settings.dockMinimized));
+      const minBtn = document.getElementById("dockMinimizeBtn");
+      if (minBtn) {
+        minBtn.setAttribute("aria-expanded", String(!settings.dockMinimized));
+        minBtn.textContent = settings.dockMinimized ? "🛠" : "‹";
+        minBtn.title = settings.dockMinimized ? "Mở rộng thanh công cụ Dock" : "Thu gọn thanh Dock";
+      }
+    }
+    const dockSidebarBtn = document.getElementById("dockBtnSidebar");
+    if (dockSidebarBtn) {
+      dockSidebarBtn.setAttribute("aria-pressed", String(isSidebarVisible));
+      dockSidebarBtn.classList.toggle("is-active", isSidebarVisible);
+    }
+    const dockOvBtn = document.getElementById("dockBtnOverview");
+    if (dockOvBtn) {
+      dockOvBtn.setAttribute("aria-pressed", String(Boolean(settings.overviewOpen)));
+      dockOvBtn.classList.toggle("is-active", Boolean(settings.overviewOpen));
+    }
+    const dockNbBtn = document.getElementById("dockBtnNotebook");
+    if (dockNbBtn) {
+      dockNbBtn.setAttribute("aria-pressed", String(Boolean(settings.drawerOpen)));
+      dockNbBtn.classList.toggle("is-active", Boolean(settings.drawerOpen));
+    }
+    const dockFocusBtn = document.getElementById("dockBtnFocus");
+    const dockFocusIcon = document.getElementById("dockFocusIcon");
+    const dockFocusLabel = document.getElementById("dockFocusLabel");
+    if (dockFocusBtn) {
+      dockFocusBtn.setAttribute("aria-pressed", String(Boolean(settings.focusMode)));
+      dockFocusBtn.classList.toggle("is-active", Boolean(settings.focusMode));
+      dockFocusBtn.classList.toggle("is-focus-exit", Boolean(settings.focusMode));
+    }
+    if (dockFocusIcon) dockFocusIcon.textContent = settings.focusMode ? "✕" : "🎯";
+    if (dockFocusLabel) dockFocusLabel.textContent = settings.focusMode ? "Thoát TT" : "Tập trung";
   }
   function saveReaderSettings() {
     safeStorageWrite(STORAGE_KEYS.SETTINGS, settings);
@@ -175,6 +240,10 @@
     group.setAttribute("role", "toolbar");
     group.setAttribute("aria-label", "Công cụ đọc sách Digital Book");
     group.innerHTML = `
+      <button type="button" class="db-tool-btn" id="dbBtnToggleSidebar" aria-pressed="true" title="Đóng/Mở Cây mục lục bên trái (Alt+B)">
+        ◧ <span class="db-btn-label">Mục lục</span>
+      </button>
+      <div class="db-tool-sep" aria-hidden="true"></div>
       <button type="button" class="db-tool-btn" id="dbBtnTypo" aria-expanded="false" aria-controls="dbTypoPopover" title="Điều chỉnh cỡ chữ và giãn dòng">
         Aa <span class="db-btn-label">Cỡ chữ</span>
       </button>
@@ -390,8 +459,10 @@
     const bmList = document.getElementById("dbHubBookmarksList");
     const countEl = document.getElementById("dbHubNotesCount");
     const totalBadge = document.getElementById("dbTotalNotesBadge");
+    const dockBadge = document.getElementById("dockNotesBadge");
     if (countEl) countEl.textContent = String(notesData.length);
     if (totalBadge) totalBadge.textContent = String(notesData.length);
+    if (dockBadge) dockBadge.textContent = String(notesData.length);
     if (bmList) {
       bmList.replaceChildren();
       if (notesData.length === 0) {
@@ -1619,11 +1690,113 @@
     updateReadingHubUI();
   }
   // ---------------- 13. KHỞI CHẠY TOÀN BỘ HỆ THỐNG DIGITAL BOOK ----------------
+  function setupThreeColumnAndFloatingDock() {
+    const backdrop = document.getElementById("dbSidebarBackdrop");
+
+    window.closeSidebarDrawer = function () {
+      document.body.classList.remove("db-sidebar-drawer-open");
+      if (backdrop) backdrop.hidden = true;
+      applyReaderSettings();
+    };
+
+    window.toggleSidebarSmart = function () {
+      const isOverlayMode = Boolean(settings.focusMode) || window.matchMedia("(max-width: 960px)").matches;
+      if (isOverlayMode) {
+        const willOpen = !document.body.classList.contains("db-sidebar-drawer-open");
+        document.body.classList.toggle("db-sidebar-drawer-open", willOpen);
+        if (backdrop) backdrop.hidden = !willOpen;
+        applyReaderSettings();
+      } else {
+        settings.sidebarCollapsed = !settings.sidebarCollapsed;
+        applyReaderSettings();
+        saveReaderSettings();
+      }
+    };
+
+    window.toggleOverviewHub = function () {
+      settings.overviewOpen = !settings.overviewOpen;
+      if (settings.overviewOpen) {
+        settings.hubCollapsed = false;
+        const shell = document.getElementById("dbHubShell");
+        if (shell) shell.classList.remove("is-collapsed");
+      }
+      applyReaderSettings();
+      saveReaderSettings();
+      if (settings.overviewOpen) {
+        if (typeof window.closeSidebarDrawer === "function") window.closeSidebarDrawer();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    };
+
+    document.getElementById("dbBtnToggleSidebar")?.addEventListener("click", () => window.toggleSidebarSmart());
+    document.getElementById("dockBtnSidebar")?.addEventListener("click", () => window.toggleSidebarSmart());
+    document.getElementById("btnCollapseSidebar")?.addEventListener("click", () => {
+      if (document.body.classList.contains("db-sidebar-drawer-open")) {
+        window.closeSidebarDrawer();
+      } else {
+        settings.sidebarCollapsed = true;
+        applyReaderSettings();
+        saveReaderSettings();
+      }
+    });
+    backdrop?.addEventListener("click", () => window.closeSidebarDrawer());
+
+    document.getElementById("btnSidebarOverview")?.addEventListener("click", () => window.toggleOverviewHub());
+    document.getElementById("dockBtnOverview")?.addEventListener("click", () => window.toggleOverviewHub());
+
+    document.getElementById("dockBtnSearch")?.addEventListener("click", () => {
+      const sInp = document.getElementById("searchInput");
+      if (sInp) {
+        sInp.focus();
+        sInp.select();
+      }
+    });
+
+    document.getElementById("dockBtnNotebook")?.addEventListener("click", () => {
+      settings.drawerOpen = !settings.drawerOpen;
+      applyReaderSettings();
+      saveReaderSettings();
+      if (settings.drawerOpen) renderNotebookList();
+    });
+
+    document.getElementById("dockBtnFocus")?.addEventListener("click", () => {
+      settings.focusMode = !settings.focusMode;
+      if (!settings.focusMode) window.closeSidebarDrawer();
+      applyReaderSettings();
+      saveReaderSettings();
+    });
+
+    const dockTopBtn = document.getElementById("dockBtnTop");
+    dockTopBtn?.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    window.addEventListener("scroll", () => {
+      if (!dockTopBtn) return;
+      const y = window.pageYOffset || document.documentElement.scrollTop || 0;
+      dockTopBtn.hidden = y < 260;
+    }, { passive: true });
+
+    document.getElementById("dockMinimizeBtn")?.addEventListener("click", () => {
+      settings.dockMinimized = !settings.dockMinimized;
+      applyReaderSettings();
+      saveReaderSettings();
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.altKey && (e.key === "b" || e.key === "B")) {
+        e.preventDefault();
+        window.toggleSidebarSmart();
+      }
+    });
+  }
+
   function bootstrapDigitalBook() {
     ensureStableIds();
     injectReaderToolbar();
     injectReadingHub();
     injectNotebookDrawer();
+    setupThreeColumnAndFloatingDock();
     syncLegacyBookmarksIntoNotebook();
     decorateKnowledgeBlocks();
     setupSelectionPopover();

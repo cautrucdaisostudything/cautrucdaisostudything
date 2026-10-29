@@ -4842,6 +4842,486 @@ mark.db-user-highlight:hover {
   text-overflow: ellipsis;
 }
 
+
+/* ==========================================================================
+   9. NÂNG CẤP BỐ CỤC KẾT HỢP Ý TƯỞNG 2 & Ý TƯỞNG 4:
+      - Ý TƯỞNG 2: 3-COLUMN DIGITAL BOOK & SIDEBAR CÂY THƯ MỤC ĐA TẦNG (ACCORDION)
+      - Ý TƯỞNG 4: FLOATING ACTION DOCK ĐA NĂNG Ở CẠNH DƯỚI MÀN HÌNH
+   ========================================================================== */
+
+/* 9.1. Tinh gọn các thanh ngang & Gom về Bố cục 3 Cột chuẩn GitBook */
+:root {
+  --mode-bar-height: 48px;
+}
+
+.mode-switch {
+  min-height: 48px !important;
+}
+.mode-btn {
+  min-height: 48px !important;
+  padding: 6px 16px !important;
+}
+.mode-btn .mode-icon {
+  font-size: 18px !important;
+}
+.mode-copy strong {
+  font-size: 13.5px !important;
+}
+
+/* Ẩn thanh Tab ngang cũ (.main-tabs-bar) và các nút nổi rời rạc (#topBtn, #labFab) */
+.main-tabs-bar,
+#topBtn,
+#labFab {
+  display: none !important;
+}
+
+/* Mặc định ẩn Banner chào mừng & Bảng đọc sách lớn để ưu tiên 100% không gian cho 3 cột;
+   Chỉ hiển thị khi người dùng bấm nút "🏠 Lộ trình / Bảng đọc sách" (body.db-overview-open) */
+body:not(.db-overview-open) .welcome-banner,
+body:not(.db-overview-open) #dbHomeDashboard {
+  display: none !important;
+}
+body.db-overview-open .welcome-banner {
+  margin: 16px auto 12px !important;
+  padding: 26px 34px !important;
+}
+
+/* 9.2. Hệ thống Lưới 3 Cột Độc lập (Left Tree - Center Reader - Right Notebook) */
+#studyWorkspace > .container,
+#studyWorkspace > .container.practice-container,
+#studyWorkspace > .container.practice-container.is-review-mode {
+  max-width: 1460px !important;
+  margin: 0 auto !important;
+  display: grid !important;
+  grid-template-columns: 288px minmax(0, 1fr) !important;
+  gap: 26px !important;
+  padding: 20px 24px 96px !important;
+  align-items: start !important;
+  transition: grid-template-columns 0.25s ease, gap 0.25s ease !important;
+}
+
+/* Khi mở đồng thời Cột Trái (Mục lục) + Cột Giữa (Bài đọc) + Cột Phải (Sổ tay) */
+body.db-drawer-open:not(.db-sidebar-collapsed) #studyWorkspace > .container,
+body.db-drawer-open:not(.db-sidebar-collapsed) #studyWorkspace > .container.practice-container,
+body.db-drawer-open:not(.db-sidebar-collapsed) #studyWorkspace > .container.practice-container.is-review-mode {
+  grid-template-columns: 272px minmax(0, 1fr) var(--db-drawer-width) !important;
+  gap: 20px !important;
+}
+
+/* Khi thu gọn Cột Trái (body.db-sidebar-collapsed) trên Desktop */
+body.db-sidebar-collapsed:not(.db-drawer-open) #studyWorkspace > .container,
+body.db-sidebar-collapsed:not(.db-drawer-open) #studyWorkspace > .container.practice-container,
+body.db-sidebar-collapsed:not(.db-drawer-open) #studyWorkspace > .container.practice-container.is-review-mode {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+body.db-sidebar-collapsed.db-drawer-open #studyWorkspace > .container,
+body.db-sidebar-collapsed.db-drawer-open #studyWorkspace > .container.practice-container,
+body.db-sidebar-collapsed.db-drawer-open #studyWorkspace > .container.practice-container.is-review-mode {
+  grid-template-columns: minmax(0, 1fr) var(--db-drawer-width) !important;
+}
+body.db-sidebar-collapsed:not(.db-sidebar-drawer-open) nav.chapter-sidebar {
+  display: none !important;
+}
+
+/* Giữ Cột Trái khả dụng ngay cả trong Phòng thi thông minh (trừ khi người dùng chủ động thu gọn) */
+.container.practice-container.is-review-mode > .chapter-sidebar {
+  display: flex !important;
+}
+body.db-sidebar-collapsed:not(.db-sidebar-drawer-open) .container.practice-container.is-review-mode > .chapter-sidebar {
+  display: none !important;
+}
+
+/* 9.3. Thiết kế Cột Trái: Cây Thư Mục Đa Tầng (Accordion Tree Sidebar) */
+nav.chapter-sidebar {
+  position: sticky !important;
+  top: calc(var(--topbar-height, 64px) + var(--mode-bar-height, 48px) + 14px) !important;
+  max-height: calc(100vh - var(--topbar-height, 64px) - var(--mode-bar-height, 48px) - 28px) !important;
+  background: var(--paper) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 14px !important;
+  padding: 14px 12px !important;
+  box-shadow: var(--db-shadow-soft) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+}
+
+.sidebar-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 2px 4px 8px;
+  border-bottom: 1px solid var(--line);
+}
+.sidebar-header-row .sidebar-title {
+  margin: 0 !important;
+  font-size: 11.5px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.06em !important;
+  color: var(--brand) !important;
+}
+.sidebar-collapse-btn {
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink-soft);
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.16s ease;
+}
+.sidebar-collapse-btn:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+  background: var(--def-bg);
+}
+
+/* Nút bật/tắt Bảng Đọc sách & Lộ trình 15 tuần ngay đầu Sidebar */
+.sidebar-overview-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 11px;
+  border-radius: 10px;
+  border: 1px dashed var(--def-border);
+  background: color-mix(in srgb, var(--def-bg) 55%, var(--paper));
+  color: var(--brand);
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.18s ease;
+}
+.sidebar-overview-btn:hover,
+.sidebar-overview-btn.is-active {
+  border-style: solid;
+  border-color: var(--brand);
+  background: var(--def-bg);
+}
+.sidebar-overview-btn .ov-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sidebar-overview-btn .ov-badge {
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--brand);
+  border: 1px solid var(--def-border);
+}
+.sidebar-overview-btn.is-active .ov-badge {
+  background: var(--brand);
+  color: #ffffff;
+  border-color: var(--brand);
+}
+
+/* Cây thư mục Accordion 6 Phần lớn */
+.sidebar-accordion-tree {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+}
+.tree-part-group {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--bg) 45%, var(--paper));
+  overflow: hidden;
+  transition: border-color 0.18s ease, background-color 0.18s ease;
+}
+.tree-part-group.is-active-part {
+  border-color: var(--def-border);
+  background: var(--paper);
+}
+.tree-part-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 10px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.tree-part-header:hover {
+  background: var(--def-bg);
+  color: var(--brand);
+}
+.tree-part-group.is-active-part > .tree-part-header {
+  background: color-mix(in srgb, var(--def-bg) 70%, var(--paper));
+  color: var(--brand);
+}
+.tree-part-icon {
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.tree-part-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tree-part-count {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--mute);
+  border: 1px solid var(--line);
+}
+.tree-part-chevron {
+  font-size: 11px;
+  color: var(--mute);
+  transition: transform 0.2s ease;
+}
+.tree-part-group:not(.is-expanded) .tree-part-chevron {
+  transform: rotate(-90deg);
+}
+.tree-part-children {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 6px 8px;
+  border-top: 1px solid var(--line);
+}
+.tree-part-group:not(.is-expanded) .tree-part-children {
+  display: none !important;
+}
+.tree-part-children .sub-tab-btn {
+  font-size: 12.5px !important;
+  padding: 7px 10px !important;
+  border-radius: 8px !important;
+  margin: 1px 0 !important;
+}
+.tree-review-btn {
+  background: color-mix(in srgb, var(--thm-bg) 65%, var(--paper)) !important;
+  color: var(--thm-color) !important;
+  border: 1px dashed var(--thm-border) !important;
+  font-weight: 800 !important;
+  justify-content: flex-start !important;
+  gap: 6px !important;
+}
+.tree-review-btn:hover,
+.tree-review-btn.active {
+  background: var(--thm-color) !important;
+  color: #ffffff !important;
+  border-style: solid !important;
+}
+
+/* 9.4. Ngăn kéo Mục lục Nổi (Slide-over TOC Drawer) khi ở Focus Mode hoặc Mobile */
+.db-sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  z-index: 325;
+}
+.db-sidebar-backdrop[hidden] {
+  display: none !important;
+}
+
+body.db-sidebar-drawer-open nav.chapter-sidebar {
+  display: flex !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  width: min(320px, 88vw) !important;
+  max-height: 100dvh !important;
+  border-radius: 0 16px 16px 0 !important;
+  z-index: 330 !important;
+  box-shadow: 12px 0 36px rgba(15, 23, 42, 0.28) !important;
+  padding: 18px 14px 90px !important;
+}
+
+@media (max-width: 960px) {
+  #studyWorkspace > .container,
+  body.db-drawer-open #studyWorkspace > .container {
+    grid-template-columns: 1fr !important;
+    padding: 14px 12px 92px !important;
+  }
+  body:not(.db-sidebar-drawer-open) nav.chapter-sidebar {
+    display: none !important;
+  }
+  #subTabsContainer {
+    white-space: normal !important;
+  }
+  .chapter-nav-item {
+    max-width: none !important;
+  }
+}
+
+/* 9.5. Thanh "Floating Action Dock" Đa năng ở Cạnh dưới (Ý tưởng 4) */
+.ctds-floating-dock {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 340;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1.5px solid var(--def-border);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18), 0 2px 8px rgba(15, 23, 42, 0.08);
+  font-family: var(--font-ui);
+  max-width: calc(100vw - 20px);
+  transition: transform 0.22s ease, opacity 0.22s ease, padding 0.2s ease;
+}
+
+body[data-app-mode="slides"] .ctds-floating-dock {
+  display: none !important;
+}
+
+.dock-items-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.dock-items-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.ctds-floating-dock.is-minimized {
+  left: auto;
+  right: 18px;
+  transform: none;
+  padding: 5px;
+}
+.ctds-floating-dock.is-minimized .dock-items-wrap {
+  display: none !important;
+}
+
+.dock-btn {
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 7px 13px;
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  position: relative;
+  transition: all 0.16s ease;
+}
+.dock-btn:hover {
+  background: var(--def-bg);
+  color: var(--brand);
+  transform: translateY(-1px);
+}
+.dock-btn.is-active {
+  background: var(--brand);
+  color: #ffffff;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--brand) 35%, transparent);
+}
+.dock-btn.is-focus-exit {
+  background: var(--thm-color) !important;
+  color: #ffffff !important;
+}
+.dock-btn .dock-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+.dock-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 800;
+  background: var(--def-bg);
+  color: var(--brand);
+}
+.dock-btn.is-active .dock-badge {
+  background: rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+}
+.dock-top-btn {
+  background: var(--eq-bg);
+  border-color: var(--line);
+}
+.dock-top-btn[hidden] {
+  display: none !important;
+}
+.dock-min-btn {
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--mute);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+.dock-min-btn:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+@media (max-width: 680px) {
+  .dock-btn {
+    padding: 8px 10px;
+  }
+  .dock-btn .dock-label {
+    display: none;
+  }
+  .dock-btn.is-focus-exit .dock-label {
+    display: inline;
+    font-size: 11.5px;
+  }
+}
+
+@media print {
+  .ctds-floating-dock,
+  .db-sidebar-backdrop {
+    display: none !important;
+  }
+}
+
 </style>
 </head>
 <body data-app-mode="study">
@@ -5292,16 +5772,63 @@ mark.db-user-highlight:hover {
 </div>
 
 
+<!-- LỚP PHỦ MỜ KHI MỞ MỤC LỤC DẠNG NGĂN KÉO (FOCUS MODE / MOBILE) -->
+<div class="db-sidebar-backdrop" id="dbSidebarBackdrop" hidden></div>
+
+<!-- THANH FLOATING ACTION DOCK ĐA NĂNG Ở CẠNH DƯỚI (Ý TƯỞNG 4) -->
+<nav class="ctds-floating-dock" id="ctdsFloatingDock" aria-label="Thanh tác vụ nhanh">
+  <div class="dock-items-wrap" id="dockItemsWrap">
+    <button type="button" class="dock-btn is-active" id="dockBtnSidebar" title="Đóng/Mở Cây Mục lục (Alt+B)" aria-pressed="true">
+      <span class="dock-icon" aria-hidden="true">◧</span>
+      <span class="dock-label">Mục lục</span>
+    </button>
+    <button type="button" class="dock-btn" id="dockBtnOverview" title="Mở/Đóng Bảng Đọc sách & Lộ trình 15 tuần" aria-pressed="false">
+      <span class="dock-icon" aria-hidden="true">🏠</span>
+      <span class="dock-label">Lộ trình</span>
+    </button>
+    <button type="button" class="dock-btn" id="dockBtnSearch" title="Tìm kiếm nhanh trong giáo trình (Ctrl+K)">
+      <span class="dock-icon" aria-hidden="true">🔍</span>
+      <span class="dock-label">Tìm kiếm</span>
+    </button>
+    <button type="button" class="dock-btn" id="dockBtnLab" data-lab-open="cayley" title="Mở Phòng LAB thí nghiệm Đại số">
+      <span class="dock-icon" aria-hidden="true">🧪</span>
+      <span class="dock-label">Phòng LAB</span>
+    </button>
+    <button type="button" class="dock-btn" id="dockBtnNotebook" title="Mở/Đóng Sổ tay cá nhân bên phải" aria-pressed="false">
+      <span class="dock-icon" aria-hidden="true">📓</span>
+      <span class="dock-label">Sổ tay</span>
+      <span class="dock-badge" id="dockNotesBadge">0</span>
+    </button>
+    <button type="button" class="dock-btn" id="dockBtnFocus" title="Bật/Tắt Chế độ Đọc tập trung" aria-pressed="false">
+      <span class="dock-icon" id="dockFocusIcon" aria-hidden="true">🎯</span>
+      <span class="dock-label" id="dockFocusLabel">Tập trung</span>
+    </button>
+    <button type="button" class="dock-btn dock-top-btn" id="dockBtnTop" title="Cuộn lên đầu trang" hidden>
+      <span class="dock-icon" aria-hidden="true">↑</span>
+      <span class="dock-label">Đầu trang</span>
+    </button>
+  </div>
+  <button type="button" class="dock-min-btn" id="dockMinimizeBtn" title="Thu gọn / Mở rộng thanh Dock" aria-expanded="true" aria-label="Thu gọn thanh Dock">‹</button>
+</nav>
+
 <div class="container">
-  <!-- SIDEBAR SUB-TABS: CHỌN CHƯƠNG TƯƠNG ỨNG -->
-  <nav class="chapter-sidebar">
-    <div class="sidebar-title" id="sidebarTitle">DANH MỤC CHƯƠNG</div>
-    <div id="subTabsContainer">
-      <!-- Sẽ được cập nhật động bằng Javascript tương ứng với Tab Lớn đang chọn -->
+  <!-- CỘT 1 (TRÁI): SIDEBAR CÂY THƯ MỤC ĐA TẦNG (ACCORDION TREE - Ý TƯỞNG 2) -->
+  <nav class="chapter-sidebar" id="chapterSidebar" aria-label="Cây thư mục giáo trình">
+    <div class="sidebar-header-row">
+      <div class="sidebar-title" id="sidebarTitle">🗂️ MỤC LỤC GIÁO TRÌNH</div>
+      <button type="button" class="sidebar-collapse-btn" id="btnCollapseSidebar" title="Thu gọn cột Mục lục (Alt+B)" aria-label="Thu gọn cột Mục lục">◧</button>
+    </div>
+    <button type="button" class="sidebar-overview-btn" id="btnSidebarOverview" aria-pressed="false" title="Hiển thị hoặc ẩn Bảng điều khiển Đọc sách & Lộ trình 15 tuần">
+      <span class="ov-icon" aria-hidden="true">🏠</span>
+      <span class="ov-text">Bảng Đọc sách &amp; Lộ trình 15 tuần</span>
+      <span class="ov-badge" id="sidebarOverviewState">Ẩn</span>
+    </button>
+    <div id="subTabsContainer" class="sidebar-accordion-tree">
+      <!-- Sẽ được cập nhật động dạng Cây thư mục đa tầng (Accordion Tree) bằng Javascript -->
     </div>
   </nav>
 
-  <!-- VÙNG NỘI DUNG CHÍNH (HIỂN THỊ THEO TAB) -->
+  <!-- CỘT 2 (GIỮA): VÙNG NỘI DUNG ĐỌC HỌC THUẬT CHÍNH -->
   <main class="content">
 
 
@@ -24038,8 +24565,13 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("practiceTabChapters").setAttribute("aria-selected", String(!isReview));
     document.getElementById("practiceTabReview").classList.toggle("active", isReview);
     document.getElementById("practiceTabReview").setAttribute("aria-selected", String(isReview));
-    chapterSidebar.hidden = isReview;
-    sidebarTitle.textContent = isReview ? "SOẠN ĐỀ ÔN TẬP" : "DANH MỤC BÀI TẬP";
+    // Giữ Sidebar Cây thư mục luôn khả dụng trong bố cục 3 cột (Ý tưởng 2)
+    chapterSidebar.hidden = false;
+    sidebarTitle.textContent = "🗂️ MỤC LỤC GIÁO TRÌNH";
+    const treeRevBtn = document.getElementById("treeSmartExamBtn");
+    if (treeRevBtn) {
+      treeRevBtn.classList.toggle("active", isReview);
+    }
   }
 
   function initializePracticeCards() {
@@ -24094,15 +24626,28 @@ document.addEventListener("DOMContentLoaded", function() {
     button.addEventListener("click", () => setPracticeView(button.dataset.practiceView));
   });
 
+  const PART_TREE_META = [
+    { id: "part-0", icon: "📌", title: "Chương 0 · Công cụ Đại số" },
+    { id: "part-1", icon: "🔹", title: "Phần I · Nhóm (Ch.1–5)" },
+    { id: "part-2", icon: "🔷", title: "Phần II · Vành (Ch.6–8)" },
+    { id: "part-3", icon: "💠", title: "Phần III · Trường (Ch.9)" },
+    { id: "part-4", icon: "📑", title: "Đối chiếu & Cẩm nang" },
+    { id: "part-5", icon: "🎯", title: "Luyện tập & Phòng thi" }
+  ];
+  const expandedTreeParts = new Set(["part-0", "part-1"]);
+
   window.switchPart = function(partId, autoScroll = true) {
     if (typeof setAppMode === "function") setAppMode("study");
     workspaceContainer.classList.toggle("practice-container", partId === "part-5");
     chapterSidebar.hidden = false;
-    sidebarTitle.textContent = partId === "part-5" ? "DANH MỤC BÀI TẬP" : "DANH MỤC CHƯƠNG";
+    sidebarTitle.textContent = "🗂️ MỤC LỤC GIÁO TRÌNH";
     mainTabs.forEach(t => t.classList.toggle("active", t.getAttribute("data-part") === partId));
     partPanels.forEach(p => p.classList.toggle("active", p.id === partId));
+    expandedTreeParts.add(partId);
     renderSubTabs(partId);
-    const firstChapter = partChapters[partId]?.[0]?.id;
+    const panel = document.getElementById(partId);
+    const activeChEl = panel?.querySelector(".chapter-content.active");
+    const firstChapter = activeChEl?.id || partChapters[partId]?.[0]?.id;
     if (firstChapter) {
       switchChapter(partId, firstChapter, autoScroll);
     }
@@ -24112,8 +24657,27 @@ document.addEventListener("DOMContentLoaded", function() {
   window.switchChapter = function(partId, chapterId, autoScroll = true) {
     const panel = document.getElementById(partId);
     if (!panel) return;
+    // Đảm bảo partId đang được kích hoạt nếu gọi trực tiếp từ cây thư mục
+    if (!panel.classList.contains("active")) {
+      workspaceContainer.classList.toggle("practice-container", partId === "part-5");
+      mainTabs.forEach(t => t.classList.toggle("active", t.getAttribute("data-part") === partId));
+      partPanels.forEach(p => p.classList.toggle("active", p.id === partId));
+    }
+    expandedTreeParts.add(partId);
     panel.querySelectorAll(".chapter-content").forEach(c => {
       c.classList.toggle("active", c.id === chapterId);
+    });
+    if (partId === "part-5" && chapterId.startsWith("tab-ex")) {
+      setPracticeView("chapters");
+    }
+    // Đồng bộ trạng thái active trên Cây thư mục Accordion
+    subTabsContainer.querySelectorAll(".tree-part-group").forEach(grp => {
+      const pId = grp.getAttribute("data-tree-part");
+      const isExp = expandedTreeParts.has(pId);
+      grp.classList.toggle("is-expanded", isExp);
+      grp.classList.toggle("is-active-part", pId === partId);
+      const hdr = grp.querySelector(".tree-part-header");
+      if (hdr) hdr.setAttribute("aria-expanded", String(isExp));
     });
     subTabsContainer.querySelectorAll(".sub-tab-btn").forEach(btn => {
       btn.classList.toggle("active", btn.getAttribute("data-target") === chapterId);
@@ -24124,21 +24688,96 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   };
 
-  function renderSubTabs(partId) {
+  function renderSubTabs(activePartId) {
+    expandedTreeParts.add(activePartId);
     subTabsContainer.innerHTML = "";
-    const chapters = partChapters[partId] || [];
-    chapters.forEach((ch, idx) => {
-      const chapterItem = document.createElement("div");
-      chapterItem.className = "chapter-nav-item";
-      const btn = document.createElement("button");
-      btn.className = "sub-tab-btn" + (idx === 0 ? " active" : "");
-      btn.setAttribute("data-target", ch.id);
-      btn.textContent = ch.title;
-      btn.onclick = function() {
-        switchChapter(partId, ch.id);
-      };
-      chapterItem.appendChild(btn);
-      subTabsContainer.appendChild(chapterItem);
+    const activePanel = document.getElementById(activePartId);
+    const activeChId = activePanel?.querySelector(".chapter-content.active")?.id || partChapters[activePartId]?.[0]?.id;
+
+    PART_TREE_META.forEach(meta => {
+      const pId = meta.id;
+      const chapters = partChapters[pId] || [];
+      const isExpanded = expandedTreeParts.has(pId);
+      const isActivePart = pId === activePartId;
+
+      const groupEl = document.createElement("div");
+      groupEl.className = "tree-part-group"
+        + (isExpanded ? " is-expanded" : "")
+        + (isActivePart ? " is-active-part" : "");
+      groupEl.setAttribute("data-tree-part", pId);
+
+      const headerBtn = document.createElement("button");
+      headerBtn.type = "button";
+      headerBtn.className = "tree-part-header";
+      headerBtn.setAttribute("aria-expanded", String(isExpanded));
+      headerBtn.innerHTML = `
+        <span class="tree-part-icon" aria-hidden="true">${meta.icon}</span>
+        <span class="tree-part-label">${meta.title}</span>
+        <span class="tree-part-count">${chapters.length}</span>
+        <span class="tree-part-chevron" aria-hidden="true">▾</span>
+      `;
+
+      headerBtn.addEventListener("click", (e) => {
+        const clickedChevron = e.target.closest(".tree-part-chevron");
+        const curActivePart = document.querySelector(".part-panel.active")?.id || "part-0";
+        if (clickedChevron || curActivePart === pId) {
+          if (expandedTreeParts.has(pId)) expandedTreeParts.delete(pId);
+          else expandedTreeParts.add(pId);
+          const nowExp = expandedTreeParts.has(pId);
+          groupEl.classList.toggle("is-expanded", nowExp);
+          headerBtn.setAttribute("aria-expanded", String(nowExp));
+        } else {
+          expandedTreeParts.add(pId);
+          window.switchPart(pId, true);
+        }
+      });
+
+      const bodyEl = document.createElement("div");
+      bodyEl.className = "tree-part-children";
+
+      // Nếu là Phần 5 (Luyện tập), thêm nút vào thẳng Phòng thi thông minh ở đầu nhánh
+      if (pId === "part-5") {
+        const examItem = document.createElement("div");
+        examItem.className = "chapter-nav-item";
+        const examBtn = document.createElement("button");
+        examBtn.type = "button";
+        examBtn.id = "treeSmartExamBtn";
+        examBtn.className = "sub-tab-btn tree-review-btn";
+        examBtn.innerHTML = "🚀 <span>Phòng thi &amp; Tự ôn tập</span>";
+        examBtn.addEventListener("click", () => {
+          if (document.querySelector(".part-panel.active")?.id !== "part-5") {
+            window.switchPart("part-5", false);
+          }
+          setPracticeView("review");
+          subTabsContainer.querySelectorAll(".sub-tab-btn").forEach(b => b.classList.remove("active"));
+          examBtn.classList.add("active");
+          if (typeof window.closeSidebarDrawer === "function") window.closeSidebarDrawer();
+          window.scrollTo({ top: 0, behavior: reducedMotion.matches ? "auto" : "smooth" });
+        });
+        examItem.appendChild(examBtn);
+        bodyEl.appendChild(examItem);
+      }
+
+      chapters.forEach(ch => {
+        const chapterItem = document.createElement("div");
+        chapterItem.className = "chapter-nav-item";
+        const btn = document.createElement("button");
+        btn.type = "button";
+        const isCurrentCh = isActivePart && ch.id === activeChId;
+        btn.className = "sub-tab-btn" + (isCurrentCh ? " active" : "");
+        btn.setAttribute("data-part", pId);
+        btn.setAttribute("data-target", ch.id);
+        btn.textContent = ch.title;
+        btn.onclick = function() {
+          window.switchChapter(pId, ch.id, true);
+          if (typeof window.closeSidebarDrawer === "function") window.closeSidebarDrawer();
+        };
+        chapterItem.appendChild(btn);
+        bodyEl.appendChild(chapterItem);
+      });
+
+      groupEl.append(headerBtn, bodyEl);
+      subTabsContainer.appendChild(groupEl);
     });
   }
 
@@ -24210,6 +24849,7 @@ document.addEventListener("DOMContentLoaded", function() {
           if (bar.matches("nav.chapter-sidebar") && !window.matchMedia("(max-width: 960px)").matches) return;
           stickyBottom = Math.max(stickyBottom, (parseFloat(style.top) || 0) + bar.getBoundingClientRect().height);
         });
+        if (typeof window.closeSidebarDrawer === "function") window.closeSidebarDrawer();
         window.scrollTo({
           top: Math.max(0, window.scrollY + heading.getBoundingClientRect().top - stickyBottom - 16),
           behavior: reducedMotion.matches ? "auto" : "smooth"
@@ -29982,7 +30622,10 @@ function selectOption(optIdx) {
     colorMode: "light",
     focusMode: false,
     drawerOpen: false,
-    hubCollapsed: false
+    hubCollapsed: false,
+    sidebarCollapsed: false,
+    overviewOpen: false,
+    dockMinimized: false
   };
   let settings = Object.assign({}, defaultSettings, safeStorageRead(STORAGE_KEYS.SETTINGS, {}));
   settings.fontSize = Math.min(22, Math.max(15, Number(settings.fontSize) || 18));
@@ -30065,6 +30708,68 @@ function selectOption(optIdx) {
     if (fsReadout) fsReadout.textContent = `${settings.fontSize}px`;
     const lhReadout = document.getElementById("dbLhReadout");
     if (lhReadout) lhReadout.textContent = settings.lineHeight.toFixed(2);
+
+    // Đồng bộ trạng thái 3 Cột (Ý tưởng 2) & Thanh Floating Action Dock (Ý tưởng 4)
+    document.body.classList.toggle("db-sidebar-collapsed", Boolean(settings.sidebarCollapsed));
+    document.body.classList.toggle("db-overview-open", Boolean(settings.overviewOpen));
+
+    const isMobileOrFocus = Boolean(settings.focusMode) || window.matchMedia("(max-width: 960px)").matches;
+    const isSidebarVisible = isMobileOrFocus
+      ? document.body.classList.contains("db-sidebar-drawer-open")
+      : !settings.sidebarCollapsed;
+
+    const btnTopSidebar = document.getElementById("dbBtnToggleSidebar");
+    if (btnTopSidebar) {
+      btnTopSidebar.setAttribute("aria-pressed", String(isSidebarVisible));
+      btnTopSidebar.classList.toggle("is-active", isSidebarVisible);
+    }
+
+    const btnSidebarOv = document.getElementById("btnSidebarOverview");
+    const ovStateBadge = document.getElementById("sidebarOverviewState");
+    if (btnSidebarOv) {
+      btnSidebarOv.setAttribute("aria-pressed", String(Boolean(settings.overviewOpen)));
+      btnSidebarOv.classList.toggle("is-active", Boolean(settings.overviewOpen));
+    }
+    if (ovStateBadge) {
+      ovStateBadge.textContent = settings.overviewOpen ? "Đang mở" : "Mở";
+    }
+
+    // Đồng bộ các nút trên Floating Action Dock
+    const dock = document.getElementById("ctdsFloatingDock");
+    if (dock) {
+      dock.classList.toggle("is-minimized", Boolean(settings.dockMinimized));
+      const minBtn = document.getElementById("dockMinimizeBtn");
+      if (minBtn) {
+        minBtn.setAttribute("aria-expanded", String(!settings.dockMinimized));
+        minBtn.textContent = settings.dockMinimized ? "🛠" : "‹";
+        minBtn.title = settings.dockMinimized ? "Mở rộng thanh công cụ Dock" : "Thu gọn thanh Dock";
+      }
+    }
+    const dockSidebarBtn = document.getElementById("dockBtnSidebar");
+    if (dockSidebarBtn) {
+      dockSidebarBtn.setAttribute("aria-pressed", String(isSidebarVisible));
+      dockSidebarBtn.classList.toggle("is-active", isSidebarVisible);
+    }
+    const dockOvBtn = document.getElementById("dockBtnOverview");
+    if (dockOvBtn) {
+      dockOvBtn.setAttribute("aria-pressed", String(Boolean(settings.overviewOpen)));
+      dockOvBtn.classList.toggle("is-active", Boolean(settings.overviewOpen));
+    }
+    const dockNbBtn = document.getElementById("dockBtnNotebook");
+    if (dockNbBtn) {
+      dockNbBtn.setAttribute("aria-pressed", String(Boolean(settings.drawerOpen)));
+      dockNbBtn.classList.toggle("is-active", Boolean(settings.drawerOpen));
+    }
+    const dockFocusBtn = document.getElementById("dockBtnFocus");
+    const dockFocusIcon = document.getElementById("dockFocusIcon");
+    const dockFocusLabel = document.getElementById("dockFocusLabel");
+    if (dockFocusBtn) {
+      dockFocusBtn.setAttribute("aria-pressed", String(Boolean(settings.focusMode)));
+      dockFocusBtn.classList.toggle("is-active", Boolean(settings.focusMode));
+      dockFocusBtn.classList.toggle("is-focus-exit", Boolean(settings.focusMode));
+    }
+    if (dockFocusIcon) dockFocusIcon.textContent = settings.focusMode ? "✕" : "🎯";
+    if (dockFocusLabel) dockFocusLabel.textContent = settings.focusMode ? "Thoát TT" : "Tập trung";
   }
   function saveReaderSettings() {
     safeStorageWrite(STORAGE_KEYS.SETTINGS, settings);
@@ -30079,6 +30784,10 @@ function selectOption(optIdx) {
     group.setAttribute("role", "toolbar");
     group.setAttribute("aria-label", "Công cụ đọc sách Digital Book");
     group.innerHTML = `
+      <button type="button" class="db-tool-btn" id="dbBtnToggleSidebar" aria-pressed="true" title="Đóng/Mở Cây mục lục bên trái (Alt+B)">
+        ◧ <span class="db-btn-label">Mục lục</span>
+      </button>
+      <div class="db-tool-sep" aria-hidden="true"></div>
       <button type="button" class="db-tool-btn" id="dbBtnTypo" aria-expanded="false" aria-controls="dbTypoPopover" title="Điều chỉnh cỡ chữ và giãn dòng">
         Aa <span class="db-btn-label">Cỡ chữ</span>
       </button>
@@ -30294,8 +31003,10 @@ function selectOption(optIdx) {
     const bmList = document.getElementById("dbHubBookmarksList");
     const countEl = document.getElementById("dbHubNotesCount");
     const totalBadge = document.getElementById("dbTotalNotesBadge");
+    const dockBadge = document.getElementById("dockNotesBadge");
     if (countEl) countEl.textContent = String(notesData.length);
     if (totalBadge) totalBadge.textContent = String(notesData.length);
+    if (dockBadge) dockBadge.textContent = String(notesData.length);
     if (bmList) {
       bmList.replaceChildren();
       if (notesData.length === 0) {
@@ -31523,11 +32234,113 @@ function selectOption(optIdx) {
     updateReadingHubUI();
   }
   // ---------------- 13. KHỞI CHẠY TOÀN BỘ HỆ THỐNG DIGITAL BOOK ----------------
+  function setupThreeColumnAndFloatingDock() {
+    const backdrop = document.getElementById("dbSidebarBackdrop");
+
+    window.closeSidebarDrawer = function () {
+      document.body.classList.remove("db-sidebar-drawer-open");
+      if (backdrop) backdrop.hidden = true;
+      applyReaderSettings();
+    };
+
+    window.toggleSidebarSmart = function () {
+      const isOverlayMode = Boolean(settings.focusMode) || window.matchMedia("(max-width: 960px)").matches;
+      if (isOverlayMode) {
+        const willOpen = !document.body.classList.contains("db-sidebar-drawer-open");
+        document.body.classList.toggle("db-sidebar-drawer-open", willOpen);
+        if (backdrop) backdrop.hidden = !willOpen;
+        applyReaderSettings();
+      } else {
+        settings.sidebarCollapsed = !settings.sidebarCollapsed;
+        applyReaderSettings();
+        saveReaderSettings();
+      }
+    };
+
+    window.toggleOverviewHub = function () {
+      settings.overviewOpen = !settings.overviewOpen;
+      if (settings.overviewOpen) {
+        settings.hubCollapsed = false;
+        const shell = document.getElementById("dbHubShell");
+        if (shell) shell.classList.remove("is-collapsed");
+      }
+      applyReaderSettings();
+      saveReaderSettings();
+      if (settings.overviewOpen) {
+        if (typeof window.closeSidebarDrawer === "function") window.closeSidebarDrawer();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    };
+
+    document.getElementById("dbBtnToggleSidebar")?.addEventListener("click", () => window.toggleSidebarSmart());
+    document.getElementById("dockBtnSidebar")?.addEventListener("click", () => window.toggleSidebarSmart());
+    document.getElementById("btnCollapseSidebar")?.addEventListener("click", () => {
+      if (document.body.classList.contains("db-sidebar-drawer-open")) {
+        window.closeSidebarDrawer();
+      } else {
+        settings.sidebarCollapsed = true;
+        applyReaderSettings();
+        saveReaderSettings();
+      }
+    });
+    backdrop?.addEventListener("click", () => window.closeSidebarDrawer());
+
+    document.getElementById("btnSidebarOverview")?.addEventListener("click", () => window.toggleOverviewHub());
+    document.getElementById("dockBtnOverview")?.addEventListener("click", () => window.toggleOverviewHub());
+
+    document.getElementById("dockBtnSearch")?.addEventListener("click", () => {
+      const sInp = document.getElementById("searchInput");
+      if (sInp) {
+        sInp.focus();
+        sInp.select();
+      }
+    });
+
+    document.getElementById("dockBtnNotebook")?.addEventListener("click", () => {
+      settings.drawerOpen = !settings.drawerOpen;
+      applyReaderSettings();
+      saveReaderSettings();
+      if (settings.drawerOpen) renderNotebookList();
+    });
+
+    document.getElementById("dockBtnFocus")?.addEventListener("click", () => {
+      settings.focusMode = !settings.focusMode;
+      if (!settings.focusMode) window.closeSidebarDrawer();
+      applyReaderSettings();
+      saveReaderSettings();
+    });
+
+    const dockTopBtn = document.getElementById("dockBtnTop");
+    dockTopBtn?.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    window.addEventListener("scroll", () => {
+      if (!dockTopBtn) return;
+      const y = window.pageYOffset || document.documentElement.scrollTop || 0;
+      dockTopBtn.hidden = y < 260;
+    }, { passive: true });
+
+    document.getElementById("dockMinimizeBtn")?.addEventListener("click", () => {
+      settings.dockMinimized = !settings.dockMinimized;
+      applyReaderSettings();
+      saveReaderSettings();
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.altKey && (e.key === "b" || e.key === "B")) {
+        e.preventDefault();
+        window.toggleSidebarSmart();
+      }
+    });
+  }
+
   function bootstrapDigitalBook() {
     ensureStableIds();
     injectReaderToolbar();
     injectReadingHub();
     injectNotebookDrawer();
+    setupThreeColumnAndFloatingDock();
     syncLegacyBookmarksIntoNotebook();
     decorateKnowledgeBlocks();
     setupSelectionPopover();

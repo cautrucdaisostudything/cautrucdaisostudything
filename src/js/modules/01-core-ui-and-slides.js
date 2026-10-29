@@ -324,8 +324,13 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("practiceTabChapters").setAttribute("aria-selected", String(!isReview));
     document.getElementById("practiceTabReview").classList.toggle("active", isReview);
     document.getElementById("practiceTabReview").setAttribute("aria-selected", String(isReview));
-    chapterSidebar.hidden = isReview;
-    sidebarTitle.textContent = isReview ? "SOẠN ĐỀ ÔN TẬP" : "DANH MỤC BÀI TẬP";
+    // Giữ Sidebar Cây thư mục luôn khả dụng trong bố cục 3 cột (Ý tưởng 2)
+    chapterSidebar.hidden = false;
+    sidebarTitle.textContent = "🗂️ MỤC LỤC GIÁO TRÌNH";
+    const treeRevBtn = document.getElementById("treeSmartExamBtn");
+    if (treeRevBtn) {
+      treeRevBtn.classList.toggle("active", isReview);
+    }
   }
 
   function initializePracticeCards() {
@@ -380,15 +385,28 @@ document.addEventListener("DOMContentLoaded", function() {
     button.addEventListener("click", () => setPracticeView(button.dataset.practiceView));
   });
 
+  const PART_TREE_META = [
+    { id: "part-0", icon: "📌", title: "Chương 0 · Công cụ Đại số" },
+    { id: "part-1", icon: "🔹", title: "Phần I · Nhóm (Ch.1–5)" },
+    { id: "part-2", icon: "🔷", title: "Phần II · Vành (Ch.6–8)" },
+    { id: "part-3", icon: "💠", title: "Phần III · Trường (Ch.9)" },
+    { id: "part-4", icon: "📑", title: "Đối chiếu & Cẩm nang" },
+    { id: "part-5", icon: "🎯", title: "Luyện tập & Phòng thi" }
+  ];
+  const expandedTreeParts = new Set(["part-0", "part-1"]);
+
   window.switchPart = function(partId, autoScroll = true) {
     if (typeof setAppMode === "function") setAppMode("study");
     workspaceContainer.classList.toggle("practice-container", partId === "part-5");
     chapterSidebar.hidden = false;
-    sidebarTitle.textContent = partId === "part-5" ? "DANH MỤC BÀI TẬP" : "DANH MỤC CHƯƠNG";
+    sidebarTitle.textContent = "🗂️ MỤC LỤC GIÁO TRÌNH";
     mainTabs.forEach(t => t.classList.toggle("active", t.getAttribute("data-part") === partId));
     partPanels.forEach(p => p.classList.toggle("active", p.id === partId));
+    expandedTreeParts.add(partId);
     renderSubTabs(partId);
-    const firstChapter = partChapters[partId]?.[0]?.id;
+    const panel = document.getElementById(partId);
+    const activeChEl = panel?.querySelector(".chapter-content.active");
+    const firstChapter = activeChEl?.id || partChapters[partId]?.[0]?.id;
     if (firstChapter) {
       switchChapter(partId, firstChapter, autoScroll);
     }
@@ -398,8 +416,27 @@ document.addEventListener("DOMContentLoaded", function() {
   window.switchChapter = function(partId, chapterId, autoScroll = true) {
     const panel = document.getElementById(partId);
     if (!panel) return;
+    // Đảm bảo partId đang được kích hoạt nếu gọi trực tiếp từ cây thư mục
+    if (!panel.classList.contains("active")) {
+      workspaceContainer.classList.toggle("practice-container", partId === "part-5");
+      mainTabs.forEach(t => t.classList.toggle("active", t.getAttribute("data-part") === partId));
+      partPanels.forEach(p => p.classList.toggle("active", p.id === partId));
+    }
+    expandedTreeParts.add(partId);
     panel.querySelectorAll(".chapter-content").forEach(c => {
       c.classList.toggle("active", c.id === chapterId);
+    });
+    if (partId === "part-5" && chapterId.startsWith("tab-ex")) {
+      setPracticeView("chapters");
+    }
+    // Đồng bộ trạng thái active trên Cây thư mục Accordion
+    subTabsContainer.querySelectorAll(".tree-part-group").forEach(grp => {
+      const pId = grp.getAttribute("data-tree-part");
+      const isExp = expandedTreeParts.has(pId);
+      grp.classList.toggle("is-expanded", isExp);
+      grp.classList.toggle("is-active-part", pId === partId);
+      const hdr = grp.querySelector(".tree-part-header");
+      if (hdr) hdr.setAttribute("aria-expanded", String(isExp));
     });
     subTabsContainer.querySelectorAll(".sub-tab-btn").forEach(btn => {
       btn.classList.toggle("active", btn.getAttribute("data-target") === chapterId);
@@ -410,21 +447,96 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   };
 
-  function renderSubTabs(partId) {
+  function renderSubTabs(activePartId) {
+    expandedTreeParts.add(activePartId);
     subTabsContainer.innerHTML = "";
-    const chapters = partChapters[partId] || [];
-    chapters.forEach((ch, idx) => {
-      const chapterItem = document.createElement("div");
-      chapterItem.className = "chapter-nav-item";
-      const btn = document.createElement("button");
-      btn.className = "sub-tab-btn" + (idx === 0 ? " active" : "");
-      btn.setAttribute("data-target", ch.id);
-      btn.textContent = ch.title;
-      btn.onclick = function() {
-        switchChapter(partId, ch.id);
-      };
-      chapterItem.appendChild(btn);
-      subTabsContainer.appendChild(chapterItem);
+    const activePanel = document.getElementById(activePartId);
+    const activeChId = activePanel?.querySelector(".chapter-content.active")?.id || partChapters[activePartId]?.[0]?.id;
+
+    PART_TREE_META.forEach(meta => {
+      const pId = meta.id;
+      const chapters = partChapters[pId] || [];
+      const isExpanded = expandedTreeParts.has(pId);
+      const isActivePart = pId === activePartId;
+
+      const groupEl = document.createElement("div");
+      groupEl.className = "tree-part-group"
+        + (isExpanded ? " is-expanded" : "")
+        + (isActivePart ? " is-active-part" : "");
+      groupEl.setAttribute("data-tree-part", pId);
+
+      const headerBtn = document.createElement("button");
+      headerBtn.type = "button";
+      headerBtn.className = "tree-part-header";
+      headerBtn.setAttribute("aria-expanded", String(isExpanded));
+      headerBtn.innerHTML = `
+        <span class="tree-part-icon" aria-hidden="true">${meta.icon}</span>
+        <span class="tree-part-label">${meta.title}</span>
+        <span class="tree-part-count">${chapters.length}</span>
+        <span class="tree-part-chevron" aria-hidden="true">▾</span>
+      `;
+
+      headerBtn.addEventListener("click", (e) => {
+        const clickedChevron = e.target.closest(".tree-part-chevron");
+        const curActivePart = document.querySelector(".part-panel.active")?.id || "part-0";
+        if (clickedChevron || curActivePart === pId) {
+          if (expandedTreeParts.has(pId)) expandedTreeParts.delete(pId);
+          else expandedTreeParts.add(pId);
+          const nowExp = expandedTreeParts.has(pId);
+          groupEl.classList.toggle("is-expanded", nowExp);
+          headerBtn.setAttribute("aria-expanded", String(nowExp));
+        } else {
+          expandedTreeParts.add(pId);
+          window.switchPart(pId, true);
+        }
+      });
+
+      const bodyEl = document.createElement("div");
+      bodyEl.className = "tree-part-children";
+
+      // Nếu là Phần 5 (Luyện tập), thêm nút vào thẳng Phòng thi thông minh ở đầu nhánh
+      if (pId === "part-5") {
+        const examItem = document.createElement("div");
+        examItem.className = "chapter-nav-item";
+        const examBtn = document.createElement("button");
+        examBtn.type = "button";
+        examBtn.id = "treeSmartExamBtn";
+        examBtn.className = "sub-tab-btn tree-review-btn";
+        examBtn.innerHTML = "🚀 <span>Phòng thi &amp; Tự ôn tập</span>";
+        examBtn.addEventListener("click", () => {
+          if (document.querySelector(".part-panel.active")?.id !== "part-5") {
+            window.switchPart("part-5", false);
+          }
+          setPracticeView("review");
+          subTabsContainer.querySelectorAll(".sub-tab-btn").forEach(b => b.classList.remove("active"));
+          examBtn.classList.add("active");
+          if (typeof window.closeSidebarDrawer === "function") window.closeSidebarDrawer();
+          window.scrollTo({ top: 0, behavior: reducedMotion.matches ? "auto" : "smooth" });
+        });
+        examItem.appendChild(examBtn);
+        bodyEl.appendChild(examItem);
+      }
+
+      chapters.forEach(ch => {
+        const chapterItem = document.createElement("div");
+        chapterItem.className = "chapter-nav-item";
+        const btn = document.createElement("button");
+        btn.type = "button";
+        const isCurrentCh = isActivePart && ch.id === activeChId;
+        btn.className = "sub-tab-btn" + (isCurrentCh ? " active" : "");
+        btn.setAttribute("data-part", pId);
+        btn.setAttribute("data-target", ch.id);
+        btn.textContent = ch.title;
+        btn.onclick = function() {
+          window.switchChapter(pId, ch.id, true);
+          if (typeof window.closeSidebarDrawer === "function") window.closeSidebarDrawer();
+        };
+        chapterItem.appendChild(btn);
+        bodyEl.appendChild(chapterItem);
+      });
+
+      groupEl.append(headerBtn, bodyEl);
+      subTabsContainer.appendChild(groupEl);
     });
   }
 
@@ -496,6 +608,7 @@ document.addEventListener("DOMContentLoaded", function() {
           if (bar.matches("nav.chapter-sidebar") && !window.matchMedia("(max-width: 960px)").matches) return;
           stickyBottom = Math.max(stickyBottom, (parseFloat(style.top) || 0) + bar.getBoundingClientRect().height);
         });
+        if (typeof window.closeSidebarDrawer === "function") window.closeSidebarDrawer();
         window.scrollTo({
           top: Math.max(0, window.scrollY + heading.getBoundingClientRect().top - stickyBottom - 16),
           behavior: reducedMotion.matches ? "auto" : "smooth"

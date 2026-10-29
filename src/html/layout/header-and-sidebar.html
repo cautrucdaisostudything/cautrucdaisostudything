@@ -442,14 +442,61 @@
 </div>
 
 
+<!-- LỚP PHỦ MỜ KHI MỞ MỤC LỤC DẠNG NGĂN KÉO (FOCUS MODE / MOBILE) -->
+<div class="db-sidebar-backdrop" id="dbSidebarBackdrop" hidden></div>
+
+<!-- THANH FLOATING ACTION DOCK ĐA NĂNG Ở CẠNH DƯỚI (Ý TƯỞNG 4) -->
+<nav class="ctds-floating-dock" id="ctdsFloatingDock" aria-label="Thanh tác vụ nhanh">
+  <div class="dock-items-wrap" id="dockItemsWrap">
+    <button type="button" class="dock-btn is-active" id="dockBtnSidebar" title="Đóng/Mở Cây Mục lục (Alt+B)" aria-pressed="true">
+      <span class="dock-icon" aria-hidden="true">◧</span>
+      <span class="dock-label">Mục lục</span>
+    </button>
+    <button type="button" class="dock-btn" id="dockBtnOverview" title="Mở/Đóng Bảng Đọc sách & Lộ trình 15 tuần" aria-pressed="false">
+      <span class="dock-icon" aria-hidden="true">🏠</span>
+      <span class="dock-label">Lộ trình</span>
+    </button>
+    <button type="button" class="dock-btn" id="dockBtnSearch" title="Tìm kiếm nhanh trong giáo trình (Ctrl+K)">
+      <span class="dock-icon" aria-hidden="true">🔍</span>
+      <span class="dock-label">Tìm kiếm</span>
+    </button>
+    <button type="button" class="dock-btn" id="dockBtnLab" data-lab-open="cayley" title="Mở Phòng LAB thí nghiệm Đại số">
+      <span class="dock-icon" aria-hidden="true">🧪</span>
+      <span class="dock-label">Phòng LAB</span>
+    </button>
+    <button type="button" class="dock-btn" id="dockBtnNotebook" title="Mở/Đóng Sổ tay cá nhân bên phải" aria-pressed="false">
+      <span class="dock-icon" aria-hidden="true">📓</span>
+      <span class="dock-label">Sổ tay</span>
+      <span class="dock-badge" id="dockNotesBadge">0</span>
+    </button>
+    <button type="button" class="dock-btn" id="dockBtnFocus" title="Bật/Tắt Chế độ Đọc tập trung" aria-pressed="false">
+      <span class="dock-icon" id="dockFocusIcon" aria-hidden="true">🎯</span>
+      <span class="dock-label" id="dockFocusLabel">Tập trung</span>
+    </button>
+    <button type="button" class="dock-btn dock-top-btn" id="dockBtnTop" title="Cuộn lên đầu trang" hidden>
+      <span class="dock-icon" aria-hidden="true">↑</span>
+      <span class="dock-label">Đầu trang</span>
+    </button>
+  </div>
+  <button type="button" class="dock-min-btn" id="dockMinimizeBtn" title="Thu gọn / Mở rộng thanh Dock" aria-expanded="true" aria-label="Thu gọn thanh Dock">‹</button>
+</nav>
+
 <div class="container">
-  <!-- SIDEBAR SUB-TABS: CHỌN CHƯƠNG TƯƠNG ỨNG -->
-  <nav class="chapter-sidebar">
-    <div class="sidebar-title" id="sidebarTitle">DANH MỤC CHƯƠNG</div>
-    <div id="subTabsContainer">
-      <!-- Sẽ được cập nhật động bằng Javascript tương ứng với Tab Lớn đang chọn -->
+  <!-- CỘT 1 (TRÁI): SIDEBAR CÂY THƯ MỤC ĐA TẦNG (ACCORDION TREE - Ý TƯỞNG 2) -->
+  <nav class="chapter-sidebar" id="chapterSidebar" aria-label="Cây thư mục giáo trình">
+    <div class="sidebar-header-row">
+      <div class="sidebar-title" id="sidebarTitle">🗂️ MỤC LỤC GIÁO TRÌNH</div>
+      <button type="button" class="sidebar-collapse-btn" id="btnCollapseSidebar" title="Thu gọn cột Mục lục (Alt+B)" aria-label="Thu gọn cột Mục lục">◧</button>
+    </div>
+    <button type="button" class="sidebar-overview-btn" id="btnSidebarOverview" aria-pressed="false" title="Hiển thị hoặc ẩn Bảng điều khiển Đọc sách & Lộ trình 15 tuần">
+      <span class="ov-icon" aria-hidden="true">🏠</span>
+      <span class="ov-text">Bảng Đọc sách &amp; Lộ trình 15 tuần</span>
+      <span class="ov-badge" id="sidebarOverviewState">Ẩn</span>
+    </button>
+    <div id="subTabsContainer" class="sidebar-accordion-tree">
+      <!-- Sẽ được cập nhật động dạng Cây thư mục đa tầng (Accordion Tree) bằng Javascript -->
     </div>
   </nav>
 
-  <!-- VÙNG NỘI DUNG CHÍNH (HIỂN THỊ THEO TAB) -->
+  <!-- CỘT 2 (GIỮA): VÙNG NỘI DUNG ĐỌC HỌC THUẬT CHÍNH -->
   <main class="content">
