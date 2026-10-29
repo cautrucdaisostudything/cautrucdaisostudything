@@ -27022,6 +27022,67 @@ if (btnResetAll) {
 })();
 
 (function initAcademicSupportBatch2() {
+  const btnHomo = document.createElement("button");
+      btnHomo.className = "lab-tab";
+      btnHomo.setAttribute("role", "tab");
+      btnHomo.id = "labTabHomo";
+      btnHomo.setAttribute("aria-controls", "labPaneHomo");
+      btnHomo.setAttribute("aria-selected", "false");
+      btnHomo.dataset.labTab = "homo";
+      btnHomo.innerHTML = "🔗 Đồng cấu &amp; Đẳng cấu I";
+
+      labTabsBar.appendChild(btnPerm);
+      labTabsBar.appendChild(btnHomo);
+      labTabsBar.appendChild(btnNotebook);
+
+      // Tạo Pane Mô phỏng Đồng cấu Nhóm & Định lý Đẳng cấu I (G/ker φ ≅ im φ)
+      const paneHomo = document.createElement("section");
+      paneHomo.className = "lab-pane";
+      paneHomo.id = "labPaneHomo";
+      paneHomo.setAttribute("role", "tabpanel");
+      paneHomo.setAttribute("aria-labelledby", "labTabHomo");
+      paneHomo.hidden = true;
+      paneHomo.innerHTML = `
+        <p class="lab-intro">
+          Khảo sát <b>Tính xác định tốt</b> (Well-definedness), <b>Bảo toàn phép toán</b>, tìm tường minh <b>Hạt nhân $\\ker\\varphi \\trianglelefteq G$</b>, <b>Tập ảnh $\\operatorname{im}\\varphi \\le K$</b>, các <b>thớ đồng cấu (lớp kề $g\\ker\\varphi$)</b> và dựng song ánh đẳng cấu $\\Phi: G/\\ker\\varphi \\xrightarrow{\\sim} \\operatorname{im}\\varphi$ theo <b>Định lý Đẳng cấu Thứ nhất</b> (Chương 5 &amp; Chương 8).
+        </p>
+        <div class="homo-controls-bar">
+          <label>Họ ánh xạ khảo sát
+            <select id="homoLabMode">
+              <option value="zn" selected>φ : (ℤ/mℤ, +) → (ℤ/nℤ, +), [x]ₘ ↦ [k·x + c]ₙ</option>
+              <option value="un">ψ : (U(m), ·) → (U(m), ·), [x]ₘ ↦ [xᵏ]ₘ (Lũy thừa)</option>
+              <option value="sgn">sgn : (Sₘ, ∘) → ({±1}, ·), σ ↦ sgn(σ) (Ánh xạ dấu)</option>
+            </select>
+          </label>
+          <label id="homoWrapM">Môđun / Bậc m
+            <input id="homoLabM" type="number" min="2" max="24" value="12" inputmode="numeric">
+          </label>
+          <label id="homoWrapN">Môđun đích n
+            <input id="homoLabN" type="number" min="2" max="24" value="4" inputmode="numeric">
+          </label>
+          <label id="homoWrapK">Hệ số / Mũ k
+            <input id="homoLabK" type="number" min="0" max="23" value="1" inputmode="numeric">
+          </label>
+          <label id="homoWrapC">Độ dịch c
+            <input id="homoLabC" type="number" min="0" max="11" value="0" inputmode="numeric">
+          </label>
+          <button type="button" class="lab-btn primary" id="homoLabRunBtn">Phân tích φ</button>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px;">
+          <span style="font-size:12px; font-weight:700; color:var(--mute); align-self:center;">Mẫu kinh điển trong Giáo trình:</span>
+          <button type="button" class="lab-preset-chip homo-preset active" data-mode="zn" data-m="12" data-n="4" data-k="1" data-c="0">Toàn cấu chuẩn: ℤ/12ℤ → ℤ/4ℤ ([x] ↦ [x])</button>
+          <button type="button" class="lab-preset-chip homo-preset" data-mode="zn" data-m="12" data-n="8" data-k="2" data-c="0">Nhân hệ số: ℤ/12ℤ → ℤ/8ℤ ([x] ↦ [2x])</button>
+          <button type="button" class="lab-preset-chip homo-preset" data-mode="zn" data-m="10" data-n="10" data-k="3" data-c="0">Đẳng cấu (Bài 0.13): ℤ/10ℤ → ℤ/10ℤ ([x] ↦ [3x])</button>
+          <button type="button" class="lab-preset-chip homo-preset" data-mode="zn" data-m="3" data-n="2" data-k="1" data-c="0">⚠️ Bẫy KHÔNG xác định tốt (PV 0.16): ℤ/3ℤ → ℤ/2ℤ</button>
+          <button type="button" class="lab-preset-chip homo-preset" data-mode="zn" data-m="6" data-n="6" data-k="1" data-c="1">⚠️ Bẫy KHÔNG đồng cấu (Bài 5.1c): [x]₆ ↦ [x+1]₆</button>
+          <button type="button" class="lab-preset-chip homo-preset" data-mode="un" data-m="12" data-n="12" data-k="2" data-c="0">Bình phương trên U(12): [x] ↦ [x²]</button>
+          <button type="button" class="lab-preset-chip homo-preset" data-mode="sgn" data-m="3" data-n="2" data-k="1" data-c="0">Đồng cấu dấu: sgn : S₃ → {±1} (ker = A₃)</button>
+        </div>
+        <div class="lab-badges" id="homoLabBadges"></div>
+        <div class="lab-verdict" id="homoLabVerdict"></div>
+        <div class="perm-results-grid" id="homoLabCards"></div>
+      `;
+  
   const BM_STORAGE_KEY = "ctds_bookmarks_v1";
 
   function runAcademicBatch2() {
