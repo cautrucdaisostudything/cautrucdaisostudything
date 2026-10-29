@@ -3,6 +3,37 @@
 <!-- ======================================================== -->
 <div class="chapter-content active" id="tab-c1">
   <h2 class="section-title">Chương 1. Nhóm và các Ví dụ Cơ bản</h2>
+
+  <!-- ==================== BẢNG KẾ HOẠCH BÀI HỌC (LESSON PLAN META-BANNER) ==================== -->
+  <div class="lp-meta-banner" id="lp-banner-c1">
+    <div class="lp-meta-top">
+      <div class="lp-meta-badges">
+        <span class="lp-badge">📅 Tuần 3–4 · 06 Tiết (3 LT + 3 BT)</span>
+        <span class="lp-badge clo">🎯 Chuẩn đầu ra: CLO1, CLO2 · Cấu trúc Nhóm & Họ nhóm chuẩn</span>
+        <span class="lp-badge weight">⚖️ Trọng tâm: Tiên đề Nhóm, Giản ước & Hoán vị S_n</span>
+      </div>
+      <span class="lp-progress-pill">Tiến độ bài học: 0/3 bài</span>
+    </div>
+    <p class="lp-objectives"><strong>Mục tiêu bài học:</strong> Phân biệt rành mạch 4 nấc thang Nửa nhóm – Vị nhóm – Nhóm – Nhóm Abel và xây dựng phản ví dụ ở từng ranh giới tiên đề; vận dụng luật giản ước giải phương trình tuyến tính $ax=b, ya=b$ và quy tắc nghịch đảo $(ab)^{-1}=b^{-1}a^{-1}$; đọc và lập Bảng Cayley, tính toán chuẩn xác trên $\mathbb{Z}/n\mathbb{Z}, U(n), S_n, D_{2n}, \mathrm{GL}_2(\mathbb{R})$.</p>
+    <div class="lp-unit-nav" role="navigation" aria-label="Lộ trình bài học Chương 1">
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u1-1')">
+        <span class="u-code">Bài 1.1 · Tiết 7–8</span>
+        <span class="u-name">Tư duy Tiên đề hóa & Thang bậc Cấu trúc: Nửa nhóm đến Nhóm Abel</span>
+        <span class="u-sub">Mục 1.1, 1.2, 1.3 · 4 nấc thang & Phản ví dụ ranh giới</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u1-2')">
+        <span class="u-code">Bài 1.2 · Tiết 9–10</span>
+        <span class="u-name">Luật Giản ước, Giải Phương trình Tuyến tính & Lũy thừa Nguyên</span>
+        <span class="u-sub">Mục 1.4, 1.5 · Quy tắc (ab)⁻¹ = b⁻¹a⁻¹ & Tiêu chuẩn Abel</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u1-3')">
+        <span class="u-code">Bài 1.3 · Tiết 11–12</span>
+        <span class="u-name">Bảng Cayley & Hệ thống 7 Họ Nhóm Chuẩn Mực</span>
+        <span class="u-sub">Mục 1.6, 1.7 · Hình vuông Latinh, Z/nZ, U(n), S_n, D_2n, GL_2</span>
+      </button>
+    </div>
+  </div>
+
   
   <p class="welcome-copy">
     Nhóm là cấu trúc đại số mô tả những phép toán có thể hợp thành và đảo ngược. 
@@ -11,7 +42,22 @@
   </p>
 
   <!-- 1.1 ĐỘNG CƠ SƯ PHẠM -->
-  <h3 class="subsection-title">1.1. Từ Biến Hình Đối Xứng Đến Tư Duy Tiên Đề Hóa</h3>
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 1.1 · Tiết 7–8 ==================== -->
+  <div class="lp-unit-header" id="lp-u1-1">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 1.1 · Tiết 7–8 · Mục 1.1, 1.2, 1.3 · 4 nấc thang & Phản ví dụ ranh giới</span>
+      <h4 class="lp-unit-title">Tư duy Tiên đề hóa & Thang bậc Cấu trúc: Nửa nhóm đến Nhóm Abel</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u1-1" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u1-1')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">1.1. Từ Biến Hình Đối Xứng Đến Tư Duy Tiên Đề Hóa</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s1">Bước 1 · Khởi động & Động cơ</span>
+    <span class="lp-step-goal">Khám phá tính không giao hoán và tính kết hợp từ đối xứng tam giác đều</span>
+  </div>
   <p>
     Xét các phép biến hình bảo toàn một tam giác đều: phép quay $r$ góc $120^\circ$ và phép đối xứng trục $s$ qua một đỉnh. 
     Khi hợp thành các phép biến hình này, ta phát hiện hai đặc tính then chốt:
@@ -26,6 +72,10 @@
 
   <!-- 1.2 THANG BẬC CẤU TRÚC ĐẠI SỐ -->
   <h3 class="subsection-title">1.2. Thang Bậc Cấu Trúc Đại Số: Nửa Nhóm, Vị Nhóm, Nhóm và Nhóm Abel</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Thiết lập 4 nấc thang tiên đề: Nửa nhóm, Vị nhóm, Nhóm, Nhóm Abel</span>
+  </div>
   
   <p>
     Cho $G$ là một tập hợp khác rỗng cùng một <b>phép toán hai ngôi</b> $* : G \times G \to G$. 
@@ -198,7 +248,25 @@
   </div>
 
   <!-- 1.3 CÁC BẪY TIÊN ĐỀ & PHẢN VÍ DỤ -->
+  
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 4 bước thực chiến: Kiểm định cấu trúc (G, *) là Nửa nhóm / Vị nhóm / Nhóm / Nhóm Abel</strong>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(9)">📐 Mở Mẫu Xây dựng Phản ví dụ (#10)</button>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 0 (Tính đóng tiên quyết):</b> Kiểm tra $\forall a, b \in G \implies a * b \in G$. Nếu vi phạm, dừng ngay (không phải phép toán 2 ngôi).</li>
+    <li><b>Bước 1 (Tính kết hợp $\to$ Nửa nhóm):</b> Kiểm tra $(a*b)*c = a*(b*c), \forall a,b,c \in G$.</li>
+    <li><b>Bước 2 (Phần tử đơn vị $\to$ Vị nhóm):</b> Tìm $e \in G$ sao cho $a*e = e*a = a, \forall a \in G$ (chú ý kiểm tra cả 2 phía).</li>
+    <li><b>Bước 3 (Khả nghịch $\to$ Nhóm & Giao hoán $\to$ Abel):</b> Với mỗi $a \in G$, giải $a*b = b*a = e$ và kiểm tra $b \in G$. Cuối cùng xét $a*b = b*a$.</li>
+  </ol>
+</div>
+
   <h3 class="subsection-title">1.3. Nhận Diện Ranh Giới Tiên Đề Qua Các Phản Ví Dụ Kinh Điển</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s4">Bước 4 · Phản ví dụ & Bẫy sai lầm</span>
+    <span class="lp-step-goal">Bác bỏ ngộ nhận 'Giao hoán kéo theo kết hợp' & Vị nhóm thiếu nghịch đảo</span>
+  </div>
   
   <details class="ex-card counter" data-type="ex" open>
     <summary>⚠️ Bẫy 1: Giao hoán KHÔNG BAO GIỜ kéo theo kết hợp</summary>
@@ -223,7 +291,31 @@
   </details>
 
   <!-- 1.4 HỆ QUẢ ĐẦU TIÊN & GIẢN ƯỚC -->
-  <h3 class="subsection-title">1.4. Hệ Quả Nền Tảng: Luật Giản Ước và Cơ Chế Giải Phương Trình Tuyến Tính</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 1.1: Phân loại Nửa nhóm, Vị nhóm, Nhóm & Bẫy tiên đề</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(1, 'ex-1-1')">✍️ Giải Bài tập 1.1 (Phân loại cấu trúc)</button>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(9)">📐 Mẫu Phản ví dụ (#10)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 1.2 · Tiết 9–10 ==================== -->
+  <div class="lp-unit-header" id="lp-u1-2">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 1.2 · Tiết 9–10 · Mục 1.4, 1.5 · Quy tắc (ab)⁻¹ = b⁻¹a⁻¹ & Tiêu chuẩn Abel</span>
+      <h4 class="lp-unit-title">Luật Giản ước, Giải Phương trình Tuyến tính & Lũy thừa Nguyên</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u1-2" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u1-2')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">1.4. Hệ Quả Nền Tảng: Luật Giản Ước và Cơ Chế Giải Phương Trình Tuyến Tính</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Hệ quả & Thuật toán</span>
+    <span class="lp-step-goal">Luật giản ước hai phía, Phương trình ax=b, ya=b & Quy tắc (ab)⁻¹ = b⁻¹a⁻¹</span>
+  </div>
   <div class="math-card thm" data-type="thm">
     <div class="card-header">
       <span class="label">🏛️ ĐỊNH LÝ 1.2</span>
@@ -281,6 +373,10 @@
 
   <!-- 1.5 LŨY THỪA VÀ TIÊU CHUẨN GIAO HOÁN -->
   <h3 class="subsection-title">1.5. Lũy Thừa Nguyên và Tiêu Chuẩn Giao Hoán</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Hệ quả & Tiêu chuẩn</span>
+    <span class="lp-step-goal">Quy tắc lũy thừa nguyên & Tiêu chuẩn giao hoán (ab)² = a²b²</span>
+  </div>
   <p>
     Với mọi $a \in G$ và $m, n \in \mathbb{Z}$, ta luôn có $a^m a^n = a^{m+n}$ và $(a^m)^n = a^{mn}$.
     Tuy nhiên, đẳng thức $(ab)^n = a^n b^n$ nói chung <b>không đúng</b> khi nhóm chưa có tính giao hoán.
@@ -304,7 +400,31 @@
   </div>
 
   <!-- 1.6 BẢNG CAYLEY -->
-  <h3 class="subsection-title">1.6. Bảng Cayley: Cấu Trúc Hình Vuông Latinh của Nhóm Hữu Hạn</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 1.2: Chứng minh tính giao hoán qua Lũy thừa & Nghịch đảo</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(1, 'ex-1-19')">✍️ Giải Bài 1.19 (x² = e ⇒ Abel)</button>
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(1, 'ex-1-23')">✍️ Giải Bài 1.23 ((ab)² = a²b²)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 1.3 · Tiết 11–12 ==================== -->
+  <div class="lp-unit-header" id="lp-u1-3">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 1.3 · Tiết 11–12 · Mục 1.6, 1.7 · Hình vuông Latinh, Z/nZ, U(n), S_n, D_2n, GL_2</span>
+      <h4 class="lp-unit-title">Bảng Cayley & Hệ thống 7 Họ Nhóm Chuẩn Mực</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u1-3" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u1-3')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">1.6. Bảng Cayley: Cấu Trúc Hình Vuông Latinh của Nhóm Hữu Hạn</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Trực quan hóa cấu trúc</span>
+    <span class="lp-step-goal">Bảng Cayley & Đặc trưng Hình vuông Latinh của nhóm hữu hạn</span>
+  </div>
   <p>
     Bảng Cayley ghi nhận toàn bộ cấu trúc phép toán của một nhóm hữu hạn. 
     Theo quy ước chuẩn của giáo trình: <b style="color:var(--thm-color);">Ô ở hàng $x$, cột $y$ chứa kết quả của phép toán $xy$</b>.
@@ -316,6 +436,10 @@
 
   <!-- 1.7 HỆ THỐNG MÔ HÌNH CHUẨN MỰC -->
   <h3 class="subsection-title">1.7. Hệ Thống Mô Hình Chuẩn Mực: Kiểm Định Tiên Đề & Đối Chiếu Các Họ Nhóm</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s5">Bước 5 · Chốt & Hệ thống hóa</span>
+    <span class="lp-step-goal">Bảng kiểm định tiên đề & Tổng hợp 7 họ nhóm nền tảng toàn khóa</span>
+  </div>
   
   <p><b>1. Bảng Kiểm Định Từng Tiên Đề Trên Các Cấu Trúc Số Học Cơ Bản:</b></p>
   <p style="font-size:0.95rem; color:var(--text-muted);">
@@ -477,5 +601,14 @@
       </tbody>
     </table>
   </div>
+
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Hoàn tất Chương 1: Thực hành Hoán vị S_n & Khám phá Bảng Cayley</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(1, 'ex-1-3')">✍️ Giải Bài 1.3 (Tích hoán vị S₄)</button>
+    <button type="button" class="lp-bridge-btn" onclick="document.getElementById('labFab')?.click()">🧪 Mở Phòng LAB Bảng Cayley</button>
+    <button type="button" class="lp-bridge-btn quiz" onclick="startChapterQuickExam(1)">🚀 Làm Đề Kiểm Tra Chương 1</button>
+  </div>
+</div>
 </div>
 <!-- ==================== HẾT CHƯƠNG 1 ==================== -->

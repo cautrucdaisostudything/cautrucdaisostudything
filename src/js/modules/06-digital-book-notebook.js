@@ -1655,3 +1655,138 @@
     bootstrapDigitalBook();
   }
 })();
+
+/* ==========================================================================
+   14. ENGINE ĐIỀU HƯỚNG BÀI HỌC CHUẨN KẾ HOẠCH & CẦU NỐI THỰC HÀNH (LESSON PLAN)
+   ========================================================================== */
+(function initLessonPlanEngine() {
+  "use strict";
+  const LP_DONE_KEY = "ctds_lesson_units_done_v1";
+
+  function getDoneUnits() {
+    try {
+      const raw = window.localStorage.getItem(LP_DONE_KEY);
+      const arr = raw ? JSON.parse(raw) : [];
+      return new Set(Array.isArray(arr) ? arr : []);
+    } catch (_) {
+      return new Set();
+    }
+  }
+
+  function saveDoneUnits(setObj) {
+    try {
+      window.localStorage.setItem(LP_DONE_KEY, JSON.stringify(Array.from(setObj)));
+    } catch (_) {}
+  }
+
+  function syncAllUnitProgressUI() {
+    const doneSet = getDoneUnits();
+    document.querySelectorAll(".lp-unit-done-btn[data-unit-id]").forEach(btn => {
+      const uid = btn.getAttribute("data-unit-id");
+      const isDone = doneSet.has(uid);
+      btn.classList.toggle("is-done", isDone);
+      btn.setAttribute("aria-pressed", String(isDone));
+      btn.innerHTML = isDone ? "✅ Đã hoàn thành bài học" : "⚪ Đánh dấu đã học xong";
+    });
+
+    document.querySelectorAll(".chapter-content[id^='tab-c']").forEach(chEl => {
+      const unitBtns = chEl.querySelectorAll(".lp-unit-done-btn[data-unit-id]");
+      if (!unitBtns.length) return;
+      let doneCount = 0;
+      unitBtns.forEach(b => {
+        if (doneSet.has(b.getAttribute("data-unit-id"))) doneCount++;
+      });
+      const pill = chEl.querySelector(".lp-progress-pill");
+      if (pill) {
+        pill.textContent = `Tiến độ bài học: ${doneCount}/${unitBtns.length} bài`;
+      }
+    });
+  }
+
+  window.toggleLessonUnitDone = function(btn, unitId) {
+    if (!unitId) return;
+    const doneSet = getDoneUnits();
+    if (doneSet.has(unitId)) doneSet.delete(unitId);
+    else doneSet.add(unitId);
+    saveDoneUnits(doneSet);
+    syncAllUnitProgressUI();
+  };
+
+  window.scrollToLessonUnit = function(unitId) {
+    const el = document.getElementById(unitId);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    el.classList.remove("db-target-flash");
+    void el.offsetWidth;
+    el.classList.add("db-target-flash");
+  };
+
+  window.goToPracticeExercise = function(chNum, exId) {
+    if (typeof window.switchPart === "function") {
+      window.switchPart("part-5", false);
+    }
+    const tabChaptersBtn = document.getElementById("practiceTabChapters");
+    if (tabChaptersBtn) tabChaptersBtn.click();
+    if (typeof window.switchChapter === "function") {
+      window.switchChapter("part-5", "tab-ex" + chNum, false);
+    }
+    setTimeout(() => {
+      const target = exId ? document.getElementById(exId) : document.getElementById("tab-ex" + chNum);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+        target.classList.remove("db-target-flash");
+        void target.offsetWidth;
+        target.classList.add("db-target-flash");
+      }
+    }, 140);
+  };
+
+  window.openProofTemplateById = function(tplIndex) {
+    if (typeof window.switchPart === "function") {
+      window.switchPart("part-4", false);
+    }
+    setTimeout(() => {
+      const sel = document.getElementById("compareProofSelect");
+      const box = document.getElementById("compareProofBox");
+      if (sel) {
+        sel.value = String(tplIndex);
+        sel.dispatchEvent(new Event("change"));
+      }
+      if (box) {
+        box.scrollIntoView({ behavior: "smooth", block: "center" });
+        box.classList.remove("db-target-flash");
+        void box.offsetWidth;
+        box.classList.add("db-target-flash");
+      }
+    }, 140);
+  };
+
+  window.startChapterQuickExam = function(chNum) {
+    if (typeof window.switchPart === "function") {
+      window.switchPart("part-5", false);
+    }
+    setTimeout(() => {
+      const reviewBtn = document.getElementById("practiceTabReview");
+      if (reviewBtn) reviewBtn.click();
+      setTimeout(() => {
+        const chBoxes = document.querySelectorAll('#seChapterGrid input[name="seChapter"]');
+        chBoxes.forEach(cb => {
+          cb.checked = (Number(cb.value) === Number(chNum));
+          cb.closest("label")?.classList.toggle("checked", cb.checked);
+        });
+        const qCountSel = document.getElementById("seQuestionCount");
+        if (qCountSel) qCountSel.value = "10";
+        const genBtn = document.getElementById("seGenerateBtn");
+        if (genBtn) genBtn.click();
+        const qCard = document.getElementById("seQuestionCard");
+        if (qCard) qCard.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }, 100);
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", syncAllUnitProgressUI);
+  } else {
+    syncAllUnitProgressUI();
+  }
+})();

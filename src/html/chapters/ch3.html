@@ -1,6 +1,37 @@
 <!-- ======================================================== -->
 <div class="chapter-content" id="tab-c3">
   <h2 class="section-title">Chương 3. Lớp Kề và Định Lý Lagrange</h2>
+
+  <!-- ==================== BẢNG KẾ HOẠCH BÀI HỌC (LESSON PLAN META-BANNER) ==================== -->
+  <div class="lp-meta-banner" id="lp-banner-c3">
+    <div class="lp-meta-top">
+      <div class="lp-meta-badges">
+        <span class="lp-badge">📅 Tuần 7–8 · 4.5 Tiết (2.5 LT + 2 BT)</span>
+        <span class="lp-badge clo">🎯 Chuẩn đầu ra: CLO2, CLO3 · Lớp kề, Chỉ số & Định lý Lagrange</span>
+        <span class="lp-badge weight">⚖️ Trọng tâm: Phân hoạch lớp kề, Lagrange & Hệ quả Euler–Fermat</span>
+      </div>
+      <span class="lp-progress-pill">Tiến độ bài học: 0/3 bài</span>
+    </div>
+    <p class="lp-objectives"><strong>Mục tiêu bài học:</strong> Hiểu rõ cơ chế phép tịnh tiến biến nhóm con $H$ thành các lớp kề trái $gH$ và lớp kề phải $Hg$ có cùng kích thước $|H|$ và phân hoạch nhóm mẹ $G$; phát biểu, chứng minh và vận dụng Định lý Lagrange $|G|=[G:H]|H|$ cùng các hệ quả (cấp phần tử, nhóm cấp nguyên tố, Định lý Euler & Fermat nhỏ); nắm vững 2 phản ví dụ kinh điển $V_4$ và $A_4$ bác bỏ chiều đảo Lagrange.</p>
+    <div class="lp-unit-nav" role="navigation" aria-label="Lộ trình bài học Chương 3">
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u3-1')">
+        <span class="u-code">Bài 3.1 · Tiết 19–20</span>
+        <span class="u-name">Lớp kề Trái, Lớp kề Phải, Chỉ số [G:H] & Định lý Phân hoạch</span>
+        <span class="u-sub">Mục 3.1, 3.2, 3.3 · Tiêu chuẩn trùng lớp aH = bH ⇔ a⁻¹b ∈ H</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u3-2')">
+        <span class="u-code">Bài 3.2 · Tiết 21</span>
+        <span class="u-name">Định lý Lagrange & Hệ thống 5 Hệ quả Số học – Đại số</span>
+        <span class="u-sub">Mục 3.4 · Cấp phần tử, Nhóm cấp nguyên tố, Euler & Fermat nhỏ</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u3-3')">
+        <span class="u-code">Bài 3.3 · Tiết 22</span>
+        <span class="u-name">Hai Mệnh đề Đảo Sai lầm (V₄, A₄), Nhóm con Chỉ số 2 & Cầu nối Chương 4</span>
+        <span class="u-sub">Mục 3.5, 3.6, 3.7 · Sự lệch pha gH ≠ Hg và nhu cầu Chuẩn tắc</span>
+      </button>
+    </div>
+  </div>
+
   
   <p class="welcome-copy">
     Cho một nhóm con $H$ của nhóm $G$. Ý tưởng trung tâm của chương này là dùng các phép tịnh tiến để dịch chuyển $H$ đi khắp nhóm mẹ $G$. 
@@ -10,7 +41,22 @@
   </p>
 
   <!-- 3.1 ĐỘNG CƠ TỪ LỚP ĐỒNG DƯ ĐẾN LỚP KỀ -->
-  <h3 class="subsection-title">3.1. Khởi Nguồn Sư Phạm: Từ Phép Tịnh Tiến Số Học Đến Khái Niệm Lớp Kề</h3>
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 3.1 · Tiết 19–20 ==================== -->
+  <div class="lp-unit-header" id="lp-u3-1">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 3.1 · Tiết 19–20 · Mục 3.1, 3.2, 3.3 · Tiêu chuẩn trùng lớp aH = bH ⇔ a⁻¹b ∈ H</span>
+      <h4 class="lp-unit-title">Lớp kề Trái, Lớp kề Phải, Chỉ số [G:H] & Định lý Phân hoạch</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u3-1" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u3-1')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">3.1. Khởi Nguồn Sư Phạm: Từ Phép Tịnh Tiến Số Học Đến Khái Niệm Lớp Kề</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s1">Bước 1 · Khởi động & Động cơ</span>
+    <span class="lp-step-goal">Từ các lớp đồng dư a + nℤ đến ý tưởng tịnh tiến nhóm con H trong G</span>
+  </div>
   <p>
     Trong nhóm cộng số nguyên $(\mathbb{Z}, +)$, các lớp đồng dư modulo $n$ có dạng:
     $$a + n\mathbb{Z} = \{a + nk \mid k \in \mathbb{Z}\}$$
@@ -24,6 +70,10 @@
 
   <!-- 3.2 ĐỊNH NGHĨA LỚP KỀ & CHỈ SỐ -->
   <h3 class="subsection-title">3.2. Cấu Trúc Lớp Kề Trái, Lớp Kề Phải và Chỉ Số Của Nhóm Con</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Định nghĩa Lớp kề trái gH, Lớp kề phải Hg, Đại diện lớp & Chỉ số [G:H]</span>
+  </div>
   
   <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
     <div class="card-header">
@@ -90,6 +140,10 @@
 
   <!-- 3.3 PHÂN HOẠCH NHÓM MẸ VÀ SONG ÁNH TỊNH TIẾN -->
   <h3 class="subsection-title">3.3. Cơ Chế Phân Hoạch Nhóm Mẹ và Sự Bảo Toàn Kích Thước</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Định lý & Thuật toán</span>
+    <span class="lp-step-goal">Quan hệ tương đương cảm sinh x⁻¹y ∈ H & Song ánh bảo toàn lực lượng |gH|=|H|</span>
+  </div>
   <p>
     Tại sao các lớp kề lại chia đều nhóm mẹ thành các khối hoàn toàn rời nhau? Câu trả lời nằm ở mối liên hệ chặt chẽ với quan hệ tương đương:
   </p>
@@ -143,7 +197,43 @@
   </details>
 
   <!-- 3.4 ĐỊNH LÝ LAGRANGE VÀ HỆ QUẢ SỐ HỌC -->
-  <h3 class="subsection-title">3.4. Định Lý Lagrange và Các Hệ Quả Số Học Nền Tảng</h3>
+  
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Liệt kê các lớp kề phân biệt của H trong nhóm hữu hạn G</strong>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Tính số lượng lớp kề):</b> Tính chỉ số $k = [G : H] = \dfrac{|G|}{|H|}$. Khởi tạo lớp đầu tiên ứng với đơn vị: $C_1 = eH = H$.</li>
+    <li><b>Bước 2 (Chọn đại diện mới ngoài các lớp đã có):</b> Lấy $g_2 \in G \setminus C_1$, tính lớp $C_2 = g_2 H = \{g_2 h \mid h \in H\}$ (hoặc $g_2 + H$ nếu là nhóm cộng).</li>
+    <li><b>Bước 3 (Lặp lại đến khi đủ k lớp rời nhau):</b> Tiếp tục lấy $g_i \notin C_1 \cup \dots \cup C_{i-1}$ cho đến khi thu được đúng $k$ lớp kề phủ kín $G$.</li>
+  </ol>
+</div>
+
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 3.1: Thực hành tìm Lớp kề trên S₃ và ℤ/15ℤ</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(3, 'ex-3-1')">✍️ Giải Bài 3.1 (Lớp kề trong S₃)</button>
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(3, 'ex-3-2')">✍️ Giải Bài 3.2 (Lớp kề trong ℤ/15ℤ)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 3.2 · Tiết 21 ==================== -->
+  <div class="lp-unit-header" id="lp-u3-2">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 3.2 · Tiết 21 · Mục 3.4 · Cấp phần tử, Nhóm cấp nguyên tố, Euler & Fermat nhỏ</span>
+      <h4 class="lp-unit-title">Định lý Lagrange & Hệ thống 5 Hệ quả Số học – Đại số</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u3-2" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u3-2')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">3.4. Định Lý Lagrange và Các Hệ Quả Số Học Nền Tảng</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Định lý Trọng tâm</span>
+    <span class="lp-step-goal">Định lý Lagrange |G| = [G:H]|H| & 5 Hệ quả nền tảng (Euler – Fermat)</span>
+  </div>
   <p>
     Khi nhóm $G$ hữu hạn, việc hợp các khối rời nhau có cùng kích thước dẫn thẳng tới định lý đếm vĩ đại của Joseph-Louis Lagrange:
   </p>
@@ -223,7 +313,30 @@
   </div>
 
   <!-- 3.5 HAI MỆNH ĐỀ ĐẢO SAI LẦM KINH ĐIỂN -->
-  <h3 class="subsection-title">3.5. Hai Mệnh Đề Đảo Sai Lầm Kinh Điển: Phản Ví Dụ Trong $V_4$ và $A_4$</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 3.2: Vận dụng Định lý Euler & Fermat nhỏ rút gọn lũy thừa</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(3, 'ex-3-9')">✍️ Giải Bài 3.9 (Tính 3¹⁰⁰ mod 35 & 7²²² mod 13)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 3.3 · Tiết 22 ==================== -->
+  <div class="lp-unit-header" id="lp-u3-3">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 3.3 · Tiết 22 · Mục 3.5, 3.6, 3.7 · Sự lệch pha gH ≠ Hg và nhu cầu Chuẩn tắc</span>
+      <h4 class="lp-unit-title">Hai Mệnh đề Đảo Sai lầm (V₄, A₄), Nhóm con Chỉ số 2 & Cầu nối Chương 4</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u3-3" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u3-3')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">3.5. Hai Mệnh Đề Đảo Sai Lầm Kinh Điển: Phản Ví Dụ Trong $V_4$ và $A_4$</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s4">Bước 4 · Phản ví dụ & Bẫy sai lầm</span>
+    <span class="lp-step-goal">Bác bỏ 2 mệnh đề đảo sai lầm của Lagrange bằng nhóm V₄ và nhóm A₄</span>
+  </div>
   <p>
     Định lý Lagrange chỉ khẳng định: <i>Nếu $H \le G$ thì $|H|$ chia hết $|G|$</i>. 
     <b>Chiều đảo lại của định lý Lagrange là HOÀN TOÀN SAI!</b> Giáo trình phân định rành mạch hai mệnh đề đảo sai lầm:
@@ -251,6 +364,10 @@
 
   <!-- 3.6 ĐỐI CHIẾU LỚP KỀ TRÁI VÀ PHẢI TRONG NHÓM KHÔNG GIAO HOÁN -->
   <h3 class="subsection-title">3.6. Trực Quan Hóa: Sự Khác Biệt Giữa Lớp Trái và Lớp Phải Trong $S_3$</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s4">Bước 4 · Đối chiếu trực quan</span>
+    <span class="lp-step-goal">So sánh lớp trái và lớp phải trong S₃ & Định lý nhóm con chỉ số 2</span>
+  </div>
   <p>
     Trong một nhóm không giao hoán, lớp kề trái $gH$ và lớp kề phải $Hg$ có cùng kích thước $|H|$, cùng chứa phần tử đại diện $g$, nhưng <b>nói chung không phải là cùng một tập hợp</b>!
   </p>
@@ -327,6 +444,10 @@
 
   <!-- 3.7 CẦU NỐI SANG CHƯƠNG 4 -->
   <h3 class="subsection-title">3.7. Cầu Nối Sư Phạm: Trở Ngại Khi Định Nghĩa Phép Nhân Trên Tập Thương</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s5">Bước 5 · Cầu nối Sư phạm</span>
+    <span class="lp-step-goal">Tại sao phép nhân đại diện (aH)(bH)=abH thất bại khi lớp trái khác lớp phải?</span>
+  </div>
   <div style="background: var(--eq-bg, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 12px; padding: 20px; margin: 1.5rem 0;">
     <div style="font-weight: 700; color: var(--thm-color, #1e3a8a); margin-bottom: 8px; font-size: 1.05rem;">
       🤔 Câu hỏi mở then chốt dẫn sang Chương 4:
@@ -350,5 +471,14 @@
     </div>
   </details>
 
+
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Hoàn tất Chương 3: Phản ví dụ Đảo Lagrange & Kiểm tra nhanh</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(3, 'ex-3-12')">✍️ Giải Bài 3.12 (Phản ví dụ V₄ và A₄)</button>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(9)">📐 Mẫu trình bày Phản ví dụ (#10)</button>
+    <button type="button" class="lp-bridge-btn quiz" onclick="startChapterQuickExam(3)">🚀 Làm Đề Kiểm Tra Chương 3</button>
+  </div>
+</div>
 </div>
 <!-- ==================== HẾT CHƯƠNG 3 HOÀN CHỈNH ==================== -->

@@ -1,6 +1,37 @@
 <!-- ======================================================== -->
 <div class="chapter-content" id="tab-c4">
   <h2 class="section-title">Chương 4. Nhóm Con Chuẩn Tắc và Nhóm Thương</h2>
+
+  <!-- ==================== BẢNG KẾ HOẠCH BÀI HỌC (LESSON PLAN META-BANNER) ==================== -->
+  <div class="lp-meta-banner" id="lp-banner-c4">
+    <div class="lp-meta-top">
+      <div class="lp-meta-badges">
+        <span class="lp-badge">📅 Tuần 8–9 · 4.5 Tiết (2.5 LT + 2 BT)</span>
+        <span class="lp-badge clo">🎯 Chuẩn đầu ra: CLO3 · Nhóm con chuẩn tắc & Cấu trúc Nhóm thương</span>
+        <span class="lp-badge weight">⚖️ Trọng tâm: Tiêu chuẩn gng⁻¹ ∈ N, Nhóm thương G/N & Tâm Z(G)</span>
+      </div>
+      <span class="lp-progress-pill">Tiến độ bài học: 0/3 bài</span>
+    </div>
+    <p class="lp-objectives"><strong>Mục tiêu bài học:</strong> Giải thích được tại sao tính chuẩn tắc ($gN = Ng$) là điều kiện cần và đủ để phép nhân lớp kề $(aN)(bN)=abN$ xác định tốt; vận dụng thành thạo 3 tiêu chuẩn tương đương và 4 cơ chế tự nhiên sinh nhóm con chuẩn tắc (Abel, chỉ số 2, tâm $Z(G)$, duy nhất theo cấp); khảo sát nhóm thương $G/N$, phép chiếu chính tắc $\pi_N$ và chứng minh định lý kinh điển $G/Z(G)$ cyclic $\implies G$ Abel.</p>
+    <div class="lp-unit-nav" role="navigation" aria-label="Lộ trình bài học Chương 4">
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u4-1')">
+        <span class="u-code">Bài 4.1 · Tiết 23–24</span>
+        <span class="u-name">Phép Liên hợp, Định nghĩa & 3 Tiêu chuẩn Nhóm con Chuẩn tắc</span>
+        <span class="u-sub">Mục 4.1, 4.2, 4.3 · Kiểm định gng⁻¹ ∈ N trên nhóm không giao hoán</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u4-2')">
+        <span class="u-code">Bài 4.2 · Tiết 25</span>
+        <span class="u-name">Bốn Cơ chế Tự nhiên Sinh Nhóm con Chuẩn tắc & Bẫy Bắc cầu</span>
+        <span class="u-sub">Mục 4.4 · Nhóm Abel, Chỉ số 2, Tâm Z(G), Duy nhất theo cấp & Phản ví dụ D₈</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u4-3')">
+        <span class="u-code">Bài 4.3 · Tiết 26–27</span>
+        <span class="u-name">Cấu trúc Nhóm thương G/N, Phép chiếu Chính tắc π_N & Định lý Tâm G/Z(G)</span>
+        <span class="u-sub">Mục 4.5, 4.6, 4.7, 4.8 · Phép toán trên G/N & Định lý G/Z(G) cyclic</span>
+      </button>
+    </div>
+  </div>
+
   
   <p class="welcome-copy">
     Từ một nhóm mẹ $G$ và một nhóm con $H$, ta đã có tập hợp các lớp kề $G/H$. 
@@ -10,7 +41,22 @@
   </p>
 
   <!-- 4.1 ĐỘNG CƠ: SỰ THẤT BẠI CỦA PHÉP NHÂN LỚP -->
-  <h3 class="subsection-title">4.1. Khởi Nguồn Sư Phạm: Sự Thất Bại Khi Nhân Đại Diện Lớp Kề</h3>
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 4.1 · Tiết 23–24 ==================== -->
+  <div class="lp-unit-header" id="lp-u4-1">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 4.1 · Tiết 23–24 · Mục 4.1, 4.2, 4.3 · Kiểm định gng⁻¹ ∈ N trên nhóm không giao hoán</span>
+      <h4 class="lp-unit-title">Phép Liên hợp, Định nghĩa & 3 Tiêu chuẩn Nhóm con Chuẩn tắc</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u4-1" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u4-1')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">4.1. Khởi Nguồn Sư Phạm: Sự Thất Bại Khi Nhân Đại Diện Lớp Kề</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s1">Bước 1 · Khởi động & Động cơ</span>
+    <span class="lp-step-goal">Phân tích sự thất bại khi nhân đại diện lớp kề của H = ⟨(12)⟩ trong S₃</span>
+  </div>
   <p>
     Xét nhóm đối xứng $S_3$ và nhóm con $H = \langle (12) \rangle = \{e, (12)\}$. Chỉ số $[S_3 : H] = 3$, tập các lớp kề trái gồm ba khối:
     $$C_1 = eH = \{e, (12)\}, \quad C_2 = (13)H = \{(13), (123)\}, \quad C_3 = (23)H = \{(23), (132)\}$$
@@ -28,6 +74,10 @@
 
   <!-- 4.2 PHÉP LIÊN HỢP VÀ ĐỊNH NGHĨA CHUẨN TẮC -->
   <h3 class="subsection-title">4.2. Phép Liên Hợp và Định Nghĩa Nhóm Con Chuẩn Tắc</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Phép liên hợp gxg⁻¹ & Định nghĩa Nhóm con chuẩn tắc N ⊴ G</span>
+  </div>
   <p>
     Để phép nhân lớp kề $(aN)(bN) = abN$ không phụ thuộc vào việc chọn đại diện, ta cần chuyển thừa số qua lại giữa $a$ và $N$, 
     điều này dẫn trực tiếp đến khái niệm <b>phép liên hợp</b> và <b>tính chuẩn tắc</b>.
@@ -90,6 +140,10 @@
 
   <!-- 4.3 CÁC TIÊU CHUẨN TƯƠNG ĐƯƠNG -->
   <h3 class="subsection-title">4.3. Ba Tiêu Chuẩn Tương Đương Của Tính Chuẩn Tắc</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Định lý & Thuật toán</span>
+    <span class="lp-step-goal">Ba tiêu chuẩn tương đương của tính chuẩn tắc & Tiêu chuẩn thực hành gng⁻¹ ∈ N</span>
+  </div>
   <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
     <div class="card-header">
       <span class="label">🏛️ ĐỊNH LÝ 4.3</span>
@@ -132,7 +186,44 @@
   </details>
 
   <!-- 4.4 BỐN CƠ CHẾ SINH RA CHUẨN TẮC -->
-  <h3 class="subsection-title">4.4. Bốn Cơ Chế Tự Nhiên Sinh Ra Nhóm Con Chuẩn Tắc</h3>
+  
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Chứng minh N là nhóm con chuẩn tắc của G (N ⊴ G)</strong>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(4)">📐 Mở Khuôn mẫu Chuẩn tắc (#5)</button>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Kiểm tra dấu hiệu nhanh trước):</b> Xem $G$ có Abel không, hoặc $[G:N]=2$, hoặc $N=\ker\varphi$, hoặc $N \le Z(G)$. Nếu có, kết luận ngay $N \trianglelefteq G$!</li>
+    <li><b>Bước 2 (Kiểm tra nhóm con):</b> Nếu chưa có sẵn $N \le G$, dùng tiêu chuẩn rút gọn chứng minh $N \le G$.</li>
+    <li><b>Bước 3 (Kiểm tra liên hợp một phía):</b> Lấy tùy ý $g \in G$ (từ toàn bộ nhóm mẹ) và $n \in N$, biến đổi chứng minh $gng^{-1} \in N$.</li>
+  </ol>
+</div>
+
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 4.1: Thực hành Phép liên hợp & Kiểm định Chuẩn tắc</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(4, 'ex-4-1')">✍️ Giải Bài 4.1 (Liên hợp trong S₃)</button>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(4)">📐 Mẫu CM Chuẩn tắc (#5)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 4.2 · Tiết 25 ==================== -->
+  <div class="lp-unit-header" id="lp-u4-2">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 4.2 · Tiết 25 · Mục 4.4 · Nhóm Abel, Chỉ số 2, Tâm Z(G), Duy nhất theo cấp & Phản ví dụ D₈</span>
+      <h4 class="lp-unit-title">Bốn Cơ chế Tự nhiên Sinh Nhóm con Chuẩn tắc & Bẫy Bắc cầu</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u4-2" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u4-2')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">4.4. Bốn Cơ Chế Tự Nhiên Sinh Ra Nhóm Con Chuẩn Tắc</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Cơ chế & Phản ví dụ</span>
+    <span class="lp-step-goal">Bốn cơ chế chuẩn tắc kinh điển & Phản ví dụ tính chuẩn tắc không bắc cầu trong D₈</span>
+  </div>
   <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
     <div class="card-header">
       <span class="label">🏛️ MỆNH ĐỀ 4.4</span>
@@ -174,7 +265,30 @@
   </details>
 
   <!-- 4.5 PHÉP DỰNG NHÓM THƯƠNG -->
-  <h3 class="subsection-title">4.5. Phép Dựng Cấu Trúc Nhóm Thương $G/N$</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 4.2: Chứng minh Nhóm con chỉ số 2 luôn chuẩn tắc</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(4, 'ex-4-6')">✍️ Giải Bài 4.6 ([G:H] = 2 ⇒ H ⊴ G & A_n ⊴ S_n)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 4.3 · Tiết 26–27 ==================== -->
+  <div class="lp-unit-header" id="lp-u4-3">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 4.3 · Tiết 26–27 · Mục 4.5, 4.6, 4.7, 4.8 · Phép toán trên G/N & Định lý G/Z(G) cyclic</span>
+      <h4 class="lp-unit-title">Cấu trúc Nhóm thương G/N, Phép chiếu Chính tắc π_N & Định lý Tâm G/Z(G)</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u4-3" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u4-3')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">4.5. Phép Dựng Cấu Trúc Nhóm Thương $G/N$</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Định lý cấu trúc Nhóm thương G/N: Phép nhân lớp, Đơn vị N, Nghịch đảo & Cấp</span>
+  </div>
   <p>
     Khi và chỉ khi nhóm con có tính chuẩn tắc, phép nhân đại diện trên tập thương mới trở thành một phép toán hai ngôi xác định tốt:
   </p>
@@ -229,6 +343,10 @@
 
   <!-- 4.6 PHÉP CHIẾU CHÍNH TẮC -->
   <h3 class="subsection-title">4.6. Phép Chiếu Chính Tắc $\pi_N$: Cây Cầu Nối Sang Chương 5</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Cầu nối Đồng cấu</span>
+    <span class="lp-step-goal">Phép chiếu chính tắc π_N : G → G/N với hạt nhân ker(π_N) = N</span>
+  </div>
   <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
     <div class="card-header">
       <span class="label">📘 ĐỊNH NGHĨA 4.6</span>
@@ -264,6 +382,10 @@
 
   <!-- 4.7 BẢNG CAYLEY NHÓM THƯƠNG MẪU & ĐỊNH LÝ TÂM -->
   <h3 class="subsection-title">4.7. Minh Họa Tính Toán: Bảng Cayley Nhóm Thương & Định Lý Tâm $G/Z(G)$</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s4">Bước 4 · Vận dụng & Định lý nâng cao</span>
+    <span class="lp-step-goal">Bảng Cayley nhóm thương (ℤ/12ℤ)/⟨[4]⟩ & Định lý G/Z(G) cyclic ⇒ G Abel</span>
+  </div>
 
   <p><b>1. Bảng Cayley Của Nhóm Thương $(\mathbb{Z}/12\mathbb{Z}) / \langle [4]_{12} \rangle$:</b></p>
   <p style="font-size:0.92rem; color:var(--text-muted);">
@@ -360,6 +482,10 @@
 
   <!-- 4.8 BẢNG TỔNG HỢP KIỂM ĐỊNH TÍNH CHUẨN TẮC -->
   <h3 class="subsection-title">4.8. Bảng Tổng Hợp Kiểm Định Tính Chuẩn Tắc Trên Các Mô Hình Chuẩn</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s5">Bước 5 · Chốt & Hệ thống hóa</span>
+    <span class="lp-step-goal">Bảng tổng hợp kiểm định tính chuẩn tắc và nhóm thương trên 7 mô hình chuẩn</span>
+  </div>
   <div class="table-wrapper">
     <table class="compare-table">
       <thead>
@@ -424,5 +550,13 @@
       </tbody>
     </table>
   </div>
+
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Hoàn tất Chương 4: Vận dụng Nhóm thương & Định lý Tâm Z(G)</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(4, 'ex-4-22')">✍️ Giải Bài 4.22 (G/Z(G) cyclic ⇒ G Abel)</button>
+    <button type="button" class="lp-bridge-btn quiz" onclick="startChapterQuickExam(4)">🚀 Làm Đề Kiểm Tra Chương 4</button>
+  </div>
+</div>
 </div>
 <!-- ==================== HẾT CHƯƠNG 4 HOÀN CHỈNH ==================== -->

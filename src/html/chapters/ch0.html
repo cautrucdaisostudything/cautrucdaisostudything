@@ -2,6 +2,37 @@
 <!-- ======================================================== -->
 <div class="chapter-content active" id="tab-c0">
 <h2 class="section-title">Chương 0. Ngôn ngữ và Công cụ Đại số</h2>
+
+  <!-- ==================== BẢNG KẾ HOẠCH BÀI HỌC (LESSON PLAN META-BANNER) ==================== -->
+  <div class="lp-meta-banner" id="lp-banner-c0">
+    <div class="lp-meta-top">
+      <div class="lp-meta-badges">
+        <span class="lp-badge">📅 Tuần 1–2 · 06 Tiết (3 LT + 3 BT)</span>
+        <span class="lp-badge clo">🎯 Chuẩn đầu ra: CLO1 · Ngôn ngữ Tập thương & Số học</span>
+        <span class="lp-badge weight">⚖️ Trọng tâm: Xác định tốt (Well-defined) & Bézout</span>
+      </div>
+      <span class="lp-progress-pill">Tiến độ bài học: 0/3 bài</span>
+    </div>
+    <p class="lp-objectives"><strong>Mục tiêu bài học:</strong> Nắm vững ngôn ngữ ánh xạ, ảnh/nghịch ảnh và quy ước hợp thành từ phải sang trái; vận dụng thành thạo thuật toán Euclid mở rộng tìm đẳng thức Bézout và hàm $\varphi(n)$; chứng minh được quan hệ tương đương, mô tả phân hoạch tập thương $X/{\sim}$ và kiểm tra tính xác định tốt của phép toán trên lớp.</p>
+    <div class="lp-unit-nav" role="navigation" aria-label="Lộ trình bài học Chương 0">
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u0-1')">
+        <span class="u-code">Bài 0.1 · Tiết 1–2</span>
+        <span class="u-name">Ánh xạ, Quan hệ tương đương & Tập thương</span>
+        <span class="u-sub">Mục 0.1, 0.2, 0.4 · Nền tảng phân hoạch</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u0-2')">
+        <span class="u-code">Bài 0.2 · Tiết 3–4</span>
+        <span class="u-name">Công cụ Số học: Chia Euclid, Bézout & Lớp đồng dư</span>
+        <span class="u-sub">Mục 0.3, 0.4 · Thuật toán số học & Z/nZ</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u0-3')">
+        <span class="u-code">Bài 0.3 · Tiết 5–6</span>
+        <span class="u-name">Phép toán hai ngôi, Tính xác định tốt & Mẫu chứng minh</span>
+        <span class="u-sub">Mục 0.5, 0.6, 0.7, 0.8 · Kiểm định tập thương</span>
+      </button>
+    </div>
+  </div>
+
 <p>
 Các cấu trúc thương xuất hiện khi nhiều biểu diễn khác nhau được xem là cùng một đối tượng.
 Chương này xây dựng ngôn ngữ cần thiết để làm việc chính xác với ý tưởng ấy: ánh xạ, một số công cụ số học, quan hệ tương đương, tập thương, phép toán hai ngôi và tính xác định tốt.
@@ -9,7 +40,22 @@ Mục đích không phải là ôn lại lý thuyết tập hợp hay số học
 </p>
 
 <!-- 0.1 ĐỘNG CƠ SƯ PHẠM -->
+
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 0.1 · Tiết 1–2 ==================== -->
+  <div class="lp-unit-header" id="lp-u0-1">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 0.1 · Tiết 1–2 · Mục 0.1, 0.2, 0.4 · Nền tảng phân hoạch</span>
+      <h4 class="lp-unit-title">Ánh xạ, Quan hệ tương đương & Tập thương</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u0-1" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u0-1')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
 <h3 class="subsection-title">0.1. Một đối tượng, nhiều cách biểu diễn</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s1">Bước 1 · Khởi động & Động cơ</span>
+    <span class="lp-step-goal">Tại sao cần đồng nhất nhiều biểu diễn thành một đối tượng?</span>
+  </div>
 <p>
 Trên mặt đồng hồ mười hai giờ, các số $5$, $17$ và $-7$ cùng chỉ một vị trí của kim giờ. Nếu chỉ quan tâm đến vị trí của kim giờ, ta muốn xem các số nguyên sai khác nhau một bội của $12$ là những biểu diễn của cùng một đối tượng. Phép cộng vẫn có ý nghĩa sau sự đồng nhất này: thay $5$ bởi $17$ và thay $8$ bởi $-4$ không làm thay đổi vị trí được biểu diễn bởi tổng. Quả thật,
 $$5 + 8 = 13, \qquad 17 + (-4) = 13.$$
@@ -23,6 +69,10 @@ Công thức này dùng trực tiếp bốn số được chọn làm đại di�
 
 <!-- 0.2 TẬP HỢP VÀ ÁNH XẠ -->
 <h3 class="subsection-title">0.2. Tập hợp và Ánh xạ</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Định nghĩa Ánh xạ, Ảnh, Nghịch ảnh & Quy ước hợp thành phải sang trái</span>
+  </div>
 <div class="math-card def" data-type="def">
 <div class="card-header">
 <span class="label">📘 ĐỊNH NGHĨA 0.1</span>
@@ -65,7 +115,32 @@ Cho hai tập hợp $X$ và $Y$. Một <b>ánh xạ</b> $f: X \to Y$ là một q
 </div>
 
 <!-- 0.3 CÔNG CỤ SỐ HỌC TỐI THIỂU -->
+
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 0.1: Vận dụng Ánh xạ, Ảnh và Nghịch ảnh</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(0, 'ex-0-1')">✍️ Giải Bài tập 0.1 (Ánh xạ)</button>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(0)">📐 Mẫu CM 2 tập bằng nhau</button>
+    <button type="button" class="lp-bridge-btn quiz" onclick="startChapterQuickExam(0)">⚡ Trắc nghiệm Chương 0</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 0.2 · Tiết 3–4 ==================== -->
+  <div class="lp-unit-header" id="lp-u0-2">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 0.2 · Tiết 3–4 · Mục 0.3, 0.4 · Thuật toán số học & Z/nZ</span>
+      <h4 class="lp-unit-title">Công cụ Số học: Chia Euclid, Bézout & Lớp đồng dư</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u0-2" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u0-2')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
 <h3 class="subsection-title">0.3. Công cụ số học tối thiểu: Chia hết, Euclid & Bézout</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Phép chia Euclid, ƯCLN, Đồng nhất thức Bézout & Hàm Euler</span>
+  </div>
 <div class="math-card def" data-type="def">
 <div class="card-header">
 <span class="label">📘 ĐỊNH NGHĨA 0.2</span>
@@ -171,7 +246,24 @@ Quy ước biên: $R_1 = \{0\}$ và $\gcd(0, 1) = 1$, do đó $\varphi(1) = 1$.
 </div>
 
 <!-- 0.4 QUAN HỆ TƯƠNG ĐƯƠNG VÀ TẬP THƯƠNG -->
-<h3 class="subsection-title">0.4. Quan hệ tương đương và Tập thương</h3>
+
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Tìm hệ số Bézout & Nghịch đảo modulo n</strong>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(2)">📐 Xem Mẫu CM Quan hệ tương đương</button>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Chia Euclid xuôi):</b> Thực hiện phép chia $a = bq + r$ ($0 \le r < b$) liên tiếp cho tới khi số dư khác $0$ cuối cùng là $d = \gcd(a, b)$.</li>
+    <li><b>Bước 2 (Truy ngược Bézout):</b> Biểu diễn $d$ từ dòng kế cuối, thế dần các số dư từ dưới lên theo hai biến gốc $a, b$ để được $ua + vb = d$.</li>
+    <li><b>Bước 3 (Kết luận lớp tương đương):</b> Nếu $\gcd(a, n) = 1$, từ $ua + vn = 1$ lấy modulo $n$ suy ra $[u]_n = [a]_n^{-1}$ trong $U(n)$.</li>
+  </ol>
+</div>
+
+  <h3 class="subsection-title">0.4. Quan hệ tương đương và Tập thương</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Ba tiên đề Quan hệ tương đương & Định lý Phân hoạch Tập thương</span>
+  </div>
 <div class="math-card def" data-type="def">
 <div class="card-header">
 <span class="label">📘 ĐỊNH NGHĨA 0.5</span>
@@ -255,7 +347,32 @@ Trên $\mathbb{Z}$, đặt $a \, R \, b \iff |a - b| \le 1$.
 </details>
 
 <!-- 0.5 PHÉP TOÁN HAI NGÔI -->
+
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 0.2: Thực hành Euclid – Bézout & Phân hoạch lớp tương đương</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(0, 'ex-0-4')">✍️ Giải Bài tập 0.4 (Bézout)</button>
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(0, 'ex-0-16')">✍️ Giải Bài tập 0.16 (Lớp tương đương)</button>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(2)">📐 Mẫu CM Quan hệ tương đương</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 0.3 · Tiết 5–6 ==================== -->
+  <div class="lp-unit-header" id="lp-u0-3">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 0.3 · Tiết 5–6 · Mục 0.5, 0.6, 0.7, 0.8 · Kiểm định tập thương</span>
+      <h4 class="lp-unit-title">Phép toán hai ngôi, Tính xác định tốt & Mẫu chứng minh</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u0-3" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u0-3')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
 <h3 class="subsection-title">0.5. Phép toán hai ngôi</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Phép toán hai ngôi: Tính đóng, Kết hợp, Đơn vị & Nghịch đảo</span>
+  </div>
 <div class="math-card def" data-type="def">
 <div class="card-header">
 <span class="label">📘 ĐỊNH NGHĨA 0.7</span>
@@ -302,6 +419,10 @@ Do đó phép trừ không có tính kết hợp. Nó cũng không giao hoán ($
 
 <!-- 0.6 TÍNH XÁC ĐỊNH TỐT -->
 <h3 class="subsection-title">0.6. Tính xác định tốt trên Tập thương</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Thuật toán & Kiểm định</span>
+    <span class="lp-step-goal">Tiêu chuẩn Xác định tốt (Well-defined) & Phản ví dụ phụ thuộc đại diện</span>
+  </div>
 <div class="math-card thm" data-type="thm">
 <div class="card-header">
 <span class="label">🏛️ ĐỊNH LÝ 0.14</span>
@@ -358,7 +479,24 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 </details>
 
 <!-- 0.7 MẪU CHỨNG MINH VÀ PHẢN VÍ DỤ -->
-<h3 class="subsection-title">0.7. Mẫu chứng minh và Cách xây dựng phản ví dụ</h3>
+
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Kiểm tra phép toán / ánh xạ trên tập thương xác định tốt</strong>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(1)">📐 Mở Khuôn mẫu Xác định tốt (#2)</button>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Giả sử đổi đại diện):</b> Lấy hai đại diện bất kỳ của cùng lớp đầu vào: $[x] = [x']$ và $[y] = [y']$.</li>
+    <li><b>Bước 2 (Chuyển về điều kiện phần tử):</b> Khai thác định nghĩa quan hệ tương đương $x \sim x'$ và $y \sim y'$ (ví dụ $n \mid (x-x')$).</li>
+    <li><b>Bước 3 (Kiểm định đầu ra):</b> Chứng minh $F(x, y) \sim F(x', y')$, suy ra $[F(x, y)] = [F(x', y')]$ (độc lập đại diện).</li>
+  </ol>
+</div>
+
+  <h3 class="subsection-title">0.7. Mẫu chứng minh và Cách xây dựng phản ví dụ</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s4">Bước 4 · Phương pháp & Bẫy sai lầm</span>
+    <span class="lp-step-goal">Bốn khuôn mẫu chứng minh chuẩn mực & Bốn lỗi suy luận kinh điển</span>
+  </div>
 <div class="math-card" style="border-color:var(--thm-border); background:var(--paper);">
 <div class="card-header" style="background:var(--thm-bg); color:var(--thm-color);">
 <span class="label">📐 BỐN KHUÔN MẪU CHỨNG MINH CHUẨN MỰC</span>
@@ -382,6 +520,10 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 
 <!-- 0.8 TÓM TẮT & THUẬT NGỮ CHÍNH -->
 <h3 class="subsection-title">0.8. Tóm tắt và Thuật ngữ chính</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s5">Bước 5 · Chốt & Hệ thống hóa</span>
+    <span class="lp-step-goal">Bảng tóm tắt thuật ngữ song ngữ Chương 0</span>
+  </div>
 <div class="table-wrapper">
 <table class="compare-table">
 <thead>
@@ -424,5 +566,15 @@ Sự không tương thích giữa các môđun làm công thức hoàn toàn vô
 </tr>
 </tbody>
 </table>
+</div>
+
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Hoàn tất Chương 0: Thực hành Xác định tốt & Phép toán hai ngôi</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(0, 'ex-0-13')">✍️ Bài 0.13 (Xác định tốt)</button>
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(0, 'ex-0-18')">✍️ Bài 0.18 (Phép toán *)</button>
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(0, 'ex-0-20')">✍️ Bài 0.20 (Nhúng phân số)</button>
+    <button type="button" class="lp-bridge-btn quiz" onclick="startChapterQuickExam(0)">🚀 Làm Đề Kiểm Tra Chương 0</button>
+  </div>
 </div>
 </div>

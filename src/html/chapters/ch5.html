@@ -1,6 +1,37 @@
 <!-- ======================================================== -->
 <div class="chapter-content" id="tab-c5">
   <h2 class="section-title">Chương 5. Đồng Cấu Nhóm và Các Định Lý Đẳng Cấu</h2>
+
+  <!-- ==================== BẢNG KẾ HOẠCH BÀI HỌC (LESSON PLAN META-BANNER) ==================== -->
+  <div class="lp-meta-banner" id="lp-banner-c5">
+    <div class="lp-meta-top">
+      <div class="lp-meta-badges">
+        <span class="lp-badge">📅 Tuần 10–11 · 06 Tiết (3 LT + 3 BT)</span>
+        <span class="lp-badge clo">🎯 Chuẩn đầu ra: CLO3, CLO4 · Đồng cấu & Các Định lý Đẳng cấu Nhóm</span>
+        <span class="lp-badge weight">⚖️ Trọng tâm: Phương pháp 3 bước G/ker(φ) ≅ im(φ) & Bất biến đẳng cấu</span>
+      </div>
+      <span class="lp-progress-pill">Tiến độ bài học: 0/3 bài</span>
+    </div>
+    <p class="lp-objectives"><strong>Mục tiêu bài học:</strong> Kiểm tra được một ánh xạ là đồng cấu nhóm, xác định hạt nhân $\ker\varphi \trianglelefteq G$, tập ảnh $\operatorname{im}\varphi \le K$ và áp dụng tiêu chuẩn đơn cấu $\ker\varphi = \{e_G\}$; làm chủ Phương pháp 3 bước nhận diện nhóm thương qua Định lý Đẳng cấu Thứ nhất cùng các Định lý Đẳng cấu 2, 3 và Tương ứng; sử dụng bất biến đẳng cấu (cấp phần tử, tính Abel, tính cyclic) để phân biệt các nhóm cùng cấp.</p>
+    <div class="lp-unit-nav" role="navigation" aria-label="Lộ trình bài học Chương 5">
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u5-1')">
+        <span class="u-code">Bài 5.1 · Tiết 28–29</span>
+        <span class="u-name">Đồng cấu Nhóm, Phân loại Ánh xạ & Tính chất Bảo toàn</span>
+        <span class="u-sub">Mục 5.1, 5.2 · Đơn cấu, Toàn cấu, Đẳng cấu, Tự đẳng cấu</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u5-2')">
+        <span class="u-code">Bài 5.2 · Tiết 30–31</span>
+        <span class="u-name">Hạt nhân ker(φ), Tập ảnh im(φ) & Tiêu chuẩn Đơn cấu Cốt lõi</span>
+        <span class="u-sub">Mục 5.3 · Chứng minh ker(φ) ⊴ G và φ đơn ánh ⇔ ker(φ) = {e}</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u5-3')">
+        <span class="u-code">Bài 5.3 · Tiết 32–33</span>
+        <span class="u-name">Bộ 4 Định lý Đẳng cấu Nhóm, Phương pháp 3 bước & Bất biến Đẳng cấu</span>
+        <span class="u-sub">Mục 5.4, 5.5, 5.6, 5.7 · Nhận diện G/N ≅ K & Phân biệt nhóm cùng cấp</span>
+      </button>
+    </div>
+  </div>
+
   
   <p class="welcome-copy">
     Ở các chương trước, ta nghiên cứu cấu trúc bên trong của một nhóm thông qua các nhóm con, lớp kề và nhóm thương. 
@@ -10,7 +41,22 @@
   </p>
 
   <!-- 5.1 ĐỘNG CƠ SƯ PHẠM: TỪ ĐỔI TÊN ĐẾN BẢO TOÀN PHÉP TOÁN -->
-  <h3 class="subsection-title">5.1. Khởi Nguồn Sư Phạm: So Sánh Cấu Trúc Bằng Ánh Xạ Giữ Phép Toán</h3>
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 5.1 · Tiết 28–29 ==================== -->
+  <div class="lp-unit-header" id="lp-u5-1">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 5.1 · Tiết 28–29 · Mục 5.1, 5.2 · Đơn cấu, Toàn cấu, Đẳng cấu, Tự đẳng cấu</span>
+      <h4 class="lp-unit-title">Đồng cấu Nhóm, Phân loại Ánh xạ & Tính chất Bảo toàn</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u5-1" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u5-1')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">5.1. Khởi Nguồn Sư Phạm: So Sánh Cấu Trúc Bằng Ánh Xạ Giữ Phép Toán</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s1">Bước 1 · Khởi động & Động cơ</span>
+    <span class="lp-step-goal">So sánh cấu trúc hai nhóm qua ánh xạ giữ phép toán f(x) = eˣ</span>
+  </div>
   <p>
     Trong toán học, hai nhóm có thể mang vẻ ngoài hoàn toàn khác nhau về bản chất phần tử:
   </p>
@@ -27,6 +73,10 @@
 
   <!-- 5.2 ĐỊNH NGHĨA ĐỒNG CẤU & PHÂN LOẠI ÁNH XẠ -->
   <h3 class="subsection-title">5.2. Định Nghĩa Đồng Cấu, Đẳng Cấu và Bảng Phân Loại Toàn Diện</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Định nghĩa Đồng cấu nhóm, Hệ quả bảo toàn & Phân loại 5 dạng đồng cấu</span>
+  </div>
   
   <div class="math-card def" data-type="def" style="margin-bottom: 1.2rem;">
     <div class="card-header">
@@ -88,7 +138,30 @@
   </div>
 
   <!-- 5.3 HẠT NHÂN VÀ TẬP ẢNH -->
-  <h3 class="subsection-title">5.3. Hạt Nhân, Tập Ảnh và Tiêu Chuẩn Đơn Cấu Cốt Lõi</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 5.1: Nhận diện Đồng cấu nhóm trên ℝ và GL₂(ℝ)</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(5, 'ex-5-1')">✍️ Giải Bài 5.1 (Khảo sát đồng cấu, ker & im)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 5.2 · Tiết 30–31 ==================== -->
+  <div class="lp-unit-header" id="lp-u5-2">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 5.2 · Tiết 30–31 · Mục 5.3 · Chứng minh ker(φ) ⊴ G và φ đơn ánh ⇔ ker(φ) = {e}</span>
+      <h4 class="lp-unit-title">Hạt nhân ker(φ), Tập ảnh im(φ) & Tiêu chuẩn Đơn cấu Cốt lõi</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u5-2" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u5-2')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">5.3. Hạt Nhân, Tập Ảnh và Tiêu Chuẩn Đơn Cấu Cốt Lõi</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Hạt nhân ker(φ) ⊴ G, Tập ảnh im(φ) ≤ K & Tiêu chuẩn đơn cấu ker(φ) = {e}</span>
+  </div>
   <p>
     Để kiểm soát mức độ "mất mát thông tin" khi ánh xạ nhóm $G$ sang nhóm $K$, ta xét hai tập con then chốt:
   </p>
@@ -162,7 +235,30 @@
   </details>
 
   <!-- 5.4 ĐỊNH LÝ ĐẲNG CẤU THỨ NHẤT & PHƯƠNG PHÁP 3 BƯỚC -->
-  <h3 class="subsection-title">5.4. Định Lý Đẳng Cấu Thứ Nhất và Phương Pháp 3 Bước Nhận Diện Nhóm Thương</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 5.2: Vận dụng Tiêu chuẩn Đơn cấu qua Hạt nhân</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(5, 'ex-5-5')">✍️ Giải Bài 5.5 (Chứng minh φ đơn ánh ⇔ ker φ = {e})</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 5.3 · Tiết 32–33 ==================== -->
+  <div class="lp-unit-header" id="lp-u5-3">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 5.3 · Tiết 32–33 · Mục 5.4, 5.5, 5.6, 5.7 · Nhận diện G/N ≅ K & Phân biệt nhóm cùng cấp</span>
+      <h4 class="lp-unit-title">Bộ 4 Định lý Đẳng cấu Nhóm, Phương pháp 3 bước & Bất biến Đẳng cấu</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u5-3" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u5-3')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">5.4. Định Lý Đẳng Cấu Thứ Nhất và Phương Pháp 3 Bước Nhận Diện Nhóm Thương</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Định lý Trọng tâm & Thuật toán</span>
+    <span class="lp-step-goal">Định lý Đẳng cấu Thứ nhất & Quy trình 3 bước nhận diện nhóm thương G/N ≅ K</span>
+  </div>
   <p>
     Vì $\ker\varphi$ luôn là nhóm con chuẩn tắc của $G$, ta luôn có thể tạo ra nhóm thương $G/\ker\varphi$. 
     Định lý đẳng cấu thứ nhất khẳng định nhóm thương này phản chiếu trọn vẹn tập ảnh:
@@ -214,7 +310,24 @@
   </div>
 
   <!-- 5.5 BỘ BA ĐỊNH LÝ ĐẲNG CẤU MỞ RỘNG -->
+  
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Nhận diện nhóm thương G/N ≅ K bằng Định lý Đẳng cấu I</strong>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(5)">📐 Mở Khuôn mẫu Đẳng cấu I (#6)</button>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Dựng đồng cấu từ nhóm mẹ):</b> Thiết lập ánh xạ $\varphi : G \to K$ và kiểm tra $\varphi(xy) = \varphi(x)\varphi(y), \forall x, y \in G$.</li>
+    <li><b>Bước 2 (Chứng minh toàn ánh):</b> Với mỗi $k \in K$, chỉ ra phần tử $g \in G$ sao cho $\varphi(g) = k$ để suy ra $\operatorname{im}\varphi = K$.</li>
+    <li><b>Bước 3 (Giải hạt nhân & Kết luận):</b> Giải phương trình $\varphi(g) = e_K$ để chứng minh $\ker\varphi = N$. Áp dụng Định lý Đẳng cấu I kết luận $G/N \cong K$.</li>
+  </ol>
+</div>
+
   <h3 class="subsection-title">5.5. Hệ Thống Định Lý Cấu Trúc Mở Rộng: Định Lý Thứ Hai, Thứ Ba và Định Lý Tương Ứng</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Mở rộng Cấu trúc</span>
+    <span class="lp-step-goal">Định lý Đẳng cấu Thứ hai (Hình thoi), Thứ ba (Thương của thương) & Tương ứng</span>
+  </div>
 
   <!-- ĐỊNH LÝ 2 -->
   <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
@@ -300,6 +413,10 @@
 
   <!-- 5.6 BẤT BIẾN ĐẲNG CẤU & BẪY CÙNG CẤP -->
   <h3 class="subsection-title">5.6. Bất Biến Đẳng Cấu: Nhận Diện Hai Cấu Trúc Khác Nhau Dù Cùng Cấp</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s4">Bước 4 · Bất biến & Bẫy sai lầm</span>
+    <span class="lp-step-goal">Bất biến đẳng cấu & Bác bỏ ngộ nhận 'Hai nhóm cùng cấp thì đẳng cấu' (ℤ₄ vs V₄, ℤ₆ vs S₃)</span>
+  </div>
   
   <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
     <div class="card-header">
@@ -343,6 +460,10 @@
 
   <!-- 5.7 BẢNG TỔNG HỢP SO SÁNH 4 ĐỊNH LÝ ĐẲNG CẤU -->
   <h3 class="subsection-title">5.7. Bảng Tổng Hợp So Sánh Bốn Định Lý Đẳng Cấu Nhóm</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s5">Bước 5 · Chốt & Hệ thống hóa</span>
+    <span class="lp-step-goal">Bảng tổng hợp đối chiếu toàn diện 4 Định lý Đẳng cấu Nhóm</span>
+  </div>
   <div class="table-wrapper">
     <table class="compare-table">
       <thead>
@@ -381,5 +502,14 @@
       </tbody>
     </table>
   </div>
+
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Hoàn tất Chương 5 (Trọn vẹn Phần I - Lý thuyết Nhóm)</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(5, 'ex-5-39')">✍️ Giải Bài 5.39 (Phương pháp 3 bước trên (ℤ×ℤ)/Δ)</button>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(5)">📐 Mẫu trình bày Đẳng cấu I (#6)</button>
+    <button type="button" class="lp-bridge-btn quiz" onclick="startChapterQuickExam(5)">🚀 Làm Đề Kiểm Tra Chương 5</button>
+  </div>
+</div>
 </div>
 <!-- ==================== HẾT CHƯƠNG 5 HOÀN CHỈNH ==================== -->

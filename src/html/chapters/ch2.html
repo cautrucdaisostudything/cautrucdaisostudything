@@ -1,6 +1,37 @@
 <!-- ======================================================== -->
 <div class="chapter-content" id="tab-c2">
   <h2 class="section-title">Chương 2. Nhóm Con và Nhóm Cyclic</h2>
+
+  <!-- ==================== BẢNG KẾ HOẠCH BÀI HỌC (LESSON PLAN META-BANNER) ==================== -->
+  <div class="lp-meta-banner" id="lp-banner-c2">
+    <div class="lp-meta-top">
+      <div class="lp-meta-badges">
+        <span class="lp-badge">📅 Tuần 5–6 · 06 Tiết (3 LT + 3 BT)</span>
+        <span class="lp-badge clo">🎯 Chuẩn đầu ra: CLO2 · Nhóm con, Cấp phần tử & Nhóm Cyclic</span>
+        <span class="lp-badge weight">⚖️ Trọng tâm: Tiêu chuẩn xy⁻¹ ∈ H & Cấu trúc nhóm Cyclic</span>
+      </div>
+      <span class="lp-progress-pill">Tiến độ bài học: 0/3 bài</span>
+    </div>
+    <p class="lp-objectives"><strong>Mục tiêu bài học:</strong> Áp dụng thành thạo Tiêu chuẩn nhóm con rút gọn 1 bước ($xy^{-1} \in H$ hoặc $x-y \in H$) và Tiêu chuẩn tập hữu hạn ($xy \in H$); nắm vững tính chất giao/hợp hai nhóm con và nhóm con sinh $\langle S \rangle$; tính chính xác cấp phần tử $\operatorname{ord}(a^k) = n/\gcd(n,k)$, số phần tử sinh $\varphi(n)$ và vẽ được Mạng lưới nhóm con (Subgroup Lattice) của $\mathbb{Z}/n\mathbb{Z}$.</p>
+    <div class="lp-unit-nav" role="navigation" aria-label="Lộ trình bài học Chương 2">
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u2-1')">
+        <span class="u-code">Bài 2.1 · Tiết 13–14</span>
+        <span class="u-name">Khái niệm Nhóm con, Tiêu chuẩn Rút gọn & Phép Giao – Hợp</span>
+        <span class="u-sub">Mục 2.1, 2.2, 2.3 · Phép thử 1 bước & Tiêu chuẩn tập hữu hạn</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u2-2')">
+        <span class="u-code">Bài 2.2 · Tiết 15–16</span>
+        <span class="u-name">Nhóm con sinh bởi Tập hợp ⟨S⟩, Cấp Phần tử & Khái niệm Nhóm Cyclic</span>
+        <span class="u-sub">Mục 2.4, 2.5 · Quy tắc đồng dư số mũ theo cấp ord(a)</span>
+      </button>
+      <button type="button" class="lp-unit-link" onclick="scrollToLessonUnit('lp-u2-3')">
+        <span class="u-code">Bài 2.3 · Tiết 17–18</span>
+        <span class="u-name">Định lý Cấu trúc Nhóm Cyclic, Mạng lưới Nhóm con & Bẫy Ngộ nhận</span>
+        <span class="u-sub">Mục 2.6, 2.7, 2.8, 2.9 · Phân loại theo ước số & Phản ví dụ U(8)</span>
+      </button>
+    </div>
+  </div>
+
   
   <p class="welcome-copy">
     Trong một nhóm đã biết, nhiều tập hợp con tự mang đầy đủ cấu trúc nhóm độc lập. 
@@ -9,7 +40,22 @@
   </p>
 
   <!-- 2.1 KHỞI NGUỒN CẤU TRÚC NỘI TẠI -->
-  <h3 class="subsection-title">2.1. Khởi Nguồn Cấu Trúc Nội Tại: Từ Tập Con Đến Khái Niệm Nhóm Con</h3>
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 2.1 · Tiết 13–14 ==================== -->
+  <div class="lp-unit-header" id="lp-u2-1">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 2.1 · Tiết 13–14 · Mục 2.1, 2.2, 2.3 · Phép thử 1 bước & Tiêu chuẩn tập hữu hạn</span>
+      <h4 class="lp-unit-title">Khái niệm Nhóm con, Tiêu chuẩn Rút gọn & Phép Giao – Hợp</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u2-1" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u2-1')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">2.1. Khởi Nguồn Cấu Trúc Nội Tại: Từ Tập Con Đến Khái Niệm Nhóm Con</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s1">Bước 1 · Khởi động & Động cơ</span>
+    <span class="lp-step-goal">Từ các tập con số học đến định nghĩa chính tắc của Nhóm con H ≤ G</span>
+  </div>
   <p>
     Trong nhóm cộng số nguyên $(\mathbb{Z}, +)$, tập các số chẵn $2\mathbb{Z}$ đóng với phép cộng, chứa số $0$, và với mọi số chẵn $2m$ đều chứa số đối $-2m$. 
     Do đó $2\mathbb{Z}$ tự nó là một nhóm hoàn chỉnh. Trái lại, tập $\mathbb{N} = \{0, 1, 2, \dots\}$ chứa $0$ và đóng với cộng, nhưng không chứa số đối của các số dương.
@@ -52,6 +98,10 @@
 
   <!-- 2.2 TIÊU CHUẨN NHÓM CON RÚT GỌN -->
   <h3 class="subsection-title">2.2. Tiêu Chuẩn Nhóm Con: Tối Giản Hóa Tiên Đề Qua Các Phép Thử</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Tiêu chuẩn & Thuật toán</span>
+    <span class="lp-step-goal">Tối giản hóa tiên đề: Phép thử 1 bước (xy⁻¹ ∈ H) & Phép thử tập hữu hạn</span>
+  </div>
   <p>
     Việc kiểm tra lần lượt cả 4 điều kiện trên rất dài dòng. Các định lý sau đây cung cấp những tiêu chuẩn rút gọn tối ưu:
   </p>
@@ -157,7 +207,24 @@
   </div>
 
   <!-- 2.3 GIAO VÀ HỢP CÁC NHÓM CON -->
+  
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Chứng minh H là nhóm con của G (H ≤ G)</strong>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(3)">📐 Mở Khuôn mẫu Nhóm con (#4)</button>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Kiểm tra khác rỗng):</b> Chỉ rõ $H \subseteq G$ và chỉ ra phần tử đơn vị $e_G \in H$ (hoặc $0_G \in H$) để suy ra $H \neq \emptyset$.</li>
+    <li><b>Bước 2 (Kiểm tra điều kiện gộp):</b> Lấy tùy ý $x, y \in H$, biến đổi chứng minh $xy^{-1} \in H$ (hoặc $x - y \in H$ nếu là nhóm cộng). <i>(Nếu $H$ hữu hạn, chỉ cần kiểm tra $xy \in H$).</i></li>
+    <li><b>Bước 3 (Kết luận):</b> Theo Tiêu chuẩn nhóm con rút gọn (Định lý 2.2 / 2.3), kết luận $H \le G$.</li>
+  </ol>
+</div>
+
   <h3 class="subsection-title">2.3. Đại Số Các Nhóm Con: Phép Giao Bảo Toàn & Trở Ngại Của Phép Hợp</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Giao của họ nhóm con bất kỳ & Điều kiện để Hợp hai nhóm con là nhóm con</span>
+  </div>
   
   <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
     <div class="card-header">
@@ -221,7 +288,32 @@
   </details>
 
   <!-- 2.4 NHÓM CON SINH BỞI TẬP HỢP -->
-  <h3 class="subsection-title">2.4. Phép Dựng Nhóm Con Sinh Bởi Tập Hợp $\langle S \rangle$</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 2.1: Thực hành Tiêu chuẩn Nhóm con Vô hạn & Hữu hạn</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(2, 'ex-2-1')">✍️ Giải Bài 2.1 (Nhóm con của ℤ)</button>
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(2, 'ex-2-2')">✍️ Giải Bài 2.2 (Tập con hữu hạn S₃)</button>
+    <button type="button" class="lp-bridge-btn" onclick="openProofTemplateById(3)">📐 Mẫu CM Nhóm con (#4)</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 2.2 · Tiết 15–16 ==================== -->
+  <div class="lp-unit-header" id="lp-u2-2">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 2.2 · Tiết 15–16 · Mục 2.4, 2.5 · Quy tắc đồng dư số mũ theo cấp ord(a)</span>
+      <h4 class="lp-unit-title">Nhóm con sinh bởi Tập hợp ⟨S⟩, Cấp Phần tử & Khái niệm Nhóm Cyclic</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u2-2" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u2-2')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">2.4. Phép Dựng Nhóm Con Sinh Bởi Tập Hợp $\langle S \rangle$</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Nhóm con sinh bởi tập hợp ⟨S⟩: Góc nhìn giao từ trên xuống & Từ dưới lên</span>
+  </div>
   <p>
     Vì hợp của các nhóm con nói chung không phải là nhóm con, ta cần công cụ để tạo ra nhóm con bé nhất chứa một tập hợp cho trước.
   </p>
@@ -259,6 +351,10 @@
 
   <!-- 2.5 CẤP PHẦN TỬ VÀ NHÓM CYCLIC -->
   <h3 class="subsection-title">2.5. Cấp Của Phần Tử & Sự Hình Thành Nhóm Cyclic</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s2">Bước 2 · Lõi Lý thuyết</span>
+    <span class="lp-step-goal">Cấp của phần tử ord(a), Quy tắc chia hết số mũ & Nhóm Cyclic</span>
+  </div>
   <p>
     Trường hợp cơ bản và quan trọng nhất của nhóm con sinh là khi tập sinh chỉ gồm đúng một phần tử: $S = \{a\}$. 
     Khi đó $\langle a \rangle = \{a^k \mid k \in \mathbb{Z}\}$ (hoặc $\{ka \mid k \in \mathbb{Z}\}$ trong ký hiệu cộng).
@@ -322,7 +418,31 @@
   </div>
 
   <!-- 2.6 ĐỊNH LÝ PHÂN LOẠI TOÀN DIỆN NHÓM CYCLIC -->
-  <h3 class="subsection-title">2.6. Định Lý Cấu Trúc Toàn Diện Của Nhóm Cyclic</h3>
+  
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Chốt Bài 2.2: Khảo sát Cấp phần tử & Nhóm con sinh</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(2, 'ex-2-12')">✍️ Giải Bài 2.12 (Cấp phần tử trong ℤ/18ℤ)</button>
+    <button type="button" class="lp-bridge-btn" onclick="document.getElementById('labFab')?.click()">🧪 Khám phá phần tử sinh trong LAB</button>
+  </div>
+</div>
+
+  
+  <!-- ==================== PHÂN TÁCH BÀI HỌC: Bài 2.3 · Tiết 17–18 ==================== -->
+  <div class="lp-unit-header" id="lp-u2-3">
+    <div class="lp-unit-title-wrap">
+      <span class="lp-unit-eyebrow">Bài 2.3 · Tiết 17–18 · Mục 2.6, 2.7, 2.8, 2.9 · Phân loại theo ước số & Phản ví dụ U(8)</span>
+      <h4 class="lp-unit-title">Định lý Cấu trúc Nhóm Cyclic, Mạng lưới Nhóm con & Bẫy Ngộ nhận</h4>
+    </div>
+    <button type="button" class="lp-unit-done-btn" data-unit-id="lp-u2-3" aria-pressed="false" onclick="toggleLessonUnitDone(this, 'lp-u2-3')">
+      ⚪ Đánh dấu đã học xong
+    </button>
+  </div>
+<h3 class="subsection-title">2.6. Định Lý Cấu Trúc Toàn Diện Của Nhóm Cyclic</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Định lý Cấu trúc & Thuật toán</span>
+    <span class="lp-step-goal">Định lý cơ bản về nhóm Cyclic: Nhóm con duy nhất theo ước & Hàm Euler</span>
+  </div>
   <div class="math-card thm" data-type="thm" style="margin-bottom: 1.2rem;">
     <div class="card-header">
       <span class="label">🏛️ ĐỊNH LÝ 2.9</span>
@@ -357,7 +477,23 @@
   </div>
 
   <!-- 2.7 GIAO VÀ HỢP QUA ƯCLN VÀ BCNN -->
+  
+<div class="lp-algo-card">
+  <div class="lp-algo-head">
+    <strong>⚡ Thuật toán 3 bước thực chiến: Phân tích toàn diện nhóm Cyclic G = ⟨a⟩ cấp n</strong>
+  </div>
+  <ol class="lp-algo-steps">
+    <li><b>Bước 1 (Tìm phần tử sinh & Cấp phần tử bất kỳ):</b> Số phần tử sinh là $\varphi(n)$ (các lũy thừa $a^k$ với $\gcd(k, n)=1$). Với mọi $k$, $\operatorname{ord}(a^k) = \dfrac{n}{\gcd(n, k)}$.</li>
+    <li><b>Bước 2 (Liệt kê mọi nhóm con theo ước của n):</b> Liệt kê các ước dương $q \mid n$. Với mỗi ước $q$, nhóm con duy nhất cấp $q$ là $H_q = \langle a^{n/q} \rangle$.</li>
+    <li><b>Bước 3 (Vẽ mạng lưới bao hàm, Giao & Hợp):</b> $\langle a^c \rangle \subseteq \langle a^d \rangle \iff d \mid c$; Giao $\langle a^c \rangle \cap \langle a^d \rangle = \langle a^{\operatorname{lcm}(c,d)} \rangle$; Nhóm sinh $\langle a^c, a^d \rangle = \langle a^{\gcd(c,d)} \rangle$.</li>
+  </ol>
+</div>
+
   <h3 class="subsection-title">2.7. Giao Và Nhóm Con Sinh: Bản Hòa Ca Giữa Đại Số Và Số Học</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s3">Bước 3 · Liên kết Đại số – Số học</span>
+    <span class="lp-step-goal">Giao và nhóm con sinh qua BCNN (lcm) và ƯCLN (gcd)</span>
+  </div>
   <p>
     Trong nhóm cyclic hữu hạn $G = \langle a \rangle$ cấp $n$, cấu trúc nhóm con phản ánh chính xác phép tính số học:
   </p>
@@ -386,6 +522,10 @@
 
   <!-- 2.8 BỘ BẪY NGỘ NHẬN & PHẢN VÍ DỤ -->
   <h3 class="subsection-title">2.8. Bộ Bẫy Ngộ Nhận & Phản Ví Dụ Sư Phạm Kinh Điển</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s4">Bước 4 · Phản ví dụ & Bẫy sai lầm</span>
+    <span class="lp-step-goal">Bẫy 'Abel suy ra Cyclic' (Phản ví dụ U(8)) & Bẫy cùng cấp vô hạn</span>
+  </div>
 
   <details class="ex-card counter" data-type="ex" open style="margin-bottom: 1rem;">
     <summary>⚠️ Bẫy 1: Nhóm giao hoán CHƯA CHẮC là nhóm cyclic (Phản ví dụ U(8))</summary>
@@ -414,6 +554,10 @@
 
   <!-- 2.9 HỆ THỐNG BẢNG KIỂM ĐỊNH & MẠNG LƯỚI NHÓM CON -->
   <h3 class="subsection-title">2.9. Hệ Thống Bảng So Sánh & Mạng Lưới Nhóm Con Khoa Học</h3>
+  <div class="lp-step-bar">
+    <span class="lp-step-pill s5">Bước 5 · Chốt & Hệ thống hóa</span>
+    <span class="lp-step-goal">Bảng kiểm định nhóm con & Sơ đồ mạng lưới Hasse của ℤ/12ℤ</span>
+  </div>
 
   <p><b>1. Bảng Kiểm Định Nhóm Con Trên Các Mô Hình Quen Thuộc:</b></p>
   <div class="table-wrapper" style="margin-bottom: 2rem;">
@@ -598,5 +742,14 @@
     </div>
   </div>
 
+
+<div class="lp-practice-bridge">
+  <div class="lp-bridge-label">🎯 <span>Hoàn tất Chương 2: Vận dụng Định lý Cấu trúc Nhóm Cyclic</span></div>
+  <div class="lp-bridge-actions">
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(2, 'ex-2-12')">✍️ Bài 2.12 (Phân tích ℤ/18ℤ)</button>
+    <button type="button" class="lp-bridge-btn" onclick="goToPracticeExercise(2, 'ex-2-32')">✍️ Bài 2.32 (Số nghiệm xᵐ = e)</button>
+    <button type="button" class="lp-bridge-btn quiz" onclick="startChapterQuickExam(2)">🚀 Làm Đề Kiểm Tra Chương 2</button>
+  </div>
+</div>
 </div>
 <!-- ==================== HẾT CHƯƠNG 2 HOÀN CHỈNH ==================== -->

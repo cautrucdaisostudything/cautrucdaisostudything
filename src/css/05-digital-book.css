@@ -936,3 +936,299 @@ mark.db-user-highlight:hover {
   color: var(--db-text-main) !important;
   border-color: var(--db-border-strong) !important;
 }
+
+/* ==========================================================================
+   8. HỆ THỐNG BÀI HỌC CHUẨN KẾ HOẠCH & MÔ-ĐUN NHẬN THỨC 5 BƯỚC (LESSON PLAN UI)
+   ========================================================================== */
+.lp-meta-banner {
+  border: 1.5px solid var(--def-border, #CBD6E6);
+  border-left: 5px solid var(--brand, #315B96);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--def-bg, #E8EDF5) 55%, var(--paper, #FFFFFF));
+  padding: 18px 22px;
+  margin: 0 0 24px;
+  font-family: var(--db-font-sans, var(--font-ui));
+  box-shadow: var(--db-shadow-soft);
+}
+.lp-meta-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--line, #E4DED3);
+  margin-bottom: 12px;
+}
+.lp-meta-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.lp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--paper, #FFFFFF);
+  color: var(--brand, #315B96);
+  border: 1px solid var(--def-border, #CBD6E6);
+}
+.lp-badge.clo {
+  background: var(--thm-bg, #F2F6F3);
+  color: var(--thm-color, #256046);
+  border-color: var(--thm-border, #C8DDD2);
+}
+.lp-badge.weight {
+  background: var(--cor-bg, #fffbeb);
+  color: var(--cor-color, #92400e);
+  border-color: var(--cor-border, #fde68a);
+}
+.lp-progress-pill {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--thm-color, #256046);
+  background: var(--paper, #FFFFFF);
+  border: 1px solid var(--thm-border, #C8DDD2);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+.lp-objectives {
+  margin: 0 0 14px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink, #24334D);
+}
+.lp-objectives strong {
+  color: var(--brand, #315B96);
+}
+.lp-unit-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px;
+}
+.lp-unit-link {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 13px;
+  border-radius: 10px;
+  background: var(--paper, #FFFFFF);
+  border: 1px solid var(--line, #E4DED3);
+  text-decoration: none;
+  color: var(--ink, #24334D);
+  transition: all 0.18s ease;
+  cursor: pointer;
+  text-align: left;
+}
+.lp-unit-link:hover {
+  border-color: var(--brand, #315B96);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+.lp-unit-link .u-code {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--brand, #315B96);
+  letter-spacing: 0.04em;
+}
+.lp-unit-link .u-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink, #24334D);
+  line-height: 1.35;
+}
+.lp-unit-link .u-sub {
+  font-size: 11.5px;
+  color: var(--mute, #6B7A90);
+}
+
+/* Thanh tiêu đề từng Bài học (Lesson Unit Divider) */
+.lp-unit-header {
+  margin: 34px 0 16px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--brand) 12%, var(--paper)), var(--paper));
+  border: 1.5px solid var(--def-border, #CBD6E6);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--db-font-sans, var(--font-ui));
+  scroll-margin-top: 136px;
+}
+.lp-unit-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.lp-unit-eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--brand, #315B96);
+}
+.lp-unit-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink, #24334D);
+}
+.lp-unit-done-btn {
+  border: 1.5px solid var(--line, #E4DED3);
+  background: var(--paper, #FFFFFF);
+  color: var(--ink-soft, #42526E);
+  border-radius: 999px;
+  padding: 6px 13px;
+  font-family: var(--db-font-sans, var(--font-ui));
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.18s ease;
+}
+.lp-unit-done-btn:hover {
+  border-color: var(--thm-color, #256046);
+  color: var(--thm-color, #256046);
+}
+.lp-unit-done-btn.is-done {
+  background: var(--thm-bg, #F2F6F3);
+  color: var(--thm-color, #256046);
+  border-color: var(--thm-color, #256046);
+}
+
+/* Nhãn Bước Nhận thức 5 bước ngay dưới mỗi tiểu mục h3 */
+.lp-step-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: -6px 0 12px;
+  font-family: var(--db-font-sans, var(--font-ui));
+}
+.lp-step-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.lp-step-pill.s1 { background: #e0f2fe; color: #0369a1; }
+.lp-step-pill.s2 { background: var(--def-bg); color: var(--def-color); }
+.lp-step-pill.s3 { background: var(--thm-bg); color: var(--thm-color); }
+.lp-step-pill.s4 { background: var(--warn-bg); color: var(--warn-color); }
+.lp-step-pill.s5 { background: var(--cor-bg); color: var(--cor-color); }
+:root[data-book-mode="dark"] .lp-step-pill.s1,
+:root[data-theme="winter"] .lp-step-pill.s1 {
+  background: rgba(56, 189, 248, 0.18);
+  color: #7dd3fc;
+}
+.lp-step-goal {
+  font-size: 12.5px;
+  color: var(--mute, #6B7A90);
+  font-weight: 600;
+}
+
+/* Hộp Thuật toán 3 bước thực chiến (Algorithm Box) */
+.lp-algo-card {
+  margin: 16px 0;
+  padding: 16px 20px;
+  border-radius: 12px;
+  border: 1.5px solid var(--thm-border, #C8DDD2);
+  border-left: 4.5px solid var(--thm-color, #256046);
+  background: color-mix(in srgb, var(--thm-bg, #F2F6F3) 70%, var(--paper, #FFFFFF));
+  font-family: var(--db-font-sans, var(--font-ui));
+}
+.lp-algo-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.lp-algo-head strong {
+  font-size: 13.5px;
+  color: var(--thm-color, #256046);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.lp-algo-steps {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink, #24334D);
+}
+.lp-algo-steps li {
+  margin-bottom: 5px;
+}
+
+/* Thanh Cầu nối Thực hành cuối mỗi Bài học (Practice Bridge) */
+.lp-practice-bridge {
+  margin: 18px 0 28px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: var(--eq-bg, #F5F2EB);
+  border: 1px solid var(--line, #E4DED3);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--db-font-sans, var(--font-ui));
+}
+.lp-bridge-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink, #24334D);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.lp-bridge-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.lp-bridge-btn {
+  border: 1px solid var(--def-border, #CBD6E6);
+  background: var(--paper, #FFFFFF);
+  color: var(--brand, #315B96);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-family: var(--db-font-sans, var(--font-ui));
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.lp-bridge-btn:hover {
+  background: var(--brand, #315B96);
+  color: #FFFFFF;
+  border-color: var(--brand, #315B96);
+}
+.lp-bridge-btn.quiz {
+  border-color: var(--thm-border, #C8DDD2);
+  color: var(--thm-color, #256046);
+}
+.lp-bridge-btn.quiz:hover {
+  background: var(--thm-color, #256046);
+  color: #FFFFFF;
+}
