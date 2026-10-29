@@ -156,14 +156,24 @@
     if (btnColor) {
       const isDark = settings.colorMode === "dark";
       btnColor.setAttribute("aria-pressed", String(isDark));
-      btnColor.innerHTML = isDark
-        ? '🌙 <span class="db-btn-label">Tối</span>'
-        : '☀️ <span class="db-btn-label">Sáng</span>';
+      btnColor.classList.toggle("is-active", isDark);
+      btnColor.innerHTML = isDark ? "🌙 Nền Tối (Đang bật)" : "☀️ Nền Sáng";
     }
     const fsReadout = document.getElementById("dbFsReadout");
     if (fsReadout) fsReadout.textContent = `${settings.fontSize}px`;
     const lhReadout = document.getElementById("dbLhReadout");
     if (lhReadout) lhReadout.textContent = settings.lineHeight.toFixed(2);
+
+    // Đồng bộ chủ đề 5 mùa trong Popover "⚙️ Hiển thị & Giao diện"
+    const validThemes = ["study", "spring", "summer", "autumn", "winter"];
+    const curSeason = validThemes.includes(settings.seasonTheme)
+      ? settings.seasonTheme
+      : (root.getAttribute("data-theme") || "study");
+    document.querySelectorAll(".db-season-chip[data-season-pick]").forEach(chip => {
+      const on = chip.getAttribute("data-season-pick") === curSeason;
+      chip.classList.toggle("is-active", on);
+      chip.setAttribute("aria-pressed", String(on));
+    });
 
     // Đồng bộ trạng thái 3 Cột (Ý tưởng 2) & Thanh Floating Action Dock (Ý tưởng 4)
     document.body.classList.toggle("db-sidebar-collapsed", Boolean(settings.sidebarCollapsed));
