@@ -437,7 +437,6 @@
 })();
 
 (function initAcademicSupportBatch2() {
-  
   const BM_STORAGE_KEY = "ctds_bookmarks_v1";
 
   function runAcademicBatch2() {
@@ -498,7 +497,7 @@
     });
 
     // ====================================================================
-    // 2. THÊM 2 TAB MỚI VÀO PHÒNG LAB: "🔄 HOÁN VỊ Sn" & "⭐ SỔ TAY ÔN THI"
+    // 2. THÊM 3 TAB MỚI VÀO PHÒNG LAB: "🔄 HOÁN VỊ Sn", "🔗 ĐỒNG CẤU" & "⭐ SỔ TAY ÔN THI"
     // ====================================================================
     if (!document.getElementById("labTabPerm")) {
       const btnPerm = document.createElement("button");
@@ -510,15 +509,6 @@
       btnPerm.dataset.labTab = "perm";
       btnPerm.innerHTML = "🔄 Hoán vị Sₙ";
 
-      const btnNotebook = document.createElement("button");
-      btnNotebook.className = "lab-tab";
-      btnNotebook.setAttribute("role", "tab");
-      btnNotebook.id = "labTabNotebook";
-      btnNotebook.setAttribute("aria-controls", "labPaneNotebook");
-      btnNotebook.setAttribute("aria-selected", "false");
-      btnNotebook.dataset.labTab = "notebook";
-      btnNotebook.innerHTML = `⭐ Sổ tay Ôn thi (<span id="bmTabCount">${bookmarks.size}</span>)`;
-
       const btnHomo = document.createElement("button");
       btnHomo.className = "lab-tab";
       btnHomo.setAttribute("role", "tab");
@@ -528,9 +518,52 @@
       btnHomo.dataset.labTab = "homo";
       btnHomo.innerHTML = "🔗 Đồng cấu &amp; Đẳng cấu I";
 
+      const btnNotebook = document.createElement("button");
+      btnNotebook.className = "lab-tab";
+      btnNotebook.setAttribute("role", "tab");
+      btnNotebook.id = "labTabNotebook";
+      btnNotebook.setAttribute("aria-controls", "labPaneNotebook");
+      btnNotebook.setAttribute("aria-selected", "false");
+      btnNotebook.dataset.labTab = "notebook";
+      btnNotebook.innerHTML = `⭐ Sổ tay Ôn thi (<span id="bmTabCount">${bookmarks.size}</span>)`;
+
       labTabsBar.appendChild(btnPerm);
       labTabsBar.appendChild(btnHomo);
       labTabsBar.appendChild(btnNotebook);
+
+      // Tạo Pane 5: Máy tính Hoán vị Sn & Phân tích Chu trình Độc lập
+      const panePerm = document.createElement("section");
+      panePerm.className = "lab-pane";
+      panePerm.id = "labPanePerm";
+      panePerm.setAttribute("role", "tabpanel");
+      panePerm.setAttribute("aria-labelledby", "labTabPerm");
+      panePerm.hidden = true;
+      panePerm.innerHTML = `
+        <p class="lab-intro">
+          Nhập hai hoán vị <b>σ, τ ∈ Sₙ</b> dưới dạng tích các chu trình (ví dụ: <code>(1 2)(3 4)</code> và <code>(1 2 3)</code>). Máy tính tuân thủ nghiêm ngặt <b>quy ước đọc hợp thành từ phải sang trái</b> của giáo trình: <b>(στ)(x) = σ(τ(x))</b> (thực hiện τ trước, rồi đến σ).
+        </p>
+        <div class="perm-input-grid">
+          <label>Bậc n (3–9)
+            <input id="permLabN" type="number" min="3" max="9" value="4" inputmode="numeric">
+          </label>
+          <label>Hoán vị σ (bên trái)
+            <input id="permLabSigma" type="text" value="(1 2)(3 4)" placeholder="VD: (1 2)(3 4)">
+          </label>
+          <label>Hoán vị τ (bên phải)
+            <input id="permLabTau" type="text" value="(1 2 3)" placeholder="VD: (1 2 3)">
+          </label>
+          <button type="button" class="lab-btn primary" id="permLabCalcBtn">Tính &amp; Phân tích</button>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
+          <span style="font-size:12px; font-weight:700; color:var(--mute); align-self:center;">Mẫu chuẩn trong giáo trình:</span>
+          <button type="button" class="lab-preset-chip perm-preset" data-n="3" data-s="(1 2)" data-t="(1 2 3)">S₃: σ=(1 2), τ=(1 2 3)</button>
+          <button type="button" class="lab-preset-chip perm-preset active" data-n="4" data-s="(1 2)(3 4)" data-t="(1 2 3)">Bài 1.3 (S₄): σ=(1 2)(3 4), τ=(1 2 3)</button>
+          <button type="button" class="lab-preset-chip perm-preset" data-n="4" data-s="(1 2 3 4)" data-t="(1 3)">D₈ ⊂ S₄: Quay r=(1 2 3 4), Lật s=(1 3)</button>
+          <button type="button" class="lab-preset-chip perm-preset" data-n="5" data-s="(1 2 3 4 5)" data-t="(2 5)(3 4)">S₅: Chu trình bậc 5</button>
+        </div>
+        <div class="lab-verdict" id="permLabVerdict"></div>
+        <div class="perm-results-grid" id="permLabResults"></div>
+      `;
 
       // Tạo Pane Mô phỏng Đồng cấu Nhóm & Định lý Đẳng cấu I (G/ker φ ≅ im φ)
       const paneHomo = document.createElement("section");
@@ -580,40 +613,6 @@
         <div class="perm-results-grid" id="homoLabCards"></div>
       `;
 
-      // Tạo Pane 5: Máy tính Hoán vị Sn & Phân tích Chu trình Độc lập
-      const panePerm = document.createElement("section");
-      panePerm.className = "lab-pane";
-      panePerm.id = "labPanePerm";
-      panePerm.setAttribute("role", "tabpanel");
-      panePerm.setAttribute("aria-labelledby", "labTabPerm");
-      panePerm.hidden = true;
-      panePerm.innerHTML = `
-        <p class="lab-intro">
-          Nhập hai hoán vị <b>σ, τ ∈ Sₙ</b> dưới dạng tích các chu trình (ví dụ: <code>(1 2)(3 4)</code> và <code>(1 2 3)</code>). Máy tính tuân thủ nghiêm ngặt <b>quy ước đọc hợp thành từ phải sang trái</b> của giáo trình: <b>(στ)(x) = σ(τ(x))</b> (thực hiện τ trước, rồi đến σ).
-        </p>
-        <div class="perm-input-grid">
-          <label>Bậc n (3–9)
-            <input id="permLabN" type="number" min="3" max="9" value="4" inputmode="numeric">
-          </label>
-          <label>Hoán vị σ (bên trái)
-            <input id="permLabSigma" type="text" value="(1 2)(3 4)" placeholder="VD: (1 2)(3 4)">
-          </label>
-          <label>Hoán vị τ (bên phải)
-            <input id="permLabTau" type="text" value="(1 2 3)" placeholder="VD: (1 2 3)">
-          </label>
-          <button type="button" class="lab-btn primary" id="permLabCalcBtn">Tính &amp; Phân tích</button>
-        </div>
-        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
-          <span style="font-size:12px; font-weight:700; color:var(--mute); align-self:center;">Mẫu chuẩn trong giáo trình:</span>
-          <button type="button" class="lab-preset-chip perm-preset" data-n="3" data-s="(1 2)" data-t="(1 2 3)">S₃: σ=(1 2), τ=(1 2 3)</button>
-          <button type="button" class="lab-preset-chip perm-preset active" data-n="4" data-s="(1 2)(3 4)" data-t="(1 2 3)">Bài 1.3 (S₄): σ=(1 2)(3 4), τ=(1 2 3)</button>
-          <button type="button" class="lab-preset-chip perm-preset" data-n="4" data-s="(1 2 3 4)" data-t="(1 3)">D₈ ⊂ S₄: Quay r=(1 2 3 4), Lật s=(1 3)</button>
-          <button type="button" class="lab-preset-chip perm-preset" data-n="5" data-s="(1 2 3 4 5)" data-t="(2 5)(3 4)">S₅: Chu trình bậc 5</button>
-        </div>
-        <div class="lab-verdict" id="permLabVerdict"></div>
-        <div class="perm-results-grid" id="permLabResults"></div>
-      `;
-
       // Tạo Pane 6: Sổ tay Đánh dấu Ôn thi & Vở nháp Cá nhân
       const paneNotebook = document.createElement("section");
       paneNotebook.className = "lab-pane";
@@ -636,10 +635,10 @@
       `;
 
       labBody.appendChild(panePerm);
-      labBody.appendChild(paneNotebook);
       labBody.appendChild(paneHomo);
+      labBody.appendChild(paneNotebook);
 
-      // Đồng bộ chuyển Tab cho toàn bộ 6 Tab trong Phòng LAB
+      // Đồng bộ chuyển Tab cho toàn bộ các Tab trong Phòng LAB
       const allTabs = labTabsBar.querySelectorAll("[data-lab-tab]");
       allTabs.forEach(tabBtn => {
         tabBtn.addEventListener("click", () => {
@@ -653,6 +652,16 @@
           if (target === "homo") runHomomorphismSimulator();
         });
       });
+
+      // Hàm toàn cục mở nhanh một Tab bất kỳ trong Phòng LAB (dùng cho nút ở Chương 5)
+      window.openLabTab = function(tabName) {
+        const openBtn = document.getElementById("btnAlgebraLab");
+        if (openBtn && !labModal.classList.contains("open")) {
+          openBtn.click();
+        }
+        const targetBtn = labTabsBar.querySelector(`[data-lab-tab="${tabName}"]`);
+        if (targetBtn) targetBtn.click();
+      };
 
       // ==================================================================
       // THUẬT TOÁN MÁY TÍNH HOÁN VỊ Sn (QUY ƯỚC PHẢI SANG TRÁI)
@@ -668,7 +677,6 @@
         const matches = [...clean.matchAll(/\(([^)]+)\)/g)];
         if (!matches.length) return id;
 
-        // Áp dụng các chu trình từ PHẢI SANG TRÁI
         let res = id.slice();
         for (let m = matches.length - 1; m >= 0; m--) {
           const nums = matches[m][1]
@@ -684,7 +692,6 @@
               const to = nums[(k + 1) % nums.length];
               cyc[from] = to;
             }
-            // Hợp thành: cyc sau res => newRes[x] = cyc[res[x]]
             const nextRes = Array.from({ length: n + 1 }, (_, i) => cyc[res[i]]);
             res = nextRes;
           }
@@ -693,7 +700,6 @@
       }
 
       function composePerm(pLeft, pRight, n) {
-        // (pLeft o pRight)(x) = pLeft(pRight(x))
         return Array.from({ length: n + 1 }, (_, x) => (x === 0 ? 0 : pLeft[pRight[x]]));
       }
 
@@ -730,7 +736,6 @@
           ? cycles.map(c => `(${c.join(" ")})`).join("")
           : "id (đồng nhất)";
 
-        // Phân tích thành tích các chuyển vị (2-chu trình)
         const transList = [];
         cycles.forEach(c => {
           for (let k = c.length - 1; k >= 1; k--) {
@@ -770,10 +775,10 @@
 
         const sigma = parsePermutation(sStr, n);
         const tau = parsePermutation(tStr, n);
-        const st = composePerm(sigma, tau, n); // sigma o tau (tau trước, sigma sau)
-        const ts = composePerm(tau, sigma, n); // tau o sigma (sigma trước, tau sau)
+        const st = composePerm(sigma, tau, n);
+        const ts = composePerm(tau, sigma, n);
         const sigmaInv = invertPerm(sigma, n);
-        const conj = composePerm(composePerm(sigma, tau, n), sigmaInv, n); // sigma * tau * sigma^-1
+        const conj = composePerm(composePerm(sigma, tau, n), sigmaInv, n);
 
         const infoS = analyzePerm(sigma, n);
         const infoT = analyzePerm(tau, n);
@@ -789,7 +794,6 @@
           ⇒ Hai hoán vị σ và τ <b>${commFlag ? "GIAO HOÁN (στ = τσ)" : "KHÔNG GIAO HOÁN (στ ≠ τσ)"}</b>!
         `;
 
-        // Vết đường đi từng phần tử cho tích sigma * tau
         let traceChips = "";
         for (let x = 1; x <= n; x++) {
           const tx = tau[x];
@@ -835,81 +839,273 @@
         `;
       }
 
-      function runHomomorphismSimulator() {
-        const nInp = document.getElementById("homoLabN");
-        const mInp = document.getElementById("homoLabM");
-        const kInp = document.getElementById("homoLabK");
-        const outVerdict = document.getElementById("homoLabVerdict");
-        const outResults = document.getElementById("homoLabResults");
+      // ==================================================================
+      // THUẬT TOÁN MÔ PHỎNG ĐỒNG CẤU & ĐỊNH LÝ ĐẲNG CẤU I
+      // ==================================================================
+      function modPos(a, n) {
+        return ((a % n) + n) % n;
+      }
 
-        if (!outVerdict || !outResults) return;
-
-        const n = parseInt(nInp ? nInp.value : "6", 10);
-        const m = parseInt(mInp ? mInp.value : "3", 10);
-        const k = parseInt(kInp ? kInp.value : "2", 10);
-
-        if (isNaN(n) || isNaN(m) || isNaN(k) || n <= 0 || m <= 0) {
-          outVerdict.innerHTML = `<span style="color:var(--color-danger, #ef4444)">Vui lòng nhập tham số cấp nhóm hợp lệ ($n, m > 0$).</span>`;
-          return;
+      function modPow(base, exp, mod) {
+        let res = 1 % mod;
+        let b = modPos(base, mod);
+        let e = Math.max(0, exp);
+        while (e > 0) {
+          if (e & 1) res = (res * b) % mod;
+          b = (b * b) % mod;
+          e >>= 1;
         }
+        return res;
+      }
 
-        // Ánh xạ f(x) = (k * x) mod m
-        const f = (x) => ((k * (x % n)) % m + m) % m;
+      function runHomomorphismSimulator() {
+        const modeEl = document.getElementById("homoLabMode");
+        const mInp = document.getElementById("homoLabM");
+        const nInp = document.getElementById("homoLabN");
+        const kInp = document.getElementById("homoLabK");
+        const cInp = document.getElementById("homoLabC");
+        const outBadges = document.getElementById("homoLabBadges");
+        const outVerdict = document.getElementById("homoLabVerdict");
+        const outCards = document.getElementById("homoLabCards");
 
-        // Kiểm tra điều kiện đồng cấu: f((a + b) mod n) == (f(a) + f(b)) mod m
-        let isHomomorphism = true;
-        let counterExample = null;
+        if (!outVerdict || !outCards) return;
 
-        for (let a = 0; a < n; a++) {
-          for (let b = 0; b < n; b++) {
-            const left = f((a + b) % n);
-            const right = (f(a) + f(b)) % m;
-            if (left !== right) {
-              isHomomorphism = false;
-              counterExample = { a, b, left, right };
-              break;
+        const mode = modeEl ? modeEl.value : "zn";
+        let m = parseInt(mInp?.value || "12", 10);
+        let n = parseInt(nInp?.value || "4", 10);
+        let k = parseInt(kInp?.value || "1", 10);
+        let c = parseInt(cInp?.value || "0", 10);
+
+        if (!Number.isFinite(m) || m < 2) m = 12;
+        if (!Number.isFinite(n) || n < 2) n = 4;
+        if (!Number.isFinite(k) || k < 0) k = 1;
+        if (!Number.isFinite(c) || c < 0) c = 0;
+
+        // Ẩn/hiện các ô input theo chế độ
+        const wrapN = document.getElementById("homoWrapN");
+        const wrapK = document.getElementById("homoWrapK");
+        const wrapC = document.getElementById("homoWrapC");
+        if (wrapN) wrapN.style.display = mode === "zn" ? "" : "none";
+        if (wrapK) wrapK.style.display = mode === "sgn" ? "none" : "";
+        if (wrapC) wrapC.style.display = mode === "zn" ? "" : "none";
+
+        if (mode === "zn") {
+          m = Math.min(24, Math.max(2, m));
+          n = Math.min(24, Math.max(2, n));
+          if (mInp) mInp.value = m;
+          if (nInp) nInp.value = n;
+
+          // Kiểm tra tính xác định tốt: k*m chia hết cho n
+          const wellDefined = (k * m) % n === 0;
+          const fn = (x) => modPos(k * x + c, n);
+
+          // Kiểm tra bảo toàn phép toán: fn((a+b)%m) == (fn(a)+fn(b))%n
+          let isHomo = wellDefined && (modPos(c, n) === 0);
+          let counterEx = null;
+          if (wellDefined) {
+            for (let a = 0; a < m; a++) {
+              for (let b = 0; b < m; b++) {
+                const lhs = fn((a + b) % m);
+                const rhs = modPos(fn(a) + fn(b), n);
+                if (lhs !== rhs) {
+                  isHomo = false;
+                  counterEx = { a, b, lhs, rhs };
+                  break;
+                }
+              }
+              if (counterEx) break;
             }
           }
-          if (!isHomomorphism) break;
-        }
 
-        // Tìm Ker(f) và Im(f)
-        const ker = [];
-        const imSet = new Set();
-        for (let x = 0; x < n; x++) {
-          const fx = f(x);
-          imSet.add(fx);
-          if (fx === 0) ker.push(x);
-        }
-        const im = Array.from(imSet).sort((a, b) => a - b);
+          if (!wellDefined) {
+            const x1 = 0, x2 = m;
+            const y1 = modPos(k * x1 + c, n);
+            const y2 = modPos(k * x2 + c, n);
+            if (outBadges) {
+              outBadges.innerHTML = `<span class="lab-badge warn">✗ KHÔNG xác định tốt</span>`;
+            }
+            outVerdict.innerHTML = `
+              <b>⚠️ Bẫy logic (Phản ví dụ 0.16):</b> Quy tắc $[x]_{${m}} \\mapsto [${k}x + ${c}]_{${n}}$ <b>KHÔNG xác định tốt (ill-defined)</b> vì $k \\cdot m = ${k}\\cdot ${m} = ${k * m} \\not\\equiv 0 \\pmod{${n}}$.<br>
+              • Cụ thể: $[${x1}]_{${m}} = [${x2}]_{${m}}$ trong $\\mathbb{Z}/${m}\\mathbb{Z}$, nhưng công thức cho $[${y1}]_{${n}} \\neq [${y2}]_{${n}}$ trong $\\mathbb{Z}/${n}\\mathbb{Z}$!
+            `;
+            outCards.innerHTML = "";
+          } else if (!isHomo) {
+            if (outBadges) {
+              outBadges.innerHTML = `
+                <span class="lab-badge ok">✓ Xác định tốt</span>
+                <span class="lab-badge warn">✗ KHÔNG bảo toàn phép toán</span>
+              `;
+            }
+            outVerdict.innerHTML = `
+              <b>⚠️ Ánh xạ xác định tốt nhưng KHÔNG phải đồng cấu nhóm:</b> Do hằng số dịch $c = ${c} \\not\\equiv 0 \\pmod{${n}}$, nên $\\varphi([0]_{${m}}) = [${modPos(c, n)}]_{${n}} \\neq [0]_{${n}}$.<br>
+              • Phản ví dụ: $\\varphi([${counterEx.a}]_{${m}} + [${counterEx.b}]_{${m}}) = [${counterEx.lhs}]_{${n}} \\neq \\varphi([${counterEx.a}]_{${m}}) + \\varphi([${counterEx.b}]_{${m}}) = [${counterEx.rhs}]_{${n}}$.
+            `;
+            outCards.innerHTML = "";
+          } else {
+            const ker = [];
+            const imSet = new Set();
+            const fibers = new Map();
+            for (let x = 0; x < m; x++) {
+              const y = fn(x);
+              imSet.add(y);
+              if (y === 0) ker.push(x);
+              if (!fibers.has(y)) fibers.set(y, []);
+              fibers.get(y).push(x);
+            }
+            const im = [...imSet].sort((a, b) => a - b);
+            const isMono = ker.length === 1;
+            const isEpi = im.length === n;
+            const isIso = isMono && isEpi;
 
-        if (isHomomorphism) {
-          outVerdict.innerHTML = `<span class="badge" style="background:#10b981; color:#fff; padding:4px 8px; border-radius:4px;">✓ Là Đồng Cấu Nhóm</span> Ánh xạ $f: \\mathbb{Z}_{${n}} \\to \\mathbb{Z}_{${m}}$ bảo toàn phép cộng nhóm.`;
+            if (outBadges) {
+              outBadges.innerHTML = `
+                <span class="lab-badge ok">✓ Xác định tốt ($${n} \\mid ${k}\\cdot ${m}$)</span>
+                <span class="lab-badge ok">✓ Đồng cấu nhóm</span>
+                <span class="lab-badge ${isMono ? "ok" : ""}">${isMono ? "✓ Đơn cấu" : "Không đơn cấu"} ($|\\ker\\varphi|=${ker.length}$)</span>
+                <span class="lab-badge ${isEpi ? "ok" : ""}">${isEpi ? "✓ Toàn cấu" : "Không toàn cấu"} ($|\\operatorname{im}\\varphi|=${im.length}$)</span>
+                ${isIso ? `<span class="lab-badge ok">🌟 ĐẲNG CẤU NHÓM</span>` : ""}
+              `;
+            }
+
+            outVerdict.innerHTML = `
+              <b>✓ Định lý Đẳng cấu I:</b> $\\varphi: \\mathbb{Z}/${m}\\mathbb{Z} \\to \\mathbb{Z}/${n}\\mathbb{Z},\\ [x]_{${m}} \\mapsto [${k}x]_{${n}}$ là đồng cấu nhóm với
+              $|G/\\ker\\varphi| = ${m}/${ker.length} = ${m / ker.length} = |\\operatorname{im}\\varphi|$, cảm sinh đẳng cấu
+              $$\\Phi: (\\mathbb{Z}/${m}\\mathbb{Z})/\\ker\\varphi \\xrightarrow{\\sim} \\operatorname{im}\\varphi \\le \\mathbb{Z}/${n}\\mathbb{Z}.$$
+            `;
+
+            let fiberRows = "";
+            im.forEach(y => {
+              const coset = fibers.get(y).map(v => `[${v}]_{${m}}`).join(", ");
+              const rep = fibers.get(y)[0];
+              fiberRows += `
+                <tr>
+                  <td><b>$[${rep}]_{${m}} + \\ker\\varphi$</b> = $\\{${coset}\\}$</td>
+                  <td><span class="homo-fiber-arrow">↦ $[${y}]_{${n}}$</span></td>
+                </tr>
+              `;
+            });
+
+            outCards.innerHTML = `
+              <div class="perm-card">
+                <h4><span>1️⃣ Hạt nhân $\\ker\\varphi \\trianglelefteq \\mathbb{Z}/${m}\\mathbb{Z}$</span> <span>Cấp ${ker.length}</span></h4>
+                <div style="font-size:13.5px; line-height:1.7;">
+                  $$\\ker\\varphi = \\{ ${ker.map(x => `[${x}]_{${m}}`).join(", ")} \\}$$
+                  • Là nhóm con chuẩn tắc sinh bởi $[${ker[1] ?? 0}]_{${m}}$.
+                </div>
+              </div>
+              <div class="perm-card">
+                <h4><span>2️⃣ Tập ảnh $\\operatorname{im}\\varphi \\le \\mathbb{Z}/${n}\\mathbb{Z}$</span> <span>Cấp ${im.length}</span></h4>
+                <div style="font-size:13.5px; line-height:1.7;">
+                  $$\\operatorname{im}\\varphi = \\{ ${im.map(y => `[${y}]_{${n}}`).join(", ")} \\}$$
+                  • Chỉ số $[\\mathbb{Z}/${m}\\mathbb{Z} : \\ker\\varphi] = ${m / ker.length} = |\\operatorname{im}\\varphi|$.
+                </div>
+              </div>
+              <div class="perm-card" style="grid-column: 1 / -1;">
+                <h4><span>3️⃣ Song ánh Đẳng cấu $\\Phi: G/\\ker\\varphi \\xrightarrow{\\sim} \\operatorname{im}\\varphi$</span> <span>Phân hoạch thành ${im.length} thớ (lớp kề)</span></h4>
+                <table class="homo-fiber-table">
+                  <thead>
+                    <tr>
+                      <th>Lớp kề trong nhóm thương $(\\mathbb{Z}/${m}\\mathbb{Z})/\\ker\\varphi$ (Thớ $\\varphi^{-1}([y]_{${n}})$)</th>
+                      <th>Ảnh đẳng cấu $\\Phi$ trong $\\operatorname{im}\\varphi$</th>
+                    </tr>
+                  </thead>
+                  <tbody>${fiberRows}</tbody>
+                </table>
+              </div>
+            `;
+          }
+        } else if (mode === "un") {
+          m = Math.min(24, Math.max(3, m));
+          if (mInp) mInp.value = m;
+          const units = [];
+          for (let x = 1; x < m; x++) {
+            if (gcd(x, m) === 1) units.push(x);
+          }
+          const ker = [];
+          const fibers = new Map();
+          units.forEach(x => {
+            const y = modPow(x, k, m);
+            if (y === 1) ker.push(x);
+            if (!fibers.has(y)) fibers.set(y, []);
+            fibers.get(y).push(x);
+          });
+          const im = [...fibers.keys()].sort((a, b) => a - b);
+
+          if (outBadges) {
+            outBadges.innerHTML = `
+              <span class="lab-badge ok">✓ Đồng cấu lũy thừa trên $U(${m})$</span>
+              <span class="lab-badge">$|U(${m})| = \\varphi(${m}) = ${units.length}$</span>
+              <span class="lab-badge">$|\\ker\\psi| = ${ker.length}$</span>
+              <span class="lab-badge">$|\\operatorname{im}\\psi| = ${im.length}$</span>
+            `;
+          }
+          outVerdict.innerHTML = `
+            <b>✓ Đồng cấu lũy thừa bậc $k=${k}$ trên nhóm Abel nhân $U(${m})$:</b>
+            $\\psi([x]_{${m}}) = [x^{${k}}]_{${m}}$ luôn là đồng cấu vì $(xy)^k = x^k y^k$.
+            Định lý Đẳng cấu I cho $U(${m})/\\ker\\psi \\cong \\operatorname{im}\\psi$ với $|U(${m})/\\ker\\psi| = ${units.length}/${ker.length} = ${im.length}$.
+          `;
+
+          let fiberRows = "";
+          im.forEach(y => {
+            const coset = fibers.get(y).map(v => `[${v}]`).join(", ");
+            fiberRows += `<tr><td>$\\{${coset}\\}$</td><td><span class="homo-fiber-arrow">↦ $[${y}]_{${m}}$</span></td></tr>`;
+          });
+
+          outCards.innerHTML = `
+            <div class="perm-card">
+              <h4><span>1️⃣ Hạt nhân $\\ker\\psi$</span> <span>Cấp ${ker.length}</span></h4>
+              <div>$$\\ker\\psi = \\{ ${ker.map(x => `[${x}]`).join(", ")} \\}$$</div>
+            </div>
+            <div class="perm-card">
+              <h4><span>2️⃣ Tập ảnh $\\operatorname{im}\\psi$</span> <span>Cấp ${im.length}</span></h4>
+              <div>$$\\operatorname{im}\\psi = \\{ ${im.map(y => `[${y}]`).join(", ")} \\}$$</div>
+            </div>
+            <div class="perm-card" style="grid-column: 1 / -1;">
+              <h4><span>3️⃣ Bảng phân hoạch lớp kề $U(${m})/\\ker\\psi \\xrightarrow{\\sim} \\operatorname{im}\\psi$</span></h4>
+              <table class="homo-fiber-table">
+                <thead><tr><th>Lớp kề $x\\ker\\psi$</th><th>Ảnh $[x^{${k}}]_{${m}}$</th></tr></thead>
+                <tbody>${fiberRows}</tbody>
+              </table>
+            </div>
+          `;
         } else {
-          outVerdict.innerHTML = `<span class="badge" style="background:#ef4444; color:#fff; padding:4px 8px; border-radius:4px;">✗ Không Phải Đồng Cấu</span> Phản ví dụ: $a=${counterExample.a}, b=${counterExample.b} \\implies f(${counterExample.a}+${counterExample.b}) \\neq f(${counterExample.a}) + f(${counterExample.b})$.`;
+          // mode === "sgn"
+          m = Math.min(5, Math.max(3, m));
+          if (mInp) mInp.value = m;
+          let fact = 1;
+          for (let i = 2; i <= m; i++) fact *= i;
+          const half = fact / 2;
+
+          if (outBadges) {
+            outBadges.innerHTML = `
+              <span class="lab-badge ok">✓ Toàn cấu dấu $\\operatorname{sgn}: S_{${m}} \\twoheadrightarrow \\{\\pm 1\\}$</span>
+              <span class="lab-badge ok">$\\ker(\\operatorname{sgn}) = A_{${m}}$ (Cấp ${half})</span>
+              <span class="lab-badge ok">$S_{${m}}/A_{${m}} \\cong \\{\\pm 1\\} \\cong \\mathbb{Z}_2$</span>
+            `;
+          }
+          outVerdict.innerHTML = `
+            <b>✓ Định lý Đẳng cấu I cho ánh xạ dấu:</b> $\\operatorname{sgn}: S_{${m}} \\to (\\{\\pm 1\\}, \\cdot)$ là toàn cấu với hạt nhân chính là <b>nhóm thay phiên $A_{${m}}$</b> gồm ${half} hoán vị chẵn. Do đó $A_{${m}} \\trianglelefteq S_{${m}}$ và $S_{${m}}/A_{${m}} \\cong \\{\\pm 1\\}$.
+          `;
+          outCards.innerHTML = `
+            <div class="perm-card">
+              <h4><span>1️⃣ Thớ hoán vị chẵn $\\ker(\\operatorname{sgn}) = A_{${m}}$</span> <span>${half} phần tử</span></h4>
+              <div>Lớp kề đơn vị $A_{${m}} \\mapsto +1$ (Mọi hoán vị phân tích được thành một số <b>chẵn</b> các chuyển vị).</div>
+            </div>
+            <div class="perm-card">
+              <h4><span>2️⃣ Thớ hoán vị lẻ $(1\\ 2)A_{${m}}$</span> <span>${half} phần tử</span></h4>
+              <div>Lớp kề $(1\\ 2)A_{${m}} \\mapsto -1$ (Mọi hoán vị phân tích được thành một số <b>lẻ</b> các chuyển vị).</div>
+            </div>
+          `;
         }
 
-        outResults.innerHTML = `
-          <div class="perm-card">
-            <h4>Hạt nhân $\\ker(f)$</h4>
-            <p><b>|Ker| = ${ker.length}</b></p>
-            <div>\\{ ${ker.join(", ")} \\}</div>
-          </div>
-          <div class="perm-card">
-            <h4>Ảnh $\\mathrm{Im}(f)$</h4>
-            <p><b>|Im| = ${im.length}</b></p>
-            <div>\\{ ${im.join(", ")} \\}</div>
-          </div>
-          <div class="perm-card">
-            <h4>Kiểm chứng đẳng cấu</h4>
-            <p>$|\\mathbb{Z}_{${n}}| / |\\ker(f)| = ${n / ker.length}$</p>
-            <div>${n / ker.length === im.length ? "✓ Khớp $|\\mathrm{Im}(f)|$" : "Không khớp"}</div>
-          </div>
-        `;
-
-        // Render lại công thức toán MathJax / KaTeX nếu có
-        if (window.MathJax && window.MathJax.typesetPromise) {
-          window.MathJax.typesetPromise([outVerdict, outResults]);
+        if (window.renderMathInElement) {
+          window.renderMathInElement(paneHomo, {
+            delimiters: [
+              { left: "$$", right: "$$", display: true },
+              { left: "$", right: "$", display: false }
+            ],
+            throwOnError: false
+          });
         }
       }
 
@@ -925,7 +1121,23 @@
         });
       });
 
+      document.getElementById("homoLabRunBtn")?.addEventListener("click", runHomomorphismSimulator);
+      document.getElementById("homoLabMode")?.addEventListener("change", runHomomorphismSimulator);
+      paneHomo.querySelectorAll(".homo-preset").forEach(btn => {
+        btn.addEventListener("click", () => {
+          paneHomo.querySelectorAll(".homo-preset").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          document.getElementById("homoLabMode").value = btn.dataset.mode || "zn";
+          document.getElementById("homoLabM").value = btn.dataset.m || "12";
+          document.getElementById("homoLabN").value = btn.dataset.n || "4";
+          document.getElementById("homoLabK").value = btn.dataset.k || "1";
+          document.getElementById("homoLabC").value = btn.dataset.c || "0";
+          runHomomorphismSimulator();
+        });
+      });
+
       runPermutationCalculator();
+      runHomomorphismSimulator();
     }
 
     // ====================================================================
