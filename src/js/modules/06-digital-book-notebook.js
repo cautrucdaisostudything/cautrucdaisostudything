@@ -240,8 +240,6 @@
   function saveReaderSettings() {
     safeStorageWrite(STORAGE_KEYS.SETTINGS, settings);
   }
-  // ---------------- 4. THANH CÔNG CỤ ĐỌC SÁCH GỌN TRÊN TOPBAR ----------------
-  function injectReaderToolbar() {
     // ---------------- 4. THANH CÔNG CỤ ĐỌC SÁCH GỌN TRÊN TOPBAR (Ý TƯỞNG 1: CLEAN TOPBAR POPOVER) ----------------
   const SEASON_META = {
     study: { label: "📖 Giao diện: Học tập", eyebrow: "📖 WELCOME TO CTĐS" },
